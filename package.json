@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/httparty/matchjs#readme",
   "dependencies": {
+    "foreman": "1.4.1",
     "gulp": "^3.9.0"
   }
 }
