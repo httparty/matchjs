@@ -1,0 +1,21 @@
+{
+  "name": "matchjs",
+  "description": "Micro mentoring for Javascript developers.",
+  "main": "server/server.js",
+  "authors": [
+    "Anthony Bibbs",
+    "Sergey Piterman",
+    "Rachel Jenkins",
+    "Polina Soshnin"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/polinadotio/matchjs",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
