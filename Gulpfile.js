@@ -1,12 +1,13 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
+var mocha = require('gulp-mocha');
 var changed = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
 var minifyHTML = require('gulp-minify-html');
 var clean = require('gulp-clean');
 
-var paths = { 
-	scripts: ['client/app/**/*.js'],
+var paths = {
+	scripts: ['client/app/**/*.js', 'server/**/*.js'],
   //OTHER PATHS TBD:
  // libs: ['scripts/libs/jquery/dist/jquery.js', 'scripts/libs/underscore/underscore.js', 'scripts/backbone/backbone.js'],
 	styles: ['client/assets/styles/**/*.css'],
@@ -16,7 +17,7 @@ var paths = {
 };
 
 
-//delete the contents of dist folder 
+//delete the contents of dist folder
 gulp.task('clean', function() {
   return gulp.src('dist/', {
     read: false
@@ -24,6 +25,10 @@ gulp.task('clean', function() {
     .pipe(clean());
 });
 
+gulp.task('test', function(){
+  gulp.src('test/*.js')
+    .pipe(mocha({reporter: 'nyan'}));
+});
 
 
 //pipe all scripts within the src/scripts folder to the jshint object, and outputs errors to the console
@@ -31,11 +36,10 @@ gulp.task('jshint', function() {
 	gulp.src(paths.scripts)
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
-		// .pipe(gulp.dest('dist/')); //this creates the dist folder with manipulated files dropped in. I don't think we're ready for this yet :). 
+		// .pipe(gulp.dest('dist/')); //this creates the dist folder with manipulated files dropped in. I don't think we're ready for this yet :).
 });
 
-// gulp.task('default', function() {
-// });
+gulp.task('default', ['jshint', 'test']);
 
 
 
@@ -53,7 +57,7 @@ gulp.task('jshint', function() {
 // gulp.task('htmlpage', function() {
 // 	var htmlSrc = './src/*.html',
 // 	htmlDst = './build';
-// 	gulp.src(htmlSrc) 
+// 	gulp.src(htmlSrc)
 // 		.pipe(changed(htmlDst))
 // 		.pipe(minifyHTML())
 // 		.pipe(gulp.dest(htmlDst));
