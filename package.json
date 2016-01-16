@@ -34,13 +34,12 @@
     "jshint": "2.9.1",
     "mocha": "2.3.4",
     "nodemon": "1.8.1",
-    "request": "2.67.0",
-    "require": "2.4.20",
-    "sequelize": "3.17.3",
+    "pg": "4.4.3",
+    "pg-hstore": "2.3.2",
     "sinon": "1.17.2",
     "sinon-chai": "2.8.0",
     "underscore": "1.8.3"
-  },
+    },
   "engines": {
     "node": "5.0.0"
   },
