@@ -1,5 +1,61 @@
 var gulp = require('gulp');
+var jshint = require('gulp-jshint');
+var changed = require('gulp-changed');
+var imagemin = require('gulp-imagemin');
+var minifyHTML = require('gulp-minify-html');
+var clean = require('gulp-clean');
 
-gulp.task('default', function() {
+var paths = { 
+	scripts: ['client/app/**/*.js'],
+  //OTHER PATHS TBD:
+ // libs: ['scripts/libs/jquery/dist/jquery.js', 'scripts/libs/underscore/underscore.js', 'scripts/backbone/backbone.js'],
+	styles: ['client/assets/styles/**/*.css'],
+	html: ['client/app/**/*.html']
+ // images: ['images/**/*.png'],
+ // extras: ['crossdomain.xml', 'humans.txt', 'manifest.appcache', 'robots.txt', 'favicon.ico'],
+};
 
+
+//delete the contents of dist folder 
+gulp.task('clean', function() {
+  return gulp.src('dist/', {
+    read: false
+  })
+    .pipe(clean());
 });
+
+
+
+//pipe all scripts within the src/scripts folder to the jshint object, and outputs errors to the console
+gulp.task('jshint', function() {
+	gulp.src(paths.scripts)
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'));
+		// .pipe(gulp.dest('dist/')); //this creates the dist folder with manipulated files dropped in. I don't think we're ready for this yet :). 
+});
+
+// gulp.task('default', function() {
+// });
+
+
+
+//------------We'll need these later, please leave them here.
+
+// gulp.task('imagemin', function() {
+// 	var imgSrc = './src/images/**/*';
+// 	var imgDst = './dist/images';
+// 	gulp.src(imgSrc)
+// 		.pipe(changed(imgDst))
+// 		.pipe(imagemin())
+// 		.pipe(gulp.dest(...))
+// });
+
+// gulp.task('htmlpage', function() {
+// 	var htmlSrc = './src/*.html',
+// 	htmlDst = './build';
+// 	gulp.src(htmlSrc) 
+// 		.pipe(changed(htmlDst))
+// 		.pipe(minifyHTML())
+// 		.pipe(gulp.dest(htmlDst));
+// });
+//-----------------------------------------------------------
