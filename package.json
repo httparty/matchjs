@@ -20,12 +20,21 @@
   "homepage": "https://github.com/httparty/matchjs#readme",
   "dependencies": {
     "bower": "1.7.2",
+    "chai": "3.4.1",
     "express": "4.13.3",
     "foreman": "1.4.1",
     "gulp": "^3.9.0",
     "http": "0.0.0",
     "nodemon": "1.8.1",
-    "sequelize": "3.17.3"
+    "sequelize": "3.17.3",
+    "jquery": "2.2.0",
+    "mocha": "2.3.4",
+    "nodemon": "1.8.1",
+    "request": "2.67.0",
+    "require": "2.4.20",
+    "sinon": "1.17.2",
+    "sinon-chai": "2.8.0",
+    "underscore": "1.8.3"
   },
   "engines": {
     "node": "5.0.0",
