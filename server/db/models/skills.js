@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('Skill', {
 		name: {
-			type: Sequelize.STRING
+			type: DataTypes.STRING
 		}
 	});
-}
+};

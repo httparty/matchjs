@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('User', {
@@ -27,4 +27,4 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER
 		}
 });
-}
+};
