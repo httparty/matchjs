@@ -28,6 +28,9 @@ models.User = sequelize.define('User', {
 	email: {
 		type: Sequelize.STRING
 	},
+	phoneNumber: {
+		type: Sequelize.INTEGER
+	},
 	photo: {
 		type: Sequelize.STRING
 	},
@@ -66,7 +69,6 @@ models.Message = sequelize.define('Message', {
 	}
 });
 
-
 models.UserSkillJoin = sequelize.define('UserSkillJoin', {
 	toLearn: {
 		type: Sequelize.BOOLEAN
@@ -80,20 +82,20 @@ models.User.hasMany(models.Message);
 models.Skill.belongsToMany(models.User, {through: 'UserSkillJoin'});
 models.User.belongsToMany(models.Skill, {through: 'UserSkillJoin'});
 
-models.User.sync({force: true}).then(function(){
-	console.log('User table created');
+models.User.sync({force: false}).then(function(){
+	console.log('User table created!');
 });
 
 models.Skill.sync({force: false}).then(function(){
-	console.log('Skill table created');
+	console.log('Skill table created!');
 });
 
 models.Message.sync({force: false}).then(function(){
-	console.log('Message table created');
+	console.log('Message table created!');
 });
 
 models.UserSkillJoin.sync({force: false}).then(function(){
-	console.log('UserSkillJoin table created');
+	console.log('UserSkillJoin table created!');
 });
 
 module.exports = models;
