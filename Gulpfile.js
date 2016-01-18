@@ -5,6 +5,7 @@ var changed = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
 var minifyHTML = require('gulp-minify-html');
 var clean = require('gulp-clean');
+var protractor = require("gulp-protractor").protractor;
 
 var paths = {
 	scripts: ['client/app/**/*.js', 'server/**/*.js'],
@@ -15,7 +16,6 @@ var paths = {
  // images: ['images/**/*.png'],
  // extras: ['crossdomain.xml', 'humans.txt', 'manifest.appcache', 'robots.txt', 'favicon.ico'],
 };
-
 
 //delete the contents of dist folder
 gulp.task('clean', function() {
@@ -30,6 +30,17 @@ gulp.task('test', function(){
     .pipe(mocha({reporter: 'nyan'}));
 });
 
+/*************************************************************
+End to end testing with protractor
+**************************************************************/
+
+gulp.task('e2e', function(done) {
+  gulp.src(["./client/test/e2e/*.js"])
+    .pipe(protractor({
+      configFile: "client/test/protractor.conf.js",
+    }))
+    .on('error', function(error) { throw error; });
+});
 
 //pipe all scripts within the src/scripts folder to the jshint object, and outputs errors to the console
 gulp.task('jshint', function() {
@@ -40,8 +51,6 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('default', ['jshint', 'test']);
-
-
 
 //------------We'll need these later, please leave them here.
 
