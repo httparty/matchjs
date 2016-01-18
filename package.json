@@ -40,6 +40,7 @@
     "nodemon": "1.8.1",
     "pg": "4.4.3",
     "pg-hstore": "2.3.2",
+    "protractor": "3.0.0",
     "request": "2.67.0",
     "require": "2.4.20",
     "sequelize": "3.17.3",
