@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/httparty/matchjs#readme",
   "dependencies": {
+    "body-parser": "1.14.2",
     "bower": "1.7.2",
     "chai": "3.4.1",
+    "cors": "2.7.1",
     "express": "4.13.3",
     "foreman": "1.4.1",
     "gulp": "3.9.0",
@@ -34,6 +36,7 @@
     "jquery": "2.2.0",
     "jshint": "2.9.1",
     "mocha": "2.3.4",
+    "morgan": "1.6.1",
     "nodemon": "1.8.1",
     "pg": "4.4.3",
     "pg-hstore": "2.3.2",
