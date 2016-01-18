@@ -2,7 +2,7 @@ angular.module('app', [
   'ui.router',
   'app.home'
   ])
-  .config(['$stateProvider','$urlRouterProvider','$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+  .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
 
@@ -10,5 +10,5 @@ angular.module('app', [
     .state('home', {
       templateUrl: 'app/components/home/home.html',
       url: '/'
-    })
-  }])
+    });
+  }]);
