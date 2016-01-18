@@ -9,8 +9,8 @@ module.exports = function(app, express) {
   }));
   app.use(bodyParser.json());
   app.use(cors());
-
   app.use(morgan('combined'));
+  app.use(express.static(__dirname +  "/../../client"));
 
   app.get('/', function(req, res) {
     res.status('200');
