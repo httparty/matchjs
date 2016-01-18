@@ -12,9 +12,9 @@ module.exports = function(app, express) {
   app.use(morgan('combined'));
   app.use(express.static(__dirname +  "/../../client"));
 
-  app.get('/', function(req, res) {
-    res.status('200');
-    res.send("Hello World");
-  });
+  // app.get('/', function(req, res) {
+  //   res.status('200');
+  //   res.send("Hello World");
+  // });
 }
 
