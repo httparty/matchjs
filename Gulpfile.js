@@ -11,7 +11,7 @@ var paths = {
   //OTHER PATHS TBD:
  // libs: ['scripts/libs/jquery/dist/jquery.js', 'scripts/libs/underscore/underscore.js', 'scripts/backbone/backbone.js'],
 	styles: ['client/assets/styles/**/*.css'],
-	html: ['client/app/**/*.html']
+	html: ['client/app/**/*.html','client/index.html']
  // images: ['images/**/*.png'],
  // extras: ['crossdomain.xml', 'humans.txt', 'manifest.appcache', 'robots.txt', 'favicon.ico'],
 };
