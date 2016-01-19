@@ -12,13 +12,13 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING
 		},
 		email: {
-			type: Sequelize.STRING,
+			type: DataTypes.STRING,
 			validate: {
 				isEmail: true
 			}
 		},
 		phoneNumber: {
-			type: Sequelize.STRING,
+			type: DataTypes.STRING,
 			validate: {
 				len: [10,13]
 			}
