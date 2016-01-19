@@ -72,7 +72,8 @@ gulp.task('jshint', function() {
 		// .pipe(gulp.dest('dist/')); //this creates the dist folder with manipulated files dropped in. I don't think we're ready for this yet :).
 });
 
-gulp.task('test-suite', ['karma']);
+gulp.task('unit-tests', ['karma','test']);
+gulp.task('e2e-tests', ['e2e']);
 gulp.task('default', ['jshint','test']);
 
 

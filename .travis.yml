@@ -13,5 +13,6 @@ before_script:
 #WebDriver for Protractor
   - ./node_modules/protractor/bin/webdriver-manager start 2>&1 &
 script:
-  - gulp test-suite
+  - gulp unit-tests
+  - gulp e2e-tests
 
