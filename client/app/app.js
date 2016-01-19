@@ -1,6 +1,7 @@
 angular.module('app', [
   'ui.router',
-  'app.home'
+  'app.home',
+  'ngCookies'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
