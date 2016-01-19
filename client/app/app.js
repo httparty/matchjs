@@ -2,7 +2,8 @@ angular.module('app', [
   'ui.router',
   'app.home',
   'ngCookies',
-  'app.profile'
+  'app.profile',
+  'app.navbarDirectives'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -24,7 +25,7 @@ angular.module('app', [
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', function($rootScope, $state, $cookies, $window) {
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) { 
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
       var s = $cookies.get('user-profile');
       if (s) {
@@ -40,12 +41,11 @@ angular.module('app', [
         return;
       } else if (!cookie && toState.name !== 'home') {
         console.log('I"m still logged out in another page');
-        event.preventDefault(); 
+        event.preventDefault();
         $state.go('home');
         return;
       } else {
         console.log('hey I"m logged in');
-      }    
+      }
     });
-
   }]);
