@@ -25,6 +25,19 @@ helpers.signupUser = function(userDataObj) {
 	})
 };
 
+
+helpers.deleteUser = function(userToDeleteObj) {
+	db.User.findOne({ 
+		where: {'username': userToDeleteObj.username}
+	}).then(function(user) {
+  	return user.destroy();
+	})
+	.then(function() {})
+};
+
+//-----------------USER PROFILE--------------------------
+
+
 helpers.getUserByUserName = function(userObj) {
   return db.User.findOne({
     where: {'username': userObj.username}
@@ -39,10 +52,6 @@ helpers.getUserByUserName = function(userObj) {
 	})
 };
 
-helpers.deleteUser = function(userToDeleteObj) {
-};
-
-//-----------------USER PROFILE--------------------------
 
 helpers.updateUserBasics = function(profileUpdateObj) {
 	return db.User.findOne({
