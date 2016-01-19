@@ -13,7 +13,7 @@
   </head>
     <body>
         <nav-dir></nav-dir>
-        <w3-test-directive></w3-test-directive>
+        <!-- <w3-test-directive></w3-test-directive> -->
         <div ui-view></div>
 
         <!-- bower components -->
@@ -34,13 +34,15 @@
         <script src="app/components/profile/profileModel.js"></script>
         <!-- custom directives -->
         <script src="app/directives/navbarDirectives.js"></script>
+
         <script>
-            angular.module('app.navbarDirectives', [])
-                    .directive("w3TestDirective", function() {
-            return {
-                template : "<h1>Made by a directive!</h1>"
-            };
-        });
+        //     angular.module('app.navbarDirectives', [])
+        //             .directive("navDir", function() {
+        //     return {
+        //         templateUrl: 'app/partials/_navbar.html',
+        //         // template : "<h1>Made by a directive!</h1>"
+        //     };
+        // });
         </script>
   </body>
 </html>

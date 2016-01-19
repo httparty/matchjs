@@ -1,11 +1,9 @@
 angular.module('app.navbarDirectives', [])
-  .directive('nav-dir', function(){
+  .directive('navDir', function(){
     return {
-      // restrict: 'E',
-      // templateURL: 'app/partials/_navbar.html'
-      template : "<h1>Made by a directive!</h1>"
+      templateUrl: 'app/partials/_navbar.html'
       // controller: ['$scope', function($scope){
       //   $scope.Message = 'Hello World';
-      // }]
+      // }]   //Still not working
     };
   });
