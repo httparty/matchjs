@@ -1,17 +1,11 @@
+require('dotenv').load();
 var Sequelize = require('sequelize');
 var User = require('./models/users.js');
 var Skill = require('./models/skills.js');
 var Message = require('./models/messages.js');
 var UserSkillJoin = require('./models/userSkills.js');
 
-// // var sequelize = new Sequelize('postgres', 'postgres', 'postgres', {
-// // 	host: 'localhost',
-// // 	dialect: 'postgres',
-// // 	port: 5432
-// // });
-// var sequelize = new Sequelize(process.env.DATABASE_URL); //Uncomment for real deployment
-
-var sequelize = new Sequelize();
+var sequelize = new Sequelize(process.env.DATABASE_URL); //Uncomment for real deployment
 
 sequelize
   .authenticate()
