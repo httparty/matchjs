@@ -31,7 +31,7 @@ Server side unit tests with Mocha + Chai
 **************************************************************/
 
 gulp.task('test', function(){
-  gulp.src('test/*.js')
+  gulp.src('./server/test/unit/*.js')
     .pipe(mocha({reporter: 'nyan'}));
 });
 
