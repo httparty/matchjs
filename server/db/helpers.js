@@ -2,6 +2,9 @@ var db = require('./config.js');
 
 var helpers = {};
 
+
+//---------------AUTHENTICATION----------------------
+
 helpers.signupUser = function(userDataObj) {
 	return db.User.findOne({
 		where: {'username': userDataObj.username}
@@ -25,7 +28,6 @@ helpers.signupUser = function(userDataObj) {
 	})
 };
 
-
 helpers.deleteUser = function(userToDeleteObj) {
 	db.User.findOne({ 
 		where: {'username': userToDeleteObj.username}
@@ -34,9 +36,6 @@ helpers.deleteUser = function(userToDeleteObj) {
 	})
 	.then(function() {})
 };
-
-//-----------------USER PROFILE--------------------------
-
 
 helpers.getUserByUserName = function(userObj) {
   return db.User.findOne({
@@ -51,6 +50,9 @@ helpers.getUserByUserName = function(userObj) {
   	}
 	})
 };
+
+
+//-----------------USER PROFILE--------------------------
 
 
 helpers.updateUserBasics = function(profileUpdateObj) {
@@ -69,7 +71,6 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 		});
 	})
 };
-
 
 helpers.updateUserSkills = function(profileUpdateObj) {
 return db.User.findOne({
@@ -118,14 +119,13 @@ helpers.getAllUsers = function() {
 		console.log('HERE ARE ALL USERS', usersArray);
 		return usersArray;
 	})
-}
-
+};
 
 //more functions need to be written here for the recommender
 
 
-
 //------------------Messages--------------------------
+
 
 helpers.addMessage = function(messageObj) {
 	var recipientID;
@@ -149,7 +149,6 @@ helpers.addMessage = function(messageObj) {
 	})
 };
 
-
 helpers.getMessageHistory = function(messageDataObj) {
 	// var recipientID;
 	// return db.User.findOne({
@@ -170,7 +169,7 @@ helpers.getMessageHistory = function(messageDataObj) {
 	// 			})
 	// 		})
 	// })
-}
+};
 
 module.exports = helpers;
 
@@ -225,17 +224,3 @@ module.exports = helpers;
 // }).then(function(user) {
 // 	console.log("WOOT HERE IS USER", user);
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
