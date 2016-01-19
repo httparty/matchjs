@@ -151,7 +151,7 @@ helpers.getMessageHistory = function(messageDataObj) {
 	// })
 }
 
-
+module.exports = helpers;
 
 //--------------------FUNCTION TESTS
 // db.Skill.bulkCreate([
