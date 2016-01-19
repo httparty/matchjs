@@ -47,7 +47,7 @@ module.exports.initialize = function(app) {
 	},
 		function(accessToken, refreshToken, profile, done) {
 			process.nextTick(function() {
-				return done(null, profile);
+				return done(null,profile);
 		});
 	}
 	)); 

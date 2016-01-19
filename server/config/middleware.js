@@ -6,9 +6,9 @@ var githubSessions = require('./githubSessions.js');
 
 module.exports = function(app, express) {
 
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
+  // app.use(bodyParser.urlencoded({
+  //   extended: true
+  // }));
   app.use(bodyParser.json());
   app.use(cors());
   app.use(morgan('combined'));
