@@ -12,21 +12,21 @@ var UserSkillJoin = require('./models/userSkills.js');
 
 // var sequelize = new Sequelize(process.env.DATABASE_URL); //Uncomment for real deployment
 
-var sequelize = new Sequelize("postgres://psoshnin:RIPmatchr28@postgres-match-dev.co6f9ijf2gka.us-west-2.rds.amazonaws.com:5432/matchjs"); //Comment out when actually deploying
+var sequelize = new Sequelize('postgres://psoshnin:RIPmatchr28@postgres-match-dev.co6f9ijf2gka.us-west-2.rds.amazonaws.com:5432/matchjs'); //Comment out when actually deploying
 
 sequelize
   .authenticate()
-  .then(function(err) {
+  .then(function() {
     console.log('Connection has been established successfully.');
   }, function (err) {
     console.log('Unable to connect to the database:', err);
   });
 
 var models = {};
-models.User = User(sequelize, Sequelize);
-models.Skill = Skill(sequelize, Sequelize);
-models.Message = Message(sequelize, Sequelize);
-models.UserSkillJoin = UserSkillJoin(sequelize, Sequelize);
+models.User = new User(sequelize, Sequelize);
+models.Skill = new Skill(sequelize, Sequelize);
+models.Message = new Message(sequelize, Sequelize);
+models.UserSkillJoin = new UserSkillJoin(sequelize, Sequelize);
 
 models.User.hasMany(models.Message);
 models.Skill.belongsToMany(models.User, {through: 'UserSkillJoin'});
