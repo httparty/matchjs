@@ -38,7 +38,7 @@ module.exports.initialize = function(app) {
 		done(null, obj);
 	});
 
-	var callback = process.env.CALLBACK || "http://localhost:5000/auth/github/callback";
+	var callback = process.env.CALLBACK || 'http://localhost:5000/auth/github/callback';
 
 	passport.use(new GitHubStrategy({
 	      clientID: github_client_id,
