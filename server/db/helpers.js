@@ -15,6 +15,7 @@ helpers.signupUser = function(userDataObj) {
 				username: userDataObj.username,
 				password: userDataObj.password,
 				email: userDataObj.email,
+				phoneNumber: userDataObj.phoneNumber,
 				name: userDataObj.name,
 				github: userDataObj.github,
 				photo: userDataObj.photo,
@@ -24,6 +25,10 @@ helpers.signupUser = function(userDataObj) {
 	})
 };
 
+
+helpers.deleteUser = function(userToDeleteObj) {
+
+}
 
 //-----------------USER PROFILE--------------------------
 
@@ -36,35 +41,47 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 	  	location: profileUpdateObj.location || user.get('location'),
 	  	name : profileUpdateObj.name || user.get('name'),
 	  	email : profileUpdateObj.email || user.get('email'),
-	  	password : profileUpdateObj.email || user.get('password'),
-	  	phone : profileUpdateObj.phone || user.get('phone'),
+	  	password : profileUpdateObj.password || user.get('password'),
+	  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
 	  	github: profileUpdateObj.github || user.get('github'),
 	  	summary : profileUpdateObj.summary || user.get('summary')
 		});
 	})
 };
 
-//NOTE TO RACHEL:
-//I think this is wrong because I'm not using the built in methods for the join table 
-// "This will add methods getUsers, setUsers, addUser,addUsers to Project, and getProjects, setProjects and addProject, addProjects to User."
 
 helpers.updateUserSkills = function(profileUpdateObj) {
 return db.User.findOne({
 		where: { 'username': profileUpdateObj.username }
 	})
 	.then(function(user) {
-		return db.Skills.findAll({
-			where: { 'name': profileUpdateObj.toLearn }
-		}).then(function(learningSkillsArray) {
-			learningSkillsArray.forEach(function(skill) {
-				skill.toLearn = true
+		if(!user) {
+			throw Error('User not found.')
+		}
+		return db.Skill.findAll()
+		.then(function(allSkillsArray) {
+			console.log("INSIDE DB.SKILL.FINDALL", allSkillsArray);
+			return allSkillsArray.forEach(function(skill) {
+				skill.addUser(user, { toTeach: false, toLearn: false });
 			})
-		}).then(function() {
-			return db.Skills.findAll({
-				where: { 'name': profileUpdateObj.toTeach }
-			}).then(function(teachingSkillsArray) {
-				teachingSkillsArray.forEach(function(skill) {
-					skill.toTeach = false
+		})
+		.then(function() {
+			return db.Skill.findAll({
+				where: {'name': profileUpdateObj.toLearn}
+			})
+			.then(function(skillsArrayToLearn) {
+				return skillsArrayToLearn.forEach(function(skill) {
+					skill.addUser(user, { toLearn: true });
+				})
+			})
+		})
+		.then(function() {
+			return db.Skill.findAll({
+				where:{'name': profileUpdateObj.toTeach}
+			})
+			.then(function(skillsArraytoTeach) {
+				return skillsArraytoTeach.forEach(function(skill) {
+					skill.addUser(user, { toTeach: true });
 				})
 			})
 		})
@@ -72,9 +89,132 @@ return db.User.findOne({
 };
 
 
-//------------------Messages--------------------------
-helpers.addMessage = function(messageObj) {
+//------------------GET USERS-------------------------
 
+helpers.getAllUsers = function() {
+	return db.User.findAll()
+	.then(function(usersArray) {
+		console.log('HERE ARE ALL USERS', usersArray);
+		return usersArray;
+	})
+}
+
+
+//more functions need to be written here for the recommender
+
+
+
+//------------------Messages--------------------------
+
+helpers.addMessage = function(messageObj) {
+	var recipientID;
+	return db.User.findOne({
+		where: {'username': messageObj.recipientName}
+	})
+	.then(function(recipient) {
+		recipientID = recipient.get('id');
+			return db.User.findOne({
+				where: {'username': messageObj.username}
+			}).then(function(sender) {
+				senderID = sender.get('id');
+				return db.Message.create({
+					'senderName': messageObj.username,
+					'recipientName': messageObj.recipientName,
+					'recipientID': recipientID,
+					'text': messageObj.text,
+					'UserId': senderID
+				})
+			})
+	})
 };
+
+
+helpers.getMessageHistory = function(messageDataObj) {
+	// var recipientID;
+	// return db.User.findOne({
+	// 	where: {'username': messageDataObj.recipientName}
+	// })
+	// .then(function(recipient) {
+	// 	recipientID = recipient.get('id');
+	// 		return db.User.findOne({
+	// 			where: {'username': messageDataObj.username}
+	// 		}).then(function(sender) {
+	// 			senderID = sender.get('id');
+	// 			return db.Message.create({
+	// 				'senderName': messageDataObj.username,
+	// 				'recipientName': messageDataObj.recipientName,
+	// 				'recipientID': recipientID,
+	// 				'text': messageDataObj.text,
+	// 				'UserId': senderID
+	// 			})
+	// 		})
+	// })
+}
+
+
+
+//--------------------FUNCTION TESTS
+// db.Skill.bulkCreate([
+// 	{	name: "AngularJS" },
+// 	{ name: "JavaScript" },
+// 	{ name: "Express"}
+// 	]).then(function() {
+// 		// return models.Skill.findAll();
+// 	})
+
+// db.User.create({
+//     username: "Tom123",
+//     name: "Tom Test",
+//     password: "abc123",
+//     email:"tom@tom.com",
+//     phoneNumber: '415-222-3215'
+//   }).then(function() {
+//   });
+
+// helpers.addMessage({
+// 	username: "Tom123",
+// 	recipientName: 'Rachel111',
+// 	text: 'Oh hello friend. howz it?!'
+// });
+
+// helpers.updateUserSkills({
+// 	username: 'Tom123',
+// 	toLearn: ['AngularJS'],
+// 	toTeach: ['JavaScript', 'Express']
+// }).then(function() {
+// 	console.log("hello success");
+// });
+
+// helpers.signupUser({
+// 	username: 'Rachel111',
+// 	password: 'somecrazyhashedupthing',
+// 	email: 'rachel@rachel.com',
+// 	phoneNumber: '4152141234'
+// }).then(function(user){
+// 	console.log('success! here is user', user);
+// });
+
+// helpers.updateUserBasics({
+// 	username: 'Rachel111',
+// 	location: 'San Francisco',
+// 	email: 'rachel@rachelCity.com',
+// 	github: 'https://github.com/dearamerican',
+// 	summary: 'Hello I am a programmer now, woot!',
+// 	password: 'resetToSomethingHashedUp'
+// }).then(function(user) {
+// 	console.log("WOOT HERE IS USER", user);
+// });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
