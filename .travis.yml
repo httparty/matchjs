@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '0.12'
 install:
-- npm install
+  - npm install
 #Protractor
   - ./node_modules/protractor/bin/webdriver-manager update --standalone --chrome
 before_script:
