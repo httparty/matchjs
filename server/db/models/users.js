@@ -12,7 +12,16 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING
 		},
 		email: {
-			type: DataTypes.STRING
+			type: Sequelize.STRING,
+			validate: {
+				isEmail: true
+			}
+		},
+		phoneNumber: {
+			type: Sequelize.STRING,
+			validate: {
+				len: [10,13]
+			}
 		},
 		photo: {
 			type: DataTypes.STRING
