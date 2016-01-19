@@ -25,10 +25,22 @@ helpers.signupUser = function(userDataObj) {
 	})
 };
 
+helpers.getUserByUserName = function(userObj) {
+  return db.User.findOne({
+    where: {'username': userObj.username}
+	})
+  .then(function(user) {
+  	if(!user) {
+			throw Error('Cannot locate user.');
+		}
+		else {
+  		return user;
+  	}
+	})
+};
 
 helpers.deleteUser = function(userToDeleteObj) {
-
-}
+};
 
 //-----------------USER PROFILE--------------------------
 
