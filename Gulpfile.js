@@ -5,7 +5,8 @@ var changed = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
 var minifyHTML = require('gulp-minify-html');
 var clean = require('gulp-clean');
-var protractor = require("gulp-protractor").protractor;
+var protractor = require('gulp-protractor').protractor;
+var karma = require('gulp-karma');
 
 var paths = {
 	scripts: ['client/app/**/*.js', 'server/**/*.js'],
@@ -25,19 +26,40 @@ gulp.task('clean', function() {
     .pipe(clean());
 });
 
+/*************************************************************
+Server side unit tests with Mocha + Chai
+**************************************************************/
+
 gulp.task('test', function(){
-  gulp.src('test/*.js')
+  gulp.src('./server/test/unit/*.js')
     .pipe(mocha({reporter: 'nyan'}));
 });
 
 /*************************************************************
-End to end testing with protractor
+Client side unit tests with Karma + Mocha + Chai
+**************************************************************/
+
+gulp.task('karma', function(done) {
+  gulp.src('./client/test/unit/*.js')
+      .pipe(karma({
+        configFile: './client/test/karma.conf.js',
+        action: 'run'
+      }))
+      .on('error', function(err) {
+        // Make sure failed tests cause gulp to exit non-zero
+        // console.log(err);
+        this.emit('end'); //instead of erroring the stream, end it
+      });
+});
+
+/*************************************************************
+End to end testing with Protractor
 **************************************************************/
 
 gulp.task('e2e', function(done) {
-  gulp.src(["./client/test/e2e/*.js"])
+  gulp.src(['./client/test/e2e/*.js'])
     .pipe(protractor({
-      configFile: "client/test/protractor.conf.js",
+      configFile: 'client/test/protractor.conf.js',
     }))
     .on('error', function(error) { throw error; });
 });
