@@ -17,5 +17,5 @@ angular.module('app.auth')
     return {
       isAuthenticated : isAuthenticated,
       getCurrentUser : getCurrentUser
-    }
-  }])
+    };
+  }]);

@@ -22,10 +22,9 @@ angular.module('app', [
       url: '/profile'
     });
   }])
-
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
     
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) { 
+    $rootScope.$on('$stateChangeStart', function(event, toState) { 
 
       console.log(AuthService.getCurrentUser());
 
