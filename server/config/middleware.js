@@ -6,7 +6,7 @@ var githubSessions = require('./githubSessions.js');
 module.exports = function(app, express) {
 
   app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
   }));
   app.use(bodyParser.json());
   app.use(cors());
@@ -17,8 +17,10 @@ module.exports = function(app, express) {
   githubSessions.initialize(app);
 
   var authRouter = express.Router();
+  var usersRouter = express.Router();
 
   app.use('/auth', authRouter);
+  app.use('/api/users', usersRouter);
 
   app.get('/failure', function(req, res) {
     res.status('404');
@@ -39,5 +41,6 @@ module.exports = function(app, express) {
   });
 
   require(__dirname + './../auth/authRoutes.js')(authRouter);
+  require(__dirname + './../users/usersRoutes.js')(usersRouter);
 };
 
