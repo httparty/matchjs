@@ -1,0 +1,48 @@
+<!-- <nav-bar></nav-bar> -->
+<div ng-controller="ProfileController">
+	<div id="profileBasicsAndPhoto" class='profileBasicsContainer'>
+		<img src='' height="60" width="60">
+		<button ng-click>Edit</button>
+	</div>
+
+<hr>
+
+	<div id="profileSkills">
+		<h2>Skills</h2>
+		<form>
+			<h3>Skills I can teach:</h3>
+			<div class="toTeach" ng-model="skillsToTeach">
+				<input type = "checkbox"> AngularJS
+				<input type = "checkbox"> Express
+				<input type = "checkbox"> JavaScript
+				<input type = "checkbox"> Backbone
+				<input type = "checkbox"> Node.js
+				<input type = "checkbox"> ReactJS
+				<input type = "checkbox"> ES6
+			</div>
+			<h3>Skills I want to learn:</h3>
+			<div class="toLearn" ng-model="skillsToLearn">
+				<input type = "checkbox"> AngularJS
+				<input type = "checkbox"> Express
+				<input type = "checkbox"> JavaScript
+				<input type = "checkbox"> Backbone
+				<input type = "checkbox"> Node.js
+				<input type = "checkbox"> ReactJS
+				<input type = "checkbox"> ES6
+			</div>
+		</form>
+		<button ng-model="saveEditButton" ng-click="toggleEditShow(); updateSkills()"> {{ saveEditButton.buttonText }}</button>
+<!-- 		<button > Save </button> -->
+	</div>
+
+<hr>
+
+	<div id="profileSummary">
+		<h2>Summary</h2>
+		<form>
+			<input type ="text">
+		</form>
+		<button>Edit</button>
+	</div>
+	<div ng-init="getCurrentUserProfile()"></div>
+</div>
