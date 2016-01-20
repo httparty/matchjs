@@ -4,37 +4,39 @@
 
 <div ng-controller="ProfileController">
 	<div id="profileBasicsAndPhoto" class='profileBasicsContainer'>
-		    <div class='profilePicture'>
+		<div class='profilePhoto'>
       
-      <form name="myForm"> 
-      <fieldset>      
-        <br>
-        <div ng-if="PicData.profilePic">
-          <img ng-src="{{PicData.profilePic}}">
-        </div>
-        <input type="file" ngf-select ng-model="picFile" name="file"    
-               accept="image/*" ngf-max-size="2MB" required>
-        <i ng-show="myForm.file.$error.required">*required</i>
-        <br>
-        <i ng-show="myForm.file.$error.maxSize">File too large 
-            {{picFile.size / 1000000|number:1}}MB: max 2M</i>
-        <div ng-if="!PicData.profilePic">
-          <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> 
-          <button ng-click="picFile = null" ng-if="PicData.profilePic">Choose new image</button>
-        </div>
-        <br>
-        <button ng-disabled="!myForm.$valid" 
-                ng-click="uploadPic(picFile)">Submit</button>
-        <span class="progress" ng-show="picFile.progress >= 0">
-          <div style="width:{{picFile.progress}}%" 
-              ng-bind="picFile.progress + '%'"></div>
-        </span>
-        <span ng-show="picFile.result">Upload Successful</span>
-        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-      </fieldset>
-      <br>
-    </form>
-		
+	    <form name="photoUploadForm"> 
+	    <fieldset>      
+	      <br>
+	      <div ng-if="photoUploadData.profilePhoto">
+	        <img ng-src="{{photoUploadData.profilePhoto}}">
+	      </div>
+	      <input type="file" ngf-select ng-model="photoFile" name="file"    
+	             accept="image/*" ngf-max-size="2MB" required>
+	      <i ng-show="photoUploadForm.file.$error.required">*required</i>
+	      <br>
+	      <i ng-show="photoUploadForm.file.$error.maxSize">File too large 
+	          {{photoFile.size / 1000000|number:1}}MB: max 2M</i>
+	      <div ng-if="!photoUploadData.profilePhoto">
+	        <img ng-show="photoUploadForm.file.$valid" ngf-thumbnail="photoFile" class="thumb"> 
+	        <button ng-click="photoFile = null" ng-if="photoUploadData.profilePhoto">Choose new image</button>
+	      </div>
+	      <br>
+	      <button ng-disabled="!photoUploadForm.$valid" 
+	              ng-click="uploadPhoto(photoFile)">Save</button>
+	      <span class="progress" ng-show="photoFile.progress >= 0">
+	        <div style="width:{{photoFile.progress}}%" 
+	            ng-bind="photoFile.progress + '%'"></div>
+	      </span>
+	      <span ng-show="photoFile.result">Upload Successful</span>
+	      <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+	    </fieldset>
+	    <br>
+	  </form>
+	</div> 
+
+	<div class="profileBasics">
 		<p>Name: {{data.name}}</p>
 		<p>Location: {{data.location}}</p>
 		<p>Github: {{data.github}}</p>
