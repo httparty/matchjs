@@ -1,4 +1,4 @@
-require('dotenv').load();
+require('dotenv').config();
 var Sequelize = require('sequelize');
 var User = require('./models/users.js');
 var Skill = require('./models/skills.js');
