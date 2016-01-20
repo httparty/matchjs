@@ -13,24 +13,25 @@ angular.module('app.profile', [])
 			var userDataObj = {};
 			userDataObj.username = $window.localStorage.username;
 			userDataObj.toLearn = [];
-				for(var key in $scope.data.toLearn) {
-					userDataObj.toLearn.push(key);
+				for(var toLearnKey in $scope.data.toLearn) {
+					userDataObj.toLearn.push(toLearnKey);
 				}
 			userDataObj.toTeach = [];
-				for(var key in $scope.data.toTeach) {
-					userDataObj.toTeach.push(key);
+				for(var toTeachKey in $scope.data.toTeach) {
+					userDataObj.toTeach.push(toTeachKey);
 				}
 			Profile.updateProfileSkills(userDataObj);
 		};
 
 		$scope.updateProfileBasics = function() {
+			var userDataObj = {};
 			Profile.updateProfileBasics(userDataObj);
 		};
 
 		//called when the edit/show button is clicked
 		$scope.toggleEditShow = function() {
 			if($scope.saveEditButton.buttonText === 'Edit') {
-				$scope.saveEditButton.buttonText = 'Save'
+				$scope.saveEditButton.buttonText = 'Save';
 			} else {
 				$scope.saveEditButton.buttonText='Edit';
 				$scope.updateProfileSkills(); //call to fn that saves the skills 
