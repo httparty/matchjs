@@ -1,7 +1,40 @@
 <!-- <nav-bar></nav-bar> -->
 <div ng-controller="ProfileController">
 	<div id="profileBasicsAndPhoto" class='profileBasicsContainer'>
-		<img src='' height="60" width="60">
+		    <div class='profilePicture'>
+      
+      <form name="myForm"> 
+      <fieldset>      
+        <br>
+        <div ng-if="PicData.profilePic">
+          <img ng-src="{{PicData.profilePic}}">
+        </div>
+        <input type="file" ngf-select ng-model="picFile" name="file"    
+               accept="image/*" ngf-max-size="2MB" required>
+        <i ng-show="myForm.file.$error.required">*required</i>
+        <br>
+        <i ng-show="myForm.file.$error.maxSize">File too large 
+            {{picFile.size / 1000000|number:1}}MB: max 2M</i>
+        <div ng-if="!PicData.profilePic">
+          <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> 
+          <button ng-click="picFile = null" ng-if="PicData.profilePic">Choose new image</button>
+        </div>
+        <br>
+        <button ng-disabled="!myForm.$valid" 
+                ng-click="uploadPic(picFile)">Submit</button>
+        <span class="progress" ng-show="picFile.progress >= 0">
+          <div style="width:{{picFile.progress}}%" 
+              ng-bind="picFile.progress + '%'"></div>
+        </span>
+        <span ng-show="picFile.result">Upload Successful</span>
+        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+      </fieldset>
+      <br>
+    </form>
+		
+		<p>Name: {{data.name}}</p>
+		<p>Location: {{data.location}}</p>
+		<p>Github: {{data.github}}</p>
 		<button ng-click>Edit</button>
 	</div>
 
@@ -11,27 +44,27 @@
 		<h2>Skills</h2>
 		<form>
 			<h3>Skills I can teach:</h3>
-			<div class="toTeach" ng-model="skillsToTeach">
-				<input type = "checkbox"> AngularJS
-				<input type = "checkbox"> Express
-				<input type = "checkbox"> JavaScript
-				<input type = "checkbox"> Backbone
-				<input type = "checkbox"> Node.js
-				<input type = "checkbox"> ReactJS
-				<input type = "checkbox"> ES6
+			<div class="toTeach" ng-model="data.toTeach">
+				<input type="checkbox" ng-model="data.toTeach.AngularJS"> AngularJS
+				<input type="checkbox" ng-model="data.toTeach.Express"> Express
+				<input type="checkbox"ng-model="data.toTeach.JavaScript"> JavaScript
+				<input type="checkbox" ng-model="data.toTeach.Backbone"> Backbone
+				<input type="checkbox" ng-model="data.toTeach.Nodejs"> Node.js
+				<input type="checkbox" ng-model="data.toTeach.ReactJS"> ReactJS
+				<input type="checkbox" ng-model="data.toTeach.ES6"> ES6
 			</div>
 			<h3>Skills I want to learn:</h3>
-			<div class="toLearn" ng-model="skillsToLearn">
-				<input type = "checkbox"> AngularJS
-				<input type = "checkbox"> Express
-				<input type = "checkbox"> JavaScript
-				<input type = "checkbox"> Backbone
-				<input type = "checkbox"> Node.js
-				<input type = "checkbox"> ReactJS
-				<input type = "checkbox"> ES6
+			<div class="toLearn" ng-model="data.toLearn">
+				<input type="checkbox" ng-model="data.toLearn.AngularJS"> AngularJS
+				<input type="checkbox" ng-model="data.toLearn.Express"> Express
+				<input type="checkbox" ng-model="data.toLearn.JavaScript"> JavaScript
+				<input type="checkbox" ng-model="data.toLearn.Backbone"> Backbone
+				<input type="checkbox" ng-model="data.toLearn.Nodejs"> Node.js
+				<input type="checkbox" ng-model="data.toLearn.ReactJS"> ReactJS
+				<input type="checkbox" ng-model="data.toLearn.ES6"> ES6
 			</div>
 		</form>
-		<button ng-model="saveEditButton" ng-click="toggleEditShow(); updateSkills()"> {{ saveEditButton.buttonText }}</button>
+		<button ng-model="saveEditButton" ng-click="toggleEditShow()"> {{ saveEditButton.buttonText }}</button>
 <!-- 		<button > Save </button> -->
 	</div>
 
