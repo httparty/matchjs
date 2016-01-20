@@ -1,11 +1,11 @@
 language: node_js
 node_js:
   - '4.1'
-install:
+#install:
   # - npm install
 #Protractor
   # - ./node_modules/protractor/bin/webdriver-manager update --standalone --chrome
-before_script:
+#before_script:
 #Chrome for Karma/Protractor
   # - export CHROME_BIN=chromium-browser
   # - export DISPLAY=:99.0
@@ -14,7 +14,7 @@ before_script:
 #WebDriver for Protractor
   # - ./node_modules/protractor/bin/webdriver-manager start 2>&1 &
   # - sleep 3 # give Web server some time to bind to sockets, etc
-script:
+#script:
   # - gulp unit-tests
   # - gulp e2e-tests does not currently work
 
