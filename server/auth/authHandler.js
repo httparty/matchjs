@@ -12,7 +12,7 @@ module.exports = {
       displayName: req.user.displayName,
       avatar: req.user._json.avatar_url,
       location: req.user._json.location
-    }
+    };
 
     res.cookie('user-profile', profile, { maxAge: 2592000000 });  // Expires in one month
 

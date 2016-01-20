@@ -22,8 +22,8 @@ angular.module('app', [
 
       var s = $cookies.get('user-profile');
       if (s) {
-        var profileObj = s.substring(s.indexOf("{"), s.lastIndexOf("}") + 1);
-        console.log("profile", profileObj);
+        var profileObj = s.substring(s.indexOf('{'), s.lastIndexOf('}') + 1);
+        console.log('profile', profileObj);
       }
 
       var cookie = $cookies.get('connect.sid');
