@@ -67,7 +67,8 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 	  	password : profileUpdateObj.password || user.get('password'),
 	  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
 	  	github: profileUpdateObj.github || user.get('github'),
-	  	summary : profileUpdateObj.summary || user.get('summary')
+	  	summary : profileUpdateObj.summary || user.get('summary'),
+	  	photo : profileUpdateObj.photo || user.get('photo')
 		});
 	})
 };
