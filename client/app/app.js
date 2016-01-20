@@ -3,7 +3,7 @@ angular.module('app', [
   'app.home',
   'ngCookies',
   'app.profile',
-  'app.navbarDirectives'
+  'app.navbar'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
