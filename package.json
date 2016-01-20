@@ -20,6 +20,7 @@
   "homepage": "https://github.com/httparty/matchjs#readme",
   "dependencies": {
     "body-parser": "1.14.2",
+    "bootstrap": "3.3.6",
     "bower": "1.7.2",
     "chai": "3.4.1",
     "cookie-parser": "1.4.1",
