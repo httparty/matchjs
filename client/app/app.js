@@ -1,7 +1,8 @@
 angular.module('app', [
   'ui.router',
   'app.home',
-  'ngCookies'
+  'ngCookies',
+  'app.profile'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -15,6 +16,11 @@ angular.module('app', [
     .state('test', {
       templateUrl: 'app/components/test/test.html',
       url: '/test'
+    })
+    .state('profile', {
+      templateUrl: 'app/components/profile/profile.html',
+      controller: 'ProfileController',
+      url: '/profile'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', function($rootScope, $state, $cookies, $window) {
@@ -43,4 +49,3 @@ angular.module('app', [
     });
 
   }]);
-

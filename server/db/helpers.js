@@ -2,6 +2,9 @@ var db = require('./config.js');
 
 var helpers = {};
 
+
+//---------------AUTHENTICATION----------------------
+
 helpers.signupUser = function(userDataObj) {
 	return db.User.findOne({
 		where: {'username': userDataObj.username}
@@ -25,12 +28,32 @@ helpers.signupUser = function(userDataObj) {
 	})
 };
 
-
 helpers.deleteUser = function(userToDeleteObj) {
+	db.User.findOne({ 
+		where: {'username': userToDeleteObj.username}
+	}).then(function(user) {
+  	return user.destroy();
+	})
+	.then(function() {})
+};
 
-}
+helpers.getUserByUserName = function(userObj) {
+  return db.User.findOne({
+    where: {'username': userObj.username}
+	})
+  .then(function(user) {
+  	if(!user) {
+			throw Error('Cannot locate user.');
+		}
+		else {
+  		return user;
+  	}
+	})
+};
+
 
 //-----------------USER PROFILE--------------------------
+
 
 helpers.updateUserBasics = function(profileUpdateObj) {
 	return db.User.findOne({
@@ -44,11 +67,11 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 	  	password : profileUpdateObj.password || user.get('password'),
 	  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
 	  	github: profileUpdateObj.github || user.get('github'),
-	  	summary : profileUpdateObj.summary || user.get('summary')
+	  	summary : profileUpdateObj.summary || user.get('summary'),
+	  	photo : profileUpdateObj.photo || user.get('photo')
 		});
 	})
 };
-
 
 helpers.updateUserSkills = function(profileUpdateObj) {
 return db.User.findOne({
@@ -97,14 +120,13 @@ helpers.getAllUsers = function() {
 		console.log('HERE ARE ALL USERS', usersArray);
 		return usersArray;
 	})
-}
-
+};
 
 //more functions need to be written here for the recommender
 
 
-
 //------------------Messages--------------------------
+
 
 helpers.addMessage = function(messageObj) {
 	var recipientID;
@@ -128,7 +150,6 @@ helpers.addMessage = function(messageObj) {
 	})
 };
 
-
 helpers.getMessageHistory = function(messageDataObj) {
 	// var recipientID;
 	// return db.User.findOne({
@@ -149,9 +170,9 @@ helpers.getMessageHistory = function(messageDataObj) {
 	// 			})
 	// 		})
 	// })
-}
+};
 
-
+module.exports = helpers;
 
 //--------------------FUNCTION TESTS
 // db.Skill.bulkCreate([
@@ -204,17 +225,3 @@ helpers.getMessageHistory = function(messageDataObj) {
 // }).then(function(user) {
 // 	console.log("WOOT HERE IS USER", user);
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
