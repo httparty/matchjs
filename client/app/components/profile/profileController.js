@@ -1,62 +1,51 @@
 angular.module('app.profile', [])
 	.controller('ProfileController', ['$scope', '$window', '$state', 'Profile', function ($scope, $window, $state, Profile) {
 		$scope.data = {};
-		$scope.data.toLearn = [];
-		$scope.data.toTeach = [];
+		$scope.data.toLearn = {};
+		$scope.data.toTeach = {};
 
 		$scope.saveEditButton = {};
 		$scope.saveEditButton.buttonText = 'Edit';
 
-		$scope.updateSkills = function() {
+		//called from within toggleEditShow when save button is clicked 
+		$scope.updateProfileSkills = function() {
 			console.log('hello inside update skills!');
+			var userDataObj = {};
+			userDataObj.username = $window.localStorage.username;
+			userDataObj.toLearn = [];
+				for(var key in $scope.data.toLearn) {
+					userDataObj.toLearn.push(key);
+				}
+			userDataObj.toTeach = [];
+				for(var key in $scope.data.toTeach) {
+					userDataObj.toTeach.push(key);
+				}
+			Profile.updateProfileSkills(userDataObj);
 		};
 
-		$scope.saveSkills = function() {
-			console.log("inside saveskills function")
+		$scope.updateProfileBasics = function() {
+			Profile.updateProfileBasics(userDataObj);
 		};
 
-		$scope.editSkills = function() {
-			console.log("inside editskills fn");
-			$scope.showEdit = false;
-		};
-
+		//called when the edit/show button is clicked
 		$scope.toggleEditShow = function() {
 			if($scope.saveEditButton.buttonText === 'Edit') {
 				$scope.saveEditButton.buttonText = 'Save'
 			} else {
 				$scope.saveEditButton.buttonText='Edit';
-				//call to fn that saves the skills
+				$scope.updateProfileSkills(); //call to fn that saves the skills 
 			} 
 		};
 
+		//called on the initialization of the page
 		$scope.getCurrentUserProfile = function() {
 			console.log('hello inside get currentUserProfile');
-			Profile.getCurrentUser()//<--data obj goes here;
+			//var userDataObj = {};
+			//userDataObj.username = $window.localStorage.getItem('username');
+			Profile.getCurrentUser();//<--pass in userDataObj here
+			//SET: $scope.data.location
+			// 		 $scope.data.name
+			//		 $scope.data.github
 		};
 
   }]);
-
-
-
-
-
-
-
-
-
-
-		// $scope.editShow = true;
-		// $scope.skillsEdit = true;
-		// if ($scope.editShow === true) {
-		// 	$scope.skillsButton.editOrSaveText = 'Edit';
-		// }
-   // class = "skillsButton" 
-
-			// $scope.editSkills ==== false ? true: false;
-			// if($scope.editShow === false) {
-			// 	$scope.skillsButton.editOrSaveText = 'Save';
-			// }
-			// class="skillsEditButton" ng-show="skillsEdit" ng-model="" 
-		// 			<button ng-show="!skillsEdit" ng-click="saveSkills()">
-		// 	Save
-		// </button>
