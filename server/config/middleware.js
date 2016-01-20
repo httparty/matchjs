@@ -31,8 +31,10 @@ module.exports = function(app, express) {
   });
 
   app.get('/logout', function(req, res) {
-    req.session.destroy();
-    res.send("destroyed session");
+    req.session.destroy(function() {
+      res.clearCookie('connect.sid', { path: '/' });
+      res.redirect('/');
+    });
   });
 
   require(__dirname + './../auth/authRoutes.js')(authRouter);
