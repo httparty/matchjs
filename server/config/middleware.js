@@ -27,7 +27,7 @@ module.exports = function(app, express) {
 
   app.get('/resource', githubSessions.restrict, function(req, res) {
     res.status('200');
-    res.send("you have access to this resource");
+    res.send('you have access to this resource');
   });
 
   app.get('/logout', function(req, res) {
