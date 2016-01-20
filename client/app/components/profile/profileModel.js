@@ -1,5 +1,5 @@
-angular.module('app.profileModel', [])
-.factory('Profile', function($http) {
+angular.module('app.profile')
+.factory('Profile', ['$http', function($http) {
 
   var getCurrentUser = function(userDataObj) {
     return $http({
@@ -29,12 +29,12 @@ angular.module('app.profileModel', [])
     }).then(function(responseObj){
       return responseObj;
     });
-  }
+  };
 
   return {
     getCurrentUser : getCurrentUser,
     updateProfileSkills : updateProfileSkills,
     updateProfileBasics : updateProfileBasics
-  }
+  };
 
-}); 
+}]); 
