@@ -25,10 +25,18 @@ module.exports = function(app, express) {
     res.send('you don\'t have access to that resource. redirecting to sign in.');
   });
 
-  // app.get('/', function(req, res) {
-  //   res.status('200');
-  //   res.send("Hello World");
-  // });
+  app.get('/resource', githubSessions.restrict, function(req, res) {
+    res.status('200');
+    res.send('you have access to this resource');
+  });
+
+  app.get('/logout', function(req, res) {
+    req.session.destroy(function() {
+      res.clearCookie('connect.sid', { path: '/' });
+      res.redirect('/');
+    });
+  });
+
   require(__dirname + './../auth/authRoutes.js')(authRouter);
 };
 
