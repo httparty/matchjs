@@ -14,6 +14,7 @@ angular.module('app', [
     $stateProvider
     .state('home', {
       templateUrl: 'app/components/home/home.html',
+      controller: 'HomeController',
       url: '/'
     })
     .state('profile', {
