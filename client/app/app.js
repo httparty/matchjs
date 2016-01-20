@@ -17,11 +17,15 @@ angular.module('app', [
       url: '/test'
     });
   }])
-  .run(['$rootScope','$state','$cookies','$window',function($rootScope, $state, $cookies, $window) {
+  .run(['$rootScope','$state','$cookies','$window', function($rootScope, $state, $cookies, $window) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) { 
 
-      //this value is undefined if a user has never logged in
-      //it's also undefined if a user logged out
+      var s = $cookies.get('user-profile');
+      if (s) {
+        var profileObj = s.substring(s.indexOf("{"), s.lastIndexOf("}") + 1);
+        console.log("profile", profileObj);
+      }
+
       var cookie = $cookies.get('connect.sid');
       console.log('cookie', cookie);
 
@@ -37,4 +41,6 @@ angular.module('app', [
         console.log('hey I"m logged in');
       }    
     });
+
   }]);
+
