@@ -28,15 +28,10 @@ angular.module('app', [
 
       console.log(AuthService.getCurrentUser());
 
-      if (!AuthService.isAuthenticated() && toState.name === 'home') {
-        return;
-      }
-
       if (!AuthService.isAuthenticated() && toState.name !== 'home') {
         event.preventDefault(); 
         $state.go('home');
         return;
       }
-
     });
   }]);
