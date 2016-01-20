@@ -1,6 +1,12 @@
 angular.module('app.navbar', [])
-  .controller('HomeController', ['$scope', function ($scope) {
-    // $scope.Name = 'Sergey';
-    // $scope.Square = function(x) { return x * x};
+  .controller('NavController', ['$scope', 'AuthService', function ($scope, AuthService) {
+
+    $scope.user = angular.fromJson(AuthService.getCurrentUser());
+
+    // $scope.user = AuthService.getCurrentUser();
+
+    $scope.isLoggedIn = function() {
+      return AuthService.isAuthenticated();
+    }
 
   }]);
