@@ -17,6 +17,8 @@
         <li><a ui-sref="signin" ng-show="!isLoggedIn()">Sign In <i class="fa fa-sign-in"></i></a></li>
         <li><a href="" ng-click="signout()" ng-show="isLoggedIn()">Sign Out <i class="fa fa-sign-out"></i></a></li>
         <li style='color: #000000; font-family: verdana' ng-show="isLoggedIn()">{{username}}</li>
+
+        <li><a href="/logout"> Sign Out </a></li>
       </ul>
     </div>
   </div>
