@@ -7,6 +7,10 @@ angular.module('app.profile', [])
 		$scope.saveEditButton = {};
 		$scope.saveEditButton.buttonText = 'Edit';
 
+		$scope.photoUploadData = {};
+		//$scope.photoUploadData.profilePhoto
+		// $scope.photoFile = {}
+		$scope.errorMsg
 		//called from within toggleEditShow when save button is clicked 
 		$scope.updateProfileSkills = function() {
 			console.log('hello inside update skills!');
@@ -21,6 +25,10 @@ angular.module('app.profile', [])
 					userDataObj.toTeach.push(toTeachKey);
 				}
 			Profile.updateProfileSkills(userDataObj);
+		};
+
+		$scope.uploadPhoto = function(userUploadedPhotoFile) {
+			console.log("here's what was uploaded", userUploadedPhotoFile);
 		};
 
 		$scope.updateProfileBasics = function() {
