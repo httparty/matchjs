@@ -33,6 +33,7 @@ module.exports = function(app, express) {
   app.get('/logout', function(req, res) {
     req.session.destroy(function() {
       res.clearCookie('connect.sid', { path: '/' });
+      res.clearCookie('user-profile');
       res.redirect('/');
     });
   });
