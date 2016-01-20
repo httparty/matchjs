@@ -2,7 +2,7 @@ angular.module('app', [
   'ui.router',
   'ngCookies',
   'app.profile',
-  'app.navbar'
+  'app.navbar',
   'app.home',
   'app.profile',
   'app.auth'
