@@ -4,7 +4,7 @@ angular.module('app.profile')
   var getCurrentUser = function(userDataObj) {
     return $http({
       method: 'POST',
-      url: '/api/profile/user',
+      url: '/api/users/user',
       data: userDataObj
     }).then(function(responseObj){
       return responseObj;
@@ -14,7 +14,7 @@ angular.module('app.profile')
   var updateProfileSkills = function(userDataObj) {
     return $http({
       method: 'POST',
-      url: '/api/profile/skills',
+      url: '/api/users/skills',
       data: userDataObj
     }).then(function(responseObj){
       return responseObj;
@@ -24,7 +24,7 @@ angular.module('app.profile')
   var updateProfileBasics = function(userDataObj) {
     return $http({
       method: 'POST',
-      url: '/api/profile/basics',
+      url: '/api/users/basics',
       data: userDataObj
     }).then(function(responseObj){
       return responseObj;
