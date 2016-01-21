@@ -44,7 +44,7 @@ module.exports = function(app, express) {
   app.get('/etc', function(req,res) {
     var got = helpers.getAllUsers();
     res.send(got);
-  })
+  });
 
   // app.get('/', function(req, res) {
   //   res.status('200');

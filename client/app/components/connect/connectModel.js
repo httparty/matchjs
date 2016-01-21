@@ -8,7 +8,7 @@ angular.module('app.connect')
 			method: 'GET',
 			url: '/api/users/getAllUsers'
 		});
-	}
+	};
 
 	return model;
 });
