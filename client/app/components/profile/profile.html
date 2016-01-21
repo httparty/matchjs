@@ -3,7 +3,7 @@
 <div class="container">
 
 <div ng-controller="ProfileController">
-	<div id="profileBasicsAndPhoto" class='profileBasicsContainer'>
+	<div id="profileBasicsAndPhoto" class='profileBasicsContainer' ng-model="selectedStyle.basics" ng-style="selectedStyle.basics">
 
 <!-- PROFILE PHOTO -->
 		<div class='profilePhoto'>
@@ -31,8 +31,7 @@
 <hr>
 
 <!-- PROFILE SKILLS -->
-
-	<div id="profileSkills">
+	<div id="profileSkills" ng-model="selectedStyle.skills" ng-style="selectedStyle.skills">
 		<h2>Skills</h2>
 		<form>
 			<h3>Skills I want to teach:</h3>
@@ -61,12 +60,12 @@
 
 <hr>
 
-	<div id="profileSummary">
+	<div id="profileSummary" ng-model="selectedStyle.summary" ng-style="selectedStyle.summary">
 		<h2>Summary</h2>
 		<form>
-			<input type ="text" style="width: 600px"> 
+			<input type ="text" style="width: 600px" ng-model="data.updateBasics.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'"> 
 		</form>
-		<button>Edit</button>
+		<button ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
 	</div>
 	<div ng-init="getCurrentUserProfile()"></div>
 </div>
