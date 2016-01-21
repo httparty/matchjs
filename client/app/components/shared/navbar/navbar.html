@@ -7,6 +7,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                   <li><a href="/#/profile" ng-show="isLoggedIn()"> {{'Hello'}} {{user.displayName}} </a></li>
+                  <li><a href="/#/inbox" ng-show="isLoggedIn()"><i class="fa fa-envelope-o"></i></a></li>
                   <li><a href="/logout" ng-show="isLoggedIn()"> Sign Out </a></li>
                 </ul>
             </div>
