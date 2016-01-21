@@ -1,0 +1,39 @@
+html, body, .indexView, .inbox, .row, .conversations, .messages{
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+.messages{
+  border-left: solid 1px;
+  padding: 3%;
+}
+#messageList, #conversationList{
+  height: 90%;
+  overflow: scroll;
+  list-style-type: none;
+  padding: 0px;
+}
+.message{
+  box-sizing: border-box;
+  padding: 2%;
+}
+
+.conversation {
+  padding: 5%;
+}
+
+.messageList {
+  height: 80%;
+}
+.messageInput {
+  height: 20%;
+}
+
+.odd {
+  background-color: #eee;
+}
+.even{
+  background-color: white;
+}
+

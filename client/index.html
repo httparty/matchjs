@@ -10,11 +10,12 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/styles/landing-page.css">
+    <link rel="stylesheet" href="assets/styles/inbox.css">
   </head>
     <body>
         <nav-dir></nav-dir>
         <!-- <w3-test-directive></w3-test-directive> -->
-        <div ui-view></div>
+        <div ui-view class="indexView"></div>
 
         <!-- bower components -->
         <script src="bower_components/angular/angular.min.js"></script>
@@ -32,17 +33,20 @@
         <script src="app/components/connect/connectController.js"></script>
         <script src="app/components/profile/profileController.js"></script>
         <script src="app/components/shared/navbar/navbarController.js"></script>
+        <script src="app/components/auth/authController.js"></script>
+        <script src="app/components/inbox/inboxController.js"></script>
 
-        
+
         <!-- models -->
         <script src="app/components/connect/connectModel.js"></script>
-        
+
         <!-- shared services -->
 
         <!-- component services -->
         <script src="app/components/auth/authModel.js"></script>
         <script src="app/components/profile/profileModel.js"></script>
-        
+        <script src="app/components/inbox/inboxModel.js"></script>
+
         <!-- custom directives -->
         <script src="app/components/shared/navbar/navbarDirective.js"></script>
 
