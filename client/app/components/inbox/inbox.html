@@ -3,8 +3,8 @@
     <div class="col-md-5 conversations">
       <h1>Conversations</h1>
       <ul id="conversationList">
-        <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'">
-        {{conversation}}
+        <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)">
+        <h4>{{conversation}}</h4>
         </li>
       </ul>
     </div>

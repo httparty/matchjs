@@ -4,7 +4,14 @@ angular.module('app.inbox', [])
 
     // Scope Variables
     $scope.conversationList = ['Rachel', 'Polina', 'Anthony', 'Chris', 'Jeff'];
-    $scope.currentMessageList = [1, 2, 3, 4, 5];
+    $scope.conversationObject = {
+        'Rachel': ['Hey!', 'How goes it?'],
+        'Polina': ['Hi! Do you need a mentor?'],
+        'Anthony': ['Whatsup man?', 'I was looking into this new framework, and was wondering if you wanted to help', 'It will be a lot of fun!'],
+        'Chris': ['You will go back to your desk and nope... you do not gots it', 'I am a programming god, I made fire', 'that is my goal here... crush your spirits'],
+        'Jeff': ['Im on vacation!']
+    };
+    $scope.currentMessageList = [];
     $scope.enteredText = '';
 
     // Message Logic
@@ -27,8 +34,8 @@ angular.module('app.inbox', [])
     $scope.updateConversations = function() {
 
     };
-    $scope.switchConversation = function() {
-
+    $scope.switchConversation = function(conversation) {
+        $scope.currentMessageList = $scope.conversationObject[conversation];
     };
     $scope.deleteConversation = function() {
 
