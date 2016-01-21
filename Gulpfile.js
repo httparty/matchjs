@@ -42,7 +42,7 @@ Client side unit tests with Karma + Mocha + Chai
 gulp.task('karma', function(done) {
   gulp.src('./client/test/unit/*.js')
       .pipe(karma({
-        configFile: './client/test/karma.conf.js',
+        configFile: './client/test/unit/config/karma.conf.js',
         action: 'run'
       }))
       .on('error', function(err) {
@@ -59,7 +59,7 @@ End to end testing with Protractor
 gulp.task('e2e', function(done) {
   gulp.src(['./client/test/e2e/*.spec.js'])
     .pipe(protractor({
-      configFile: 'client/test/protractor.conf.js',
+      configFile: 'client/test/e2e/config/protractor.conf.js',
     }))
     .on('error', function(error) { throw error; });
 });

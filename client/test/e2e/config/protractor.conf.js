@@ -15,17 +15,27 @@ exports.config = {
   baseUrl: 'http://localhost:5000',
   framework: 'jasmine2',
   specs: [
-    './e2e/*.spec.js'
+    '../*.spec.js'
   ]
 };
 
-//Run just Chrome in Dev
-//In Travis, run against both browsers
-if (process.argv[3] === '--prod') {
+//set --all flag to run both Chrome and Firefox in dev
+if (process.argv[3] === '--all') {
   exports.config.multiCapabilities = [
     browsers.firefox,
     browsers.chrome
   ]
 } else {
   exports.config.capabilities = browsers.chrome;
+}
+
+//Travis
+if (process.env.TRAVIS) {
+  config.sauceUser = process.env.SAUCE_USERNAME;
+  config.sauceKey = process.env.SAUCE_ACCESS_KEY;
+  config.capabilities = {
+    'browserName': 'chrome',
+    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    'build': process.env.TRAVIS_BUILD_NUMBER
+  };
 }
