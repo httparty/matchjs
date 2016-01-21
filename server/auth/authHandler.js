@@ -6,12 +6,14 @@ module.exports = {
 
 	success: function(req, res) {
 
+    console.log(req.user);
     var profile = {
       id: req.user.id,
       username: req.user.username,
       displayName: req.user.displayName,
       avatar: req.user._json.avatar_url,
-      location: req.user._json.location
+      location: req.user._json.location,
+      github : req.user.profileUrl
     };
 
     res.cookie('user-profile', profile, { maxAge: 2592000000 });  // Expires in one month
