@@ -1,22 +1,40 @@
 angular.module('app.profile', [])
-	.controller('ProfileController', ['$scope', '$window', '$state', 'Profile', function ($scope, $window, $state, Profile) {
+	.controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', function ($scope, $window, $state, Profile, AuthService) {
 		$scope.data = {};
 		$scope.data.toLearn = {};
 		$scope.data.toTeach = {};
 		// $scope.data.profilePhoto
-		$scope.data.name = 'Rachel';
-		$scope.data.location = 'San Francisco';
-		$scope.data.github = 'url.com';
+		// $scope.data.name = $scope.user.displayName;
+		// $scope.data.location = 'San Francisco';
+		// $scope.data.github = 'url.com';
 
-		$scope.data.username = $window.localStorage.username;
+		// $scope.data.username = $window.localStorage.username;
 
 		$scope.data.update = {}; //this is to pass new data into the form fields
+
+		$scope.user = angular.fromJson(AuthService.getCurrentUser());
+
+		// console.log("HERE IS USER", $scope.user);
 
 		$scope.saveEditButton = {};
 		$scope.saveEditButton.skills = {};
 		$scope.saveEditButton.skills.buttonText = 'Edit';
 		$scope.saveEditButton.basics = {};
 		$scope.saveEditButton.basics.buttonText = 'Edit';
+
+		$scope.updateProfileBasics = function() {
+			var userDataObj = $scope.data.update; 
+			console.log("here is userDataObj", userDataObj);
+			Profile.updateProfileBasics(userDataObj) //update DB
+				.then(function(response) {
+					console.log("here is the server response", response);
+					for(var key in userDataObj) { //update DOM 
+						if(userDataObj[key]) {
+							$scope.user[key] = userDataObj[key];
+						}
+					}
+				})
+		};
 
 		//called from within toggleEditShow when save button is clicked 
 		$scope.updateProfileSkills = function() {
@@ -34,19 +52,6 @@ angular.module('app.profile', [])
 			Profile.updateProfileSkills(userDataObj);
 		};
 
-
-		$scope.updateProfileBasics = function() {
-			var userDataObj = $scope.data.update; 
-			console.log("here is userDataObj", userDataObj);
-			//update the DOM 
-			for(var key in userDataObj) {
-				if(userDataObj[key]) {
-					$scope.data[key] = userDataObj[key];
-				}
-			}
-			//update the DB
-			Profile.updateProfileBasics(userDataObj);
-		};
 
 		//called when BASICS edit/show button is clicked
 		$scope.toggleEditShowBasics = function() {
@@ -75,10 +80,7 @@ angular.module('app.profile', [])
 			//var userDataObj = {};
 			//userDataObj.username = $window.localStorage.getItem('username');
 			Profile.getCurrentUser();//<--pass in userDataObj here
-			//SET: $scope.data.location
-			// 		 $scope.data.name
-			//		 $scope.data.github
-			//		 $scope.data.photo
+			//toggle true skills to true
 		};
 
   }]);
