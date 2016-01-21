@@ -2,24 +2,6 @@ language: node_js
 node_js:
 - '4.1'
 addons:
-  sauce_connect: true
-    username: 'matchjs-team'
-    access_key: 'n6dhqwolsc/88bLZ2vlfZbc06wZC2zqEB3scmKnu+0t+Zy1CoV41R7igD+Pu1i34vC5CKkar1v8CSSHdNe+W88UhrbMbAhR0AZXPOwY9MsFnd9zvaL1oaS/Klzgx1wALhkFuIEHuzatBJtOzRZPuncBzdZY/ZFmPhRWv8BRevYEFk9Z4vwapid0OzlspbNL8ZySIoGzFhD/OTzQY/pgtY5eijeZexs72C6Sz9x+X+7fW/F1f3rHAp2b/vJLEA+uSPmkgAVIPrtC5F47WblECc601DKUFDkQMOsRlfk9z9U4l0J4hR1E/2pbsx7OunTwAouBKc4SS56HsiT76bF+t1AxGu8YHaW9W2hE5TQ6X0T99RnqmzDU1AM16n1EG90NbYUfrw58BCd4fC1WJDyOFsTJwMIvdLRYYMrf//wjqUfe2NQetVjSgiuK0y8BSll++AYGPRMu+fYmqLp4FdgevZ9dnFd1/B3j7Q7PzaeBpfFJLRSL/tH6RM9jzB+vFnwIh6humZAqPuMBP2VCefVIzvpC0RZ5jMxqu4B/DgD7SSQ0naZLxrYQ847OJJ67Oe5tybny3FRwpJrtmR/n4xYg33zrxGs7wTvVOKhOoc+sJgEZCCPzltewSqrrJm23XjGcpm9+J2dILxsJevDwa8yXmbUjCL9DzLD6z+BO3yNEmkQ8='
-
-#install:
-  # - npm install
-#Protractor
-  # - ./node_modules/protractor/bin/webdriver-manager update --standalone --chrome
-#before_script:
-#Chrome for Karma/Protractor
-  # - export CHROME_BIN=chromium-browser
-  # - export DISPLAY=:99.0
-  # - sh -e /etc/init.d/xvfb start
-  # - sleep 3 # give xvfb some time to start
-#WebDriver for Protractor
-  # - ./node_modules/protractor/bin/webdriver-manager start 2>&1 &
-  # - sleep 3 # give Web server some time to bind to sockets, etc
-#script:
-  # - gulp unit-tests
- # - gulp e2e-tests does not currently work
-
+  sauce_connect:
+    username: matchjs-team
+    access_key: fxStC/VV8uzPyqQTgTMjEeDoCqy+oIJPxDX0dvjdvof5gahjbrfvrnf0tUkCgeKv9SU8F1nBQc3db97DX9rVeFDtaXjWIPYx00rz3eoCW5H+dDYpIcpgaTnkXyD+wdE/8AP3azk20yL+VETXJ8Dx+QknU8p729ahtrdH0D0ExPqf7/RQ6daiShJzHQYQq8V0+B4jsMr09V+OhabrBpfQiBbnBr4B3ir0eoRzLFDIMt+/Jiy+rJrkdZAiWsU9LPVpjO8LDU5B93ZzUshmIUYHGzEgX0U+Q7ChfMN1aoRHGAvqHZwLkTXxyPMCyJuzXTZu1s+vzxhUM1t3a0eUytjRNLorLxM1Ijn8pL9yyum7za4bkqrwq3TGiXkw0wY3BUy1xGPmitAg6pcsQPoYfE7DcOHe0p2UF0NroPsNCeGo6ZKyKZ0JyAd52EAIAMWo987lbaIJ9q/jdla3lBrSZ6Miq1Q6G3k+X7EfxnzXAvIBNGmW+ifE4lAIOTV6wXRlY6nNIk8EsMWNtOw9p8c6IwbXNsxubvDKXp1DmoA2X9suNoRkpnvfa+xHWkj0B6atSKdWxmI1UbR+fQZMvgUGL/pzourJuSvRIt88qQvsiLsMXdpm/oq64XVP1EtpG1Tlkn7L3+G/KeLyPaqdIGanL9nSLxn0RvJcZkUv3BZv1T2YdBE=
