@@ -1,3 +1,28 @@
-<div>
-	<button ng-click="getAllUsers()">Click me!</button>
+<div class="table-responsive">
+	<table class="table table-reflow" ng-repeat="u in users">
+      <h1><strong>All Users</strong></h1>
+        <thead>
+        <span style="font-weight:bold">
+          <tr style="vertical-align: top; padding:10px">
+            <th>ID</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Github</th>
+            <th>Karma points</th>
+          </tr>
+        </thead>
+        </span>
+        <tbody>
+          <tr style="vertical-align: top; padding:10px">
+            <td style="vertical-align: top; padding:10px">{{u.id || 'N\A'}}</td>
+            <td style="vertical-align: top; padding:10px">{{u.username || 'N\A'}}</td>
+            <td style="vertical-align: top; padding:10px">{{u.name || 'N\A'}}</td>
+            <td style="vertical-align: top; padding:10px">{{u.location || 'San Francisco'}}</td>
+            <td style="vertical-align: top; padding:10px">{{u.github || 'https://github.com'}}</td>
+            <td style="vertical-align: top; padding:10px">{{u.karmapoints || 'N\A'}}</td>
+          </tr>
+        </tbody>
+      </table>
 </div>
+	<button class="btn btn-primary-outline" ng-click="getAllUsers()">Click me!</button>
