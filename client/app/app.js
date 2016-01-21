@@ -5,7 +5,8 @@ angular.module('app', [
   'app.profile',
   'app.navbar',
   'app.home',
-  'app.connect'
+  'app.connect',
+  'app.inbox'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -14,7 +15,7 @@ angular.module('app', [
     $stateProvider
     .state('home', {
       templateUrl: 'app/components/home/home.html',
-      controller: 'HomeController',
+      // controller: 'HomeController',
       url: '/'
     })
     .state('profile', {
@@ -22,18 +23,24 @@ angular.module('app', [
       controller: 'ProfileController',
       url: '/profile'
     })
+
     .state('connect', {
       templateUrl: 'app/components/connect/connect.html',
       controller: 'connectController',
       url: '/connect'
+    })
+    .state('inbox', {
+      templateUrl: 'app/components/inbox/inbox.html',
+      controller: 'InboxController',
+      url: '/inbox'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
-    
-    $rootScope.$on('$stateChangeStart', function(event, toState) { 
+
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
 
       if (!AuthService.isAuthenticated() && toState.name !== 'home') {
-        event.preventDefault(); 
+        event.preventDefault();
         $state.go('home');
         return;
       }
