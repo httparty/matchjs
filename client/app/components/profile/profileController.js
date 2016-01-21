@@ -10,7 +10,7 @@ angular.module('app.profile', [])
 
 		// $scope.data.username = $window.localStorage.username;
 
-		$scope.data.update = {}; //this is to pass new data into the form fields
+		$scope.data.updateBasics = {}; //this is to pass new data into the form fields
 
 		$scope.user = angular.fromJson(AuthService.getCurrentUser());
 
@@ -21,37 +21,6 @@ angular.module('app.profile', [])
 		$scope.saveEditButton.skills.buttonText = 'Edit';
 		$scope.saveEditButton.basics = {};
 		$scope.saveEditButton.basics.buttonText = 'Edit';
-
-		$scope.updateProfileBasics = function() {
-			var userDataObj = $scope.data.update; 
-			console.log("here is userDataObj", userDataObj);
-			Profile.updateProfileBasics(userDataObj) //update DB
-				.then(function(response) {
-					console.log("here is the server response", response);
-					for(var key in userDataObj) { //update DOM 
-						if(userDataObj[key]) {
-							$scope.user[key] = userDataObj[key];
-						}
-					}
-				})
-		};
-
-		//called from within toggleEditShow when save button is clicked 
-		$scope.updateProfileSkills = function() {
-			console.log('hello inside update skills!');
-			var userDataObj = {};
-			userDataObj.username = $scope.data.username;
-			userDataObj.toLearn = [];
-				for(var toLearnKey in $scope.data.toLearn) {
-					userDataObj.toLearn.push(toLearnKey);
-				}
-			userDataObj.toTeach = [];
-				for(var toTeachKey in $scope.data.toTeach) {
-					userDataObj.toTeach.push(toTeachKey);
-				}
-			Profile.updateProfileSkills(userDataObj);
-		};
-
 
 		//called when BASICS edit/show button is clicked
 		$scope.toggleEditShowBasics = function() {
@@ -64,6 +33,20 @@ angular.module('app.profile', [])
 			}
 		};
 
+		$scope.updateProfileBasics = function() {
+			var userDataObj = $scope.data.updateBasics; 
+			console.log("here is userDataObj", userDataObj);
+			Profile.updateProfileBasics(userDataObj) //update DB
+				.then(function(response) {
+					console.log("here is the server response to BASICS update", response);
+					for(var key in userDataObj) { //update DOM 
+						if(userDataObj[key]) {
+							$scope.user[key] = userDataObj[key];
+						}
+					}
+				})
+		};
+
 		//called when SKILLS edit/show button is clicked
 		$scope.toggleEditShowSkills = function() {
 			if($scope.saveEditButton.skills.buttonText === 'Edit') {
@@ -74,12 +57,41 @@ angular.module('app.profile', [])
 			} 
 		};
 
+		//called from within toggleEditShow when save button is clicked 
+		$scope.updateProfileSkills = function() {
+			console.log('hello inside update skills!');
+			var userDataObj = {};
+			userDataObj.username = $scope.user.username;
+			userDataObj.toLearn = [];
+				for(var toLearnKey in $scope.data.toLearn) {
+					userDataObj.toLearn.push(toLearnKey);
+				}
+			userDataObj.toTeach = [];
+				for(var toTeachKey in $scope.data.toTeach) {
+					userDataObj.toTeach.push(toTeachKey);
+				}
+			Profile.updateProfileSkills(userDataObj)
+				.then(function(response) {
+					console.log("here is the server response to SKILLS update", response);
+					//
+				})
+		};
+
+
 		//called on the initialization of the page
 		$scope.getCurrentUserProfile = function() {
 			console.log('hello inside get currentUserProfile');
-			//var userDataObj = {};
-			//userDataObj.username = $window.localStorage.getItem('username');
-			Profile.getCurrentUser();//<--pass in userDataObj here
+			var userDataObj = {};
+			userDataObj.username = $scope.user.username;
+			Profile.getCurrentUser(userDataObj)
+				.then(function(response) {
+					//for each toLearn skills array in response, 
+						//if skill value is true
+						//toggle checkbox to checked: $scope.data.toLearn[] = true;//SKILLNAME] 
+					//for each toTeach skills array in response
+						//if skill value is true
+						//toggle checkbox to checked: $scope.data.toLearn[] = true;//SKILLNAME] 
+				})
 			//toggle true skills to true
 		};
 
