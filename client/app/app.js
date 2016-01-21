@@ -4,7 +4,8 @@ angular.module('app', [
   'app.auth',
   'app.profile',
   'app.navbar',
-  'app.home'
+  'app.home',
+  'app.connect'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -19,6 +20,11 @@ angular.module('app', [
       templateUrl: 'app/components/profile/profile.html',
       controller: 'ProfileController',
       url: '/profile'
+    })
+    .state('connect', {
+      templateUrl: 'app/components/connect/connect.html',
+      controller: 'connectController',
+      url: '/connect'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {

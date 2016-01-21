@@ -2,11 +2,12 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cors = require('cors');
 var githubSessions = require('./githubSessions.js');
+var helpers = require('../db/helpers.js');
 
 module.exports = function(app, express) {
 
   app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
   }));
   app.use(bodyParser.json());
   app.use(cors());
@@ -17,8 +18,10 @@ module.exports = function(app, express) {
   githubSessions.initialize(app);
 
   var authRouter = express.Router();
+  var usersRouter = express.Router();
 
   app.use('/auth', authRouter);
+  app.use('/api/users', usersRouter);
 
   app.get('/failure', function(req, res) {
     res.status('404');
@@ -38,6 +41,17 @@ module.exports = function(app, express) {
     });
   });
 
+  app.get('/etc', function(req,res) {
+    var got = helpers.getAllUsers();
+    res.send(got);
+  });
+
+  // app.get('/', function(req, res) {
+  //   res.status('200');
+  //   res.send("Hello World");
+  // });
+
   require(__dirname + './../auth/authRoutes.js')(authRouter);
+  require(__dirname + './../users/usersRoutes.js')(usersRouter);
 };
 

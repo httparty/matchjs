@@ -225,3 +225,4 @@ module.exports = helpers;
 // }).then(function(user) {
 // 	console.log("WOOT HERE IS USER", user);
 // });
+module.exports = helpers;
