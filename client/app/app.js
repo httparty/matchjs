@@ -4,6 +4,7 @@ angular.module('app', [
   'app.auth',
   'app.profile',
   'app.navbar',
+  'app.footer',
   'app.home',
   'app.connect',
   'app.inbox'
@@ -46,7 +47,7 @@ angular.module('app', [
       }
 
       if (AuthService.isAuthenticated() && toState.name === 'home') {
-        event.preventDefault(); 
+        event.preventDefault();
         $state.go('connect');
         return;
       }

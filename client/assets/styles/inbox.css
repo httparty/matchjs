@@ -1,12 +1,17 @@
+/* Universal settings */
 html, body, .indexView, .inbox, .row, .conversations, .messages{
   height: 100%;
   box-sizing: border-box;
 }
 
+/*Both Feathers*/
+.messages, .conversations {
+  padding-left: 3%;
+}
 
+/*Message Features*/
 .messages{
   border-left: solid 1px;
-  padding: 3%;
 }
 #messageList, #conversationList{
   height: 90%;
@@ -19,8 +24,12 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   padding: 2%;
 }
 
+
+/*Conversation Features*/
 .conversation {
   padding: 5%;
+  /*text-align: center;*/
+  border: solid 1px;
 }
 
 .messageList {

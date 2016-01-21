@@ -5,25 +5,28 @@ angular.module('app.inbox')
       //-Change urls to reflect proper route
       //-Change method arguments to appropriate names
 
+    var inbox = {};
     //Messages
-    var displayMessages = function(conversationDataObj){
+    inbox.displayMessages = function(conversationDataObj){
       return $http({
         method: 'GET',
-        url: '/api/inbox/',
+        url: '/api/inbox/displayMessages',
         data: conversationDataObj
       }).then(function(responseObj){
         return responseObj;
+      }, function(responseObj){
+        console.error('Error: ', responseObj);
       });
     };
 
-    var updateMessages = function(conversationDataObj){
-      displayMessages(conversationDataObj);
+    inbox.updateMessages = function(conversationDataObj){
+      inbox.displayMessages(conversationDataObj);
     };
 
-    var sendMessage = function(messageDataObj){
+    inbox.sendMessage = function(messageDataObj){
       return $http({
         method: 'POST',
-        url: '/api/inbox',
+        url: '/api/inbox/sendMessage',
         data: messageDataObj
       }).then(function(responseObj){
         return responseObj;
@@ -31,24 +34,25 @@ angular.module('app.inbox')
     };
 
     //Conversations
-    var displayConversations = function(userDataObj){
+    inbox.displayConversations = function(userDataObj){
       return $http({
         method: 'GET',
-        url: '/api/inbox',
+        url: '/api/inbox/conversationList',
         data: userDataObj
       }).then(function(responseObj){
         return responseObj;
       });
     };
 
-    var switchConversation = function(userDataObj){
+    inbox.switchConversation = function(userDataObj){
       return $http({
         method: 'GET',
-        url: '/api/inbox',
+        url: '/api/inbox/conversation',
         data: userDataObj
       }).then(function(responseObj){
         return responseObj;
       });
     };
 
+    return inbox;
   }]);
