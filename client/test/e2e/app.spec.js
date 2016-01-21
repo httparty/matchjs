@@ -3,10 +3,10 @@ describe("app", function () {
   describe("index", function () {
 
     it("should display the correct title", function () {
-      //currently doesn't work
-      browser.get('http://localhost:5000/#/');
+      browser.get('/#');
       expect(browser.getTitle()).toBe('MatchJS');
     });
+
 
   });
 });

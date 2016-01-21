@@ -57,7 +57,7 @@ End to end testing with Protractor
 **************************************************************/
 
 gulp.task('e2e', function(done) {
-  gulp.src(['./client/test/e2e/*.js'])
+  gulp.src(['./client/test/e2e/*.spec.js'])
     .pipe(protractor({
       configFile: 'client/test/protractor.conf.js',
     }))
