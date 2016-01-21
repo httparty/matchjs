@@ -28,7 +28,7 @@ helpers.signupUser = function(userDataObj) {
 };
 
 helpers.deleteUser = function(userToDeleteObj) {
-	db.User.findOne({ 
+	db.User.findOne({
 		where: {'username': userToDeleteObj.username}
 	}).then(function(user) {
   		return user.destroy();
@@ -65,7 +65,10 @@ helpers.addUserToDb = function(userObj) {
 				karmaPoints: 0
 			})
 		}
-	})
+		else {
+  		return user;
+  	}
+	});
 };
 
 //-----------------USER PROFILE--------------------------
@@ -77,7 +80,7 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 	})
 	.then(function(user) {
 		if(!user) {
-			throw Error('User not found.')
+			throw Error('User not found.');
 		}
 		return user.updateAttributes({
 		  	location: profileUpdateObj.location || user.get('location'),
@@ -89,7 +92,7 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 		  	summary : profileUpdateObj.summary || user.get('summary'),
 		  	photo : profileUpdateObj.photo || user.get('photo')
 		});
-	})
+	});
 };
 
 helpers.updateUserSkills = function(profileUpdateObj) {
@@ -98,14 +101,14 @@ return db.User.findOne({
 	})
 	.then(function(user) {
 		if(!user) {
-			throw Error('User not found.')
+			throw Error('User not found.');
 		}
 		return db.Skill.findAll()
 		.then(function(allSkillsArray) {
-			console.log("INSIDE DB.SKILL.FINDALL", allSkillsArray);
+			console.log('INSIDE DB.SKILL.FINDALL', allSkillsArray);
 			return allSkillsArray.forEach(function(skill) {
 				skill.addUser(user, { toTeach: false, toLearn: false });
-			})
+			});
 		})
 		.then(function() {
 			return db.Skill.findAll({
@@ -114,8 +117,8 @@ return db.User.findOne({
 			.then(function(skillsArrayToLearn) {
 				return skillsArrayToLearn.forEach(function(skill) {
 					skill.addUser(user, { toLearn: true });
-				})
-			})
+				});
+			});
 		})
 		.then(function() {
 			return db.Skill.findAll({
@@ -124,10 +127,10 @@ return db.User.findOne({
 			.then(function(skillsArraytoTeach) {
 				return skillsArraytoTeach.forEach(function(skill) {
 					skill.addUser(user, { toTeach: true });
-				})
-			})
-		})
-	})
+				});
+			});
+		});
+	});
 };
 
 
@@ -138,7 +141,7 @@ helpers.getAllUsers = function() {
 	.then(function(usersArray) {
 		console.log('HERE ARE ALL USERS', usersArray);
 		return usersArray;
-	})
+	});
 };
 
 //more functions need to be written here for the recommender
@@ -164,9 +167,9 @@ helpers.addMessage = function(messageObj) {
 					'recipientID': recipientID,
 					'text': messageObj.text,
 					'UserId': senderID
-				})
-			})
-	})
+				});
+			});
+	});
 };
 
 helpers.getMessageHistory = function(messageDataObj) {
