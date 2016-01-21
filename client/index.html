@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="assets/styles/landing-page.css">
   </head>
     <body>
         <nav-dir></nav-dir>
@@ -26,18 +26,19 @@
         <script src="app/app.js"></script>
 
         <!-- controllers -->
+        <script src="app/components/auth/authController.js"></script>
         <script src="app/components/home/homeController.js"></script>
         <script src="app/components/profile/profileController.js"></script>
-        <script src="app/components/auth/authController.js"></script>
+        <script src="app/components/shared/navbar/navbarController.js"></script>
 
         <!-- shared services -->
 
         <!-- component services -->
-        <script src="app/components/profile/profileModel.js"></script>
         <script src="app/components/auth/authModel.js"></script>
+        <script src="app/components/profile/profileModel.js"></script>
         
         <!-- custom directives -->
-        <script src="app/components/shared/navbar/navbarDirectives.js"></script>
+        <script src="app/components/shared/navbar/navbarDirective.js"></script>
 
         <script>
         //     angular.module('app.navbarDirectives', [])

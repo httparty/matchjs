@@ -1,11 +1,10 @@
 angular.module('app', [
   'ui.router',
   'ngCookies',
+  'app.auth',
   'app.profile',
   'app.navbar',
-  'app.home',
-  'app.profile',
-  'app.auth'
+  'app.home'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -26,7 +25,7 @@ angular.module('app', [
     
     $rootScope.$on('$stateChangeStart', function(event, toState) { 
 
-      console.log(AuthService.getCurrentUser());
+      // console.log(AuthService.getCurrentUser());
 
       if (!AuthService.isAuthenticated() && toState.name !== 'home') {
         event.preventDefault(); 
