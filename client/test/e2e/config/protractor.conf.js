@@ -1,3 +1,8 @@
+//Use this config to run locally
+//without Sauce connect
+//webdriver-manager start
+//protractor client/test/e2e/config/protractor.conf.js or gulp e2e
+
 var browsers = {
   firefox: {
     name: 'Firefox',

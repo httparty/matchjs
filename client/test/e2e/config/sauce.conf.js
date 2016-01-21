@@ -1,3 +1,7 @@
+//Use this config to Run with Sauce Connect locally
+//bin/sc -u YOUR_USERNAME -k YOUR_ACCESS_KEY
+//protractor client/test/e2e/config/sauce.conf.js 
+
 var browsers = require('./browsers');
 
 var config = {
@@ -16,17 +20,17 @@ var config = {
     }
 };
 
-config.baseUrl = 'https://matchjs.herokuapp.com';
+// config.baseUrl = 'https://matchjs.herokuapp.com';
 config.sauceUser = process.env.SAUCE_USERNAME;
 config.sauceKey = process.env.SAUCE_ACCESS_KEY;
 
 config.multiCapabilities = [
     browsers.chrome,
     browsers.firefox,
-    browsers.ie9,
-    browsers.ie10,
-    browsers.ie11,
-    browsers.ios
+    // browsers.ie9,
+    // browsers.ie10,
+    // browsers.ie11,
+    // browsers.ios
 ];
 
 exports.config = config;
