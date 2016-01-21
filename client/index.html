@@ -5,23 +5,54 @@
     <title>MatchJS</title>
     <!-- stylesheets-->
     <!-- <link rel="stylesheet" type="text/css" href="styles/styles.css"> -->
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/styles/landing-page.css">
   </head>
     <body>
-
+        <nav-dir></nav-dir>
+        <!-- <w3-test-directive></w3-test-directive> -->
         <div ui-view></div>
 
         <!-- bower components -->
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        
+        <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+
         <!-- main config/routing -->
         <script src="app/app.js"></script>
 
         <!-- controllers -->
+        <script src="app/components/auth/authController.js"></script>
         <script src="app/components/home/homeController.js"></script>
+        <script src="app/components/connect/connectController.js"></script>
+        <script src="app/components/profile/profileController.js"></script>
+        <script src="app/components/shared/navbar/navbarController.js"></script>
+
+        
+        <!-- models -->
+        <script src="app/components/connect/connectModel.js"></script>
         
         <!-- shared services -->
+
         <!-- component services -->
+        <script src="app/components/auth/authModel.js"></script>
+        <script src="app/components/profile/profileModel.js"></script>
+        
         <!-- custom directives -->
+        <script src="app/components/shared/navbar/navbarDirective.js"></script>
+
+        <script>
+        //     angular.module('app.navbarDirectives', [])
+        //             .directive("navDir", function() {
+        //     return {
+        //         templateUrl: 'app/partials/_navbar.html',
+        //         // template : "<h1>Made by a directive!</h1>"
+        //     };
+        // });
+        </script>
   </body>
 </html>
