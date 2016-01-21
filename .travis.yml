@@ -11,4 +11,4 @@ before_script:
 # - "./node_modules/protractor/bin/webdriver-manager start 2>&1 &"
 # - sleep 3
 script:
-# - gulp karma
+- gulp karma
