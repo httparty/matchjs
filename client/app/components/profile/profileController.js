@@ -3,19 +3,18 @@ angular.module('app.profile', [])
 		$scope.data = {};
 		$scope.data.toLearn = {};
 		$scope.data.toTeach = {};
+		// $scope.data.profilePhoto
+
+		$scope.data.username = $window.localStorage.username;
 
 		$scope.saveEditButton = {};
 		$scope.saveEditButton.buttonText = 'Edit';
 
-		$scope.photoUploadData = {};
-		//$scope.photoUploadData.profilePhoto
-		// $scope.photoFile = {}
-		$scope.errorMsg
 		//called from within toggleEditShow when save button is clicked 
 		$scope.updateProfileSkills = function() {
 			console.log('hello inside update skills!');
 			var userDataObj = {};
-			userDataObj.username = $window.localStorage.username;
+			userDataObj.username = $scope.data.username;
 			userDataObj.toLearn = [];
 				for(var toLearnKey in $scope.data.toLearn) {
 					userDataObj.toLearn.push(toLearnKey);
@@ -27,12 +26,9 @@ angular.module('app.profile', [])
 			Profile.updateProfileSkills(userDataObj);
 		};
 
-		$scope.uploadPhoto = function(userUploadedPhotoFile) {
-			console.log("here's what was uploaded", userUploadedPhotoFile);
-		};
 
 		$scope.updateProfileBasics = function() {
-			var userDataObj = {};
+			var userDataObj = {}; //this should be scope.data
 			Profile.updateProfileBasics(userDataObj);
 		};
 
@@ -55,6 +51,7 @@ angular.module('app.profile', [])
 			//SET: $scope.data.location
 			// 		 $scope.data.name
 			//		 $scope.data.github
+			//		 $scope.data.photo
 		};
 
   }]);
