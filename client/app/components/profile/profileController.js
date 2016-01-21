@@ -30,10 +30,10 @@ angular.module('app.profile', [])
 			console.log('inside toggle edit show basics fn');
 			if($scope.saveEditButton.basics.buttonText === 'Edit') {
 				$scope.saveEditButton.basics.buttonText = 'Save';
-				$scope.selectedStyle.basics = {"background-color" : "#FFFFCC"};
+				$scope.selectedStyle.basics = {'background-color' : '#FFFFCC'};
 			} else {
 				$scope.saveEditButton.basics.buttonText='Edit';
-				$scope.selectedStyle.basics = {"background-color" : "#FFFFFF"};
+				$scope.selectedStyle.basics = {'background-color' : '#FFFFFF'};
 				$scope.updateProfileBasics(); //call to fn 
 			}
 		};
@@ -42,17 +42,17 @@ angular.module('app.profile', [])
 //------------SHARED BY BASICS & SUMMARY---------------
 		$scope.updateProfileBasics = function() {
 			var userDataObj = $scope.data.updateBasics; 
-			console.log("here is userDataObj", userDataObj);
+			console.log('here is userDataObj', userDataObj);
 			if(userDataObj) {
 				Profile.updateProfileBasics(userDataObj) //update DB
 					.then(function(response) {
-						console.log("here is the server response to BASICS update", response);
+						console.log('here is the server response to BASICS update', response);
 						for(var key in userDataObj) { //update DOM 
 							if(userDataObj[key]) {
 								$scope.user[key] = userDataObj[key];
 							}
 						}
-					})
+					});
 			}
 		};
 
@@ -61,10 +61,10 @@ angular.module('app.profile', [])
 		$scope.toggleEditShowSkills = function() {
 			if($scope.saveEditButton.skills.buttonText === 'Edit') {
 				$scope.saveEditButton.skills.buttonText = 'Save';
-				$scope.selectedStyle.skills = {"background-color" : "#FFFFCC"};
+				$scope.selectedStyle.skills = {'background-color' : '#FFFFCC'};
 			} else {
 				$scope.saveEditButton.skills.buttonText='Edit';
-				$scope.selectedStyle.skills = {"background-color" : "#FFFFFF"};
+				$scope.selectedStyle.skills = {'background-color' : '#FFFFFF'};
 				$scope.updateProfileSkills(); //call to fn that saves the skills 
 			} 
 		};
@@ -85,9 +85,9 @@ angular.module('app.profile', [])
 			if(userDataObj) {
 				Profile.updateProfileSkills(userDataObj)
 					.then(function(response) {
-						console.log("here is the server response to SKILLS update", response);
+						console.log('here is the server response to SKILLS update', response);
 						//
-					})
+					});
 			}
 		};
 
@@ -96,10 +96,10 @@ angular.module('app.profile', [])
 		$scope.toggleEditShowSummary = function() {
 			if($scope.saveEditButton.summary.buttonText === 'Edit') {
 				$scope.saveEditButton.summary.buttonText = 'Save';
-				$scope.selectedStyle.summary = {"background-color" : "#FFFFCC"};
+				$scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
 			} else {
 				$scope.saveEditButton.summary.buttonText='Edit';
-				$scope.selectedStyle.summary = {"background-color" : "#FFFFFF"};
+				$scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
 				$scope.updateProfileBasics(); //call to fn that saves the skills 
 			} 
 		};
@@ -122,7 +122,7 @@ angular.module('app.profile', [])
 						//toggle checkbox to checked: $scope.data.toLearn[] = true;//SKILLNAME] 
 					//if response has summary
 						//$scope.data.updateBasics.summary = the summary from resp
-				})
+				});
 		};
 
   }]);

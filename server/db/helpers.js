@@ -141,7 +141,7 @@ helpers.addMessage = function(messageObj) {
 			return db.User.findOne({
 				where: {'username': messageObj.username}
 			}).then(function(sender) {
-				senderID = sender.get('id');
+				var senderID = sender.get('id');
 				return db.Message.create({
 					'senderName': messageObj.username,
 					'recipientName': messageObj.recipientName,
