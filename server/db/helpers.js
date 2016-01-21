@@ -22,9 +22,9 @@ helpers.signupUser = function(userDataObj) {
 				github: userDataObj.github,
 				photo: userDataObj.photo,
 				karmaPoints: 0
-			})
+			});
 		}
-	})
+	});
 };
 
 helpers.deleteUser = function(userToDeleteObj) {
@@ -33,7 +33,7 @@ helpers.deleteUser = function(userToDeleteObj) {
 	}).then(function(user) {
   		return user.destroy();
 	})
-	.then(function() {})
+	.then(function() {});
 };
 
 helpers.getUserByUserName = function(userObj) {
@@ -46,7 +46,7 @@ helpers.getUserByUserName = function(userObj) {
 		} else {
   			return user;
   		}
-	})
+	});
 };
 
 helpers.addUserToDb = function(userObj) {
