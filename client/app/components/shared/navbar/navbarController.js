@@ -5,6 +5,6 @@ angular.module('app.navbar', [])
 
     $scope.isLoggedIn = function() {
       return AuthService.isAuthenticated();
-    }
+    };
 
   }]);
