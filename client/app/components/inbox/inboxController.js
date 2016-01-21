@@ -5,7 +5,7 @@ angular.module('app.inbox', [])
     // Scope Variables
     $scope.conversationList = ['Rachel', 'Polina', 'Anthony', 'Chris', 'Jeff'];
     $scope.currentMessageList = [1, 2, 3, 4, 5];
-    $scope.enteredText = "";
+    $scope.enteredText = '';
 
     // Message Logic
     $scope.displayMessages = function() {
@@ -16,7 +16,7 @@ angular.module('app.inbox', [])
     };
     $scope.sendMessage = function() {
         $scope.currentMessageList.push($scope.enteredText);
-        $scope.enteredText = "";
+        $scope.enteredText = '';
     };
 
     // Conversation Logic
@@ -31,6 +31,6 @@ angular.module('app.inbox', [])
     };
     $scope.deleteConversation = function() {
 
-    }
+    };
 
   }]);

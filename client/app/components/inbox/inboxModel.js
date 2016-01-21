@@ -13,7 +13,7 @@ angular.module('app.inbox')
         data: conversationDataObj
       }).then(function(responseObj){
         return responseObj;
-      })
+      });
     };
 
     var updateMessages = function(conversationDataObj){
@@ -27,7 +27,7 @@ angular.module('app.inbox')
         data: messageDataObj
       }).then(function(responseObj){
         return responseObj;
-      })
+      });
     };
 
     //Conversations
@@ -38,7 +38,7 @@ angular.module('app.inbox')
         data: userDataObj
       }).then(function(responseObj){
         return responseObj;
-      })
+      });
     };
 
     var switchConversation = function(userDataObj){
@@ -48,7 +48,7 @@ angular.module('app.inbox')
         data: userDataObj
       }).then(function(responseObj){
         return responseObj;
-      })
+      });
     };
 
   }]);
