@@ -60,6 +60,9 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 		where: {'username': profileUpdateObj.username}
 	})
 	.then(function(user) {
+		if(!user) {
+			throw Error('User not found.')
+		}
 		return user.updateAttributes({
 		  	location: profileUpdateObj.location || user.get('location'),
 		  	name : profileUpdateObj.name || user.get('name'),
@@ -138,7 +141,7 @@ helpers.addMessage = function(messageObj) {
 			return db.User.findOne({
 				where: {'username': messageObj.username}
 			}).then(function(sender) {
-				senderID = sender.get('id');
+				var senderID = sender.get('id');
 				return db.Message.create({
 					'senderName': messageObj.username,
 					'recipientName': messageObj.recipientName,

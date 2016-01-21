@@ -11,7 +11,7 @@ module.exports = {
 			console.log('HERE ARE ALL USERS', usersArray);
 			// return usersArray;
 			res.send(usersArray);
-		})
+		});
 	},
 
 	getUserProfileData: function(req, res) {
