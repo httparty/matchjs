@@ -16,14 +16,14 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                    <center><img class="img-responsive" ng-src="{{u.photo || 'http://placehold.it/136x136'}}" alt=""style="margin-bottom: 10px"></center>
                 </a>
 
                    <div class="list-group">
-                    <div class="list-group-item">{{u.name || 'N\A'}}</div>
+                    <div class="list-group-item"><strong>{{u.name || 'N/A'}}</strong></div>
                     <div class="list-group-item"><i class="fa fa-map-marker"></i> {{u.location || 'San Francisco'}}</div>
                     <div class="list-group-item"><i class="fa fa-github"></i> <a href="{{u.github || 'https://github.com'}}">{{u.github || 'https://github.com'}}</a></div>
-                    <div class="list-group-item">Karma: {{u.karmapoints || 'N\A'}}</div>
+                    <div class="list-group-item">Karma: {{u.karmapoints || 'N/A'}}</div>
                   </div>
 
               </div>
