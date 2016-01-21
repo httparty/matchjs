@@ -4,11 +4,19 @@ angular.module('app.profile', [])
 		$scope.data.toLearn = {};
 		$scope.data.toTeach = {};
 		// $scope.data.profilePhoto
+		$scope.data.name = 'Rachel';
+		$scope.data.location = 'San Francisco';
+		$scope.data.github = 'url.com';
 
 		$scope.data.username = $window.localStorage.username;
 
+		$scope.data.update = {}; //this is to pass new data into the form fields
+
 		$scope.saveEditButton = {};
-		$scope.saveEditButton.buttonText = 'Edit';
+		$scope.saveEditButton.skills = {};
+		$scope.saveEditButton.skills.buttonText = 'Edit';
+		$scope.saveEditButton.basics = {};
+		$scope.saveEditButton.basics.buttonText = 'Edit';
 
 		//called from within toggleEditShow when save button is clicked 
 		$scope.updateProfileSkills = function() {
@@ -28,16 +36,35 @@ angular.module('app.profile', [])
 
 
 		$scope.updateProfileBasics = function() {
-			var userDataObj = {}; //this should be scope.data
+			var userDataObj = $scope.data.update; 
+			console.log("here is userDataObj", userDataObj);
+			//update the DOM 
+			for(var key in userDataObj) {
+				if(userDataObj[key]) {
+					$scope.data[key] = userDataObj[key];
+				}
+			}
+			//update the DB
 			Profile.updateProfileBasics(userDataObj);
 		};
 
-		//called when the edit/show button is clicked
-		$scope.toggleEditShow = function() {
-			if($scope.saveEditButton.buttonText === 'Edit') {
-				$scope.saveEditButton.buttonText = 'Save';
+		//called when BASICS edit/show button is clicked
+		$scope.toggleEditShowBasics = function() {
+			console.log('inside toggle edit show basics fn');
+			if($scope.saveEditButton.basics.buttonText === 'Edit') {
+				$scope.saveEditButton.basics.buttonText = 'Save';
 			} else {
-				$scope.saveEditButton.buttonText='Edit';
+				$scope.saveEditButton.basics.buttonText='Edit';
+				$scope.updateProfileBasics(); //call to fn 
+			}
+		};
+
+		//called when SKILLS edit/show button is clicked
+		$scope.toggleEditShowSkills = function() {
+			if($scope.saveEditButton.skills.buttonText === 'Edit') {
+				$scope.saveEditButton.skills.buttonText = 'Save';
+			} else {
+				$scope.saveEditButton.skills.buttonText='Edit';
 				$scope.updateProfileSkills(); //call to fn that saves the skills 
 			} 
 		};

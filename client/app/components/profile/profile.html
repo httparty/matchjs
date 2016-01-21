@@ -4,19 +4,34 @@
 
 <div ng-controller="ProfileController">
 	<div id="profileBasicsAndPhoto" class='profileBasicsContainer'>
+
+<!-- PROFILE PHOTO -->
 		<div class='profilePhoto'>
 			<!-- photo upload stuff goes here -->
 			<img src=http://oregoncapitalprsa.org/wp-content/uploads/2011/04/default-profile4.jpg height="200" width="200">
 		</div> 
 
+
+<!-- PROFILE BASICS, SANS PHOTO -->
+
 		<div class="profileBasics">
-			<p>Name: {{data.name}}</p>
-			<p>Location: {{data.location}}</p>
-			<p>Github: {{data.github}}</p>
-			<button ng-click>Edit</button>
+			<div ng-hide="saveEditButton.basics.buttonText === 'Save'">
+				<p>Name: {{data.name}}</p>
+				<p>Location: {{data.location}}</p>
+				<p>Github: {{data.github}}</p>
+			</div>
+			<form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
+				<input type="text" ng-model="data.update.name" placeholder="{{data.name}}">
+				<input type="text" ng-model="data.update.location" placeholder="{{data.location}}">
+				<input type="text" ng-model="data.update.github" placeholder="{{data.github}}">
+			</form>
+			<!-- saveEditButtonBasics -->
+			<button ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
 		</div>
 	</div>
 <hr>
+
+<!-- PROFILE SKILLS -->
 
 	<div id="profileSkills">
 		<h2>Skills</h2>
@@ -42,8 +57,7 @@
 				<input type="checkbox" ng-model="data.toLearn.ES6"> ES6
 			</div>
 		</form>
-		<button ng-model="saveEditButton" ng-click="toggleEditShow()"> {{ saveEditButton.buttonText }}</button>
-<!-- 		<button > Save </button> -->
+		<button ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()"> {{ saveEditButton.skills.buttonText }}</button>
 	</div>
 
 <hr>
@@ -51,7 +65,7 @@
 	<div id="profileSummary">
 		<h2>Summary</h2>
 		<form>
-			<input type ="text">
+			<input type ="text" style="width: 600px"> 
 		</form>
 		<button>Edit</button>
 	</div>
