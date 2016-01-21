@@ -1,4 +1,4 @@
-// var helpers = require('../db/helpers.js');
+var helpers = require('../db/helpers.js');
 var db = require('../db/config.js');
 
 module.exports = {
@@ -12,5 +12,18 @@ module.exports = {
 			// return usersArray;
 			res.send(usersArray);
 		})
+	},
+
+	getUserProfileData: function(req, res) {
+		//var username = req.params.username
+	},
+
+	updateProfileSkills: function(req, res) {
+
+	},
+
+	updateProfileBasics: function(req, res) {
+
 	}
+
 };
