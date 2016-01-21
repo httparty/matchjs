@@ -1,10 +1,32 @@
-<div class="container-fluid" ng-controller="HomeController">
+<div class="container-fluid inbox" ng-controller="InboxController">
   <div class="row">
-    <div class="col-md-5" id="conversations">
-      <h1>Open Conversations Over Here</h1>
+    <div class="col-md-5 conversations">
+      <h1>Conversations</h1>
+      <ul id="conversationList">
+        <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'">
+        {{conversation}}
+        </li>
+      </ul>
     </div>
-    <div class="col-md-7" id="messages">
-      <h1>Messages Over Here</h1>
+    <div class="col-md-7 messages">
+
+      <div class="messageList">
+        <h1>Messages</h1>
+        <!-- <h1>{{ enteredText }}</h1> -->
+        <ul id="messageList">
+          <li ng-repeat="message in currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
+          {{message}}
+          </li>
+        </ul>
+      </div>
+
+      <div class="messageInput">
+        <form class="form-group" >
+          <input type="text" class="form-control" placeholder="Enter your message" ng-model="enteredText" ng-submit="sendMessage()">
+          <button type="submit" class="btn btn-primary" ng-click="sendMessage()">Submit</button>
+        </form>
+      </div>
+
     </div>
 
   </div>
