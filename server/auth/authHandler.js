@@ -1,4 +1,5 @@
 var passport = require('passport');
+var helpers = require('../db/helpers.js');
 
 module.exports = {
 	initialLogin: passport.authenticate('github'),
@@ -7,6 +8,8 @@ module.exports = {
 	// if user exists, save them in the db
 
 	success: function(req, res) {
+		// add user to database
+		helpers.addUserToDb(req.user);
 
 	    console.log(req.user);
 	    var profile = {

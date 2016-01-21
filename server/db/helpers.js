@@ -12,8 +12,7 @@ helpers.signupUser = function(userDataObj) {
 	.then(function(user) {
 		if(user) {
 			throw Error('Username already taken!');
-		}
-		else {
+		} else {
 			return db.User.create({
 				username: userDataObj.username,
 				password: userDataObj.password,
@@ -32,7 +31,7 @@ helpers.deleteUser = function(userToDeleteObj) {
 	db.User.findOne({ 
 		where: {'username': userToDeleteObj.username}
 	}).then(function(user) {
-  	return user.destroy();
+  		return user.destroy();
 	})
 	.then(function() {})
 };
@@ -44,13 +43,30 @@ helpers.getUserByUserName = function(userObj) {
   .then(function(user) {
   	if(!user) {
 			throw Error('Cannot locate user.');
-		}
-		else {
-  		return user;
-  	}
+		} else {
+  			return user;
+  		}
 	})
 };
 
+helpers.addUserToDb = function(userObj) {
+	return db.User.findOne({
+		where: {'username': userObj.username}
+	}).then(function(user) {
+		if (!user) {
+			return db.User.create({
+				username: userObj.username,
+				password: userObj.id,
+				email: userObj._json.email || userObj.username + '@users.noreply.github.com',
+				name: userObj.displayName,
+				github: userObj.profileUrl,
+				photo: userObj._json.avatar_url,
+				location: userObj._json.location,
+				karmaPoints: 0
+			})
+		}
+	})
+};
 
 //-----------------USER PROFILE--------------------------
 
