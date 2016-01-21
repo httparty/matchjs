@@ -3,9 +3,8 @@ angular.module('app.profile')
 
   var getCurrentUser = function(userDataObj) {
     return $http({
-      method: 'POST',
-      url: '/api/profile/user',
-      data: userDataObj
+      method: 'GET',
+      url: '/api/users/userProfile/' + userDataObj.username
     }).then(function(responseObj){
       return responseObj;
     });
@@ -14,7 +13,7 @@ angular.module('app.profile')
   var updateProfileSkills = function(userDataObj) {
     return $http({
       method: 'POST',
-      url: '/api/profile/skills',
+      url: '/api/users/profileSkills',
       data: userDataObj
     }).then(function(responseObj){
       return responseObj;
@@ -24,7 +23,7 @@ angular.module('app.profile')
   var updateProfileBasics = function(userDataObj) {
     return $http({
       method: 'POST',
-      url: '/api/profile/basics',
+      url: '/api/users/profileBasics',
       data: userDataObj
     }).then(function(responseObj){
       return responseObj;

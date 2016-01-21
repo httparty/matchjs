@@ -4,44 +4,33 @@
 
 <div ng-controller="ProfileController">
 	<div id="profileBasicsAndPhoto" class='profileBasicsContainer'>
-		    <div class='profilePicture'>
-      
-      <form name="myForm"> 
-      <fieldset>      
-        <br>
-        <div ng-if="PicData.profilePic">
-          <img ng-src="{{PicData.profilePic}}">
-        </div>
-        <input type="file" ngf-select ng-model="picFile" name="file"    
-               accept="image/*" ngf-max-size="2MB" required>
-        <i ng-show="myForm.file.$error.required">*required</i>
-        <br>
-        <i ng-show="myForm.file.$error.maxSize">File too large 
-            {{picFile.size / 1000000|number:1}}MB: max 2M</i>
-        <div ng-if="!PicData.profilePic">
-          <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> 
-          <button ng-click="picFile = null" ng-if="PicData.profilePic">Choose new image</button>
-        </div>
-        <br>
-        <button ng-disabled="!myForm.$valid" 
-                ng-click="uploadPic(picFile)">Submit</button>
-        <span class="progress" ng-show="picFile.progress >= 0">
-          <div style="width:{{picFile.progress}}%" 
-              ng-bind="picFile.progress + '%'"></div>
-        </span>
-        <span ng-show="picFile.result">Upload Successful</span>
-        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-      </fieldset>
-      <br>
-    </form>
-		
-		<p>Name: {{data.name}}</p>
-		<p>Location: {{data.location}}</p>
-		<p>Github: {{data.github}}</p>
-		<button ng-click>Edit</button>
-	</div>
 
+<!-- PROFILE PHOTO -->
+		<div class='profilePhoto'>
+			<!-- photo upload stuff goes here -->
+			<img src={{user.avatar}} height="200" width="200">
+		</div> 
+
+<!-- PROFILE BASICS, EXCLUDING PHOTO -->
+
+		<div class="profileBasics">
+			<div ng-hide="saveEditButton.basics.buttonText === 'Save'">
+				<p>Name: {{user.displayName}}</p>
+				<p>Location: {{user.location}}</p>
+				<p>Github: {{user.github}}</p>
+			</div>
+			<form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
+				<input type="text" ng-model="data.update.displayName" placeholder="{{user.displayName}}">
+				<input type="text" ng-model="data.update.location" placeholder="{{user.location}}">
+				<input type="text" ng-model="data.update.github" placeholder="{{user.github}}">
+			</form>
+			<!-- saveEditButtonBasics -->
+			<button ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
+		</div>
+	</div>
 <hr>
+
+<!-- PROFILE SKILLS -->
 
 	<div id="profileSkills">
 		<h2>Skills</h2>
@@ -67,8 +56,7 @@
 				<input type="checkbox" ng-model="data.toLearn.ES6"> ES6
 			</div>
 		</form>
-		<button ng-model="saveEditButton" ng-click="toggleEditShow()"> {{ saveEditButton.buttonText }}</button>
-<!-- 		<button > Save </button> -->
+		<button ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()"> {{ saveEditButton.skills.buttonText }}</button>
 	</div>
 
 <hr>
@@ -76,7 +64,7 @@
 	<div id="profileSummary">
 		<h2>Summary</h2>
 		<form>
-			<input type ="text">
+			<input type ="text" style="width: 600px"> 
 		</form>
 		<button>Edit</button>
 	</div>

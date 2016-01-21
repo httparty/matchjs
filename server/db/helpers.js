@@ -61,14 +61,14 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 	})
 	.then(function(user) {
 		return user.updateAttributes({
-	  	location: profileUpdateObj.location || user.get('location'),
-	  	name : profileUpdateObj.name || user.get('name'),
-	  	email : profileUpdateObj.email || user.get('email'),
-	  	password : profileUpdateObj.password || user.get('password'),
-	  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
-	  	github: profileUpdateObj.github || user.get('github'),
-	  	summary : profileUpdateObj.summary || user.get('summary'),
-	  	photo : profileUpdateObj.photo || user.get('photo')
+		  	location: profileUpdateObj.location || user.get('location'),
+		  	name : profileUpdateObj.name || user.get('name'),
+		  	email : profileUpdateObj.email || user.get('email'),
+		  	password : profileUpdateObj.password || user.get('password'),
+		  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
+		  	github: profileUpdateObj.github || user.get('github'),
+		  	summary : profileUpdateObj.summary || user.get('summary'),
+		  	photo : profileUpdateObj.photo || user.get('photo')
 		});
 	})
 };
