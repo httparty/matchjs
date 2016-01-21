@@ -1,28 +1,63 @@
-<div class="table-responsive">
-	<table class="table table-reflow" ng-repeat="u in users">
-      <h1><strong>All Users</strong></h1>
-        <thead>
-        <span style="font-weight:bold">
-          <tr style="vertical-align: top; padding:10px">
-            <th>ID</th>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Github</th>
-            <th>Karma points</th>
-          </tr>
-        </thead>
-        </span>
-        <tbody>
-          <tr style="vertical-align: top; padding:10px">
-            <td style="vertical-align: top; padding:10px">{{u.id || 'N\A'}}</td>
-            <td style="vertical-align: top; padding:10px">{{u.username || 'N\A'}}</td>
-            <td style="vertical-align: top; padding:10px">{{u.name || 'N\A'}}</td>
-            <td style="vertical-align: top; padding:10px">{{u.location || 'San Francisco'}}</td>
-            <td style="vertical-align: top; padding:10px">{{u.github || 'https://github.com'}}</td>
-            <td style="vertical-align: top; padding:10px">{{u.karmapoints || 'N\A'}}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container">
+
+  <div class="row">
+      <div class="col-lg-12">
+          <h1 class="page-header">All Users
+            <small> Make a connection</small>
+          </h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div ng-repeat="u in users">
+        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+        <div class="col-sm-4 portfolio-item">
+            
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <a href="#">
+                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                </a>
+
+                   <div class="list-group">
+                    <div class="list-group-item">{{u.name || 'N\A'}}</div>
+                    <div class="list-group-item"><i class="fa fa-map-marker"></i> {{u.location || 'San Francisco'}}</div>
+                    <div class="list-group-item"><i class="fa fa-github"></i> <a href="{{u.github || 'https://github.com'}}">{{u.github || 'https://github.com'}}</a></div>
+                    <div class="list-group-item">Karma: {{u.karmapoints || 'N\A'}}</div>
+                  </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
 </div>
-	<button class="btn btn-primary-outline" ng-click="getAllUsers()">Click me!</button>
+
+  <!-- Pagination -->
+  <div class="row text-center">
+      <div class="col-lg-12">
+          <ul class="pagination">
+              <li>
+                  <a href="#">&laquo;</a>
+              </li>
+              <li class="active">
+                  <a href="#">1</a>
+              </li>
+              <li>
+                  <a href="#">2</a>
+              </li>
+              <li>
+                  <a href="#">3</a>
+              </li>
+              <li>
+                  <a href="#">4</a>
+              </li>
+              <li>
+                  <a href="#">5</a>
+              </li>
+              <li>
+                  <a href="#">&raquo;</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
