@@ -3,8 +3,6 @@ angular.module('app.navbar', [])
 
     $scope.user = angular.fromJson(AuthService.getCurrentUser());
 
-    // $scope.user = AuthService.getCurrentUser();
-
     $scope.isLoggedIn = function() {
       return AuthService.isAuthenticated();
     }
