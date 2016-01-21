@@ -1,5 +1,5 @@
 angular.module('app.inbox', [])
-  .controller('InboxController', ['$scope', function($scope){
+  .controller('InboxController', ['$scope', 'Inbox', function($scope, Inbox){
     console.log('Inbox Controller is working');
 
     // Scope Variables
@@ -16,6 +16,7 @@ angular.module('app.inbox', [])
     };
     $scope.sendMessage = function() {
         $scope.currentMessageList.push($scope.enteredText);
+        Inbox.sendMessage({text: $scope.enteredText});
         $scope.enteredText = '';
     };
 
