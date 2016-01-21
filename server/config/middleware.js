@@ -55,6 +55,6 @@ module.exports = function(app, express) {
 
   require(__dirname + './../auth/authRoutes.js')(authRouter);
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
-  require(__dirname + './../messages/messagesRoutes.js')(messageRouter);
+  // require(__dirname + './../messages/messagesRoutes.js')(messageRouter);  //Add this back in when messages are working
 };
 
