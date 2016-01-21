@@ -23,7 +23,12 @@ module.exports = {
 	},
 
 	updateProfileBasics: function(req, res) {
-
+		// console.log("HERE IS REQ.BODY!", req.body);
+		helpers.updateUserBasics(req.body)
+			.then(function(user) {
+				res.send();
+			});
 	}
 
 };
+
