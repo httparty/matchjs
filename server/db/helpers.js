@@ -60,6 +60,9 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 		where: {'username': profileUpdateObj.username}
 	})
 	.then(function(user) {
+		if(!user) {
+			throw Error('User not found.')
+		}
 		return user.updateAttributes({
 		  	location: profileUpdateObj.location || user.get('location'),
 		  	name : profileUpdateObj.name || user.get('name'),
