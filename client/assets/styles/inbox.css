@@ -1,48 +1,76 @@
+/*                    */
 /* Universal settings */
+/*                    */
 html, body, .indexView, .inbox, .row, .conversations, .messages{
   height: 100%;
   box-sizing: border-box;
 }
 
-/*Both Feathers*/
+/*               */
+/*Shared Features*/
+/*               */
+.mainContainer {
+  margin-top: 20px;
+}
+
 .messages, .conversations {
   padding-left: 3%;
 }
 
-/*Message Features*/
-.messages{
-  border-left: solid 1px;
+/*For the Box with uls and titles*/
+.messageBox, .conversationBox {
+  height: 80%;
 }
-#messageList, #conversationList{
+
+.messagesHeader, .conversationsHeader{
+  display: inline-block;
+}
+
+/*For the ULs*/
+.messageList, .conversationList{
   height: 90%;
   overflow: scroll;
   list-style-type: none;
   padding: 0px;
 }
-.message{
-  box-sizing: border-box;
-  padding: 2%;
-}
 
-
-/*Conversation Features*/
-.conversation {
-  padding: 5%;
-  /*text-align: center;*/
-  border: solid 1px;
-}
-
-.messageList {
-  height: 80%;
-}
-.messageInput {
+.messageInput, .conversationInput{
   height: 20%;
 }
 
+/*For the LIs*/
 .odd {
   background-color: #eee;
 }
 .even{
   background-color: white;
 }
+
+/*                */
+/*Message Features*/
+/*                */
+.messages{
+  border-left: solid 1px;
+}
+
+.message{
+  box-sizing: border-box;
+  padding: 2%;
+}
+
+/*                     */
+/*Conversation Features*/
+/*                     */
+
+.conversation {
+  padding: 5%;
+  border: solid 1px;
+}
+
+.plus {
+  width: 100%;
+  margin: 0px;
+}
+
+
 
