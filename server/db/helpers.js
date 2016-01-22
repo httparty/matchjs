@@ -63,7 +63,7 @@ helpers.addUserToDb = function(userObj) {
 				photo: userObj._json.avatar_url,
 				location: userObj._json.location,
 				karmaPoints: 0
-			})
+			});
 		}
 		// else {
   // 		return user;
