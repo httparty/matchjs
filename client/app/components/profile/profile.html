@@ -3,84 +3,76 @@
 <div class="container">
 
 <div ng-controller="ProfileController">
-	<div id="profileBasicsAndPhoto" class='profileBasicsContainer'>
-		    <div class='profilePicture'>
-      
-      <form name="myForm"> 
-      <fieldset>      
-        <br>
-        <div ng-if="PicData.profilePic">
-          <img ng-src="{{PicData.profilePic}}">
-        </div>
-        <input type="file" ngf-select ng-model="picFile" name="file"    
-               accept="image/*" ngf-max-size="2MB" required>
-        <i ng-show="myForm.file.$error.required">*required</i>
-        <br>
-        <i ng-show="myForm.file.$error.maxSize">File too large 
-            {{picFile.size / 1000000|number:1}}MB: max 2M</i>
-        <div ng-if="!PicData.profilePic">
-          <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> 
-          <button ng-click="picFile = null" ng-if="PicData.profilePic">Choose new image</button>
-        </div>
-        <br>
-        <button ng-disabled="!myForm.$valid" 
-                ng-click="uploadPic(picFile)">Submit</button>
-        <span class="progress" ng-show="picFile.progress >= 0">
-          <div style="width:{{picFile.progress}}%" 
-              ng-bind="picFile.progress + '%'"></div>
-        </span>
-        <span ng-show="picFile.result">Upload Successful</span>
-        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-      </fieldset>
-      <br>
-    </form>
-		
-		<p>Name: {{data.name}}</p>
-		<p>Location: {{data.location}}</p>
-		<p>Github: {{data.github}}</p>
-		<button ng-click>Edit</button>
-	</div>
+	<div id="profileBasicsAndPhoto" class='profileBasicsContainer' ng-model="selectedStyle.basics" ng-style="selectedStyle.basics">
 
+<!-- PROFILE PHOTO -->
+		<div class='profilePhoto'>
+			<!-- photo upload stuff goes here -->
+			<img ng-src={{user.avatar}} height="200" width="200">
+		</div> 
+
+<!-- PROFILE BASICS, EXCLUDING PHOTO -->
+
+		<div class="profileBasics">
+			<div ng-hide="saveEditButton.basics.buttonText === 'Save'">
+				<p>
+					<strong>{{user.displayName}}</strong><br>
+					Location: {{user.location || 'San Francisco'}} <br>
+					Github: <a href="{{user.github}}">{{user.github}}</a><br>
+					Karma: {{user.karmaPoints || '0'}} <br>
+				</p>
+			</div>
+			<form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
+				<input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}">
+				<input type="text" ng-model="user.location" placeholder="{{user.location}}">
+				<input type="text" ng-model="user.github" placeholder="{{user.github}}">
+			</form>
+			<!-- saveEditButtonBasics -->
+			<button ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
+		</div>
+	</div>
 <hr>
 
-	<div id="profileSkills">
+<!-- PROFILE SKILLS -->
+	<div id="profileSkills" ng-model="selectedStyle.skills" ng-style="selectedStyle.skills">
 		<h2>Skills</h2>
 		<form>
-			<h3>Skills I can teach:</h3>
-			<div class="toTeach" ng-model="data.toTeach">
-				<input type="checkbox" ng-model="data.toTeach.AngularJS"> AngularJS
-				<input type="checkbox" ng-model="data.toTeach.Express"> Express
-				<input type="checkbox"ng-model="data.toTeach.JavaScript"> JavaScript
-				<input type="checkbox" ng-model="data.toTeach.Backbone"> Backbone
-				<input type="checkbox" ng-model="data.toTeach.Nodejs"> Node.js
-				<input type="checkbox" ng-model="data.toTeach.ReactJS"> ReactJS
-				<input type="checkbox" ng-model="data.toTeach.ES6"> ES6
+			<h3>Skills I want to teach:</h3>
+			<div class="toTeach" ng-model="skills.toTeach">
+				<input type="checkbox" ng-model="skills.toTeach.AngularJS" ng-checked="skills.toTeach.AngularJS" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> AngularJS
+				<input type="checkbox" ng-model="skills.toTeach.Express" ng-checked="skills.toTeach.Express" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Express
+				<input type="checkbox" ng-model="skills.toTeach.JavaScript" ng-checked="skills.toTeach.JavaScript" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> JavaScript
+				<input type="checkbox" ng-model="skills.toTeach.Backbone" ng-checked="skills.toTeach.Backbone" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Backbone
+				<input type="checkbox" ng-model="skills.toTeach.Nodejs" ng-checked="skills.toTeach.Nodejs" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Node.js
+				<input type="checkbox" ng-model="skills.toTeach.ReactJS" ng-checked="skills.toTeach.ReactJS" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> ReactJS
+				<input type="checkbox" ng-model="skills.toTeach.ES6" ng-checked="skills.toTeach.ES6" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> ES6
 			</div>
 			<h3>Skills I want to learn:</h3>
-			<div class="toLearn" ng-model="data.toLearn">
-				<input type="checkbox" ng-model="data.toLearn.AngularJS"> AngularJS
-				<input type="checkbox" ng-model="data.toLearn.Express"> Express
-				<input type="checkbox" ng-model="data.toLearn.JavaScript"> JavaScript
-				<input type="checkbox" ng-model="data.toLearn.Backbone"> Backbone
-				<input type="checkbox" ng-model="data.toLearn.Nodejs"> Node.js
-				<input type="checkbox" ng-model="data.toLearn.ReactJS"> ReactJS
-				<input type="checkbox" ng-model="data.toLearn.ES6"> ES6
+			<div class="toLearn" ng-model="skills.toLearn">
+				<input type="checkbox" ng-model="skills.toLearn.AngularJS" ng-checked="skills.toLearn.AngularJS" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> AngularJS
+				<input type="checkbox" ng-model="skills.toLearn.Express" ng-checked="skills.toLearn.Express" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Express
+				<input type="checkbox" ng-model="skills.toLearn.JavaScript" ng-checked="skills.toLearn.JavaScript" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> JavaScript
+				<input type="checkbox" ng-model="skills.toLearn.Backbone" ng-checked="skills.toLearn.Backbone" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Backbone
+				<input type="checkbox" ng-model="skills.toLearn.Nodejs" ng-checked="skills.toLearn.Nodejs" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Node.js
+				<input type="checkbox" ng-model="skills.toLearn.ReactJS"  ng-checked="skills.toLearn.ReactJS" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> ReactJS
+				<input type="checkbox" ng-model="skills.toLearn.ES6" ng-checked="skills.toLearn.ES6" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> ES6
 			</div>
 		</form>
-		<button ng-model="saveEditButton" ng-click="toggleEditShow()"> {{ saveEditButton.buttonText }}</button>
-<!-- 		<button > Save </button> -->
+		<button style="margin-top: 10px" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()"> {{ saveEditButton.skills.buttonText }}</button>
 	</div>
 
 <hr>
 
-	<div id="profileSummary">
+	<div id="profileSummary" ng-model="selectedStyle.summary" ng-style="selectedStyle.summary">
 		<h2>Summary</h2>
 		<form>
-			<input type ="text">
+			<input type ="text" style="width: 600px; height: 250px; margin-bottom: 10px" ng-model="user.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'"> 
 		</form>
-		<button>Edit</button>
+		<button ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
 	</div>
 	<div ng-init="getCurrentUserProfile()"></div>
 </div>
 
 </div>
+
+<footer-dir></footer-dir>

@@ -10,18 +10,20 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/styles/landing-page.css">
+    <link rel="stylesheet" href="assets/styles/inbox.css">
   </head>
     <body>
         <nav-dir></nav-dir>
-        <!-- <w3-test-directive></w3-test-directive> -->
-        <div ui-view></div>
+        <div ui-view class="indexView"></div>
+        <!-- <footer-dir></footer-dir> -->
 
         <!-- bower components -->
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-
+       <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
+       <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
         <!-- main config/routing -->
         <script src="app/app.js"></script>
 
@@ -31,19 +33,24 @@
         <script src="app/components/connect/connectController.js"></script>
         <script src="app/components/profile/profileController.js"></script>
         <script src="app/components/shared/navbar/navbarController.js"></script>
+        <script src="app/components/shared/footer/footerController.js"></script>
+        <script src="app/components/auth/authController.js"></script>
+        <script src="app/components/inbox/inboxController.js"></script>
 
-        
+
         <!-- models -->
         <script src="app/components/connect/connectModel.js"></script>
-        
+
         <!-- shared services -->
 
         <!-- component services -->
         <script src="app/components/auth/authModel.js"></script>
         <script src="app/components/profile/profileModel.js"></script>
-        
+        <script src="app/components/inbox/inboxModel.js"></script>
+
         <!-- custom directives -->
         <script src="app/components/shared/navbar/navbarDirective.js"></script>
+        <script src="app/components/shared/footer/footerDirective.js"></script>
 
         <script>
         //     angular.module('app.navbarDirectives', [])

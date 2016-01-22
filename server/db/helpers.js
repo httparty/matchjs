@@ -12,8 +12,7 @@ helpers.signupUser = function(userDataObj) {
 	.then(function(user) {
 		if(user) {
 			throw Error('Username already taken!');
-		}
-		else {
+		} else {
 			return db.User.create({
 				username: userDataObj.username,
 				password: userDataObj.password,
@@ -23,18 +22,18 @@ helpers.signupUser = function(userDataObj) {
 				github: userDataObj.github,
 				photo: userDataObj.photo,
 				karmaPoints: 0
-			})
+			});
 		}
-	})
+	});
 };
 
 helpers.deleteUser = function(userToDeleteObj) {
-	db.User.findOne({ 
+	db.User.findOne({
 		where: {'username': userToDeleteObj.username}
 	}).then(function(user) {
-  	return user.destroy();
+  		return user.destroy();
 	})
-	.then(function() {})
+	.then(function() {});
 };
 
 helpers.getUserByUserName = function(userObj) {
@@ -45,12 +44,35 @@ helpers.getUserByUserName = function(userObj) {
   	if(!user) {
 			throw Error('Cannot locate user.');
 		}
-		else {
-  		return user;
-  	}
-	})
+		return user;
+	});
 };
 
+helpers.addUserToDb = function(userObj) {
+	return db.User.findOne({
+		where: {'username': userObj.username}
+	}).then(function(user) {
+		if(user) {
+			return user;
+		} else {
+			return db.User.create({
+				username: userObj.username,
+				password: userObj.id,
+				email: userObj._json.email || userObj.username + '@users.noreply.github.com',
+				name: userObj.displayName,
+				github: userObj.profileUrl,
+				photo: userObj._json.avatar_url,
+				location: userObj._json.location,
+				karmaPoints: 0,
+				toLearn: [],
+				toTeach: []
+			});
+		}
+		// else {
+  // 		return user;
+  // 	}
+	});
+};
 
 //-----------------USER PROFILE--------------------------
 
@@ -60,56 +82,26 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 		where: {'username': profileUpdateObj.username}
 	})
 	.then(function(user) {
+		if(!user) {
+			throw Error('User not found.');
+		}
 		return user.updateAttributes({
-	  	location: profileUpdateObj.location || user.get('location'),
-	  	name : profileUpdateObj.name || user.get('name'),
-	  	email : profileUpdateObj.email || user.get('email'),
-	  	password : profileUpdateObj.password || user.get('password'),
-	  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
-	  	github: profileUpdateObj.github || user.get('github'),
-	  	summary : profileUpdateObj.summary || user.get('summary'),
-	  	photo : profileUpdateObj.photo || user.get('photo')
+		  	location: profileUpdateObj.location || user.get('location'),
+		  	name : profileUpdateObj.name || user.get('name'),
+		  	email : profileUpdateObj.email || user.get('email'),
+		  	password : profileUpdateObj.password || user.get('password'),
+		  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
+		  	github: profileUpdateObj.github || user.get('github'),
+		  	summary : profileUpdateObj.summary || user.get('summary'),
+		  	photo : profileUpdateObj.photo || user.get('photo'),
+		  	karmaPoints : profileUpdateObj.karmaPoints || user.get('karmaPoints'),
+		  	toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
+		  	toTeach: profileUpdateObj.toTeach || user.get('toTeach')
 		});
-	})
+	});
 };
 
-helpers.updateUserSkills = function(profileUpdateObj) {
-return db.User.findOne({
-		where: { 'username': profileUpdateObj.username }
-	})
-	.then(function(user) {
-		if(!user) {
-			throw Error('User not found.')
-		}
-		return db.Skill.findAll()
-		.then(function(allSkillsArray) {
-			console.log("INSIDE DB.SKILL.FINDALL", allSkillsArray);
-			return allSkillsArray.forEach(function(skill) {
-				skill.addUser(user, { toTeach: false, toLearn: false });
-			})
-		})
-		.then(function() {
-			return db.Skill.findAll({
-				where: {'name': profileUpdateObj.toLearn}
-			})
-			.then(function(skillsArrayToLearn) {
-				return skillsArrayToLearn.forEach(function(skill) {
-					skill.addUser(user, { toLearn: true });
-				})
-			})
-		})
-		.then(function() {
-			return db.Skill.findAll({
-				where:{'name': profileUpdateObj.toTeach}
-			})
-			.then(function(skillsArraytoTeach) {
-				return skillsArraytoTeach.forEach(function(skill) {
-					skill.addUser(user, { toTeach: true });
-				})
-			})
-		})
-	})
-};
+
 
 
 //------------------GET USERS-------------------------
@@ -119,7 +111,7 @@ helpers.getAllUsers = function() {
 	.then(function(usersArray) {
 		console.log('HERE ARE ALL USERS', usersArray);
 		return usersArray;
-	})
+	});
 };
 
 //more functions need to be written here for the recommender
@@ -138,16 +130,25 @@ helpers.addMessage = function(messageObj) {
 			return db.User.findOne({
 				where: {'username': messageObj.username}
 			}).then(function(sender) {
-				senderID = sender.get('id');
+				var senderID = sender.get('id');
 				return db.Message.create({
 					'senderName': messageObj.username,
 					'recipientName': messageObj.recipientName,
 					'recipientID': recipientID,
 					'text': messageObj.text,
 					'UserId': senderID
-				})
-			})
-	})
+				});
+			});
+	});
+};
+
+helpers.containsId = function(elem, array) {
+	for(var i = 0; i < array.length; i++) {
+		if(array[i]['id'] === elem) {
+			return array[i]['name'];
+		}
+	}
+	return false;
 };
 
 helpers.getMessageHistory = function(messageDataObj) {

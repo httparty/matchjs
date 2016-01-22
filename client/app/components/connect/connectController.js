@@ -6,4 +6,7 @@ angular.module('app.connect',[])
 			$scope.users = r.data;
 		});
 	};
+
+  $scope.getAllUsers();
+  
 });
