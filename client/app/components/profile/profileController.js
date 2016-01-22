@@ -97,9 +97,9 @@ angular.module('app.profile', [])
 				$scope.saveEditButton.summary.buttonText = 'Save';
 				$scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
 			} else {
-				$scope.saveEditButton.summary.buttonText='Edit';
 				$scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
-				$scope.updateProfileBasics(); //call to fn that saves the skills 
+				$scope.updateProfileBasics($scope.user); //call to fn that saves skills 
+				$scope.saveEditButton.summary.buttonText='Edit';
 			} 
 		};
 

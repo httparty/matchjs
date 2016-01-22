@@ -35,6 +35,9 @@ module.exports = function(sequelize, DataTypes) {
 		karmaPoints: {
 			type: DataTypes.INTEGER
 		},
+		summary: {
+			type: DataTypes.TEXT
+		},
 		toLearn: {
 			type:DataTypes.ARRAY(DataTypes.STRING)
 		},
