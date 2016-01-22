@@ -3,9 +3,6 @@ var db = require('../db/config.js');
 
 module.exports = {
 	getAllUsers: function(req,res) {
-		// return helpers.getAllUsers;
-		// var users = helpers.getAllUsers;
-		// res.end(users);
 		return db.User.findAll()
 		.then(function(usersArray) {
 			console.log('HERE ARE ALL USERS', usersArray);
@@ -15,18 +12,20 @@ module.exports = {
 	},
 
 	getUserProfileData: function(req, res) {
-		//var username = req.params.username
-	},
-
-	updateProfileSkills: function(req, res) {
-
+		// console.log('inside getUserProfileData');
+		// console.log("HERES PARAMS FROM GETPROFILE FN in userhandler", req.params);
+		helpers.getUserByUserName(req.params)
+			.then(function(user) {
+				console.log("HERE IS USER AFTER GETTING DATA", user);
+				res.send(user);
+			});
 	},
 
 	updateProfileBasics: function(req, res) {
 		// console.log("HERE IS REQ.BODY!", req.body);
 		helpers.updateUserBasics(req.body)
 			.then(function(user) {
-				res.send();
+				res.send(user);
 			});
 	}
 
