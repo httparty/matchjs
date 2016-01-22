@@ -27,7 +27,8 @@ models.User = new User(sequelize, Sequelize);
 // models.Skill.belongsToMany(models.User, {through: 'UserSkillJoin'});
 // models.User.belongsToMany(models.Skill, {through: 'UserSkillJoin'});
 
-models.User.sync({force: true}).then(function(){
+models.User.sync({force: false}).then(function(){
+  //Set force: true for development, false for deployment
 	console.log('User table created!');
 	// return models.User.create({
  //    username: "Tom123",
@@ -44,7 +45,7 @@ models.User.sync({force: true}).then(function(){
 // 	models.Skill.bulkCreate([
 // 		{ name: "AngularJS" },
 // 		{ name: "JavaScript" },
-// 		{ name: "Express" }, 
+// 		{ name: "Express" },
 // 		{ name: "Backbone" },
 // 		{ name: "Node.js" },
 // 		{ name: "ReactJS"},
