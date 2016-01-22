@@ -7,7 +7,8 @@ angular.module('app', [
   'app.footer',
   'app.home',
   'app.connect',
-  'app.inbox'
+  'app.inbox',
+  'app.guidelines'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -34,6 +35,11 @@ angular.module('app', [
       templateUrl: 'app/components/inbox/inbox.html',
       controller: 'InboxController',
       url: '/inbox'
+    }) //;
+    .state('guidelines', {
+      templateUrl: 'app/components/guidelines/guidelines.html',
+      controller: 'GuidelinesController',
+      url: '/guidelines'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
