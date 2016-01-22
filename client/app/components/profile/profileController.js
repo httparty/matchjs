@@ -51,20 +51,20 @@ angular.module('app.profile', [])
 			} else {
 				$scope.selectedStyle.skills = {'background-color' : '#FFFFFF'};
 				for(var learnKey in $scope.skills.toLearn) {
-					console.log("here is toLEarn skill:", learnKey);
+					// console.log('here is toLEarn skill:', learnKey);
 					if(!contains(learnKey, $scope.skills.toLearn)) {
 						$scope.user.toLearn.push(learnKey);					
 					}
 				}
 				for(var teachKey in $scope.skills.toTeach) {
-					console.log("here is toTeach skill:", teachKey); 
+					// console.log('here is toTeach skill:', teachKey); 
 					if(!contains(teachKey, $scope.skills.toTeach)) {
 						$scope.user.toTeach.push(teachKey);
 					}
 				}
 
-				console.log("$scope.user.toTeach", $scope.user.toTeach);
-				console.log("$scope.user.toLearn", $scope.user.toLearn);
+				console.log('$scope.user.toTeach', $scope.user.toTeach);
+				console.log('$scope.user.toLearn', $scope.user.toLearn);
 
 				$scope.updateProfileBasics($scope.user); //call to fn that saves the skills 
 				$scope.saveEditButton.skills.buttonText='Edit';
@@ -110,7 +110,7 @@ angular.module('app.profile', [])
 			console.log('hello inside get currentUserProfile');
 			Profile.getCurrentUser($scope.user)
 				.then(function(response) {
-					console.log("response.data", response.data);
+					console.log('response.data', response.data);
 					$scope.user.location = response.data.location;
 					$scope.user.name = response.data.location;
 					$scope.user.github = response.data.github;

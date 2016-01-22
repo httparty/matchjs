@@ -66,7 +66,7 @@ helpers.addUserToDb = function(userObj) {
 				karmaPoints: 0,
 				toLearn: [],
 				toTeach: []
-			})
+			});
 		}
 		// else {
   // 		return user;
