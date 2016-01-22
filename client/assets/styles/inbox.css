@@ -4,38 +4,19 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   box-sizing: border-box;
 }
 
-/*Both Feathers*/
+/*Shared Features*/
 .messages, .conversations {
   padding-left: 3%;
 }
 
-/*Message Features*/
-.messages{
-  border-left: solid 1px;
-}
 #messageList, #conversationList{
   height: 90%;
   overflow: scroll;
   list-style-type: none;
   padding: 0px;
 }
-.message{
-  box-sizing: border-box;
-  padding: 2%;
-}
 
-
-/*Conversation Features*/
-.conversation {
-  padding: 5%;
-  /*text-align: center;*/
-  border: solid 1px;
-}
-
-.messageList {
-  height: 80%;
-}
-.messageInput {
+.messageInput, .conversationInput{
   height: 20%;
 }
 
@@ -45,4 +26,37 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
 .even{
   background-color: white;
 }
+
+/*Message Features*/
+.messages{
+  border-left: solid 1px;
+}
+
+.messageList {
+  height: 80%;
+}
+
+/*Individual Message*/
+.message{
+  box-sizing: border-box;
+  padding: 2%;
+}
+
+/*Conversation Features*/
+.conversations {
+  height: 80%;
+}
+
+.conversation {
+  padding: 5%;
+  /*text-align: center;*/
+  border: solid 1px;
+}
+
+.plus {
+  width: 100%;
+  margin: 0px;
+}
+
+
 

@@ -1,17 +1,28 @@
 <div class="container-fluid inbox" ng-controller="InboxController">
   <div class="row">
     <div class="col-md-5 conversations">
-      <h1>Conversations</h1>
-      <ul id="conversationList">
-        <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)">
-        <h4>{{conversation}}</h4>
-        </li>
-      </ul>
+
+        <h1>Conversations</h1>
+        <ul id="conversationList">
+          <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)">
+          <h4>{{conversation}}</h4>
+          </li>
+        </ul>
+
+        <!-- Form for adding a new conversation -->
+        <div class="conversationInput">
+          <form class="form-group" >
+            <input type="text" class="form-control" placeholder="Choose a new user" ng-model="newConvoName" ng-submit="startNewConversation()">
+            <button type="submit" class="btn btn-primary plus" ng-click="startNewConversation()"><h2 class="plus">+</h2></button>
+          </form>
+        </div>
+
     </div>
+
     <div class="col-md-7 messages">
 
       <div class="messageList">
-        <h1>Messages</h1>
+        <div><h1>Messages</h1><h2>with {{currentRecipient}}</h2></div>
         <!-- <h1>{{ enteredText }}</h1> -->
         <ul id="messageList">
           <li ng-repeat="message in currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
