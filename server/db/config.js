@@ -27,7 +27,7 @@ models.User = new User(sequelize, Sequelize);
 // models.Skill.belongsToMany(models.User, {through: 'UserSkillJoin'});
 // models.User.belongsToMany(models.Skill, {through: 'UserSkillJoin'});
 
-models.User.sync({force: false}).then(function(){
+models.User.sync({force: true}).then(function(){
   //Set force: true for development, false for deployment
 	console.log('User table created!');
 	// return models.User.create({
