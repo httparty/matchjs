@@ -1,15 +1,33 @@
+/*                    */
 /* Universal settings */
+/*                    */
 html, body, .indexView, .inbox, .row, .conversations, .messages{
   height: 100%;
   box-sizing: border-box;
 }
 
+/*               */
 /*Shared Features*/
+/*               */
+.mainContainer {
+  margin-top: 20px;
+}
+
 .messages, .conversations {
   padding-left: 3%;
 }
 
-#messageList, #conversationList{
+/*For the Box with uls and titles*/
+.messageBox, .conversationBox {
+  height: 80%;
+}
+
+.messagesHeader, .conversationsHeader{
+  display: inline-block;
+}
+
+/*For the ULs*/
+.messageList, .conversationList{
   height: 90%;
   overflow: scroll;
   list-style-type: none;
@@ -20,6 +38,7 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   height: 20%;
 }
 
+/*For the LIs*/
 .odd {
   background-color: #eee;
 }
@@ -27,29 +46,24 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   background-color: white;
 }
 
+/*                */
 /*Message Features*/
+/*                */
 .messages{
   border-left: solid 1px;
 }
 
-.messageList {
-  height: 80%;
-}
-
-/*Individual Message*/
 .message{
   box-sizing: border-box;
   padding: 2%;
 }
 
+/*                     */
 /*Conversation Features*/
-.conversations {
-  height: 80%;
-}
+/*                     */
 
 .conversation {
   padding: 5%;
-  /*text-align: center;*/
   border: solid 1px;
 }
 

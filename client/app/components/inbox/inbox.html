@@ -1,13 +1,15 @@
 <div class="container-fluid inbox" ng-controller="InboxController">
-  <div class="row">
+  <div class="row mainContainer">
     <div class="col-md-5 conversations">
 
-        <h1>Conversations</h1>
-        <ul id="conversationList">
+      <div class="conversationBox">
+        <div class="conversationsHeader"><h1>Conversations</h1></div>
+        <ul class="conversationList">
           <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)">
           <h4>{{conversation}}</h4>
           </li>
         </ul>
+      </div>
 
         <!-- Form for adding a new conversation -->
         <div class="conversationInput">
@@ -21,10 +23,12 @@
 
     <div class="col-md-7 messages">
 
-      <div class="messageList">
-        <div><h1>Messages</h1><h2>with {{currentRecipient}}</h2></div>
+      <div class="messageBox">
+        <div class="messagesHeader">
+            <h1>Messages with {{currentRecipient}}</h1>
+        </div>
         <!-- <h1>{{ enteredText }}</h1> -->
-        <ul id="messageList">
+        <ul class="messageList">
           <li ng-repeat="message in currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
           {{message}}
           </li>
