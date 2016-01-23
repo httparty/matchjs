@@ -7,4 +7,5 @@
         templateUrl: 'app/components/shared/footer/footer.html'
       };
     });
+    
 })();
