@@ -5,35 +5,12 @@ var helpers = {};
 
 //---------------AUTHENTICATION----------------------
 
-helpers.signupUser = function(userDataObj) {
-  return db.User.findOne({
-    where: {'username': userDataObj.username}
-  })
-  .then(function(user) {
-    if(user) {
-      throw Error('Username already taken!');
-    } else {
-      return db.User.create({
-        username: userDataObj.username,
-        password: userDataObj.password,
-        email: userDataObj.email,
-        phoneNumber: userDataObj.phoneNumber,
-        name: userDataObj.name,
-        github: userDataObj.github,
-        photo: userDataObj.photo,
-        karmaPoints: 0
-      });
-    }
-  });
-};
-
 helpers.deleteUser = function(userToDeleteObj) {
   db.User.findOne({
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
     return user.destroy();
   })  
-  .then(function() {});
 };
 
 helpers.getUserByUserName = function(userObj) {
@@ -48,7 +25,7 @@ helpers.getUserByUserName = function(userObj) {
   });
 };
 
-helpers.addUserToDb = function(userObj) {
+helpers.signupUser = function(userObj) { 
   return db.User.findOne({
     where: {'username': userObj.username}
   }).then(function(user) {
@@ -68,9 +45,6 @@ helpers.addUserToDb = function(userObj) {
         toTeach: []
       });
     }
-  // else {
-  // 		return user;
-  // 	}
   });
 };
 
@@ -86,7 +60,7 @@ helpers.updateUserBasics = function(profileUpdateObj) {
   		throw Error('User not found.');
   	}
     return user.updateAttributes({
-      location: profileUpdateObj.location || user.get('location'),
+      location: profileUpdateObj.location || user.get('location'), 
       name : profileUpdateObj.name || user.get('name'),
       email : profileUpdateObj.email || user.get('email'),
       password : profileUpdateObj.password || user.get('password'),
@@ -115,61 +89,6 @@ helpers.getAllUsers = function() {
 //more functions need to be written here for the recommender
 
 
-//------------------Messages--------------------------
-
-
-helpers.addMessage = function(messageObj) {
-  var recipientID;
-  return db.User.findOne({
-    where: {'username': messageObj.recipientName}
-  })
-  .then(function(recipient) {
-    recipientID = recipient.get('id');
-    return db.User.findOne({
-    where: {'username': messageObj.username}
-    }).then(function(sender) {
-      var senderID = sender.get('id');
-      return db.Message.create({
-      'senderName': messageObj.username,
-      'recipientName': messageObj.recipientName,
-      'recipientID': recipientID,
-      'text': messageObj.text,
-      'UserId': senderID
-      });
-    });
-  });
-};
-
-helpers.containsId = function(elem, array) {
-  for(var i = 0; i < array.length; i++) {
-    if(array[i]['id'] === elem) {
-      return array[i]['name'];
-    }
-  }
-  return false;
-};
-
-helpers.getMessageHistory = function(messageDataObj) {
-	// var recipientID;
-	// return db.User.findOne({
-	// 	where: {'username': messageDataObj.recipientName}
-	// })
-	// .then(function(recipient) {
-	// 	recipientID = recipient.get('id');
-	// 		return db.User.findOne({
-	// 			where: {'username': messageDataObj.username}
-	// 		}).then(function(sender) {
-	// 			senderID = sender.get('id');
-	// 			return db.Message.create({
-	// 				'senderName': messageDataObj.username,
-	// 				'recipientName': messageDataObj.recipientName,
-	// 				'recipientID': recipientID,
-	// 				'text': messageDataObj.text,
-	// 				'UserId': senderID
-	// 			})
-	// 		})
-	// })
-};
 
 module.exports = helpers;
 
