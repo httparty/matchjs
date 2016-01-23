@@ -2,11 +2,12 @@
   <div class="row mainContainer">
     <div class="col-md-5 conversations">
 
+      <!-- List of all conversation threads -->
       <div class="conversationBox">
         <div class="conversationsHeader"><h1>Conversations</h1></div>
         <ul class="conversationList">
-          <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)">
-          <h4>{{conversation.username}}</h4>
+          <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)" ng-if="conversation.username!= $scope.username">
+          <h4>{{conversation.name}}</h4>
           </li>
         </ul>
       </div>
@@ -23,6 +24,7 @@
 
     <div class="col-md-7 messages">
 
+      <!-- Message History -->
       <div ng-show="currentRecipient" class="messageBox">
         <div class="messagesHeader">
             <h1>Messages with {{currentRecipient}}</h1>
@@ -35,7 +37,13 @@
           </li>
         </ul>
       </div>
-      <div class="alert alert-warning" ng-show="!currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto"><center><h3><i class="fa fa-exclamation-triangle"></i> Select a User</h3></center></div>
+
+      <!-- Displayed if no user selected -->
+      <div class="alert alert-warning" ng-show="!currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto">
+      <center><h3><i class="fa fa-exclamation-triangle"></i>Select a User</h3></center>
+      </div>
+
+
       <div class="messageInput" ng-show="currentRecipient">
         <form class="form-group" >
           <input type="text" class="form-control" placeholder="Enter your message" ng-model="enteredText" ng-submit="sendMessage()">
@@ -44,7 +52,6 @@
       </div>
 
     </div>
-
   </div>
 </div>
 
