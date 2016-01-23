@@ -6,7 +6,7 @@
         <div class="conversationsHeader"><h1>Conversations</h1></div>
         <ul class="conversationList">
           <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)">
-          <h4>{{conversation}}</h4>
+          <h4>{{conversation.username}}</h4>
           </li>
         </ul>
       </div>
@@ -30,7 +30,8 @@
         <!-- <h1>{{ enteredText }}</h1> -->
         <ul class="messageList">
           <li ng-repeat="message in currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
-          {{message}}
+          {{message.from}} :
+          {{message.message}}
           </li>
         </ul>
       </div>
