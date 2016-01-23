@@ -7,20 +7,20 @@ module.exports = {
 		.then(function(usersArray) {
 			console.log('HERE ARE ALL USERS', usersArray);
 			res.send(usersArray);
-		});
+			});
 	},
 
 	getUserProfileData: function(req, res) {
 		helpers.getUserByUserName(req.params)
 			.then(function(user) {
-				res.send(user);
+			res.send(user);
 			});
 	},
 
 	updateProfileBasics: function(req, res) {
 		helpers.updateUserBasics(req.body)
 			.then(function(user) {
-				res.send(user);
+			res.send(user);
 			});
 	}
 

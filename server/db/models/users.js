@@ -3,46 +3,46 @@
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('User', {
 		username: {
-			type: DataTypes.STRING
+		type: DataTypes.STRING
 		},
 		name: {
-			type: DataTypes.STRING
+		type: DataTypes.STRING
 		},
 		password: {
-			type: DataTypes.STRING
+		type: DataTypes.STRING
 		},
 		email: {
-			type: DataTypes.STRING,
-			validate: {
-				isEmail: true
+		type: DataTypes.STRING,
+		validate: {
+			isEmail: true
 			}
 		},
 		phoneNumber: {
-			type: DataTypes.STRING,
-			validate: {
-				len: [10,13]
+		type: DataTypes.STRING,
+		validate: {
+			len: [10,13]
 			}
 		},
 		photo: {
-			type: DataTypes.STRING
+		type: DataTypes.STRING
 		},
 		github: {
-			type: DataTypes.STRING
+		type: DataTypes.STRING
 		},
 		location: {
-			type: DataTypes.STRING
+		type: DataTypes.STRING
 		},
 		karmaPoints: {
-			type: DataTypes.INTEGER
+		type: DataTypes.INTEGER
 		},
 		summary: {
-			type: DataTypes.TEXT
+		type: DataTypes.TEXT
 		},
 		toLearn: {
-			type:DataTypes.ARRAY(DataTypes.STRING)
+		type:DataTypes.ARRAY(DataTypes.STRING)
 		},
 		toTeach: {
-			type:DataTypes.ARRAY(DataTypes.STRING)
+		type:DataTypes.ARRAY(DataTypes.STRING)
 		}
 	});
 };

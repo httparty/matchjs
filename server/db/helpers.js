@@ -31,17 +31,17 @@ helpers.deleteUser = function(userToDeleteObj) {
 	db.User.findOne({
 		where: {'username': userToDeleteObj.username}
 	}).then(function(user) {
-  		return user.destroy();
+		return user.destroy();
 	})
 	.then(function() {});
 };
 
 helpers.getUserByUserName = function(userObj) {
-  return db.User.findOne({
-    where: {'username': userObj.username}
+	return db.User.findOne({
+		where: {'username': userObj.username}
 	})
-  .then(function(user) {
-  	if(!user) {
+	.then(function(user) {
+		if(!user) {
 			throw Error('Cannot locate user.');
 		}
 		return user;
@@ -68,9 +68,9 @@ helpers.addUserToDb = function(userObj) {
 				toTeach: []
 			});
 		}
-		// else {
-  // 		return user;
-  // 	}
+	// else {
+	// 		return user;
+	// 	}
 	});
 };
 
@@ -86,17 +86,17 @@ helpers.updateUserBasics = function(profileUpdateObj) {
 			throw Error('User not found.');
 		}
 		return user.updateAttributes({
-		  	location: profileUpdateObj.location || user.get('location'),
-		  	name : profileUpdateObj.name || user.get('name'),
-		  	email : profileUpdateObj.email || user.get('email'),
-		  	password : profileUpdateObj.password || user.get('password'),
-		  	phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
-		  	github: profileUpdateObj.github || user.get('github'),
-		  	summary : profileUpdateObj.summary || user.get('summary'),
-		  	photo : profileUpdateObj.photo || user.get('photo'),
-		  	karmaPoints : profileUpdateObj.karmaPoints || user.get('karmaPoints'),
-		  	toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
-		  	toTeach: profileUpdateObj.toTeach || user.get('toTeach')
+			location: profileUpdateObj.location || user.get('location'),
+			name : profileUpdateObj.name || user.get('name'),
+			email : profileUpdateObj.email || user.get('email'),
+			password : profileUpdateObj.password || user.get('password'),
+			phoneNumber : profileUpdateObj.phoneNumber || user.get('phoneNumber'),
+			github: profileUpdateObj.github || user.get('github'),
+			summary : profileUpdateObj.summary || user.get('summary'),
+			photo : profileUpdateObj.photo || user.get('photo'),
+			karmaPoints : profileUpdateObj.karmaPoints || user.get('karmaPoints'),
+			toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
+			toTeach: profileUpdateObj.toTeach || user.get('toTeach')
 		});
 	});
 };
@@ -127,18 +127,18 @@ helpers.addMessage = function(messageObj) {
 	})
 	.then(function(recipient) {
 		recipientID = recipient.get('id');
-			return db.User.findOne({
-				where: {'username': messageObj.username}
+		return db.User.findOne({
+			where: {'username': messageObj.username}
 			}).then(function(sender) {
-				var senderID = sender.get('id');
-				return db.Message.create({
-					'senderName': messageObj.username,
-					'recipientName': messageObj.recipientName,
-					'recipientID': recipientID,
-					'text': messageObj.text,
-					'UserId': senderID
-				});
+			var senderID = sender.get('id');
+			return db.Message.create({
+				'senderName': messageObj.username,
+				'recipientName': messageObj.recipientName,
+				'recipientID': recipientID,
+				'text': messageObj.text,
+				'UserId': senderID
 			});
+		});
 	});
 };
 
