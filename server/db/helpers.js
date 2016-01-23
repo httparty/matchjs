@@ -79,12 +79,12 @@ helpers.addUserToDb = function(userObj) {
 
 helpers.updateUserBasics = function(profileUpdateObj) {
   return db.User.findOne({
-    where: {'username': profileUpdateObj.username}
+  	where: {'username': profileUpdateObj.username}
   })
   .then(function(user) {
-    if(!user) {
-      throw Error('User not found.');
-    }
+  	if(!user) {
+  		throw Error('User not found.');
+  	}
     return user.updateAttributes({
       location: profileUpdateObj.location || user.get('location'),
       name : profileUpdateObj.name || user.get('name'),
@@ -100,8 +100,6 @@ helpers.updateUserBasics = function(profileUpdateObj) {
     });
   });
 };
-
-
 
 
 //------------------GET USERS-------------------------

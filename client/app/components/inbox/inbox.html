@@ -23,7 +23,7 @@
 
     <div class="col-md-7 messages">
 
-      <div class="messageBox">
+      <div ng-show="currentRecipient" class="messageBox">
         <div class="messagesHeader">
             <h1>Messages with {{currentRecipient}}</h1>
         </div>
@@ -35,8 +35,8 @@
           </li>
         </ul>
       </div>
-
-      <div class="messageInput">
+      <div class="alert alert-warning" ng-show="!currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto"><center><h3><i class="fa fa-exclamation-triangle"></i> Select a User</h3></center></div>
+      <div class="messageInput" ng-show="currentRecipient">
         <form class="form-group" >
           <input type="text" class="form-control" placeholder="Enter your message" ng-model="enteredText" ng-submit="sendMessage()">
           <button type="submit" class="btn btn-primary" ng-click="sendMessage()">Submit</button>
