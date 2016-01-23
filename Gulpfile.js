@@ -66,9 +66,9 @@ gulp.task('e2e', function(done) {
 
 //pipe all scripts within the src/scripts folder to the jshint object, and outputs errors to the console
 gulp.task('jshint', function() {
-	gulp.src(paths.scripts)
-		.pipe(jshint())
-		.pipe(jshint.reporter('default'));
+  gulp.src(paths.scripts)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 		// .pipe(gulp.dest('dist/')); //this creates the dist folder with manipulated files dropped in. I don't think we're ready for this yet :).
 });
 
