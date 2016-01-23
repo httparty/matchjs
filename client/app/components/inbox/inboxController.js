@@ -1,11 +1,23 @@
-angular.module('app.inbox', [])
-  .controller('InboxController', ['$scope', 'Inbox', 'AuthService',  function($scope, Inbox, AuthService){
+angular.module('app.inbox', ['firebase'])
+  .controller('InboxController', ['$scope', 'Inbox', 'AuthService', 'connectModel', '$firebaseObject', '$firebaseArray',function($scope, Inbox, AuthService, connectModel, $firebaseObject, $firebaseArray){
+
+    // var myFirebaseRef = new Firebase("https://matchjs.firebaseio.com/chat");
+    var count = 0;
+    var baseURL = "https://matchjs.firebaseio.com/chat/";
+
     console.log('Inbox Controller is working');
+
 
     // Scope Variables
     var user = angular.fromJson(AuthService.getCurrentUser());
     $scope.username = user.username;
-    $scope.conversationList = ['Rachel', 'Polina', 'Anthony', 'Chris', 'Jeff'];
+    $scope.conversationList = [];
+
+    connectModel.getAllUsers().then(function(r) {
+        console.dir(r.data);
+        $scope.conversationList = r.data;
+    });
+    // $scope.conversationList = ['Rachel', 'Polina', 'Anthony', 'Chris', 'Jeff'];
     $scope.conversationObject = {
         'Rachel': ['Hey!', 'How goes it?'],
         'Polina': ['Hi! Do you need a mentor?'],
@@ -46,7 +58,31 @@ angular.module('app.inbox', [])
     $scope.switchConversation = function(conversation) {
         // console.log($scope.username);
         $scope.currentMessageList = $scope.conversationObject[conversation];
-        $scope.currentRecipient = conversation;
+        $scope.currentRecipient = conversation.username;
+
+        var arr = [$scope.currentRecipient, $scope.username];
+        arr.sort();
+
+        console.log(arr[0] + arr[1]);
+        var convoURL = baseURL + arr[0] + arr[1];
+        var myFirebaseRef = new Firebase(convoURL);
+        // myFirebaseRef.set({'rachel': 'How goes it'});
+        var messages = $firebaseArray(myFirebaseRef.child('messages'));
+
+        messages.$add({count : 'Arr'});
+        console.log(messages);
+
+        console.log($firebaseArray(myFirebaseRef.child('messages')));
+
+        //We can generate new conversations
+
+        //Refactor above code and split it up
+        //Add scope variable online 72
+        //
+
+        // console.log(myFirebaseRef.child('messages').get());
+        // $scope.messages = $firebaseObject(myFirebaseRef.limit(15));
+        // $scope.messages({'sup': 'sup'});
     };
     $scope.startNewConversation = function() {
         $scope.conversationList.push($scope.newConvoName);

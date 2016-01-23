@@ -9,6 +9,7 @@ angular.module('app', [
   'app.connect',
   'app.inbox',
   'app.guidelines'
+  // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
