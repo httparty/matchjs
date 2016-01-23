@@ -9,13 +9,13 @@ var protractor = require('gulp-protractor').protractor;
 var karma = require('gulp-karma');
 
 var paths = {
-	scripts: ['client/app/**/*.js', 'server/**/*.js'],
+  scripts: ['client/app/**/*.js', 'server/**/*.js'],
   //OTHER PATHS TBD:
- // libs: ['scripts/libs/jquery/dist/jquery.js', 'scripts/libs/underscore/underscore.js', 'scripts/backbone/backbone.js'],
-	styles: ['client/assets/styles/**/*.css'],
-	html: ['client/app/**/*.html','client/index.html']
- // images: ['images/**/*.png'],
- // extras: ['crossdomain.xml', 'humans.txt', 'manifest.appcache', 'robots.txt', 'favicon.ico'],
+  // libs: ['scripts/libs/jquery/dist/jquery.js', 'scripts/libs/underscore/underscore.js', 'scripts/backbone/backbone.js'],
+  styles: ['client/assets/styles/**/*.css'],
+  html: ['client/app/**/*.html','client/index.html']
+  // images: ['images/**/*.png'],
+  // extras: ['crossdomain.xml', 'humans.txt', 'manifest.appcache', 'robots.txt', 'favicon.ico'],
 };
 
 //delete the contents of dist folder
@@ -66,9 +66,9 @@ gulp.task('e2e', function(done) {
 
 //pipe all scripts within the src/scripts folder to the jshint object, and outputs errors to the console
 gulp.task('jshint', function() {
-	gulp.src(paths.scripts)
-		.pipe(jshint())
-		.pipe(jshint.reporter('default'));
+  gulp.src(paths.scripts)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 		// .pipe(gulp.dest('dist/')); //this creates the dist folder with manipulated files dropped in. I don't think we're ready for this yet :).
 });
 
