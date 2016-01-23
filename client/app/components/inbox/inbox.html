@@ -1,8 +1,8 @@
 <div class="container-fluid inbox" ng-controller="InboxController">
   <div class="row mainContainer">
-    <div class="col-md-5 conversations">
 
-      <!-- List of all conversation threads -->
+    <div class="col-md-5 conversations">
+      <!-- List all conversation threads -->
       <div class="conversationBox">
         <div class="conversationsHeader"><h1>Conversations</h1></div>
         <ul class="conversationList">
@@ -12,14 +12,13 @@
         </ul>
       </div>
 
-        <!-- Form for adding a new conversation -->
-        <div class="conversationInput">
-          <form class="form-group" >
-            <input type="text" class="form-control" placeholder="Choose a new user" ng-model="newConvoName" ng-submit="startNewConversation()">
-            <button type="submit" class="btn btn-primary plus" ng-click="startNewConversation()"><h2 class="plus">+</h2></button>
-          </form>
-        </div>
-
+      <!-- Search for user to start new conversation -->
+      <div class="conversationInput">
+        <form class="form-group" >
+          <input type="text" class="form-control" placeholder="Choose a new user" ng-model="newConvoName" ng-submit="startNewConversation()">
+          <button type="submit" class="btn btn-primary plus" ng-click="startNewConversation()"><h2 class="plus">+</h2></button>
+        </form>
+      </div>
     </div>
 
     <div class="col-md-7 messages">
@@ -43,7 +42,7 @@
       <center><h3><i class="fa fa-exclamation-triangle"></i>Select a User</h3></center>
       </div>
 
-
+      <!-- send new message -->
       <div class="messageInput" ng-show="currentRecipient">
         <form class="form-group" >
           <input type="text" class="form-control" placeholder="Enter your message" ng-model="enteredText" ng-submit="sendMessage()">
