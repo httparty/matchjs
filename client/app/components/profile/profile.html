@@ -3,18 +3,19 @@
   <div ng-controller="ProfileController">
     <div id="profileBasicsAndPhoto" class='profileBasicsContainer' ng-model="selectedStyle.basics" ng-style="selectedStyle.basics">
 
-    <!-- PROFILE PHOTO -->
+<!-- PROFILE PHOTO -->
       <div class='profilePhoto'>
       <!-- photo upload stuff goes here -->
         <img ng-src={{user.avatar}} height="200" width="200">
       </div> 
 
-    <!-- PROFILE BASICS, EXCLUDING PHOTO -->
+<!-- PROFILE BASICS, EXCLUDING PHOTO -->
 
       <div class="profileBasics">
         <div ng-hide="saveEditButton.basics.buttonText === 'Save'">
           <p>
             <strong>{{user.displayName}}</strong><br>
+            Username: {{user.username}}<br>
             Location: {{user.location || 'San Francisco'}} <br>
             Github: <a href="{{user.github}}">{{user.github}}</a><br>
             Karma: {{user.karmaPoints || '0'}} <br>
@@ -36,7 +37,7 @@
     <div id="profileSkills" ng-model="selectedStyle.skills" ng-style="selectedStyle.skills">
     <h2>Skills</h2>
     <form>
-      <h3>Skills I want to teach:</h3>
+      <h3>I want to teach:</h3>
       <div class="toTeach" ng-model="skills.toTeach">
         <input type="checkbox" ng-model="skills.toTeach.AngularJS" ng-checked="skills.toTeach.AngularJS" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> AngularJS
         <input type="checkbox" ng-model="skills.toTeach.Express" ng-checked="skills.toTeach.Express" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Express
@@ -46,7 +47,7 @@
         <input type="checkbox" ng-model="skills.toTeach.ReactJS" ng-checked="skills.toTeach.ReactJS" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> ReactJS
         <input type="checkbox" ng-model="skills.toTeach.ES6" ng-checked="skills.toTeach.ES6" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> ES6
       </div>
-      <h3>Skills I want to learn:</h3>
+      <h3>I want to learn:</h3>
       <div class="toLearn" ng-model="skills.toLearn">
         <input type="checkbox" ng-model="skills.toLearn.AngularJS" ng-checked="skills.toLearn.AngularJS" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> AngularJS
         <input type="checkbox" ng-model="skills.toLearn.Express" ng-checked="skills.toLearn.Express" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> Express

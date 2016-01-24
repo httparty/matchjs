@@ -10,10 +10,10 @@ angular.module('app.profile')
     });
   };
 
-  var updateProfileBasics = function(userDataObj) {
+  var updateProfile = function(userDataObj) {
     return $http({
       method: 'POST',
-      url: '/api/users/profileBasics',
+      url: '/api/users/profile',
       data: userDataObj
     }).then(function(responseObj){
       return responseObj;
@@ -22,7 +22,7 @@ angular.module('app.profile')
 
   return {
     getCurrentUser : getCurrentUser,
-    updateProfileBasics : updateProfileBasics
+    updateProfile : updateProfile
   };
 
 }]); 
