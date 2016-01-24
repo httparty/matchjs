@@ -1,44 +1,51 @@
-angular.module('app.inbox', ['firebase'])
-  .controller('InboxController', ['$scope', 'Inbox', 'AuthService', 'connectModel', '$firebaseObject', '$firebaseArray',function($scope, Inbox, AuthService, connectModel, $firebaseObject, $firebaseArray){
+;(function() {
+  'use strict';
 
-    //Firebase setup
-    var baseURL = 'https://matchjs.firebaseio.com/chat/';
-    var myFirebaseRef = '';
+  angular.module('app.inbox', ['firebase'])
+    .controller('InboxController', ['$scope', '$firebaseArray', 'AuthService', 'connectModel', function($scope, $firebaseArray, AuthService, connectModel) {
 
-    // Scope Variables
-    var user = angular.fromJson(AuthService.getCurrentUser());
-    $scope.username = user.username;
-    $scope.conversationList = [];
+      //Firebase
+      var baseURL = 'https://matchjs.firebaseio.com/chat/';
+      var firebaseConnection = '';
 
-    //Person with whom you are currently chatting
-    $scope.currentRecipient = '';
-    $scope.currentMessageList = [];
-    $scope.enteredText = '';
+      var currentUser = angular.fromJson(AuthService.getCurrentUser());
+      $scope.username = currentUser.username;
+      $scope.conversationList = [];
 
-    // Message Logic
-    $scope.displayMessages = function() {
-      $scope.currentMessageList = $firebaseArray(myFirebaseRef.child('messages'));
-    };
-    $scope.sendMessage = function() {
+      //Person with whom you are currently chatting
+      $scope.currentRecipient = '';
+      $scope.currentMessageList = [];
+      $scope.enteredText = '';
+
+      $scope.getAllUsers = function() {
+
+        connectModel.getAllUsers().then(function(r) {
+          $scope.conversationList = r.data;
+        });
+      };
+
+      $scope.displayMessages = function() {
+        
+        $scope.currentMessageList = $firebaseArray(firebaseConnection.child('messages'));
+      };
+
+      $scope.sendMessage = function() {
+
         $scope.currentMessageList.$add({message : $scope.enteredText, to: $scope.currentRecipient, from: $scope.username});
         $scope.enteredText = '';
-    };
+      };
 
-    // Conversation Logic
-    $scope.getAllUsers = function(){
-      connectModel.getAllUsers().then(function(r) {
-          $scope.conversationList = r.data;
-      });
-    };
+      $scope.switchConversation = function(conversation) {
 
-    $scope.switchConversation = function(conversation) {
         $scope.currentRecipient = conversation.username;
         var arr = [$scope.currentRecipient, $scope.username].sort();
         var convoURL = baseURL + arr[0] + arr[1];
-        myFirebaseRef = new Firebase(convoURL);
+        firebaseConnection = new Firebase(convoURL);
         $scope.displayMessages();
-    };
+      };
 
-    $scope.getAllUsers();
+      $scope.getAllUsers();
 
-  }]);
+    }]);
+
+})();

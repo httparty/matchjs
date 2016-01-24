@@ -1,3 +1,5 @@
+<div ng-controller="connectController as ctrl">
+
 <div class="container">
 
   <div class="row">
@@ -8,8 +10,10 @@
     </div>
   </div>
 
-  <div class="row">
-    <div ng-repeat="u in users">
+  <div class="row" ng-init="ctrl.getAllUsers()">
+
+    <div ng-repeat="u in ctrl.users">
+
       <div class="clearfix" ng-if="$index % 3 == 0"></div>
         <div class="col-sm-4 portfolio-item">
           <div class="panel panel-default">
@@ -60,5 +64,5 @@
       </div>
   </div>
 </div>
-
+</div>
 <footer-dir></footer-dir>

@@ -1,21 +1,26 @@
-angular.module('app.auth')
-  .factory('AuthService', ['$cookies', function($cookies) {
+;(function() {
+  'use strict';
 
-    var isAuthenticated = function () {
-      return !!$cookies.get('user-profile');
-    };
+  angular.module('app.auth')
+    .factory('AuthService', ['$cookies', function($cookies) {
 
-    var getCurrentUser = function () {
-      var str = $cookies.get('user-profile');
-      if (str) {
-        var profile = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
-        return profile;
-      }
-      return undefined;
-    };
+      var isAuthenticated = function () {
+        return !!$cookies.get('user-profile');
+      };
 
-    return {
-      isAuthenticated : isAuthenticated,
-      getCurrentUser : getCurrentUser
-    };
-  }]);
+      var getCurrentUser = function () {
+        var str = $cookies.get('user-profile');
+        if (str) {
+          var profile = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
+          return profile;
+        }
+        return undefined;
+      };
+
+      return {
+        isAuthenticated : isAuthenticated,
+        getCurrentUser : getCurrentUser
+      };
+    }]);
+    
+})();
