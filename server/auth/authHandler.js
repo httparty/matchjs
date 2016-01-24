@@ -9,11 +9,8 @@ module.exports = {
 
   success: function(req, res) {
   // add user to database
-    console.log('here is req.body before it goes into the helper', req.user);
-    helpers.addUserToDb(req.user)
+    helpers.signupUser(req.user)
     .then(function(user) {
-      console.log('HERE IS REQ USER IN AUTH! AFTER HELPER SUCCES', user);
-
       var profile = {
       id: req.user.id,
       username: req.user.username,

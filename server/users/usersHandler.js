@@ -3,9 +3,8 @@ var db = require('../db/config.js');
 
 module.exports = {
   getAllUsers: function(req,res) {
-    return db.User.findAll()
+    helpers.getAllUsers()
     .then(function(usersArray) {
-      console.log('HERE ARE ALL USERS', usersArray);
       res.send(usersArray);
     });
   },
@@ -17,10 +16,10 @@ module.exports = {
     });
   },
 
-  updateProfileBasics: function(req, res) {
-    helpers.updateUserBasics(req.body)
+  updateProfile: function(req, res) {
+    helpers.updateUser(req.body)
     .then(function(user) {
-      res.send(user);
+      res.send(user); 
     });
   }
 };
