@@ -16,8 +16,8 @@ module.exports = {
     });
   },
 
-  updateProfileBasics: function(req, res) {
-    helpers.updateUserBasics(req.body)
+  updateProfile: function(req, res) {
+    helpers.updateUser(req.body)
     .then(function(user) {
       res.send(user); 
     });
