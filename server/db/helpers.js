@@ -51,7 +51,7 @@ helpers.signupUser = function(userObj) {
 //-----------------USER PROFILE--------------------------
 
 
-helpers.updateUserBasics = function(profileUpdateObj) {
+helpers.updateUser = function(profileUpdateObj) {
   return db.User.findOne({
   	where: {'username': profileUpdateObj.username}
   })
