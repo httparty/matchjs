@@ -12,6 +12,7 @@
         console.dir(r.data);
         vm.users = r.data;
       });
+
     };
     
   }]);
