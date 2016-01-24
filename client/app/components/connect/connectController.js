@@ -2,15 +2,17 @@
   'use strict';
 
   angular.module('app.connect',[])
-  .controller('connectController', function($scope,connectModel) {
-      $scope.getAllUsers = function() {
+  .controller('connectController', function($scope, connectModel) {
+
+      var vm = this;
+      vm.users = '';
+
+      vm.getAllUsers = function() {
         connectModel.getAllUsers().then(function(r) {
         console.dir(r.data);
-        $scope.users = r.data;
+        vm.users = r.data;
       });
     };
-
-    $scope.getAllUsers();
     
   });
 
