@@ -42,20 +42,8 @@
         <li>
           <a href="#">&laquo;</a>
         </li>
-        <li class="active">
-          <a href="#">1</a>
-        </li>
-        <li>
-          <a href="#">2</a>
-        </li>
-        <li>
-          <a href="#">3</a>
-        </li>
-        <li>
-          <a href="#">4</a>
-        </li>
-        <li>
-          <a href="#">5</a>
+        <li ng-repeat="n in [1, 2, 3, 4, 5] track by $index">
+          <a href="#">{{ n }}</a>
         </li>
         <li>
         <a href="#">&raquo;</a>
@@ -66,3 +54,4 @@
 </div>
 </div>
 <footer-dir></footer-dir>
+
