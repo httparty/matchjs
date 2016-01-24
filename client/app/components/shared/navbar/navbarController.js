@@ -2,11 +2,12 @@
   'use strict';
 
   angular.module('app.navbar', [])
-    .controller('NavController', ['$scope', 'AuthService', function ($scope, AuthService) {
+    .controller('NavController', ['AuthService', function (AuthService) {
+      var vm = this;
 
-      $scope.user = angular.fromJson(AuthService.getCurrentUser());
+      vm.user = angular.fromJson(AuthService.getCurrentUser());
 
-      $scope.isLoggedIn = function() {
+      vm.isLoggedIn = function() {
         return AuthService.isAuthenticated();
       };
 

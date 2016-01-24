@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.connect',[])
-  .controller('connectController', function($scope, connectModel) {
+  .controller('connectController', ['connectModel', function(connectModel) {
 
       var vm = this;
       vm.users = '';
@@ -14,6 +14,6 @@
       });
     };
     
-  });
+  }]);
 
 })();
