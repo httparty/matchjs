@@ -6,6 +6,7 @@
 
       var vm = this;
       vm.users = '';
+      vm.pages = [1, 2, 3, 4, 5];
 
       vm.getAllUsers = function() {
         connectModel.getAllUsers().then(function(r) {
@@ -14,7 +15,7 @@
       });
 
     };
-    
+
   }]);
 
 })();
