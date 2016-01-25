@@ -18,6 +18,7 @@ angular.module('app.profile', [])
     $scope.skills = {};
     $scope.skills.toLearn = {};
     $scope.skills.toTeach = {};
+    $scope.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
 
   //-------------------BASICS-----------------------------
     $scope.toggleEditShowBasics = function() {
@@ -37,12 +38,18 @@ angular.module('app.profile', [])
       for(var learnKey in $scope.skills.toLearn) {
           if(!contains(learnKey, $scope.skills.toLearn)) {
             $scope.user.toLearn.push(learnKey);         
-          }   
+          }  
+          if(!$scope.skills.toLearn[learnKey]) {
+            $scope.user.toLearn.splice($scope.user.toLearn.indexOf(learnKey),1);
+          } 
       }
       for(var teachKey in $scope.skills.toTeach) {
         if(!contains(teachKey, $scope.skills.toTeach)) {
             $scope.user.toTeach.push(teachKey);
         }   
+        if(!$scope.skills.toTeach[teachKey]) {
+          $scope.user.toTeach.splice($scope.user.toTeach.indexOf(teachKey),1);
+        } 
       }
       Profile.updateProfile($scope.user) //update DB
       .then(function(response) {
