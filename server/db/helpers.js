@@ -10,7 +10,7 @@ helpers.deleteUser = function(userToDeleteObj) {
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
     return user.destroy();
-  })  
+  });  
 };
 
 helpers.getUserByUserName = function(userObj) {
@@ -105,7 +105,7 @@ helpers.getRecommendations = function(usersArray, username) {
   //assigning some sort of ranking
 
   return [];
-}
+};
 //get user obj with that username from db
 //apply a filter to the list of all users based on some 
 //property of that user obj
@@ -157,27 +157,27 @@ helpers.seedDatabase = function() {
 
       //query right here
       db.User.create({
-        username: "user"+i,
-        password: "password"+i,
-        email: "user"+i+"@email.com",
-        name: "user"+i,
+        username: 'user'+i,
+        password: 'password'+i,
+        email: 'user'+i+'@email.com',
+        name: 'user'+i,
         karmaPoints: Math.floor(Math.random() * 6)
         // toLearn: [],
         // toTeach: []
       }).then(function() {
-        console.log("User successfully created");
+        console.log('User successfully created');
         next();
       });
 
   }, function(err) {
     if (err) {
-      console.log("An item failed to process");
+      console.log('An item failed to process');
 
     } else {
-      console.log("successfully went through all of them");  
+      console.log('successfully went through all of them');  
     }
   });
-}
+};
 
 
 // helpers.seedDatabase();
