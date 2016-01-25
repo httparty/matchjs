@@ -10,29 +10,10 @@ angular.module('app.profile')
     });
   };
 
-  // var getCurrentUserSkills = function(userDataObj) {
-  //   return $http({
-  //     method: 'GET',
-  //     url: '/api/users/profileSkills/' + userDataObj.username
-  //   }).then(function(responseObj) {
-  //     return responseObj
-  //   });
-  // };
-
-  // var updateProfileSkills = function(userDataObj) {
-  //   return $http({
-  //     method: 'POST',
-  //     url: '/api/users/profileSkills',
-  //     data: userDataObj
-  //   }).then(function(responseObj){
-  //     return responseObj;
-  //   });
-  // };
-
-  var updateProfileBasics = function(userDataObj) {
+  var updateProfile = function(userDataObj) {
     return $http({
       method: 'POST',
-      url: '/api/users/profileBasics',
+      url: '/api/users/profile',
       data: userDataObj
     }).then(function(responseObj){
       return responseObj;
@@ -41,9 +22,7 @@ angular.module('app.profile')
 
   return {
     getCurrentUser : getCurrentUser,
-    // updateProfileSkills : updateProfileSkills,
-    updateProfileBasics : updateProfileBasics
-    // getCurrentUserSkills : getCurrentUserSkills
+    updateProfile : updateProfile
   };
 
 }]); 

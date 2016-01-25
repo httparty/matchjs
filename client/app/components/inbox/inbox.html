@@ -6,7 +6,7 @@
         <div class="conversationsHeader"><h1>Conversations</h1></div>
         <ul class="conversationList">
           <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)">
-          <h4>{{conversation}}</h4>
+          <h4>{{conversation.username}}</h4>
           </li>
         </ul>
       </div>
@@ -23,19 +23,20 @@
 
     <div class="col-md-7 messages">
 
-      <div class="messageBox">
+      <div ng-show="currentRecipient" class="messageBox">
         <div class="messagesHeader">
             <h1>Messages with {{currentRecipient}}</h1>
         </div>
         <!-- <h1>{{ enteredText }}</h1> -->
         <ul class="messageList">
           <li ng-repeat="message in currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
-          {{message}}
+          {{message.from}} :
+          {{message.message}}
           </li>
         </ul>
       </div>
-
-      <div class="messageInput">
+      <div class="alert alert-warning" ng-show="!currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto"><center><h3><i class="fa fa-exclamation-triangle"></i> Select a User</h3></center></div>
+      <div class="messageInput" ng-show="currentRecipient">
         <form class="form-group" >
           <input type="text" class="form-control" placeholder="Enter your message" ng-model="enteredText" ng-submit="sendMessage()">
           <button type="submit" class="btn btn-primary" ng-click="sendMessage()">Submit</button>
