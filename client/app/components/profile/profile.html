@@ -27,7 +27,7 @@
           <input type="text" ng-model="user.github" placeholder="{{user.github}}">
         </form>
         <!-- saveEditButtonBasics -->
-        <button ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
+        <button ng-hide="!isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
       </div>
 
     </div>
@@ -54,7 +54,7 @@
         </ng-form>
     </form>
     <br>
-    <button style="margin-top: 10px" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()"> {{ saveEditButton.skills.buttonText }}</button>
+    <button style="margin-top: 10px" ng-hide="!isSameUser" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()" > {{ saveEditButton.skills.buttonText }}</button>
   </div>
 
 <hr>
@@ -63,9 +63,9 @@
     <form>
       <input type ="text" style="width: 600px; height: 250px; margin-bottom: 10px" ng-model="user.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'"> 
     </form>
-    <button ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
+    <button ng-hide="!isSameUser" ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
     </div>
-    <div ng-init="getCurrentUserProfile()"></div>
+    <div ng-init="getCurrentUserProfile(); isSameUser = false;"></div>
   </div>
 
 </div>

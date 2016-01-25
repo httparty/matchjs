@@ -11,6 +11,7 @@ module.exports = {
   },
 
   getUserProfileData: function(req, res) {
+    console.log('req.params', req.params);
     helpers.getUserByUserName(req.params)
     .then(function(user) {
       res.send(user);

@@ -1,5 +1,5 @@
 angular.module('app.profile', [])
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', function ($scope, $window, $state, Profile, AuthService) {
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', '$stateParams', function ($scope, $window, $state, Profile, AuthService, $stateParams) {
 
     $scope.user = angular.fromJson(AuthService.getCurrentUser());
 
@@ -19,6 +19,8 @@ angular.module('app.profile', [])
     $scope.skills.toLearn = {};
     $scope.skills.toTeach = {};
     $scope.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
+
+    $scope.isSameUser = '';
 
   //-------------------BASICS-----------------------------
     $scope.toggleEditShowBasics = function() {
@@ -99,6 +101,10 @@ angular.module('app.profile', [])
       console.log('hello inside get currentUserProfile');
       Profile.getCurrentUser($scope.user)
       .then(function(response) {
+        if($scope.user.username === response.data.username) {
+          //make buttons visible
+          $scope.isSameUser = true;
+        }
         console.log('response.data', response.data);
         $scope.user.location = response.data.location;
         $scope.user.name = response.data.displayName; //
@@ -115,7 +121,3 @@ angular.module('app.profile', [])
       });
     };
 }]);
-
-//ng repeat with different filter for each 
-//disable in the div? 
-//refctor inline styling 
