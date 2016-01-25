@@ -27,6 +27,7 @@ module.exports = function(app, express) {
   app.use('/api/inbox', messageRouter);
   app.use('/api/email', emailRouter);
 
+
   app.get('/failure', function(req, res) {
     res.status('404');
     res.send('you don\'t have access to that resource. redirecting to sign in.');
@@ -58,6 +59,7 @@ module.exports = function(app, express) {
   require(__dirname + './../auth/authRoutes.js')(authRouter);
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
   require(__dirname + './../email/emailRoutes.js')(emailRouter);
-  // require(__dirname + './../messages/messagesRoutes.js')(messageRouter);  //Add this back in when messages are working
+
+
 };
 
