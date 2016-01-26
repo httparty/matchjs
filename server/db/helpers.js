@@ -84,96 +84,17 @@ helpers.getAllUsers = function(username) {
   });
 };
 
-//get user obj with that username from db
-//apply a filter to the list of all users based on some
-//property of that user obj
-
-//filter by skills to teach
-//some sort of intersection between arrays
-//we'll rank you higher than someone who only has two
-
-//api/users/username
-
-
-//--------------------FUNCTION TESTS
-// db.Skill.bulkCreate([
-// 	{	name: "AngularJS" },
-// 	{ name: "JavaScript" },
-// 	{ name: "Express"}
-// 	]).then(function() {
-// 		// return models.Skill.findAll();
-// 	})
-
-// db.User.create({
-//     username: "Tom123",
-//     name: "Tom Test",
-//     password: "abc123",
-//     email:"tom@tom.com",
-//     phoneNumber: '415-222-3215'
-//   }).then(function() {
-//   });
-
-// helpers.addMessage({
-// 	username: "Tom123",
-// 	recipientName: 'Rachel111',
-// 	text: 'Oh hello friend. howz it?!'
-// });
-
-// helpers.updateUserSkills({
-// 	username: 'Tom123',
-// 	toLearn: ['AngularJS'],
-// 	toTeach: ['JavaScript', 'Express']
-// }).then(function() {
-// 	console.log("hello success");
-// });
-
-helpers.seedDatabase = function() {
-
-  var array = [1,2,3,4,5,6,7,8,9,10];
-
-  async.each(array, function(i, next) {
-
-      //query right here
-      db.User.create({
-        username: 'user'+i,
-        password: 'password'+i,
-        email: 'user'+i+'@email.com',
-        name: 'user'+i,
-        karmaPoints: Math.floor(Math.random() * 6)
-        // toLearn: [],
-        // toTeach: []
-      }).then(function() {
-        console.log('User successfully created');
-        next();
-      });
-
-  }, function(err) {
-    if (err) {
-      console.log('An item failed to process');
-
-    } else {
-      console.log('successfully went through all of them');
-    }
-  });
-};
-
-
-// helpers.seedDatabase();
-
-
-// helpers.updateUserBasics({
-// 	username: 'Rachel111',
-// 	location: 'San Francisco',
-// 	email: 'rachel@rachelCity.com',
-// 	github: 'https://github.com/dearamerican',
-// 	summary: 'Hello I am a programmer now, woot!',
-// 	password: 'resetToSomethingHashedUp'
-// }).then(function(user) {
-// 	console.log("WOOT HERE IS USER", user);
-// });
-
 //------------------INVITATIONS-------------------------
-helpers.createInvitation = function(username,invitee,sessionInfo){
+
+// var sessionInfo = {
+//   when: new Date(),
+//   where:'San Francisco',
+//   summary: 'AngularJS'
+// };
+
+// helpers.createInvitation('dearamerican','polinadotio',sessionInfo);
+
+helpers.createInvitation = function(username, invitee, sessionInfo){
   return db.User.findOne({
     where: {'username': username}
   }).then(function(user) {
@@ -189,12 +110,38 @@ helpers.createInvitation = function(username,invitee,sessionInfo){
     });
   });
 };
-// var sessionInfo = {
-//   when: new Date(),
-//   where:'San Francisco',
-//   summary: 'AngularJS'
-// };
 
-// helpers.createInvitation('dearamerican','polinadotio',sessionInfo);
+// helpers.getInvitationsBySender('polinadotio');
+helpers.getInvitationsBySender = function(username) {
+  return db.User.findOne({
+    where: {'username': username}
+  }).then(function(user) {
+    if(!user) {
+      throw Error('Cannot locate user.');
+    }
+    return db.Invitation.findAll({
+      where: {'UserId': user.dataValues.id}
+    }).then(function(invitations) {
+      if (!invitations) {
+        console.log('You have created no invitations');
+        return null;
+      }
+      return invitations;
+    });
+  });
+};
+
+// helpers.getInvitationsByRecipient('dearamerican');
+helpers.getInvitationsByRecipient = function(username) {
+  return db.Invitation.findAll({
+    where: {'recipientName': username}
+  }).then(function(invitations) {
+    // console.log("invitations", invitations);
+    if (!invitations) {
+      return null;
+    }
+    return invitations;
+  });
+};
 
 module.exports = helpers;
