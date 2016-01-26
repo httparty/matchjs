@@ -8,7 +8,8 @@ angular.module('app', [
   'app.home',
   'app.connect',
   'app.inbox',
-  'app.guidelines'
+  'app.guidelines',
+  'app.invitations'
   // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -41,6 +42,11 @@ angular.module('app', [
       templateUrl: 'app/components/guidelines/guidelines.html',
       controller: 'GuidelinesController',
       url: '/guidelines'
+    })
+    .state('invitations', {
+      templateUrl: 'app/components/invitations/invitations.html',
+      controller: 'invitationsController',
+      url: '/invitations'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
