@@ -46,7 +46,7 @@ angular.module('app', [
     .state('invitations', {
       templateUrl: 'app/components/invitations/invitations.html',
       controller: 'invitationsController',
-      url: '/invitations'
+      url: '/invitations/:username'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
