@@ -14,6 +14,7 @@ module.exports = {
     console.log('req.params', req.params);
     helpers.getUserByUserName(req.params)
     .then(function(user) {
+      //call to the invitations helper, passing in username 
       res.send(user);
     });
   },
