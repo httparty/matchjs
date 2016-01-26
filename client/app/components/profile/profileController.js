@@ -1,5 +1,5 @@
 angular.module('app.profile', [])
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', '$stateParams', function ($scope, $window, $state, Profile, AuthService, $stateParams) {
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', function ($scope, $window, $state, Profile, AuthService) {
     console.log('my parms', $state.params);
     $scope.currentUser = angular.fromJson(AuthService.getCurrentUser());
 
@@ -25,7 +25,11 @@ angular.module('app.profile', [])
 
     $scope.isSameUser = '';
 
-  //-------------------BASICS-----------------------------
+    $scope.invitations = {};
+
+    $scope.inviteSent = '';
+
+  //-------------------BASICS--------------------
     $scope.toggleEditShowBasics = function() {
       if($scope.saveEditButton.basics.buttonText === 'Edit') {
         $scope.saveEditButton.basics.buttonText = 'Save';
@@ -38,7 +42,7 @@ angular.module('app.profile', [])
     };
 
 
-  //---------SHARED BY BASICS, SKILLS, & SUMMARY------------
+  //---------SHARED BY BASICS, SKILLS, & SUMMARY-
     var updateProfile = function() {
       for(var learnKey in $scope.skills.toLearn) {
           if(!contains(learnKey, $scope.skills.toLearn)) {
@@ -59,7 +63,7 @@ angular.module('app.profile', [])
       Profile.updateProfile($scope.profileUser) //update DB
       .then(function(response) {
         console.log('server response to profile update:', response);
-        $scope.getCurrentUserProfile();
+        $scope.getUserProfile();
       });
     };
 
@@ -72,7 +76,7 @@ angular.module('app.profile', [])
       return false;
     };
 
-  //-------------------SKILLS-----------------------------
+  //-------------------SKILLS--------------------
   		//called when SKILLS edit/show button is clicked
     $scope.toggleEditShowSkills = function() {
       if($scope.saveEditButton.skills.buttonText === 'Edit') {
@@ -85,7 +89,7 @@ angular.module('app.profile', [])
       } 
     };
 
-  //-------------------SUMMARY---------------------------
+  //-------------------SUMMARY-------------------
     $scope.toggleEditShowSummary = function() {
       if($scope.saveEditButton.summary.buttonText === 'Edit') {
         $scope.saveEditButton.summary.buttonText = 'Save';
@@ -97,33 +101,37 @@ angular.module('app.profile', [])
         $scope.saveEditButton.summary.buttonText='Edit';
       } 
     };
+  //--------------CREATE INVITATION -------------
+  $scope.createNewInvite = function(username) {
+    //call to invitation controller 
+    //set scope.inviteSent = true;
+  };
 
-  //---------RETRIEVE USER PROFILE DATA FROM DB------------
+  //---------RETRIEVE USER PROFILE DATA FROM DB--
   	//called on the initialization of the HTML page, ng-init
     $scope.getUserProfile = function() {
-      // console.log('hello inside get currentUserProfile');
-      // console.log("$stateParams, AKA scope.profile user", $stateParams.username);
-      // console.log('scope.current user', $scope.currentUser.username)
-      Profile.getCurrentUser($state.params) 
+      Profile.getUserProfile($state.params) 
       .then(function(response) {
-        //if the current user is the same as the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons. 
+        //---if the current user is the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons.---
         if($scope.currentUser.username === $scope.profileUser.username) {
           $scope.isSameUser = true;
         }
-        console.log('here is response.data', response.data);
+
+        //---populate the scope with the data returning from DB query.---
         $scope.profileUser.photo = response.data.photo;
         $scope.profileUser.location = response.data.location;
         $scope.profileUser.name = response.data.displayName; 
         $scope.profileUser.github = response.data.github;
         $scope.profileUser.summary =	response.data.summary; 
-
+        $scope.profileUser.displayName = response.data.displayName;
         response.data.toLearn.forEach(function(skill) {
           $scope.skills.toLearn[skill] = true;
         });
-
         response.data.toTeach.forEach(function(skill) {
           $scope.skills.toTeach[skill] = true;
         });
+
+        //---
       });
     };
 }]);
