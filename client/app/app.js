@@ -15,6 +15,7 @@ angular.module('app', [
 
     $urlRouterProvider.otherwise('/');
 
+
     $stateProvider
     .state('home', {
       templateUrl: 'app/components/home/home.html',
@@ -24,9 +25,8 @@ angular.module('app', [
     .state('profile', {
       templateUrl: 'app/components/profile/profile.html',
       controller: 'ProfileController',
-      url: '/profile'
+      url: '/profile/:username'
     })
-
     .state('connect', {
       templateUrl: 'app/components/connect/connect.html',
       controller: 'connectController',
@@ -45,9 +45,11 @@ angular.module('app', [
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
 
+    console.log('hi friend!');
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-
+      console.log(toState.name);
       if (!AuthService.isAuthenticated() && toState.name !== 'home') {
+        console.log('hello in isauth')
         event.preventDefault();
         $state.go('home');
         return;

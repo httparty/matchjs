@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.connect',[])
-  .controller('connectController', ['connectModel', 'AuthService', function(connectModel, AuthService) {
+  .controller('connectController', ['connectModel', 'AuthService', '$state', function(connectModel, AuthService, $state) {
 
       var vm = this;
       vm.users = '';
@@ -14,10 +14,15 @@
         connectModel.getAllUsers(username).then(function(r) {
         console.dir(r.data);
         vm.users = r.data;
-      });
+        });
+      };
 
-    };
 
+      vm.getThisUserProfile = function(username) {
+        console.log('in connectController: user', username);
+        $state.go('profile', {username: username});
+      };
+    
   }]);
 
 })();

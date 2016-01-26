@@ -1,10 +1,13 @@
 angular.module('app.profile', [])
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', function ($scope, $window, $state, Profile, AuthService) {
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', '$stateParams', function ($scope, $window, $state, Profile, AuthService, $stateParams) {
+    console.log('my parms', $state.params);
+    $scope.currentUser = angular.fromJson(AuthService.getCurrentUser());
 
-    $scope.user = angular.fromJson(AuthService.getCurrentUser());
+    $scope.profileUser = {};
+    $scope.profileUser.username = $state.params.username;
 
-    $scope.user.toLearn = [];
-    $scope.user.toTeach = [];
+    $scope.profileUser.toLearn = [];
+    $scope.profileUser.toTeach = [];
 
     $scope.saveEditButton = {};
     $scope.saveEditButton.skills = {};
@@ -20,6 +23,8 @@ angular.module('app.profile', [])
     $scope.skills.toTeach = {};
     $scope.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
 
+    $scope.isSameUser = '';
+
   //-------------------BASICS-----------------------------
     $scope.toggleEditShowBasics = function() {
       if($scope.saveEditButton.basics.buttonText === 'Edit') {
@@ -28,7 +33,7 @@ angular.module('app.profile', [])
       } else {
         $scope.saveEditButton.basics.buttonText='Edit';
         $scope.selectedStyle.basics = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.user); //call to fn 
+        updateProfile($scope.profileUser); //call to fn 
       }
     };
 
@@ -37,21 +42,21 @@ angular.module('app.profile', [])
     var updateProfile = function() {
       for(var learnKey in $scope.skills.toLearn) {
           if(!contains(learnKey, $scope.skills.toLearn)) {
-            $scope.user.toLearn.push(learnKey);         
+            $scope.profileUser.toLearn.push(learnKey);         
           }  
           if(!$scope.skills.toLearn[learnKey]) {
-            $scope.user.toLearn.splice($scope.user.toLearn.indexOf(learnKey),1);
+            $scope.profileUser.toLearn.splice($scope.profileUser.toLearn.indexOf(learnKey),1);
           } 
       }
       for(var teachKey in $scope.skills.toTeach) {
         if(!contains(teachKey, $scope.skills.toTeach)) {
-            $scope.user.toTeach.push(teachKey);
+            $scope.profileUser.toTeach.push(teachKey);
         }   
         if(!$scope.skills.toTeach[teachKey]) {
-          $scope.user.toTeach.splice($scope.user.toTeach.indexOf(teachKey),1);
+          $scope.profileUser.toTeach.splice($scope.profileUser.toTeach.indexOf(teachKey),1);
         } 
       }
-      Profile.updateProfile($scope.user) //update DB
+      Profile.updateProfile($scope.profileUser) //update DB
       .then(function(response) {
         console.log('server response to profile update:', response);
         $scope.getCurrentUserProfile();
@@ -65,7 +70,7 @@ angular.module('app.profile', [])
         }
       }
       return false;
-    }
+    };
 
   //-------------------SKILLS-----------------------------
   		//called when SKILLS edit/show button is clicked
@@ -75,7 +80,7 @@ angular.module('app.profile', [])
         $scope.selectedStyle.skills = {'background-color' : '#FFFFCC'};
       } else {
         $scope.selectedStyle.skills = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.user);
+        updateProfile($scope.profileUser);
         $scope.saveEditButton.skills.buttonText='Edit';
       } 
     };
@@ -88,22 +93,29 @@ angular.module('app.profile', [])
       } else {
         $scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
         //call to fn that saves summary 
-        updateProfile($scope.user); 
+        updateProfile($scope.profileUser); 
         $scope.saveEditButton.summary.buttonText='Edit';
       } 
     };
 
   //---------RETRIEVE USER PROFILE DATA FROM DB------------
   	//called on the initialization of the HTML page, ng-init
-    $scope.getCurrentUserProfile = function() {
-      console.log('hello inside get currentUserProfile');
-      Profile.getCurrentUser($scope.user)
+    $scope.getUserProfile = function() {
+      // console.log('hello inside get currentUserProfile');
+      // console.log("$stateParams, AKA scope.profile user", $stateParams.username);
+      // console.log('scope.current user', $scope.currentUser.username)
+      Profile.getCurrentUser($state.params) 
       .then(function(response) {
-        console.log('response.data', response.data);
-        $scope.user.location = response.data.location;
-        $scope.user.name = response.data.displayName; //
-        $scope.user.github = response.data.github;
-        $scope.user.summary =	response.data.summary; 
+        //if the current user is the same as the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons. 
+        if($scope.currentUser.username === $scope.profileUser.username) {
+          $scope.isSameUser = true;
+        }
+        console.log('here is response.data', response.data);
+        $scope.profileUser.photo = response.data.photo;
+        $scope.profileUser.location = response.data.location;
+        $scope.profileUser.name = response.data.displayName; 
+        $scope.profileUser.github = response.data.github;
+        $scope.profileUser.summary =	response.data.summary; 
 
         response.data.toLearn.forEach(function(skill) {
           $scope.skills.toLearn[skill] = true;
@@ -115,7 +127,3 @@ angular.module('app.profile', [])
       });
     };
 }]);
-
-//ng repeat with different filter for each 
-//disable in the div? 
-//refctor inline styling 
