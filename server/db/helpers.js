@@ -78,10 +78,10 @@ helpers.updateUser = function(profileUpdateObj) {
 
 //------------------GET USERS-------------------------
 
-helpers.getAllUsers = function() {
+helpers.getAllUsers = function(username) {
   return db.User.findAll()
   .then(function(usersArray) {
-    var result = helpers.getRecommendations(usersArray, 'spiterman');
+    var result = helpers.getRecommendations(usersArray, username);
     //call
     // console.log('HERE ARE ALL USERS', usersArray);
     return result;
@@ -94,11 +94,12 @@ helpers.getAllUsers = function() {
 helpers.getRecommendations = function(usersArray, username) {
   //get the object with the current user and take it out
   //of the usersArray
+  console.log(username, 'HEY LOOK AT ME< IM IN HELPERS');
   var current_user = {};
   for (var i = 0; i < usersArray.length; i++) {
     if (usersArray[i].dataValues.username === username) {
       current_user = usersArray[i].dataValues;
-      usersArray.splice(i);
+      usersArray.splice(i, 1);
     }
   }
 
