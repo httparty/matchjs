@@ -55,7 +55,7 @@ angular.module('app', [
     $rootScope.$on('$stateChangeStart', function(event, toState) {
       console.log(toState.name);
       if (!AuthService.isAuthenticated() && toState.name !== 'home') {
-        console.log('hello in isauth')
+        console.log('hello in isauth');
         event.preventDefault();
         $state.go('home');
         return;
