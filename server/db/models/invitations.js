@@ -6,10 +6,10 @@ module.exports = function(sequelize, DataType) {
       type: DataType.STRING
     },
     when: {
-      type: DataType.STRING
+      type: DataType.DATE
     },
     where: {
-      type: DataType.DATE
+      type: DataType.STRING
     },
     summary: {
       type: DataType.TEXT
