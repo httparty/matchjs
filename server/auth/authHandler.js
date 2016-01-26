@@ -22,7 +22,8 @@ module.exports = {
     };
     res.cookie('user-profile', profile, { maxAge: 2592000000 });  // Expires in one month
     // Successful authentication, redirect home.
-    res.redirect('/#/connect');
+    // res.redirect('/#/connect');
+    res.redirect('/api/email/signupConfirm');
   });
 }
 };
