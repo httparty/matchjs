@@ -123,14 +123,13 @@ helpers.getInvitationsBySender = function(username) {
       where: {'UserId': user.dataValues.id}
     }).then(function(invitations) {
       if (!invitations) {
-        console.log("You have created no invitations");
+        console.log('You have created no invitations');
         return null;
       }
-      console.log("Here are the invitations", invitations);
       return invitations;
     });
   });
-}
+};
 
 // helpers.getInvitationsByRecipient('dearamerican');
 helpers.getInvitationsByRecipient = function(username) {
@@ -143,6 +142,6 @@ helpers.getInvitationsByRecipient = function(username) {
     }
     return invitations;
   });
-}
+};
 
 module.exports = helpers;
