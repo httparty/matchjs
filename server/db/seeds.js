@@ -2,21 +2,25 @@ var db = require('./config.js');
 var async = require('async');
 var _ = require('underscore');
 
-var seedDatabase = function() {
+var seedUsers = function() {
 
-  var array = [1,2,3,4,5,6,7,8,9,10];
+  var skills = ['Angular','HTML', 'MongoDB', 
+                'Grunt', 'PostgreSQL', 'Express', 
+                'Node', 'React', 'Backbone',
+                'Ember', 'Neo4j', 'AWS', 'Redis'];
+
+  var array = _.range(1, 11);
 
   async.each(array, function(i, next) {
-    
-      //query right here
+        
       db.User.create({
         username: 'user'+i,
         password: 'password'+i,
         email: 'user'+i+'@email.com',
         name: 'user'+i,
-        karmaPoints: Math.floor(Math.random() * 6)
-        // toLearn: [],
-        // toTeach: []
+        karmaPoints: Math.floor(Math.random() * 6),
+        toLearn: _.sample(skills, 5),
+        toTeach: _.sample(skills, 5)
       }).then(function() {
         console.log('User successfully created');
         next();
@@ -27,9 +31,13 @@ var seedDatabase = function() {
       console.log('An item failed to process');
 
     } else {
-      console.log('successfully went through all of them');
+      console.log('successfully seeded all users');
     }
   });
 };
 
-//seedDatabase();
+var seedInvitations = function() {
+
+};
+
+// seedUsers();
