@@ -17,7 +17,7 @@
         });
       };
 
-
+//consider moving this to profile model 
       vm.getThisUserProfile = function(username) {
         console.log('in connectController: user', username);
         $state.go('profile', {username: username});
