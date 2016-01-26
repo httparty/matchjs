@@ -6,7 +6,7 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right" ng-show="ctrl.isLoggedIn()">
-          <li ng-click="ctrl.getThisUserProfile(ctrl.user.username)"> {{'Hello,'}} {{ctrl.user.displayName}}</li>
+          <li><a href="/#/profile"> {{'Hello,'}} {{ctrl.user.displayName}} </a></li>
           <li><a href="/#/inbox"> Messages  <i class="fa fa-envelope-o"></i></a></li>
           <li><a href="/logout"> Sign Out </a></li>
         </ul>

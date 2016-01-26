@@ -21,11 +21,13 @@ module.exports = function(app, express) {
   var usersRouter = express.Router();
   var messageRouter = express.Router();
   var emailRouter = express.Router();
+  var invitationsRouter = express.Router();
 
   app.use('/auth', authRouter);
   app.use('/api/users', usersRouter);
   app.use('/api/inbox', messageRouter);
   app.use('/api/email', emailRouter);
+  app.use('/api/invitations',invitationsRouter);
 
 
   app.get('/failure', function(req, res) {
@@ -59,7 +61,7 @@ module.exports = function(app, express) {
   require(__dirname + './../auth/authRoutes.js')(authRouter);
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
   require(__dirname + './../email/emailRoutes.js')(emailRouter);
-
+  require(__dirname + './../invitations/invitationsRoutes.js')(invitationsRouter);
 
 };
 
