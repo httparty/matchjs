@@ -1,5 +1,5 @@
 var db = require('./config.js');
-
+var async = require('async');
 var helpers = {};
 
 
@@ -10,7 +10,7 @@ helpers.deleteUser = function(userToDeleteObj) {
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
     return user.destroy();
-  })  
+  });  
 };
 
 helpers.getUserByUserName = function(userObj) {
@@ -81,6 +81,8 @@ helpers.updateUser = function(profileUpdateObj) {
 helpers.getAllUsers = function() {
   return db.User.findAll()
   .then(function(usersArray) {
+    // var result = helpers.getRecommendations(usersArray, 'spiterman');
+    //call 
     console.log('HERE ARE ALL USERS', usersArray);
     return usersArray;
   });
@@ -88,9 +90,32 @@ helpers.getAllUsers = function() {
 
 //more functions need to be written here for the recommender
 
+helpers.getRecommendations = function(usersArray, username) {
+  //get the object with the current user and take it out
+  //of the usersArray
+  var current_user = {};
+  for (var i = 0; i < usersArray.length; i++) {
+    if (usersArray[i].dataValues.username === username) {
+      current_user = usersArray[i].dataValues;
+      usersArray.splice(i);
+    }
+  }
 
+  //we want to sort usersArray by comparing every elt to current_user and 
+  //assigning some sort of ranking
 
-module.exports = helpers;
+  return [];
+};
+//get user obj with that username from db
+//apply a filter to the list of all users based on some 
+//property of that user obj
+
+//filter by skills to teach
+//some sort of intersection between arrays
+//we'll rank you higher than someone who only has two
+
+//api/users/username
+// console.log(helpers.getAllUsers());
 
 //--------------------FUNCTION TESTS
 // db.Skill.bulkCreate([
@@ -124,14 +149,39 @@ module.exports = helpers;
 // 	console.log("hello success");
 // });
 
-// helpers.signupUser({
-// 	username: 'Rachel111',
-// 	password: 'somecrazyhashedupthing',
-// 	email: 'rachel@rachel.com',
-// 	phoneNumber: '4152141234'
-// }).then(function(user){
-// 	console.log('success! here is user', user);
-// });
+helpers.seedDatabase = function() {
+
+  var array = [1,2,3,4,5,6,7,8,9,10];
+
+  async.each(array, function(i, next) {
+
+      //query right here
+      db.User.create({
+        username: 'user'+i,
+        password: 'password'+i,
+        email: 'user'+i+'@email.com',
+        name: 'user'+i,
+        karmaPoints: Math.floor(Math.random() * 6)
+        // toLearn: [],
+        // toTeach: []
+      }).then(function() {
+        console.log('User successfully created');
+        next();
+      });
+
+  }, function(err) {
+    if (err) {
+      console.log('An item failed to process');
+
+    } else {
+      console.log('successfully went through all of them');  
+    }
+  });
+};
+
+
+// helpers.seedDatabase();
+
 
 // helpers.updateUserBasics({
 // 	username: 'Rachel111',

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/httparty/matchjs#readme",
   "dependencies": {
+    "async": "1.5.2",
     "body-parser": "1.14.2",
     "bootstrap": "3.3.6",
     "bower": "1.7.2",
