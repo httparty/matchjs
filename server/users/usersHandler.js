@@ -3,7 +3,8 @@ var db = require('../db/config.js');
 
 module.exports = {
   getAllUsers: function(req,res) {
-    helpers.getAllUsers()
+    var username = req.params.username;
+    helpers.getAllUsers(username)
     .then(function(usersArray) {
       res.send(usersArray);
     });
@@ -19,7 +20,7 @@ module.exports = {
   updateProfile: function(req, res) {
     helpers.updateUser(req.body)
     .then(function(user) {
-      res.send(user); 
+      res.send(user);
     });
   }
 };

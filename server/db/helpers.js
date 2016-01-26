@@ -10,7 +10,7 @@ helpers.deleteUser = function(userToDeleteObj) {
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
     return user.destroy();
-  });  
+  });
 };
 
 helpers.getUserByUserName = function(userObj) {
@@ -25,7 +25,7 @@ helpers.getUserByUserName = function(userObj) {
   });
 };
 
-helpers.signupUser = function(userObj) { 
+helpers.signupUser = function(userObj) {
   return db.User.findOne({
     where: {'username': userObj.username}
   }).then(function(user) {
@@ -60,7 +60,7 @@ helpers.updateUser = function(profileUpdateObj) {
   		throw Error('User not found.');
   	}
     return user.updateAttributes({
-      location: profileUpdateObj.location || user.get('location'), 
+      location: profileUpdateObj.location || user.get('location'),
       name : profileUpdateObj.name || user.get('name'),
       email : profileUpdateObj.email || user.get('email'),
       password : profileUpdateObj.password || user.get('password'),
@@ -78,13 +78,14 @@ helpers.updateUser = function(profileUpdateObj) {
 
 //------------------GET USERS-------------------------
 
-helpers.getAllUsers = function() {
+helpers.getAllUsers = function(username) {
   return db.User.findAll()
   .then(function(usersArray) {
-    // var result = helpers.getRecommendations(usersArray, 'spiterman');
-    //call 
-    console.log('HERE ARE ALL USERS', usersArray);
-    return usersArray;
+    var result = helpers.getRecommendations(usersArray, username);
+    //call
+    // console.log('HERE ARE ALL USERS', usersArray);
+    return result;
+    // return usersArray;
   });
 };
 
@@ -97,17 +98,25 @@ helpers.getRecommendations = function(usersArray, username) {
   for (var i = 0; i < usersArray.length; i++) {
     if (usersArray[i].dataValues.username === username) {
       current_user = usersArray[i].dataValues;
-      usersArray.splice(i);
+      usersArray.splice(i, 1);
     }
   }
 
-  //we want to sort usersArray by comparing every elt to current_user and 
+  usersArray.sort(function(a, b){
+    return b.dataValues.karmaPoints - a.dataValues.karmaPoints;
+  });
+  usersArray.forEach(function(item){
+    console.log(item.dataValues.karmaPoints, item.dataValues.username);
+  });
+
+  // console.log(usersArray);
+  //we want to sort usersArray by comparing every elt to current_user and
   //assigning some sort of ranking
 
-  return [];
+  return usersArray;
 };
 //get user obj with that username from db
-//apply a filter to the list of all users based on some 
+//apply a filter to the list of all users based on some
 //property of that user obj
 
 //filter by skills to teach
@@ -115,7 +124,7 @@ helpers.getRecommendations = function(usersArray, username) {
 //we'll rank you higher than someone who only has two
 
 //api/users/username
-// console.log(helpers.getAllUsers());
+
 
 //--------------------FUNCTION TESTS
 // db.Skill.bulkCreate([
@@ -174,7 +183,7 @@ helpers.seedDatabase = function() {
       console.log('An item failed to process');
 
     } else {
-      console.log('successfully went through all of them');  
+      console.log('successfully went through all of them');
     }
   });
 };
@@ -193,3 +202,6 @@ helpers.seedDatabase = function() {
 // }).then(function(user) {
 // 	console.log("WOOT HERE IS USER", user);
 // });
+
+module.exports = helpers;
+

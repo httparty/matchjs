@@ -5,14 +5,14 @@
   .factory('connectModel',function($http){
     var model = {};
 
-    model.getAllUsers = function() {
+    model.getAllUsers = function(username) {
       return $http({
       method: 'GET',
-        url: '/api/users/getAllUsers'
+        url: '/api/users/getAllUsers/' + username
       });
     };
 
     return model;
   });
-  
+
 })();
