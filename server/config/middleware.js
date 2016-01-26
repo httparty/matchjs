@@ -20,10 +20,13 @@ module.exports = function(app, express) {
   var authRouter = express.Router();
   var usersRouter = express.Router();
   var messageRouter = express.Router();
+  var emailRouter = express.Router();
 
   app.use('/auth', authRouter);
   app.use('/api/users', usersRouter);
   app.use('/api/inbox', messageRouter);
+  app.use('/api/email', emailRouter);
+
 
   app.get('/failure', function(req, res) {
     res.status('404');
@@ -55,6 +58,8 @@ module.exports = function(app, express) {
 
   require(__dirname + './../auth/authRoutes.js')(authRouter);
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
-  // require(__dirname + './../messages/messagesRoutes.js')(messageRouter);  //Add this back in when messages are working
+  require(__dirname + './../email/emailRoutes.js')(emailRouter);
+
+
 };
 
