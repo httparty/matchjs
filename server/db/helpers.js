@@ -81,10 +81,11 @@ helpers.updateUser = function(profileUpdateObj) {
 helpers.getAllUsers = function() {
   return db.User.findAll()
   .then(function(usersArray) {
-    // var result = helpers.getRecommendations(usersArray, 'spiterman');
+    var result = helpers.getRecommendations(usersArray, 'spiterman');
     //call
-    console.log('HERE ARE ALL USERS', usersArray);
-    return usersArray;
+    // console.log('HERE ARE ALL USERS', usersArray);
+    return result;
+    // return usersArray;
   });
 };
 
@@ -101,11 +102,18 @@ helpers.getRecommendations = function(usersArray, username) {
     }
   }
 
+  usersArray.sort(function(a, b){
+    return b.dataValues.karmaPoints - a.dataValues.karmaPoints;
+  });
+  usersArray.forEach(function(item){
+    console.log(item.dataValues.karmaPoints, item.dataValues.username);
+  })
 
+  // console.log(usersArray);
   //we want to sort usersArray by comparing every elt to current_user and
   //assigning some sort of ranking
 
-  return [];
+  return usersArray;
 };
 //get user obj with that username from db
 //apply a filter to the list of all users based on some
@@ -116,7 +124,7 @@ helpers.getRecommendations = function(usersArray, username) {
 //we'll rank you higher than someone who only has two
 
 //api/users/username
-// console.log(helpers.getAllUsers());
+console.log(helpers.getAllUsers());
 
 //--------------------FUNCTION TESTS
 // db.Skill.bulkCreate([
@@ -194,5 +202,6 @@ helpers.seedDatabase = function() {
 // }).then(function(user) {
 // 	console.log("WOOT HERE IS USER", user);
 // });
-// module.exports = helpers;
+
+module.exports = helpers;
 
