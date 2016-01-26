@@ -1,14 +1,19 @@
 ;(function(){
   'use strict';
   angular.module('app.invitations', [])
-  .controller('invitationsController', ['invitationsModel', 'AuthService', '$state', function(invitationsModel, AuthService, $state){
+  .controller('invitationsController', ['invitationsModel', 'AuthService', '$state', 'Profile', function(invitationsModel, AuthService, $state, Profile){
 
     var vm = this;
-    // vm.user = '';
+
     var current_user = angular.fromJson(AuthService.getCurrentUser());
     var username = current_user.username;
 
     vm.recipient = $state.params.username;
+
+    Profile.getUserProfile($state.params).then(function(response){
+
+      vm.recipientProfile = response.data;
+    })
 
     vm.createInvitation = function() {
       console.log('Invitation Submitted!');
