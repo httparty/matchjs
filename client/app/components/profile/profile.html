@@ -6,7 +6,7 @@
 <!-- PROFILE PHOTO -->
       <div class='profilePhoto'>
       <!-- photo upload stuff goes here -->
-        <img ng-src={{user.avatar}} height="200" width="200">
+        <img ng-src={{profileUser.photo}} height="200" width="200">
       </div> 
 
 <!-- PROFILE BASICS, EXCLUDING PHOTO -->
@@ -14,17 +14,17 @@
       <div class="profileBasics">
         <div ng-hide="saveEditButton.basics.buttonText === 'Save'">
           <p>
-            <strong>{{user.displayName}}</strong><br>
-            Username: {{user.username}}<br>
-            Location: {{user.location || 'San Francisco'}} <br>
-            Github: <a href="{{user.github}}">{{user.github}}</a><br>
-            Karma: {{user.karmaPoints || '0'}} <br>
+            <strong>{{profileUser.displayName}}</strong><br>
+            Username: {{profileUser.username}}<br>
+            Location: {{profileUser.location || 'San Francisco'}} <br>
+            Github: <a href="{{profileUser.github}}">{{profileUser.github}}</a><br>
+            Karma: {{profileUser.karmaPoints || '0'}} <br>
           </p>
         </div>
         <form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
-          <input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}">
-          <input type="text" ng-model="user.location" placeholder="{{user.location}}">
-          <input type="text" ng-model="user.github" placeholder="{{user.github}}">
+          <<!-- input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}"> -->
+          <input type="text" ng-model="profileUser.location" placeholder="{{profileUser.location}}">
+          <input type="text" ng-model="profileUser.github" placeholder="{{profileUser.github}}">
         </form>
         <!-- saveEditButtonBasics -->
         <button ng-hide="!isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
@@ -61,11 +61,11 @@
   <div id="profileSummary" ng-model="selectedStyle.summary" ng-style="selectedStyle.summary">
     <h2>Summary</h2>
     <form>
-      <input type ="text" style="width: 600px; height: 250px; margin-bottom: 10px" ng-model="user.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'"> 
+      <input type ="text" style="width: 600px; height: 250px; margin-bottom: 10px" ng-model="profileUser.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'"> 
     </form>
     <button ng-hide="!isSameUser" ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
     </div>
-    <div ng-init="getCurrentUserProfile(); isSameUser = false;"></div>
+    <div ng-init="getUserProfile(); isSameUser = false;"></div>
   </div>
 
 </div>
