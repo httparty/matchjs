@@ -4,7 +4,6 @@ var db = require('../db/config.js');
 module.exports = {
   getAllUsers: function(req,res) {
     var username = req.params.username;
-    // console.log(username);
     helpers.getAllUsers(username)
     .then(function(usersArray) {
       res.send(usersArray);

@@ -9,7 +9,6 @@
       vm.pages = [1, 2, 3, 4, 5];
       var current_user = angular.fromJson(AuthService.getCurrentUser());
       var username = current_user.username;
-      // console.log(username);
 
       vm.getAllUsers = function() {
         connectModel.getAllUsers(username).then(function(r) {

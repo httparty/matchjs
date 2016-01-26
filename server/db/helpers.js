@@ -94,7 +94,6 @@ helpers.getAllUsers = function(username) {
 helpers.getRecommendations = function(usersArray, username) {
   //get the object with the current user and take it out
   //of the usersArray
-  console.log(username, 'HEY LOOK AT ME< IM IN HELPERS');
   var current_user = {};
   for (var i = 0; i < usersArray.length; i++) {
     if (usersArray[i].dataValues.username === username) {
@@ -108,7 +107,7 @@ helpers.getRecommendations = function(usersArray, username) {
   });
   usersArray.forEach(function(item){
     console.log(item.dataValues.karmaPoints, item.dataValues.username);
-  })
+  });
 
   // console.log(usersArray);
   //we want to sort usersArray by comparing every elt to current_user and
@@ -125,7 +124,7 @@ helpers.getRecommendations = function(usersArray, username) {
 //we'll rank you higher than someone who only has two
 
 //api/users/username
-console.log(helpers.getAllUsers());
+
 
 //--------------------FUNCTION TESTS
 // db.Skill.bulkCreate([
