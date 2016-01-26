@@ -12,6 +12,15 @@
       });
     };
 
+    model.getThisUserProfile = function(username) {
+      return $http({
+      method: 'GET',
+        url: '/userProfile/' + username
+      }).then(function(response) {
+        return response;
+      });
+    };
+
     return model;
   });
 

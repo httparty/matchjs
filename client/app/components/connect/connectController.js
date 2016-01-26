@@ -14,10 +14,17 @@
         connectModel.getAllUsers(username).then(function(r) {
         console.dir(r.data);
         vm.users = r.data;
-      });
+        });
+      };
 
-    };
 
+      vm.getThisUserProfile = function(username) {
+        connectModel.getThisUserProfile(username)
+          .then(function(response) {
+            console.log('here is response.body:', response.body)
+        });
+      };
+    
   }]);
 
 })();
