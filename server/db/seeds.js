@@ -1,5 +1,6 @@
 var db = require('./config.js');
 var async = require('async');
+var _ = require('underscore');
 
 var seedDatabase = function() {
 
@@ -32,4 +33,3 @@ var seedDatabase = function() {
 };
 
 //seedDatabase();
-
