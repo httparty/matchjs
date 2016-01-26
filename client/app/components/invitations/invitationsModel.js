@@ -2,13 +2,14 @@
   'use strict';
 
   angular.module('app.invitations')
-    .factory('inviationsModel', function($http){
+    .factory('invitationsModel', function($http){
       var model = {};
 
-      model.createInviation = function(username){
+      model.createInvitation = function(username){
         return $http({
-          method: 'GET',
+          method: 'POST',
           url: '/api/invitations/createInvitation/' + username
+          //Data
         });
       };
 
