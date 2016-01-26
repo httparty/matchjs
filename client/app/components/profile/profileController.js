@@ -70,7 +70,7 @@ angular.module('app.profile', [])
         }
       }
       return false;
-    }
+    };
 
   //-------------------SKILLS-----------------------------
   		//called when SKILLS edit/show button is clicked
