@@ -21,7 +21,7 @@ var models = {};
 models.User = new User(sequelize, Sequelize);
 models.Invitation = new Invitation(sequelize, Sequelize);
 
-models.User.hasMany(models.Invitation)
+models.User.hasMany(models.Invitation);
 // models.Skill = new Skill(sequelize, Sequelize);
 // models.Message = new Message(sequelize, Sequelize);
 // models.UserSkillJoin = new UserSkillJoin(sequelize, Sequelize);
@@ -44,7 +44,7 @@ models.User.sync({force: false}).then(function(){
 
 });
 
-models.Invitation.sync({force: true}).then(function(){
+models.Invitation.sync({force: false}).then(function(){
   console.log('Invitation table created!');
 });
 // models.Skill.sync({force: false}).then(function(){

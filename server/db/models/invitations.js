@@ -15,4 +15,4 @@ module.exports = function(sequelize, DataType) {
       type: DataType.TEXT
     }
   });
-}
+};
