@@ -1,10 +1,15 @@
-angular.module('app.navbar', [])
-  .controller('NavController', ['$scope', 'AuthService', function ($scope, AuthService) {
+;(function() {
+  'use strict';
 
-    $scope.user = angular.fromJson(AuthService.getCurrentUser());
+  angular.module('app.navbar', [])
+    .controller('NavController', ['AuthService', function (AuthService) {
+      var vm = this;
 
-    $scope.isLoggedIn = function() {
-      return AuthService.isAuthenticated();
-    };
+      vm.user = angular.fromJson(AuthService.getCurrentUser());
 
-  }]);
+      vm.isLoggedIn = function() {
+        return AuthService.isAuthenticated();
+      };
+
+    }]);
+})();

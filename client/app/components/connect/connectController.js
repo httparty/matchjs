@@ -1,12 +1,20 @@
-angular.module('app.connect',[])
-.controller('connectController', function($scope,connectModel) {
-	$scope.getAllUsers = function() {
-		connectModel.getAllUsers().then(function(r) {
-			console.dir(r.data);
-			$scope.users = r.data;
-		});
-	};
+;(function() {
+  'use strict';
 
-  $scope.getAllUsers();
-  
-});
+  angular.module('app.connect',[])
+  .controller('connectController', ['connectModel', function(connectModel) {
+
+      var vm = this;
+      vm.users = '';
+
+      vm.getAllUsers = function() {
+        connectModel.getAllUsers().then(function(r) {
+        console.dir(r.data);
+        vm.users = r.data;
+      });
+
+    };
+    
+  }]);
+
+})();

@@ -27,6 +27,8 @@
     "angular-cookies": "~1.4.8",
     "angular-bootstrap": "~1.1.0",
     "ng-file-upload-shim": "~11.2.0",
-    "ng-file-upload": "~11.2.0"
+    "ng-file-upload": "~11.2.0",
+    "firebase": "~2.4.0",
+    "angularfire": "~1.1.3"
   }
 }
