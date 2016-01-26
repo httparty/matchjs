@@ -27,7 +27,8 @@
         <!-- saveEditButtonBasics -->
         <button ng-hide="!isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
       </div>
-      <button ng-hide="isSameUser" ng-hide='!inviteSent' ng-click="createNewInvite(profileUser.username)">Invite {{profileUser.displayName || profileUser.username}}</button>
+<!--       <button ng-hide="isSameUser" ng-hide='!inviteSent' ng-click="createNewInvite(profileUser.username)">Invite {{profileUser.displayName || profileUser.username}}</button> -->
+        <a ui-sref="invitations({username: profileUser.username, karmaPoints: profileUser.karmaPoints})" ng-hide="isSameUser" ng-hide="!inviteSent" class="btn btn-primary"> Invite {{profileUser.displayName || profileUser.username}}</a>
     </div>
 <!-- END PHOTO AND BASICS SECTION -->
 
@@ -77,6 +78,5 @@
 
 </div>
 
-<a ui-sref="invitations({username: profileUser.username})" class="btn btn-primary"> Invite this user</a>
 
 <footer-dir></footer-dir>
