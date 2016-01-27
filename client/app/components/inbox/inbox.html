@@ -7,6 +7,7 @@
         <div class="conversationsHeader"><h1>Conversations</h1></div>
         <ul class="conversationList">
           <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)" ng-if="conversation.username!= username">
+            <img ng-src="{{conversation.photo || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px">
           <h4>{{conversation.name}}</h4>
           </li>
         </ul>
