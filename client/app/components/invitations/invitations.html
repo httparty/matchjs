@@ -38,6 +38,107 @@
         <input type="text" ng-model="ctrl.formData.sessionInfo.summary"><br>
       </form>
       <h2>{{ctrl.formData.sessionInfo.time}}</h2>
+
+
+      <form class="row">
+        <div class="col-md-8">
+          <input type="text" class="form-control" placeholder="Enter location">
+        </div>
+      </form>
+
+      <form class="row">
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Month">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Day">
+        </div>
+        <div class="col-xs-2">
+          <input type="text" class="form-control" placeholder="Year">
+        </div>
+        <div class="col-xs-2">
+          <input type="text" class="form-control" placeholder="Hr">
+        </div>
+        <div class="col-xs-2">
+          <input type="text" class="form-control" placeholder="Mn">
+        </div>
+      </form>
+      <br>
+      <br>
+      <br>
+
+
+<!-- Time Picker -->
+
+      <div class="row">
+        <uib-timepicker ng-model="ctrl.mytime" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
+
+<!--           <div class="col-xs-6">
+          Hours step is:
+            <select class="form-control" ng-model="ctrl.hstep" ng-options="opt for opt in ctrl.options.hstep"></select>
+          </div>
+          <div class="col-xs-6">
+          Minutes step is:
+            <select class="form-control" ng-model="ctrl.mstep" ng-options="opt for opt in ctrl.options.mstep"></select>
+          </div> -->
+
+  <hr>
+
+  <button type="button" class="btn btn-info" ng-click="ctrl.toggleMode()">12H / 24H</button>
+  <button type="button" class="btn btn-danger" ng-click="ctrl.clear()">Clear</button>
+  <button type="button" class="btn btn-default" ng-click="ctrl.update()">Reset</button>
+
+      </div>
+
+<!-- End Time Picker -->
+
+<!-- Date Picker -->
+
+<div class="row">
+    <pre>Selected date is: <em>{{ctrl.dt | date:'fullDate' }}</em></pre>
+
+    <h4>Inline</h4>
+    <div style="display:inline-block; min-height:290px;">
+      <uib-datepicker ng-model="ctrl.dt" min-date="ctrl.minDate" show-weeks="true" class="well well-sm" custom-class="ctrl.getDayClass(date, mode)"></uib-datepicker>
+    </div>
+
+    <h4>Popup</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{ctrl.format}}" ng-model="ctrl.dt" is-open="ctrl.popup1.opened" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" date-disabled="ctrl.disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="ctrl.altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="ctrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup ng-model="ctrl.dt" is-open="ctrl.popup2.opened" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" date-disabled="ctrl.disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="ctrl.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Format: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in ctrl.formats"><option></option></select>
+        </div>
+    </div>
+
+    <hr />
+    <button type="button" class="btn btn-sm btn-info" ng-click="ctrl.today()">Today</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="ctrl.setDate(2009, 7, 24)">2009-08-24</button>
+    <button type="button" class="btn btn-sm btn-danger" ng-click="ctrl.clear()">Clear</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="ctrl.toggleMin()" uib-tooltip="After today restriction">Min date</button>
+</div>
+
+
+<!-- End Date Picker -->
+
+      <br>
       <button class="btn btn-primary" ng-click="ctrl.createInvitation()">
         Submit Invite
       </button>
