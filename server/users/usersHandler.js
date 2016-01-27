@@ -1,6 +1,14 @@
 var helpers = require('../db/helpers.js');
 
 module.exports = {
+  getAllUsersRec: function(req,res) {
+    var username = req.params.username;
+    helpers.getAllUsersRec(username)
+    .then(function(usersArray) {
+      res.send(usersArray);
+    });
+  },
+
   getAllUsers: function(req,res) {
     var username = req.params.username;
     helpers.getAllUsers(username)

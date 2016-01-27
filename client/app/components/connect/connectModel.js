@@ -5,10 +5,17 @@
   .factory('connectModel',function($http){
     var model = {};
 
-    model.getAllUsers = function(username) {
+    model.getAllUsersRec = function(username) {
       return $http({
       method: 'GET',
-        url: '/api/users/getAllUsers/' + username
+        url: '/api/users/getAllUsersRec/' + username
+      });
+    };
+
+    model.getAllUsers = function() {
+      return $http({
+      method: 'GET',
+        url: '/api/users/getAllUsers'
       });
     };
 

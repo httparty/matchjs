@@ -75,12 +75,21 @@ helpers.updateUser = function(profileUpdateObj) {
 
 //------------------GET RECOMMENDED USERS-------------------------
 
-helpers.getAllUsers = function(username) {
+// helper function for recommender
+helpers.getAllUsersRec = function(username) {
   return db.User.findAll()
   .then(function(usersArray) {
     var result = rec.getRecommendations(usersArray, username);
     // console.log('HERE ARE ALL USERS', usersArray);
     return result;
+  });
+};
+
+helpers.getAllUsers = function() {
+  return db.User.findAll()
+  .then(function(usersArray) {
+    console.log('HERE ARE ALL USERS', usersArray);
+    return usersArray;
   });
 };
 
