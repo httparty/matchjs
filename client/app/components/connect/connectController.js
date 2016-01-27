@@ -10,14 +10,21 @@
       var current_user = angular.fromJson(AuthService.getCurrentUser());
       var username = current_user.username;
 
-      vm.getAllUsers = function() {
-        connectModel.getAllUsers(username).then(function(r) {
+      vm.getAllUsersRec = function() {
+        connectModel.getAllUsersRec(username).then(function(r) {
         console.dir(r.data);
         vm.users = r.data;
         });
       };
 
-//consider moving this to profile model 
+      vm.getAllUsers = function() {
+        connectModel.getAllUsers().then(function(r) {
+        console.dir(r.data);
+        vm.users = r.data;
+        });
+      };
+
+      //consider moving this to profile model 
       vm.getThisUserProfile = function(username) {
         console.log('in connectController: user', username);
         $state.go('profile', {username: username});

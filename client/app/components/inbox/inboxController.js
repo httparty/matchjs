@@ -38,6 +38,8 @@
       $scope.switchConversation = function(conversation) {
 
         $scope.currentRecipient = conversation.username;
+        $scope.currentRecipientName = conversation.name;
+        $scope.currentRecipientPhoto = conversation.photo;
         var arr = [$scope.currentRecipient, $scope.username].sort();
         var convoURL = baseURL + arr[0] + arr[1];
         firebaseConnection = new Firebase(convoURL);
