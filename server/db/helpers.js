@@ -85,6 +85,20 @@ helpers.getAllUsersRec = function(username) {
   });
 };
 
+helpers.getUsersByLocation = function(location) {
+  return db.User.findAll({
+    where: {'location': location}
+  }).then(function(users) {
+    // console.log("users", users);
+    if (!users) {
+      return null;
+    }
+    return users;
+  });
+};
+
+// helpers.getUsersByLocation("San Francisco");
+
 helpers.getAllUsers = function() {
   return db.User.findAll()
   .then(function(usersArray) {
