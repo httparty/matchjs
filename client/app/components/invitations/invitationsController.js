@@ -14,7 +14,7 @@
     Profile.getUserProfile($state.params).then(function(response){
 
       vm.recipientProfile = response.data;
-    })
+    });
 
     vm.formData = {};
 
