@@ -1,0 +1,45 @@
+<div class="container-fluid" ng-controller="invitationsController as ctrl">
+  <div class="row">
+    <div class="jumbotron">
+      <h1>Invitations Page</h1>
+      <h2>{{ ctrl.recipient }}</h2>
+    </div>
+  </div>
+  <div class="row"></div>
+    <div class="col-md-4 profileInfo">
+      <h1>Profile Info</h1>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <a href="#">
+            <center><img class="img-responsive" ng-src="{{ctrl.recipientProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
+          </a>
+          <div class="list-group">
+            <div class="list-group-item"><strong>{{ctrl.recipient || 'N/A'}}</strong></div>
+            <div class="list-group-item"><i class="fa fa-map-marker"></i> {{ctrl.recipientProfile.location || 'San Francisco'}}</div>
+            <div class="list-group-item"><i class="fa fa-github"></i> <a href="{{u.github || 'https://github.com'}}">{{ctrl.recipientProfile.github || 'https://github.com'}}</a></div>
+            <div class="list-group-item">Karma: {{ctrl.recipientProfile.karmaPoints || 'N/A'}}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 inviteInfo">
+      <h1>Invite Info</h1>
+      <form>
+        Mentor: <br>
+        {{ctrl.username}} <br>
+        Mentee: <br>
+        {{ctrl.recipient}}<br>
+        When:<br>
+        <input type="text" ng-model="ctrl.formData.sessionInfo.when"><br>
+        Where:<br>
+        <input type="text" ng-model="ctrl.formData.sessionInfo.where"><br>
+        Summary:<br>
+        <input type="text" ng-model="ctrl.formData.sessionInfo.summary"><br>
+      </form>
+      <h2>{{ctrl.formData.sessionInfo.time}}</h2>
+      <button class="btn btn-primary" ng-click="ctrl.createInvitation()">
+        Submit Invite
+      </button>
+    </div>
+  </div>

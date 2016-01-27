@@ -37,7 +37,7 @@ angular.module('app.profile', [])
       } else {
         $scope.saveEditButton.basics.buttonText='Edit';
         $scope.selectedStyle.basics = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.profileUser); //call to fn 
+        updateProfile($scope.profileUser); //call to fn
       }
     };
 
@@ -46,19 +46,19 @@ angular.module('app.profile', [])
     var updateProfile = function() {
       for(var learnKey in $scope.skills.toLearn) {
           if(!contains(learnKey, $scope.skills.toLearn)) {
-            $scope.profileUser.toLearn.push(learnKey);         
-          }  
+            $scope.profileUser.toLearn.push(learnKey);
+          }
           if(!$scope.skills.toLearn[learnKey]) {
             $scope.profileUser.toLearn.splice($scope.profileUser.toLearn.indexOf(learnKey),1);
-          } 
+          }
       }
       for(var teachKey in $scope.skills.toTeach) {
         if(!contains(teachKey, $scope.skills.toTeach)) {
             $scope.profileUser.toTeach.push(teachKey);
-        }   
+        }
         if(!$scope.skills.toTeach[teachKey]) {
           $scope.profileUser.toTeach.splice($scope.profileUser.toTeach.indexOf(teachKey),1);
-        } 
+        }
       }
       Profile.updateProfile($scope.profileUser) //update DB
       .then(function(response) {
@@ -86,7 +86,7 @@ angular.module('app.profile', [])
         $scope.selectedStyle.skills = {'background-color' : '#FFFFFF'};
         updateProfile($scope.profileUser);
         $scope.saveEditButton.skills.buttonText='Edit';
-      } 
+      }
     };
 
   //-------------------SUMMARY-------------------
@@ -96,21 +96,21 @@ angular.module('app.profile', [])
         $scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
       } else {
         $scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
-        //call to fn that saves summary 
-        updateProfile($scope.profileUser); 
+        //call to fn that saves summary
+        updateProfile($scope.profileUser);
         $scope.saveEditButton.summary.buttonText='Edit';
-      } 
+      }
     };
   //--------------CREATE INVITATION -------------
   $scope.createNewInvite = function(username) {
-    //call to invitation controller 
+    //call to invitation controller
     //set scope.inviteSent = true;
   };
 
   //---------RETRIEVE USER PROFILE DATA FROM DB--
   	//called on the initialization of the HTML page, ng-init
     $scope.getUserProfile = function() {
-      Profile.getUserProfile($state.params) 
+      Profile.getUserProfile($state.params)
       .then(function(response) {
         //---if the current user is the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons.---
         if($scope.currentUser.username === $scope.profileUser.username) {
@@ -120,9 +120,10 @@ angular.module('app.profile', [])
         //---populate the scope with the data returning from DB query.---
         $scope.profileUser.photo = response.data.photo;
         $scope.profileUser.location = response.data.location;
-        $scope.profileUser.name = response.data.displayName; 
+        $scope.profileUser.name = response.data.displayName;
         $scope.profileUser.github = response.data.github;
-        $scope.profileUser.summary =	response.data.summary; 
+        $scope.profileUser.karmaPoints = response.data.karmaPoints;
+        $scope.profileUser.summary =	response.data.summary;
         $scope.profileUser.displayName = response.data.displayName;
         response.data.toLearn.forEach(function(skill) {
           $scope.skills.toLearn[skill] = true;

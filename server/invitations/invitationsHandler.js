@@ -3,8 +3,12 @@ var helpers = require('../db/helpers.js');
 module.exports = {
   createInvitation: function(req,res) {
     var username = req.cookies['user-profile'].username;
-    var invitee = req.body.invitee;
+    var invitee = req.body.mentee;
     var sessionInfo = req.body.sessionInfo;
+    console.log('Invitee', invitee);
+    console.log('Username', username);
+    console.log('SessionInfo', sessionInfo);
+
 
     helpers.createInvitation(username,invitee,sessionInfo)
     .then(function(invitation) {

@@ -7,7 +7,7 @@
       <div class='profilePhoto'>
       <!-- photo upload stuff goes here -->
         <img ng-src={{profileUser.photo}} height="200" width="200">
-      </div> 
+      </div>
 
   <!-- PROFILE BASICS, EXCLUDING PHOTO -->
       <div class="profileBasics">
@@ -27,7 +27,8 @@
         <!-- saveEditButtonBasics -->
         <button ng-hide="!isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
       </div>
-      <button ng-hide="isSameUser" ng-hide='!inviteSent' ng-click="createNewInvite(profileUser.username)">Invite {{profileUser.displayName || profileUser.username}}</button>
+<!--       <button ng-hide="isSameUser" ng-hide='!inviteSent' ng-click="createNewInvite(profileUser.username)">Invite {{profileUser.displayName || profileUser.username}}</button> -->
+        <a ui-sref="invitations({username: profileUser.username, karmaPoints: profileUser.karmaPoints})" ng-hide="isSameUser" ng-hide="!inviteSent" class="btn btn-primary"> Invite {{profileUser.displayName || profileUser.username}}</a>
     </div>
 <!-- END PHOTO AND BASICS SECTION -->
 
@@ -60,7 +61,7 @@
     <div id="profileSummary" class='col-sm-6' ng-model="selectedStyle.summary" ng-style="selectedStyle.summary">
       <h2>Summary</h2>
       <form>
-        <input type ="text" style="width: 600px; height: 250px; margin-bottom: 10px" ng-model="profileUser.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'"> 
+        <input type ="text" style="width: 600px; height: 250px; margin-bottom: 10px" ng-model="profileUser.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'">
       </form>
       <button ng-hide="!isSameUser" ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
     </div>
@@ -68,8 +69,7 @@
 <!-- INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
   <div id="invitations" class='col-sm-6'>
     <h2>My Invitations</h2>
-    <div ng-repeat="invite in invitations"> 
-
+    <div ng-repeat="invite in invitations">
     </div>
   </div>
 
@@ -77,5 +77,6 @@
   <div ng-init="getUserProfile(); isSameUser = false;"></div>
 
 </div>
+
 
 <footer-dir></footer-dir>
