@@ -12,4 +12,4 @@ before_script:
 # - sleep 3
 script:
 - gulp karma
-- gulp test
+# - gulp test

@@ -1,5 +1,4 @@
 var helpers = require('../db/helpers.js');
-var db = require('../db/config.js');
 
 module.exports = {
   getAllUsers: function(req,res) {
