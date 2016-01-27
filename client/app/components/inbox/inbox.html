@@ -1,4 +1,4 @@
-<div class="container-fluid inbox" ng-controller="InboxController">
+<div class="container-fluid inbox" ng-controller="InboxController as ctrl">
   <div class="row mainContainer">
 
     <div class="col-md-5 conversations">
@@ -6,8 +6,8 @@
       <div class="conversationBox">
         <div class="conversationsHeader"><h1>Conversations</h1></div>
         <ul class="conversationList">
-          <li ng-repeat="conversation in conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="switchConversation(conversation)" ng-if="conversation.username!= username">
-            <img ng-src="{{conversation.photo || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px">
+          <li ng-repeat="conversation in ctrl.conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="ctrl.switchConversation(conversation)" ng-if="conversation.username != ctrl.username">
+            <img class="img-rounded" ng-src="{{conversation.photo || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px">
           <h4>{{conversation.name}}</h4>
           </li>
         </ul>
@@ -16,8 +16,8 @@
       <!-- Search for user to start new conversation -->
       <div class="conversationInput">
         <form class="form-group" >
-          <input type="text" class="form-control" placeholder="Choose a new user" ng-model="newConvoName" ng-submit="startNewConversation()">
-          <button type="submit" class="btn btn-primary plus" ng-click="startNewConversation()"><h2 class="plus">+</h2></button>
+          <input type="text" class="form-control" placeholder="Choose a new user" ng-model="ctrl.newConvoName" ng-submit="ctrl.startNewConversation()">
+          <button type="submit" class="btn btn-primary plus" ng-click="ctrl.startNewConversation()"><h2 class="plus">+</h2></button>
         </form>
       </div>
     </div>
@@ -25,13 +25,13 @@
     <div class="col-md-7 messages">
 
       <!-- Message History -->
-      <div ng-show="currentRecipient" class="messageBox">
+      <div ng-show="ctrl.currentRecipient" class="messageBox">
         <div class="messagesHeader">
-            <h1>Messages with {{currentRecipientName}}</h1>
+            <h1>Messages with {{ctrl.currentRecipientName}}</h1>
         </div>
         <!-- <h1>{{ enteredText }}</h1> -->
         <ul class="messageList">
-          <li ng-repeat="message in currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
+          <li ng-repeat="message in ctrl.currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
           {{message.from}} :
           {{message.message}}
           </li>
@@ -39,15 +39,15 @@
       </div>
 
       <!-- Displayed if no user selected -->
-      <div class="alert alert-warning" ng-show="!currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto">
+      <div class="alert alert-warning" ng-show="!ctrl.currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto">
       <center><h3><i class="fa fa-exclamation-triangle"></i>Select a User</h3></center>
       </div>
 
       <!-- send new message -->
-      <div class="messageInput" ng-show="currentRecipient">
+      <div class="messageInput" ng-show="ctrl.currentRecipient">
         <form class="form-group" >
-          <input type="text" class="form-control" placeholder="Enter your message" ng-model="enteredText" ng-submit="sendMessage()">
-          <button type="submit" class="btn btn-primary" ng-click="sendMessage()">Submit</button>
+          <input type="text" class="form-control" placeholder="Enter your message" ng-model="ctrl.enteredText" ng-submit="ctrl.sendMessage()">
+          <button type="submit" class="btn btn-primary" ng-click="ctrl.sendMessage()">Submit</button>
         </form>
       </div>
 

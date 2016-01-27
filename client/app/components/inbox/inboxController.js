@@ -4,49 +4,51 @@
   angular.module('app.inbox', ['firebase'])
     .controller('InboxController', ['$scope', '$firebaseArray', 'AuthService', 'connectModel', function($scope, $firebaseArray, AuthService, connectModel) {
 
+      var vm = this;
+
       //Firebase
       var baseURL = 'https://matchjs.firebaseio.com/chat/';
       var firebaseConnection = '';
 
       var currentUser = angular.fromJson(AuthService.getCurrentUser());
-      $scope.username = currentUser.username;
-      $scope.conversationList = [];
+      vm.username = currentUser.username;
+      vm.conversationList = [];
 
       //Person with whom you are currently chatting
-      $scope.currentRecipient = '';
-      $scope.currentMessageList = [];
-      $scope.enteredText = '';
+      vm.currentRecipient = '';
+      vm.currentMessageList = [];
+      vm.enteredText = '';
 
-      $scope.getAllUsers = function() {
+      vm.getAllUsers = function() {
 
         connectModel.getAllUsers().then(function(r) {
-          $scope.conversationList = r.data;
+          vm.conversationList = r.data;
         });
       };
 
-      $scope.displayMessages = function() {
+      vm.displayMessages = function() {
         
-        $scope.currentMessageList = $firebaseArray(firebaseConnection.child('messages'));
+        vm.currentMessageList = $firebaseArray(firebaseConnection.child('messages'));
       };
 
-      $scope.sendMessage = function() {
+      vm.sendMessage = function() {
 
-        $scope.currentMessageList.$add({message : $scope.enteredText, to: $scope.currentRecipient, from: $scope.username});
-        $scope.enteredText = '';
+        vm.currentMessageList.$add({message : vm.enteredText, to: vm.currentRecipient, from: vm.username});
+        vm.enteredText = '';
       };
 
-      $scope.switchConversation = function(conversation) {
+      vm.switchConversation = function(conversation) {
 
-        $scope.currentRecipient = conversation.username;
-        $scope.currentRecipientName = conversation.name;
-        $scope.currentRecipientPhoto = conversation.photo;
-        var arr = [$scope.currentRecipient, $scope.username].sort();
+        vm.currentRecipient = conversation.username;
+        vm.currentRecipientName = conversation.name;
+        vm.currentRecipientPhoto = conversation.photo;
+        var arr = [vm.currentRecipient, vm.username].sort();
         var convoURL = baseURL + arr[0] + arr[1];
         firebaseConnection = new Firebase(convoURL);
-        $scope.displayMessages();
+        vm.displayMessages();
       };
 
-      $scope.getAllUsers();
+      vm.getAllUsers();
 
     }]);
 
