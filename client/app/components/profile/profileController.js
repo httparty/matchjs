@@ -1,5 +1,5 @@
 angular.module('app.profile', [])
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', function ($scope, $window, $state, Profile, AuthService) {
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile, AuthService, invitationsModel) {
     console.log('my parms', $state.params);
     $scope.currentUser = angular.fromJson(AuthService.getCurrentUser());
 
@@ -25,7 +25,8 @@ angular.module('app.profile', [])
 
     $scope.isSameUser = '';
 
-    $scope.invitations = {};
+    $scope.invitations = [];
+    // $scope.invitations.invites = [];
 
     $scope.inviteSent = '';
 
@@ -114,7 +115,19 @@ angular.module('app.profile', [])
       .then(function(response) {
         //---if the current user is the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons.---
         if($scope.currentUser.username === $scope.profileUser.username) {
+          console.log('inside if statement re: username equivalence');
           $scope.isSameUser = true;
+          invitationsModel.getInvitationsByMentor($scope.currentUser)
+            .then(function(mentorResp) {
+              console.log("response.data from getInvitationsByMentor", mentorResp.data);
+              //sort by date
+                $scope.invitations.mentor = mentorResp.data;
+                invitationsModel.getInvitationsByMentee($scope.currentUser)
+                  .then(function(menteeResp) {
+                    console.log("response data from get invites by Mentee", menteeResp.data);
+                    $scope.invitations.mentee = mentorResp.data;
+                  });
+            });
         }
 
         //---populate the scope with the data returning from DB query.---
