@@ -6,7 +6,8 @@
     var vm = this;
 
     var current_user = angular.fromJson(AuthService.getCurrentUser());
-    var username = current_user.username;
+
+    vm.username = current_user.username;
 
     vm.recipient = $state.params.username;
 
@@ -15,13 +16,24 @@
       vm.recipientProfile = response.data;
     })
 
+    vm.formData = {};
+
     vm.createInvitation = function() {
       console.log('Invitation Submitted!');
-      invitationsModel.createInvitation(username)
-      .then(function(r){
-        console.dir(r.data);
-        vm.user = r.data;
-      });
+      vm.formData.mentor = vm.username;
+      vm.formData.mentee = vm.recipient;
+      vm.formData.sessionInfo.when = new Date();
+      console.dir(vm.formData);
+      invitationsModel.createInvitation(vm.formData)
+        .then(function(r){
+          console.dir(r.data);
+          vm.formData = {};
+        });
+
+      // .then(function(r){
+      //   console.dir(r.data);
+      //   vm.user = r.data;
+      // });
     };
 
   }]);

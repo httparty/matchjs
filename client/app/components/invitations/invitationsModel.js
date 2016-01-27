@@ -5,11 +5,11 @@
     .factory('invitationsModel', function($http){
       var model = {};
 
-      model.createInvitation = function(username){
+      model.createInvitation = function(inviteObj){
         return $http({
           method: 'POST',
-          url: '/api/invitations/createInvitation/' + username
-          //Data
+          url: '/api/invitations/createInvitation',
+          data: inviteObj
         });
       };
 

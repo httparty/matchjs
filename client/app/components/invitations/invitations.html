@@ -25,6 +25,19 @@
     </div>
     <div class="col-md-8 inviteInfo">
       <h1>Invite Info</h1>
+      <form>
+        Mentor: <br>
+        {{ctrl.username}} <br>
+        Mentee: <br>
+        {{ctrl.recipient}}<br>
+        When:<br>
+        <input type="text" ng-model="ctrl.formData.sessionInfo.when"><br>
+        Where:<br>
+        <input type="text" ng-model="ctrl.formData.sessionInfo.where"><br>
+        Summary:<br>
+        <input type="text" ng-model="ctrl.formData.sessionInfo.summary"><br>
+      </form>
+      <h2>{{ctrl.formData.sessionInfo.time}}</h2>
       <button class="btn btn-primary" ng-click="ctrl.createInvitation()">
         Submit Invite
       </button>
