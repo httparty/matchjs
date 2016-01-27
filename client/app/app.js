@@ -1,5 +1,6 @@
 angular.module('app', [
   'ui.router',
+  'ui.bootstrap',
   'ngCookies',
   'app.auth',
   'app.profile',
