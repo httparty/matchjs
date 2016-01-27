@@ -15,6 +15,7 @@ module.exports = {
       res.send(invitation);
     });
   },
+  
   getInvitationsBySender: function(req, res) {
     var username = req.params.username;
 
@@ -23,6 +24,7 @@ module.exports = {
       res.send(invitations);
     });
   },
+
   getInvitationsByRecipient: function(req, res) {
     var username = req.params.username;
 
@@ -30,5 +32,8 @@ module.exports = {
     .then(function(invitations) {
       res.send(invitations);
     });
+  },
+
+  deleteInvitationByInvitationID: function(req, res) {
   }
 };

@@ -13,6 +13,23 @@
         });
       };
 
+      model.getInvitationsByMentor = function(inviteObj){
+        return $http({
+          method: 'GET',
+          url: '/api/invitations/sender/' + inviteObj.username,
+        });
+      };
+
+      model.getInvitationsByMentee = function(inviteObj){
+        return $http({
+          method: 'GET',
+          url: '/api/invitations/recipient/' + inviteObj.username,
+        });
+      };
+
+      model.deleteInvitationByInvitationID = function(inviteObj){
+      };
+
       return model;
   });
 
