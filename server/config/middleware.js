@@ -2,7 +2,6 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cors = require('cors');
 var githubSessions = require('./githubSessions.js');
-var helpers = require('../db/helpers.js');
 
 module.exports = function(app, express) {
 
