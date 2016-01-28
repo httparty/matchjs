@@ -39,10 +39,11 @@
     vm.hstep = 1;
     vm.mstep = 5;
 
-    vm.options = {
-      hstep: [1, 2, 3],
-      mstep: [1, 5, 10, 15, 25, 30]
-    };
+    vm.minDate = new Date();
+    // vm.options = {
+    //   hstep: [1, 2, 3],
+    //   mstep: [1, 5, 10, 15, 25, 30]
+    // };
 
     vm.ismeridian = true;
 
@@ -70,11 +71,12 @@
     return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
   };
 
-  vm.toggleMin = function() {
-    vm.minDate = vm.minDate ? null : new Date();
-  };
+  // vm.toggleMin = function() {
+  //   vm.minDate = vm.minDate ? null : new Date();
+  // };
 
-  vm.toggleMin();
+  // vm.toggleMin();
+
   vm.maxDate = new Date(2020, 5, 22);
 
   vm.open1 = function() {
