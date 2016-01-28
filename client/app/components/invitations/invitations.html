@@ -55,7 +55,7 @@
       </form>
 
 
-      <form class="row">
+<!--       <form class="row">
       <div class="col-md-12">
         <h3>When:</h3>
         <div class="col-md-8">
@@ -63,7 +63,7 @@
         </div>
       </div>
       </form>
-
+ -->
 <!-- Date/Time Row -->
 
       <div class="row">
@@ -73,12 +73,12 @@
 
           <!-- Time Picker -->
 
-            <uib-timepicker ng-model="ctrl.mytime" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
+            <uib-timepicker ng-model="ctrl.tm" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
 
           <!-- Date Picker-->
 
             <p class="input-group">
-              <input type="text" class="form-control" uib-datepicker-popup="{{ctrl.format}}" ng-model="ctrl.dt" is-open="ctrl.popup1.opened" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" date-disabled="ctrl.disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="ctrl.altInputFormats" id="dateSelector"/>
+              <input type="text" class="form-control" uib-datepicker-popup="{{ctrl.format}}" ng-model="ctrl.dt" is-open="ctrl.popup1.opened" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="ctrl.altInputFormats" id="dateSelector"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="ctrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
@@ -88,12 +88,12 @@
 
           <!-- Preview/Buttons -->
           <div class="col-md-6">
-            <pre>Selected date is: <em>{{ctrl.dt | date:'fullDate' }} at {{ctrl.myTime.getHours()}}:{{ctrl.myTime.getMinutes()}}</em>
+            <pre>Selected date is: <em>{{ctrl.dt | date:'fullDate' }} at {{ctrl.tm.getHours()}}:{{ctrl.displayMinutesCorrectly()}}</em>
             </pre>
 
             <button type="button" class="btn btn-info" ng-click="ctrl.toggleMode()">12H / 24H</button>
             <button type="button" class="btn btn-danger" ng-click="ctrl.clear()">Clear</button>
-            <!-- <button type="button" class="btn btn-sm btn-default" ng-click="ctrl.toggleMin()" uib-tooltip="After today restriction">Min date</button> -->
+
           </div>
         </div>
       </div>
