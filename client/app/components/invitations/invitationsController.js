@@ -52,26 +52,18 @@
 
     vm.clear = function() {
       vm.mytime = null;
+      vm.dt = null
     };
 
-    vm.update = function() {
-      var d = new Date();
-      d.setHours( 12 );
-      d.setMinutes( 0 );
-      vm.mytime = d;
-    };
+    // vm.update = function() {
+    //   var d = new Date();
+    //   d.setHours( 12 );
+    //   d.setMinutes( 0 );
+    //   vm.mytime = d;
+    // };
 
 //Date picker code
 
-
-  vm.today = function() {
-    vm.dt = new Date();
-  };
-  vm.today();
-
-  vm.clearDate = function() {
-    vm.dt = null;
-  };
 
   // Disable weekend selection
   vm.disabled = function(date, mode) {
