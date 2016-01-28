@@ -9,6 +9,10 @@
     vm.username = current_user.username;
     vm.recipient = $state.params.username;
 
+    Profile.getUserProfile(vm.username).then(function(response){
+      vm.currentUserProfile = response.data;
+    });
+
     Profile.getUserProfile($state.params).then(function(response){
       vm.recipientProfile = response.data;
     });
