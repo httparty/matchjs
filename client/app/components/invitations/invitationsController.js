@@ -1,7 +1,7 @@
 ;(function(){
   'use strict';
   angular.module('app.invitations', [])
-  .controller('invitationsController', ['invitationsModel', 'AuthService', '$state', 'Profile', '$scope',function(invitationsModel, AuthService, $state, Profile, $scope){
+  .controller('invitationsController', ['invitationsModel', 'AuthService', '$state', 'Profile',function(invitationsModel, AuthService, $state, Profile){
 
     var vm = this;
 
