@@ -44,9 +44,9 @@
     vm.ismeridian = true;
 
     vm.hstep = 1;
-    vm.mstep = 5;
-    vm.tm = null;
-    vm.dt = null;
+    vm.mstep = 15;
+    vm.tm = new Date();
+    vm.dt = new Date();
 
 
     vm.toggleMode = function() {
@@ -54,8 +54,8 @@
     };
 
     vm.clear = function() {
-      vm.tm = null;
-      vm.dt = null;
+      vm.tm = new Date();
+      vm.dt = new Date();
     };
 
 //Date picker code
