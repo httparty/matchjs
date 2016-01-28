@@ -14,6 +14,7 @@
       var firebaseConnection = '';
 
       var currentUser = angular.fromJson(AuthService.getCurrentUser());
+
       vm.username = currentUser.username;
       vm.name = currentUser.displayName;
       vm.conversationList = [];
@@ -36,9 +37,9 @@
       };
 
       vm.sendMessage = function() {
-        var today = moment().format("dddd MMMM Do, YYYY @ h:mA");
+        var today = moment().format('dddd MMMM Do, YYYY @ h:mA');
 
-        vm.currentMessageList.$add({message : vm.enteredText, toUsername: vm.currentRecipient, to:  vm.currentRecipientName, fromUsername: vm.username, from: vm.name, time: today});
+        vm.currentMessageList.$add({message : vm.enteredText, toUsername: vm.currentRecipient, to: vm.currentRecipientName, fromUsername: vm.username, from: vm.name, time: today});
         vm.enteredText = '';
       };
 
