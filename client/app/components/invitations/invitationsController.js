@@ -105,10 +105,10 @@
   vm.displayMinutesCorrectly = function(){
     var t = vm.tm.getMinutes();
     if(t < 10){
-      return "0" + t;
+      return '0' + t;
     }
     return t;
-  }
+  };
 
   vm.getDayClass = function(date, mode) {
     if (mode === 'day') {
