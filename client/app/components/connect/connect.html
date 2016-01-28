@@ -11,9 +11,8 @@
   </div>
 
 
-  <tags-input ng-model="ctrl.tags"></tags-input>
+<!--   <tags-input ng-model="ctrl.tags"></tags-input>
 
-    <!-- Single button -->
     <div class="btn-group" uib-dropdown is-open="status.isopen">
       <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
         Location <span class="caret"></span>
@@ -25,9 +24,27 @@
       </ul>
     </div>
 
-    <br>
+    <br> -->
 
-<!--   <div class="row" ng-init="ctrl.getAllUsersRec()">
+<!--     <p>Select One of the Following</p>
+
+    <input id="s-sf" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="San Francisco"> 
+    <label for="s-sf">San Francisco</label>
+
+    <input id="s-nyc" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="New York">
+    <label for="s-nyc">New York</label>
+
+    <input id="s-bos" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="Boston">
+    <label for="s-bos">Boston</label>
+    
+    <p> {{ ctrl.filters | json }} </p>
+    <ul>
+      <li ng-repeat="entity in ctrl.entities">
+        {{ entity.name }}
+      </li>
+    </ul> -->
+
+  <div class="row" ng-init="ctrl.getAllUsersRec()">
 
     <div ng-repeat="u in ctrl.users">
 
@@ -49,26 +66,7 @@
           </div>
         </div>
     </div>
-</div> -->
-
-    <p>Select One of the Following</p>
-
-    <input id="s-sf" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="San Francisco"> 
-    <label for="s-sf">San Francisco</label>
-
-    <input id="s-nyc" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="New York">
-    <label for="s-nyc">New York</label>
-
-    <input id="s-bos" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="Boston">
-    <label for="s-bos">Boston</label>
-    
-    <p> {{ ctrl.filters | json }} </p>
-    <ul>
-      <li ng-repeat="entity in ctrl.entities">
-        {{ entity.name }}
-      </li>
-    </ul>
-
+</div>
 
 <!--   <div class="row" ng-init="ctrl.getAllUsers()">
 

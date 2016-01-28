@@ -76,5 +76,5 @@ exports.getRecommendations = function(usersArray, username) {
   // });
 
   //return top 6 recommended users
-  return usersArray.slice(0,3);
+  return usersArray.slice(0,6);
 };

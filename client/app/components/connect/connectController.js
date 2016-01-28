@@ -75,13 +75,13 @@
           return vm.filters.entityType;
         }, function(newVal){
             observer.onNext(newVal);
-        })
+        });
       }).flatMapLatest(function(type) {
           return Rx.Observable.fromPromise(connectModel.getUsersByLocation(type));
         });
 
       var listener = source.subscribe(function(result) {
-        console.log("go here");
+        console.log('go here');
         vm.entities = result.data;
       });
 
