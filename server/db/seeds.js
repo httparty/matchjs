@@ -9,6 +9,8 @@ var seedUsers = function() {
                 'Node', 'React', 'Backbone',
                 'Ember', 'Neo4j', 'AWS', 'Redis'];
 
+  var locations = ['San Francisco', 'Boston', 'New York'];
+
   var array = _.range(1, 11);
 
   async.each(array, function(i, next) {
@@ -18,6 +20,7 @@ var seedUsers = function() {
         password: 'password'+i,
         email: 'user'+i+'@email.com',
         name: 'user'+i,
+        location: _.sample(locations, 1)[0],
         karmaPoints: Math.floor(Math.random() * 6),
         toLearn: _.sample(skills, 5),
         toTeach: _.sample(skills, 5)
