@@ -63,20 +63,20 @@
           <div class="col-md-6">
 
           <!-- Time Picker -->
-            <uib-timepicker ng-model="ctrl.tm" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
+            <uib-timepicker ng-model="ctrl.date" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
 
           <!-- Date Picker-->
             <div class="input-group">
-              <input type="text" class="form-control" uib-datepicker-popup="{{ctrl.format}}" ng-model="ctrl.dt" is-open="ctrl.popup1.opened" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="ctrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
+              <input type="text" class="form-control" uib-datepicker-popup="{{ctrl.format}}" ng-model="ctrl.date" is-open="ctrl.isCalendarOpen" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="ctrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="ctrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </div>
           </div> <!-- End Time/Date Picker -->
 
           <!-- Preview/Buttons -->
           <div class="col-md-6">
-            <pre>Selected date is: <em>{{ctrl.dt | date:'fullDate' }} at {{ctrl.tm.getHours()}}:{{ctrl.displayMinutesCorrectly()}}</em>
+            <pre>Selected date is: <br><em>{{ctrl.date | date:'fullDate' }} <br>at {{ctrl.date.getHours()}}:{{ctrl.displayMinutesCorrectly()}}</em>
             </pre>
             <button type="button" class="btn btn-info" ng-click="ctrl.toggleMode()">12H / 24H</button>
             <button type="button" class="btn btn-danger" ng-click="ctrl.clear()">Clear</button>
@@ -115,7 +115,7 @@
     </div>
 
   <!-- Submission Sent -->
-  <div class="col-md-8 jumbotron" ng-show="ctrl.submitted">
+  <div class="col-md-8 jumbotron submitComplete" ng-show="ctrl.submitted">
     <h1>Invitation Sent!</h1>
     <a class="btn btn-primary" href="/"> Connect with more users </a>
   </div>
