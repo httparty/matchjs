@@ -120,7 +120,7 @@ helpers.createInvitation = function(username, invitee, sessionInfo){
   }).then(function(user) {
     return db.Invitation.create({
       UserId: user.dataValues.id,
-      senderName: username,
+      senderName: user.get('username'),
       recipientName: invitee,
       when: sessionInfo.when,
       where: sessionInfo.where,
