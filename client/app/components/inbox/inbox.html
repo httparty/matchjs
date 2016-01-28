@@ -3,6 +3,9 @@
 
     <div class="col-md-5 conversations">
       <!-- List all conversation threads -->
+      <!-- <h4>Static arrays</h4>
+      <pre>Model: {{ctrl.selected | json}}</pre>
+      <input type="text" ng-model="ctrl.selected" uib-typeahead="state for state in ctrl.states | filter:$viewValue | limitTo:8" class="form-control"> -->
       <div class="conversationBox">
         <div class="conversationsHeader"><h1>Conversations</h1></div>
         <ul class="conversationList">
@@ -27,13 +30,16 @@
       <!-- Message History -->
       <div ng-show="ctrl.currentRecipient" class="messageBox">
         <div class="messagesHeader">
-            <h1>Messages with {{ctrl.currentRecipientName}}</h1>
+            <h1>Messages with {{ctrl.currentRecipientName}} <img class="img-rounded" ng-src="{{ctrl.currentRecipientPhoto || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px"></h1>
         </div>
         <!-- <h1>{{ enteredText }}</h1> -->
         <ul class="messageList">
           <li ng-repeat="message in ctrl.currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
-          {{message.from}} :
-          {{message.message}}
+          <p>
+          <strong>{{message.from}}</strong> : {{message.message}}
+          <br>
+          {{message.time}}
+          </p>
           </li>
         </ul>
       </div>
