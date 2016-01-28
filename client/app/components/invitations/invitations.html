@@ -1,10 +1,10 @@
-<div class="container-fluid" ng-controller="invitationsController as ctrl">
+<div class="container-fluid" ng-controller="invitationsController as ctrl" ng-model="ctrl.submitted">
 
     <!-- White Space -->
     <div class="col-md-2"></div>
 
     <!-- Invite Content -->
-    <div class="col-md-8 inviteInfo">
+    <div class="col-md-8 inviteInfo" ng-hide="ctrl.submitted">
 
       <!-- Mentor/Mentee Row -->
       <div class="row">
@@ -114,7 +114,13 @@
 
     </div>
 
-<!-- White Space -->
+  <!-- Submission Sent -->
+  <div class="col-md-8 jumbotron" ng-show="ctrl.submitted">
+    <h1>Invitation Sent!</h1>
+    <a class="btn btn-primary" href="/"> Connect with more users </a>
+  </div>
+
+  <!-- White Space -->
   <div class="col-md-2"></div>
 
 </div>

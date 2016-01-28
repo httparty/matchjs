@@ -25,6 +25,7 @@
       vm.formData.mentee = vm.recipient;
       vm.formData.sessionInfo.when = new Date(vm.dt.getFullYear(), vm.dt.getMonth(), vm.dt.getDate(), vm.tm.getHours(), vm.tm.getMinutes());
       console.dir(vm.formData);
+      vm.submitted = true;
       invitationsModel.createInvitation(vm.formData)
         .then(function(r){
           console.dir(r.data);
@@ -47,6 +48,8 @@
     vm.mstep = 15;
     vm.tm = new Date();
     vm.dt = new Date();
+
+    vm.submitted = false;
 
 
     vm.toggleMode = function() {
