@@ -86,22 +86,22 @@
     //Rounds the time to nearest 15 minutes
     vm.roundTime = function(){
       var currentMinute = vm.date.getMinutes();
-      vm.date.setMinutes(currentMinute + 15 - currentMinute % 15)
-    }
+      vm.date.setMinutes(currentMinute + 15 - currentMinute % 15);
+    };
 
-    vm.roundTime() //Immediately Invoked
+    vm.roundTime(); //Immediately Invoked
 
 //Submission Functions
 
     //No submission if form is incomplete
     vm.attemptSubmit = function() {
       if(!vm.formData.sessionInfo || !vm.formData.sessionInfo.summary || !vm.formData.sessionInfo.where){
-          alert("Please fill out all of the fields!")
+          alert('Please fill out all of the fields!');
       }
       else{
         vm.createInvitation();
       }
-    }
+    };
 
     //Submits the actual invitation
     vm.createInvitation = function() {
