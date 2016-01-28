@@ -2,7 +2,7 @@ var db = require('./config.js');
 var rec = require('../recommender/recommend');
 var helpers = {};
 
-//---------------AUTHENTICATION----------------------
+//---------------AUTHENTICATION---------------------- 
 
 helpers.deleteUser = function(userToDeleteObj) {
   db.User.findOne({
@@ -120,6 +120,7 @@ helpers.createInvitation = function(username, invitee, sessionInfo){
   }).then(function(user) {
     return db.Invitation.create({
       UserId: user.dataValues.id,
+      senderName: username,
       recipientName: invitee,
       when: sessionInfo.when,
       where: sessionInfo.where,
