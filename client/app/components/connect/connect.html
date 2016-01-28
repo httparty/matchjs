@@ -4,13 +4,30 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <h2 class="page-header">Recommended Users
+      <h2 class="page-header">Browse Users
         <small> Make a connection</small>
       </h2>
     </div>
   </div>
 
-  <div class="row" ng-init="ctrl.getAllUsersRec()">
+
+  <tags-input ng-model="ctrl.tags"></tags-input>
+
+    <!-- Single button -->
+    <div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+        Location <span class="caret"></span>
+      </button>
+      <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a href="#">San Francisco</a></li>
+        <li role="menuitem"><a href="#">New York</a></li>
+        <li role="menuitem"><a href="#">Boston</a></li>
+      </ul>
+    </div>
+
+    <br>
+
+<!--   <div class="row" ng-init="ctrl.getAllUsersRec()">
 
     <div ng-repeat="u in ctrl.users">
 
@@ -32,16 +49,50 @@
           </div>
         </div>
     </div>
-</div>
+</div> -->
+
+    <p>Select One of the Following</p>
+
+    <input id="s-sf" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="San Francisco"> 
+    <label for="s-sf">San Francisco</label>
+
+    <input id="s-nyc" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="New York">
+    <label for="s-nyc">New York</label>
+
+    <input id="s-bos" name="standardEntityType" type="radio" ng-model="ctrl.filters.entityType" value="Boston">
+    <label for="s-bos">Boston</label>
+    
+    <p> {{ ctrl.filters | json }} </p>
+    <ul>
+      <li ng-repeat="entity in ctrl.entities">
+        {{ entity.name }}
+      </li>
+    </ul>
 
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h2 class="page-header">Browse Users
-        <small>TBD</small>
-      </h2>
+<!--   <div class="row" ng-init="ctrl.getAllUsers()">
+
+    <div ng-repeat="u in ctrl.searchResults">
+
+      <div class="clearfix" ng-if="$index % 3 == 0"></div>
+        <div class="col-sm-4 portfolio-item">
+          <div class="panel panel-default" ng-click="ctrl.getThisUserProfile(u.username)">
+            <div class="panel-body">
+              <center><img class="img-responsive" ng-src="{{u.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
+              </a>
+
+              <div class="list-group">
+                <div class="list-group-item"><strong>{{u.name || 'N/A'}}</strong></div>
+                <div class="list-group-item"><i class="fa fa-map-marker"></i> {{u.location || 'San Francisco'}}</div>
+                <div class="list-group-item"><i class="fa fa-github"></i> <a href="{{u.github || 'https://github.com'}}">{{u.github || 'https://github.com'}}</a></div>
+                <div class="list-group-item">Karma: {{u.karmaPoints || 'N/A'}}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Pagination -->
   <div class="row text-center">

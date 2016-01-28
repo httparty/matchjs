@@ -52,9 +52,7 @@ angular.module('app', [
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
 
-    console.log('hi friend!');
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-      console.log(toState.name);
       if (!AuthService.isAuthenticated() && toState.name !== 'home') {
         console.log('hello in isauth');
         event.preventDefault();
