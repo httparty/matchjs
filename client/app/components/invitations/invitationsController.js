@@ -19,6 +19,15 @@
 
     vm.formData = {};
 
+    vm.attemptSubmit = function() {
+      if(!vm.formData.sessionInfo || !vm.formData.sessionInfo.summary || !vm.formData.sessionInfo.where){
+          alert("Please fill out all of the fields!")
+      }
+      else{
+        vm.createInvitation();
+      }
+    }
+
     vm.createInvitation = function() {
       console.log('Invitation Submitted!');
       vm.formData.mentor = vm.username;
