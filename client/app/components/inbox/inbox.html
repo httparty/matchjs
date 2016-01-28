@@ -1,7 +1,7 @@
 <div class="container-fluid inbox" ng-controller="InboxController as ctrl">
   <div class="row mainContainer">
 
-    <div class="col-md-5 conversations">
+  <div class="col-md-5 conversations">
       <!-- List all conversation threads -->
       <!-- <h4>Static arrays</h4>
       <pre>Model: {{ctrl.selected | json}}</pre>
@@ -14,7 +14,6 @@
           <h4>{{conversation.name}}</h4>
           </li>
         </ul>
-      </div>
 
       <!-- Search for user to start new conversation -->
       <div class="conversationInput">
@@ -24,6 +23,7 @@
         </form>
       </div>
     </div>
+  </div>
 
     <div class="col-md-7 messages">
 
@@ -42,21 +42,21 @@
           </p>
           </li>
         </ul>
-      </div>
 
       <!-- Displayed if no user selected -->
-      <div class="alert alert-warning" ng-show="!ctrl.currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto">
-      <center><h3><i class="fa fa-exclamation-triangle"></i>Select a User</h3></center>
-      </div>
 
       <!-- send new message -->
-      <div class="messageInput" ng-show="ctrl.currentRecipient">
+      <div class="messageInput">
         <form class="form-group" >
           <input type="text" class="form-control" placeholder="Enter your message" ng-model="ctrl.enteredText" ng-submit="ctrl.sendMessage()">
           <button type="submit" class="btn btn-primary" ng-click="ctrl.sendMessage()">Submit</button>
         </form>
       </div>
 
+      </div>
+      <div class="alert alert-warning" ng-show="!ctrl.currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto">
+        <center><h3><i class="fa fa-exclamation-triangle"></i>Select a User</h3></center>
+      </div>
     </div>
   </div>
 </div>
