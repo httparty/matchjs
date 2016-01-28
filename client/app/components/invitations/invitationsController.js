@@ -5,125 +5,117 @@
 
     var vm = this;
 
+//Loading User Information
+
+    // Current User Information
     var current_user = angular.fromJson(AuthService.getCurrentUser());
     vm.username = current_user.username;
+
+    Profile.getUserProfile({username: vm.username}).then(function(response){
+      vm.currentUserProfile = response.data;
+    });
+
+    //Recipient Information
     vm.recipient = $state.params.username;
 
     Profile.getUserProfile($state.params).then(function(response){
       vm.recipientProfile = response.data;
     });
 
-    vm.formData = {};
 
-    vm.createInvitation = function() {
-      console.log('Invitation Submitted!');
-      vm.formData.mentor = vm.username;
-      vm.formData.mentee = vm.recipient;
-      vm.formData.sessionInfo.when = new Date(vm.dt.getFullYear(), vm.dt.getMonth(), vm.dt.getDate(), vm.tm.getHours(), vm.tm.getMinutes());
-      console.dir(vm.formData);
-      invitationsModel.createInvitation(vm.formData)
-        .then(function(r){
-          console.dir(r.data);
-          vm.formData = {};
-          vm.clear();
-      });
+//Scope Variables
 
-      // .then(function(r){
-      //   console.dir(r.data);
-      //   vm.user = r.data;
-      // });
-    };
+    vm.date = new Date(); //Sets time/date to current
 
     //Set meeting time
-    vm.minDate = new Date();
-    vm.myTime = new Date();
-    vm.ismeridian = true;
+    vm.minDate = new Date(); //Blocks past dates
+    vm.maxDate = new Date(2050, 5, 22); //Set Max Date
 
-    vm.hstep = 1;
-    vm.mstep = 5;
-    vm.tm = null;
-    vm.dt = null;
+    vm.ismeridian = true;  //AM/PM or 24H
+    vm.hstep = 1;  //Hour Step
+    vm.mstep = 15;  //Minute Step
+    vm.submitted = false;  //Hides form upon submission
 
 
+    //Date formating
+    vm.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
+
+    vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate']; //Alternate formats
+
+    vm.format = vm.formats[0];
+    vm.altInputFormats = ['M!/d!/yyyy'];
+
+    //Calendar popup
+    vm.isCalendarOpen = false;
+
+    //Submission Form Data
+    vm.formData = {};
+
+
+
+//Helper Functions
+
+    //Toggles AM/PM or 24HR
     vm.toggleMode = function() {
       vm.ismeridian = ! vm.ismeridian;
     };
 
+    //Resets Date/Time to Present
     vm.clear = function() {
-      vm.tm = null;
-      vm.dt = null;
+      vm.date = new Date();
     };
 
-//Date picker code
+    //Open the calendar
+    vm.openCalendar = function() {
+      vm.isCalendarOpen = true;
+    };
 
-
-  vm.maxDate = new Date(2050, 5, 22);
-
-  vm.open1 = function() {
-    vm.popup1.opened = true;
-  };
-
-//Not used, utility function
-  vm.setDate = function(year, month, day) {
-    vm.dt = new Date(year, month, day);
-  };
-
-  vm.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  vm.format = vm.formats[0];
-  vm.altInputFormats = ['M!/d!/yyyy'];
-
-  vm.popup1 = {
-    opened: false
-  };
-
-//Handling events in the calendar
-//Needs refactoring
-
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  var afterTomorrow = new Date();
-  afterTomorrow.setDate(tomorrow.getDate() + 1);
-
-  vm.events =
-    [
-      {
-        date: tomorrow,
-        status: 'full'
-      },
-      {
-        date: afterTomorrow,
-        status: 'partially'
+    //Add zero to minutes if under 10
+    vm.displayMinutesCorrectly = function(){
+      var t = vm.date.getMinutes();
+      if(t < 10){
+        return '0' + t;
       }
-    ];
+      return t;
+    };
 
-  vm.displayMinutesCorrectly = function(){
-    var t = vm.tm.getMinutes();
-    if(t < 10){
-      return '0' + t;
-    }
-    return t;
-  };
 
-  vm.getDayClass = function(date, mode) {
-    if (mode === 'day') {
-      var dayToCheck = new Date(date).setHours(0,0,0,0);
+    //Rounds the time to nearest 15 minutes
+    vm.roundTime = function(){
+      var currentMinute = vm.date.getMinutes();
+      vm.date.setMinutes(currentMinute + 15 - currentMinute % 15);
+    };
 
-      for (var i = 0; i < vm.events.length; i++) {
-        var currentDay = new Date(vm.events[i].date).setHours(0,0,0,0);
+    vm.roundTime(); //Immediately Invoked
 
-        if (dayToCheck === currentDay) {
-          return vm.events[i].status;
-        }
+//Submission Functions
+
+    //No submission if form is incomplete
+    vm.attemptSubmit = function() {
+      if(!vm.formData.sessionInfo || !vm.formData.sessionInfo.summary || !vm.formData.sessionInfo.where){
+          alert('Please fill out all of the fields!');
       }
-    }
-    return '';
-  };
+      else{
+        vm.createInvitation();
+      }
+    };
+
+    //Submits the actual invitation
+    vm.createInvitation = function() {
+      console.log('Invitation Submitted!');
+      vm.formData.mentor = vm.username;
+      vm.formData.mentee = vm.recipient;
+      vm.formData.sessionInfo.when = new Date(vm.date.getFullYear(), vm.date.getMonth(), vm.date.getDate(), vm.date.getHours(), vm.date.getMinutes());
+      vm.submitted = true;
+      invitationsModel.createInvitation(vm.formData)
+        .then(function(r){
+          vm.formData = {};
+          vm.clear();
+      });
+    };
 
   }]);
 })();

@@ -1,128 +1,126 @@
-<div class="container-fluid" ng-controller="invitationsController as ctrl">
-  <!-- Jumbotron -->
-  <div class="row">
-    <div class="jumbotron">
-      <h1>Invitations Page</h1>
-      <h2>{{ ctrl.recipient }}</h2>
-    </div>
-  </div>
+<div class="container-fluid" ng-controller="invitationsController as ctrl" ng-model="ctrl.submitted">
 
-  <div class="row">
+    <!-- White Space -->
+    <div class="col-md-2"></div>
 
-  </div>
-
-    <div class="col-md-4 profileInfo">
-      <h1>Profile Info</h1>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <a href="#">
-            <center><img class="img-responsive" ng-src="{{ctrl.recipientProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
-          </a>
-          <div class="list-group">
-            <div class="list-group-item"><strong>{{ctrl.recipient || 'N/A'}}</strong></div>
-            <div class="list-group-item"><i class="fa fa-map-marker"></i> {{ctrl.recipientProfile.location || 'San Francisco'}}</div>
-            <div class="list-group-item"><i class="fa fa-github"></i> <a href="{{u.github || 'https://github.com'}}">{{ctrl.recipientProfile.github || 'https://github.com'}}</a></div>
-            <div class="list-group-item">Karma: {{ctrl.recipientProfile.karmaPoints || 'N/A'}}</div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-8 inviteInfo">
-      <h1>Invite Info</h1>
+    <!-- Invite Content -->
+    <div class="col-md-8 inviteInfo" ng-hide="ctrl.submitted">
 
       <!-- Mentor/Mentee Row -->
-      <form class="row">
+      <div class="row">
+
+        <!-- Mentor -->
         <div class="col-md-6">
           <h3>Mentor:</h3>
-          <h5>{{ctrl.username}}</h5>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <a href="#">
+                <center><img class="img-responsive" ng-src="{{ctrl.currentUserProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
+              </a>
+              <div class="list-group">
+                <div class="list-group-item col-md-6"><strong>{{ctrl.username || 'N/A'}}</strong></div>
+                <div class="list-group-item col-md-6"><strong>Karma: {{ctrl.currentUserProfile.karmaPoints || 'N/A'}}</strong></div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Mentee -->
         <div class="col-md-6">
           <h3>Mentee: </h3>
-          <h5>{{ctrl.recipient}}</h5>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <a href="#">
+                <center><img class="img-responsive" ng-src="{{ctrl.recipientProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
+              </a>
+              <div class="list-group">
+                <div class="list-group-item col-md-6"><strong>{{ctrl.recipient || 'N/A'}}</strong></div>
+                <div class="list-group-item col-md-6"><strong>Karma: {{ctrl.recipientProfile.karmaPoints || 'N/A'}}</strong></div>
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
+
+      </div><!--  End Mentor/Mentee Row  -->
 
       <!-- Location Row -->
-      <form class="row">
+      <div class="row">
         <div class="col-md-12">
         <h3>Where:</h3>
-          <div class="col-md-8">
+          <div class="col-md-6">
             <input type="text" class="form-control" placeholder="Enter location" ng-model="ctrl.formData.sessionInfo.where">
           </div>
         </div>
-      </form>
+      </div> <!-- End Location Row -->
 
 
-<!--       <form class="row">
-      <div class="col-md-12">
-        <h3>When:</h3>
-        <div class="col-md-8">
-          <input type="text" class="form-control" placeholder="Enter a date" ng-model="ctrl.formData.sessionInfo.when">
-        </div>
-      </div>
-      </form>
- -->
-<!-- Date/Time Row -->
-
+      <!-- Time/Date Row -->
       <div class="row">
         <div class="col-md-12">
           <h3>When:</h3>
+
+          <!-- Time/Date Picker -->
           <div class="col-md-6">
 
           <!-- Time Picker -->
-
-            <uib-timepicker ng-model="ctrl.tm" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
+            <uib-timepicker ng-model="ctrl.date" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
 
           <!-- Date Picker-->
-
-            <p class="input-group">
-              <input type="text" class="form-control" uib-datepicker-popup="{{ctrl.format}}" ng-model="ctrl.dt" is-open="ctrl.popup1.opened" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="ctrl.altInputFormats" id="dateSelector"/>
+            <div class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{ctrl.format}}" ng-model="ctrl.date" is-open="ctrl.isCalendarOpen" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="ctrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="ctrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
-            </p>
-          </div>
-
+            </div>
+          </div> <!-- End Time/Date Picker -->
 
           <!-- Preview/Buttons -->
           <div class="col-md-6">
-            <pre>Selected date is: <em>{{ctrl.dt | date:'fullDate' }} at {{ctrl.tm.getHours()}}:{{ctrl.displayMinutesCorrectly()}}</em>
+            <pre>Selected date is: <br><em>{{ctrl.date | date:'fullDate' }} <br>at {{ctrl.date.getHours()}}:{{ctrl.displayMinutesCorrectly()}}</em>
             </pre>
-
             <button type="button" class="btn btn-info" ng-click="ctrl.toggleMode()">12H / 24H</button>
             <button type="button" class="btn btn-danger" ng-click="ctrl.clear()">Clear</button>
+          </div> <!-- End Preview/Buttons  -->
 
-          </div>
         </div>
-      </div>
+      </div> <!-- End Time/Date Row -->
 
       <!-- Description Row -->
-
-      <form class="row">
+      <div class="row">
         <div class="col-md-12">
           <h3>Meeting Description:</h3>
           <div class="col-md-12">
             <input type="text" class="form-control" placeholder="Enter a brief description of the meeting" ng-model="ctrl.formData.sessionInfo.summary">
           </div>
         </div>
-      </form>
+      </div> <!-- End Description Row -->
       <br>
 
-<!-- Submit Button -->
+      <!-- Submit Button -->
       <div class="row">
+        <!-- White Space -->
         <div class="col-md-5"></div>
+
+        <!-- Button -->
         <div class="col-md-2">
-          <button class="btn btn-primary" ng-click="ctrl.createInvitation()">
+          <button class="btn btn-primary" ng-click="ctrl.attemptSubmit()">
             Submit Invite
           </button>
         </div>
+
+        <!-- White Space -->
         <div class="col-md-5"></div>
-      </div>
+      </div> <!-- End Submit Button -->
 
     </div>
 
-
-
+  <!-- Submission Sent -->
+  <div class="col-md-8 jumbotron submitComplete" ng-show="ctrl.submitted">
+    <h1>Invitation Sent!</h1>
+    <a class="btn btn-primary" href="/"> Connect with more users </a>
   </div>
+
+  <!-- White Space -->
+  <div class="col-md-2"></div>
+
+</div>
