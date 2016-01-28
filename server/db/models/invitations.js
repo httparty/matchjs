@@ -5,6 +5,9 @@ module.exports = function(sequelize, DataType) {
     recipientName: {
       type: DataType.STRING
     },
+    senderName: {
+      type: DataType.STRING
+    },
     when: {
       type: DataType.DATE
     },
