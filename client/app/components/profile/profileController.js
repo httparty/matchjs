@@ -1,6 +1,9 @@
 angular.module('app.profile', [])
+  .constant('moment', moment)
   .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile, AuthService, invitationsModel) {
-    console.log('my parms', $state.params);
+    
+    var noMentorInvites;    
+
     $scope.currentUser = angular.fromJson(AuthService.getCurrentUser());
 
     $scope.profileUser = {};
@@ -26,7 +29,8 @@ angular.module('app.profile', [])
     $scope.isSameUser = '';
 
     $scope.invitations = [];
-    // $scope.invitations.invites = [];
+
+    $scope.UImessages = {};
 
     $scope.inviteSent = '';
 
@@ -114,19 +118,34 @@ angular.module('app.profile', [])
       Profile.getUserProfile($state.params)
       .then(function(response) {
         //---if the current user is the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons.---
+        var invites = [];
         if($scope.currentUser.username === $scope.profileUser.username) {
-          console.log('inside if statement re: username equivalence');
           $scope.isSameUser = true;
           invitationsModel.getInvitationsByMentor($scope.currentUser)
             .then(function(mentorResp) {
-              console.log("response.data from getInvitationsByMentor", mentorResp.data);
-              //sort by date
-                $scope.invitations.mentor = mentorResp.data;
-                invitationsModel.getInvitationsByMentee($scope.currentUser)
-                  .then(function(menteeResp) {
-                    console.log("response data from get invites by Mentee", menteeResp.data);
-                    $scope.invitations.mentee = mentorResp.data;
-                  });
+              if(mentorResp.data.length === 0) {
+                noMentorInvites = true;
+              } else {
+                mentorResp.data.forEach(function(invite) {
+                  invite.when = moment(invite.when).format("dddd, MMMM Do YYYY, h:mm a");
+                  invites.push(invite);                
+                });
+              }
+            });
+          invitationsModel.getInvitationsByMentee($scope.currentUser)
+            .then(function(menteeResp) {
+              if(menteeResp.data.length === 0 && noMentorInvites) {
+                console.log('hello face');
+                UImessages.noInvites = 'You have no invitations, and totally suck at life.';
+              } else {
+                menteeResp.data.forEach(function(invite) {
+                  invite.when = moment(invite.when).format("dddd, MMMM Do YYYY, h:mm a");
+                  console.log('NOWWWW invite.when', invite.when);
+                  invites.push(invite);
+                });
+                invites = bubbleSort(invites);
+                $scope.invitations = invites;
+              }
             });
         }
 
@@ -148,4 +167,16 @@ angular.module('app.profile', [])
         //---
       });
     };
+  var bubbleSort = function(array) {
+    for(var j = 0; j < array.length; j++) {   
+      for(var i = 0; i < array.length -1; i++) {
+        if(array[i]['when'] > array[i+1]['when']) {
+          var temp = array[i];
+          array[i] = array[i+1];
+          array[i+1] = temp;
+        }
+      }
+    }
+    return array;
+  };
 }]);
