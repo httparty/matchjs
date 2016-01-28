@@ -1,7 +1,7 @@
 ;(function(){
   'use strict';
   angular.module('app.invitations', [])
-  .controller('invitationsController', ['invitationsModel', 'AuthService', '$state', 'Profile', '$scope',function(invitationsModel, AuthService, $state, Profile, $scope){
+  .controller('invitationsController', ['invitationsModel', 'AuthService', '$state', 'Profile',function(invitationsModel, AuthService, $state, Profile){
 
     var vm = this;
 
@@ -19,12 +19,13 @@
       console.log('Invitation Submitted!');
       vm.formData.mentor = vm.username;
       vm.formData.mentee = vm.recipient;
-      vm.formData.sessionInfo.when = new Date();
+      vm.formData.sessionInfo.when = new Date(vm.dt.getFullYear(), vm.dt.getMonth(), vm.dt.getDate(), vm.tm.getHours(), vm.tm.getMinutes());
       console.dir(vm.formData);
       invitationsModel.createInvitation(vm.formData)
         .then(function(r){
           console.dir(r.data);
           vm.formData = {};
+          vm.clear();
       });
 
       // .then(function(r){
@@ -34,65 +35,35 @@
     };
 
     //Set meeting time
+    vm.minDate = new Date();
     vm.myTime = new Date();
+    vm.ismeridian = true;
 
     vm.hstep = 1;
     vm.mstep = 5;
+    vm.tm = null;
+    vm.dt = null;
 
-    vm.options = {
-      hstep: [1, 2, 3],
-      mstep: [1, 5, 10, 15, 25, 30]
-    };
-
-    vm.ismeridian = true;
 
     vm.toggleMode = function() {
       vm.ismeridian = ! vm.ismeridian;
     };
 
     vm.clear = function() {
-      vm.mytime = null;
-    };
-
-    vm.update = function() {
-      var d = new Date();
-      d.setHours( 12 );
-      d.setMinutes( 0 );
-      vm.mytime = d;
+      vm.tm = null;
+      vm.dt = null;
     };
 
 //Date picker code
 
 
-  vm.today = function() {
-    vm.dt = new Date();
-  };
-  vm.today();
-
-  vm.clearDate = function() {
-    vm.dt = null;
-  };
-
-  // Disable weekend selection
-  vm.disabled = function(date, mode) {
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-  };
-
-  vm.toggleMin = function() {
-    vm.minDate = vm.minDate ? null : new Date();
-  };
-
-  vm.toggleMin();
-  vm.maxDate = new Date(2020, 5, 22);
+  vm.maxDate = new Date(2050, 5, 22);
 
   vm.open1 = function() {
     vm.popup1.opened = true;
   };
 
-  vm.open2 = function() {
-    vm.popup2.opened = true;
-  };
-
+//Not used, utility function
   vm.setDate = function(year, month, day) {
     vm.dt = new Date(year, month, day);
   };
@@ -110,14 +81,15 @@
     opened: false
   };
 
-  vm.popup2 = {
-    opened: false
-  };
+//Handling events in the calendar
+//Needs refactoring
 
   var tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+
   var afterTomorrow = new Date();
   afterTomorrow.setDate(tomorrow.getDate() + 1);
+
   vm.events =
     [
       {
@@ -129,6 +101,14 @@
         status: 'partially'
       }
     ];
+
+  vm.displayMinutesCorrectly = function(){
+    var t = vm.tm.getMinutes();
+    if(t < 10){
+      return '0' + t;
+    }
+    return t;
+  };
 
   vm.getDayClass = function(date, mode) {
     if (mode === 'day') {
@@ -142,11 +122,8 @@
         }
       }
     }
-
     return '';
   };
-
-
 
   }]);
 })();
