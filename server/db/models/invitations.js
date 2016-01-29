@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataType) {
     when: {
       type: DataType.DATE
     },
-    where: {
+    location: {
       type: DataType.STRING
     },
     summary: {
