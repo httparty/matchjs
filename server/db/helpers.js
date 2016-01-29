@@ -165,4 +165,15 @@ helpers.getInvitationsByRecipient = function(username) {
   });
 };
 
+helpers.updateInvitation = function(inviteObj) {
+  return db.Invitation.findOne({
+    where: {'id' : inviteObj.id} 
+  }).then(function(invite) {
+    return invite.updateAttributes({
+      when: inviteObj.when || invite.get('when'),
+      where: invite.Obj.where || invite.get('where')
+    });
+  });
+};
+
 module.exports = helpers;
