@@ -103,7 +103,7 @@
               <p><b>Summary:</b> {{invite['summary']}}</p>
               <div ng-hide="invite.readOnly">
                 <button class="btn btn-default btn-sm" ng-click="toggleInviteEditForm(); editMode.inviteEditMode = $index">Edit</button>
-                <button class="btn btn-default btn-sm" ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite.senderName, invite.recipientName, invite.id)">Delete</button>
+                <button class="btn btn-default btn-sm" ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite)">Delete</button>
               </div>
             </div>
             <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}; updateSent = false;" ng-submit="updateInvite(invite.senderName, invite.recipientName, invite.id, inviteUpdate);"> 
