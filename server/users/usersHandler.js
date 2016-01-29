@@ -1,4 +1,5 @@
-var helpers = require('../db/helpers.js');
+var helpers = require('../db/helpers');
+var search = require('../search/search');
 
 module.exports = {
 
@@ -37,6 +38,14 @@ module.exports = {
     helpers.getUsersByLocation(location)
     .then(function(usersArray) {
       res.send(usersArray);
+    });
+  },
+
+  getUsersByQuery: function(req, res) {
+
+    helpers.getAllUsers()
+    .then(function(usersArray) {
+      res.send(search.getSearchResults(req.query, usersArray));
     });
   }
 };
