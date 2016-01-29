@@ -2,51 +2,59 @@
   'use strict';
 
   angular.module('app.inbox', ['firebase'])
-    .controller('InboxController', ['$scope', '$firebaseArray', 'AuthService', 'connectModel', function($scope, $firebaseArray, AuthService, connectModel) {
+    .constant('moment',moment)
+    .controller('InboxController', ['$scope', '$firebaseArray', 'AuthService', 'connectModel', 'moment', function($scope, $firebaseArray, AuthService, connectModel, moment) {
+
+      var vm = this;
+      vm.selected = undefined;
+      vm.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
       //Firebase
       var baseURL = 'https://matchjs.firebaseio.com/chat/';
       var firebaseConnection = '';
 
       var currentUser = angular.fromJson(AuthService.getCurrentUser());
-      $scope.username = currentUser.username;
-      $scope.conversationList = [];
+
+      vm.username = currentUser.username;
+      vm.name = currentUser.displayName;
+      vm.conversationList = [];
 
       //Person with whom you are currently chatting
-      $scope.currentRecipient = '';
-      $scope.currentMessageList = [];
-      $scope.enteredText = '';
+      vm.currentRecipient = '';
+      vm.currentMessageList = [];
+      vm.enteredText = '';
 
-      $scope.getAllUsers = function() {
+      vm.getAllUsers = function() {
 
         connectModel.getAllUsers().then(function(r) {
-          $scope.conversationList = r.data;
+          vm.conversationList = r.data;
         });
       };
 
-      $scope.displayMessages = function() {
+      vm.displayMessages = function() {
         
-        $scope.currentMessageList = $firebaseArray(firebaseConnection.child('messages'));
+        vm.currentMessageList = $firebaseArray(firebaseConnection.child('messages'));
       };
 
-      $scope.sendMessage = function() {
+      vm.sendMessage = function() {
+        var today = moment().format('dddd MMMM Do, YYYY @ h:mA');
 
-        $scope.currentMessageList.$add({message : $scope.enteredText, to: $scope.currentRecipient, from: $scope.username});
-        $scope.enteredText = '';
+        vm.currentMessageList.$add({message : vm.enteredText, toUsername: vm.currentRecipient, to: vm.currentRecipientName, fromUsername: vm.username, from: vm.name, time: today});
+        vm.enteredText = '';
       };
 
-      $scope.switchConversation = function(conversation) {
+      vm.switchConversation = function(conversation) {
 
-        $scope.currentRecipient = conversation.username;
-        $scope.currentRecipientName = conversation.name;
-        $scope.currentRecipientPhoto = conversation.photo;
-        var arr = [$scope.currentRecipient, $scope.username].sort();
+        vm.currentRecipient = conversation.username;
+        vm.currentRecipientName = conversation.name;
+        vm.currentRecipientPhoto = conversation.photo;
+        var arr = [vm.currentRecipient, vm.username].sort();
         var convoURL = baseURL + arr[0] + arr[1];
         firebaseConnection = new Firebase(convoURL);
-        $scope.displayMessages();
+        vm.displayMessages();
       };
 
-      $scope.getAllUsers();
+      vm.getAllUsers();
 
     }]);
 

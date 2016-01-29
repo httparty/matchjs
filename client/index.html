@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="assets/styles/inbox.css">
     <link rel="stylesheet" href="assets/styles/guidelines.css">
     <link rel="stylesheet" href="assets/styles/invitations.css">
+    <script>
+      function clickX()
+      {
+        $(".validation").animate({ 'height': '16px' }, 500).show();
+      }
+    </script>
   </head>
   <body>
     <nav-dir></nav-dir>
@@ -29,6 +35,7 @@
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
 
     <!-- main config/routing -->
     <script src="app/app.js"></script>
