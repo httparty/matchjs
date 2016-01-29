@@ -173,7 +173,6 @@ helpers.updateInvitation = function(inviteObj) {
     if(!invite) {
       throw Error('Invitation not found.');
     }
-    console.log('SINANANANANNA', invite);
     return invite.updateAttributes({
       'when': inviteObj.when || invite.get('when'),
       'location': inviteObj.where || invite.get('location')
