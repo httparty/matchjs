@@ -11,7 +11,7 @@
         <ul class="conversationList">
           <li ng-repeat="conversation in ctrl.conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="ctrl.switchConversation(conversation)" ng-if="conversation.username != ctrl.username">
             <img class="img-rounded" ng-src="{{conversation.photo || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px">
-          <h4>{{conversation.name}}</h4>
+          <h5>{{conversation.name}}</h5>
           </li>
         </ul>
 
@@ -35,11 +35,22 @@
         <!-- <h1>{{ enteredText }}</h1> -->
         <ul class="messageList" id="msgList">
           <li ng-repeat="message in ctrl.currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
-          <p>
-          <strong>{{message.from}}</strong> : {{message.message}}
-          <br>
-          {{message.time}}
-          </p>
+
+          <div class="row messageContent">
+            <div class="col-xs-12">
+              <strong>{{message.from}}</strong>
+            </div>
+
+            <div class="col-md-12 text">
+              {{message.message}}
+            </div>
+
+            <div class="col-xs-12">
+              on <i>{{message.time}}</i>
+            </div>
+
+          </div>
+
           </li>
         </ul>
 

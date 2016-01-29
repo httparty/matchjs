@@ -56,6 +56,17 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
 .message{
   box-sizing: border-box;
   padding: 1%;
+  /*overflow: auto;*/
+}
+
+.messageContent {
+  width: 95%;
+  margin: 0px;
+}
+
+.text {
+  word-wrap: break-word;
+  overflow-y: auto;
 }
 
 /*                     */
