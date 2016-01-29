@@ -10,8 +10,7 @@ angular.module('app', [
   'app.connect',
   'app.inbox',
   'app.guidelines',
-  'app.invitations',
-  'angularMoment'
+  'app.invitations'
   // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
