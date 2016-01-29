@@ -48,7 +48,7 @@ module.exports = {
     var inviteId = req.params.inviteId;
     helpers.deleteInvitation(inviteId)
     .then(function(invite) {
-      res.status(200).send('Invitation has been deleted.')
-    })
+      res.status(200).send('Invitation has been deleted.');
+    });
   }
 };
