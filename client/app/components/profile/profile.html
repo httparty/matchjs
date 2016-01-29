@@ -79,10 +79,12 @@
         <p><b>Mentor:</b> {{invite['senderName']}}</p>
         <p><b>Mentee:</b> {{invite['recipientName']}}</p>
         <p><b>Summary:</b> {{invite['summary']}}</p>
-        <button ng-click="toggleInviteEditForm(); editMode.inviteEditMode = $index">Edit</button>
-        <button ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite)">Delete</button>
+        <div ng-hide="invite.readOnly">
+          <button ng-click="toggleInviteEditForm(); editMode.inviteEditMode = $index">Edit</button>
+          <button ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite)">Delete</button>
+        </div>
       </div>
-      <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}" ng-submit="updateInvite(invite.id, inviteUpdate)">
+      <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}; updateSent = false;" ng-submit="updateInvite(invite.senderName, invite.id, inviteUpdate)">
         <b>Location: </b><input type="text" ng-model="inviteUpdate.where" placeholder="{{invite['where']}}"><br>
         <b>Time & Date: </b><input type="text" ng-model="inviteUpdate.when" placeholder="{{invite['when']}}">
         <p><b>Mentor:</b> {{invite['senderName']}}</p>

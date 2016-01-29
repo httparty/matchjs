@@ -126,17 +126,18 @@ angular.module('app.profile', [])
       $scope.saveEditButton.invites.buttonText = 'Save';
     } else {
       // $scope.inviteUpdate.id = inviteId;
-      updateInvite($scope.inviteUpdate);
+      // updateInvite($scope.inviteUpdate);
       $scope.saveEditButton.invites.buttonText = 'Edit';
     }
   };
 
-  $scope.updateInvite = function(inviteId, inviteObj) { 
-    console.log('yep');
+  $scope.updateInvite = function(username, inviteId, inviteObj) {
     inviteObj.id = inviteId;
+    inviteObj.username = username;
     console.log(inviteObj);
     invitationsModel.updateInvitation(inviteObj)
       .then(function(response) {
+        $scope.updateSent = true;
         UImessages.inviteUpdated = 'Your invitation has been updated, and ' + $scope.invite.recipientName + ' has been notified.';
         console.log("here is the updated invite", response.body);
       });
@@ -181,6 +182,7 @@ angular.module('app.profile', [])
               } else {
                 menteeResp.data.forEach(function(invite) {
                   invite.when = moment(invite.when).format("dddd, MMMM Do YYYY, h:mm a");
+                  invite.readOnly = true;
                   console.log('NOWWWW invite.when', invite);
                   invites.push(invite);
                 });

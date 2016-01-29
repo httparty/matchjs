@@ -165,13 +165,17 @@ helpers.getInvitationsByRecipient = function(username) {
   });
 };
 
+
 helpers.updateInvitation = function(inviteObj) {
   return db.Invitation.findOne({
-    where: {'id' : inviteObj.id} 
+    where: {'id': inviteObj.id} 
   }).then(function(invite) {
+    if(!invite) {
+      throw Error('Invitation not found.');
+    }
     return invite.updateAttributes({
       when: inviteObj.when || invite.get('when'),
-      where: invite.Obj.where || invite.get('where')
+      where: inviteObj.where || invite.get('where')
     });
   });
 };
