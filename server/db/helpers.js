@@ -97,12 +97,9 @@ helpers.getUsersByLocation = function(location) {
   });
 };
 
-// helpers.getUsersByLocation("San Francisco");
-
 helpers.getAllUsers = function() {
   return db.User.findAll()
   .then(function(usersArray) {
-    console.log('HERE ARE ALL USERS', usersArray);
     return usersArray;
   });
 };
