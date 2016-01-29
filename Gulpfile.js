@@ -7,6 +7,7 @@ var minifyHTML = require('gulp-minify-html');
 var clean = require('gulp-clean');
 var protractor = require('gulp-protractor').protractor;
 var karma = require('gulp-karma');
+// var jasmine = require('gulp-jasmine');
 
 var paths = {
   scripts: ['client/app/**/*.js', 'server/**/*.js'],
@@ -40,7 +41,7 @@ Client side unit tests with Karma + Mocha + Chai
 **************************************************************/
 
 gulp.task('karma', function(done) {
-  gulp.src('./client/test/unit/*.js')
+  gulp.src('./foobar')
       .pipe(karma({
         configFile: './client/test/unit/config/karma.conf.js',
         action: 'run'
