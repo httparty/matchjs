@@ -22,20 +22,20 @@
                   <strong>Github:</strong> <a href="{{profileUser.github}}">{{profileUser.github}}</a><br>
                   <strong>Karma:</strong> {{profileUser.karmaPoints || '0'}} <br>
                   <div ng-hide="saveEditButton.basics.buttonText === 'Save'">
-                    <strong>Location:</strong> {{profileUser.location || 'San Francisco'}} <br>
+                    <strong>Location: </strong>{{profileUser.location || 'San Francisco'}} <br>
                   </div>
                 </p>
               </div>
               <form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
                 <!-- input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}"> -->
-                <input class="form-control" type="text" ng-model="profileUser.location" placeholder="{{profileUser.location}}">
+                <input class="form-control" type="text" ng-model="profileUser.location" placeholder="Location:  {{profileUser.location}}">
               </form>
               <!-- saveEditButtonBasics -->
               <button class="btn btn-default" ng-hide="!editMode.isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
             </div>
               <a ui-sref="invitations({username: profileUser.username, karmaPoints: profileUser.karmaPoints})" ng-hide="editMode.isSameUser" ng-hide="!inviteSent" class="btn btn-primary"> Invite {{profileUser.displayName || profileUser.username}}</a>
           </div><!-- End panel body-->
-        </div>
+        </div><!-- End panel panel-default-->
   <!-- END PHOTO AND BASICS SECTION -->
 
   <!-- PROFILE SUMMARY -->
@@ -103,17 +103,19 @@
               <p><b>Summary:</b> {{invite['summary']}}</p>
               <div ng-hide="invite.readOnly">
                 <button class="btn btn-default btn-sm" ng-click="toggleInviteEditForm(); editMode.inviteEditMode = $index">Edit</button>
-                <button class="btn btn-default btn-sm" ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite)">Delete</button>
+                <button class="btn btn-default btn-sm" ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite.senderName, invite.recipientName, invite.id)">Delete</button>
               </div>
             </div>
-            <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}; updateSent = false;" ng-submit="updateInvite(invite.senderName, invite.id, inviteUpdate)">
-              <b>Location: </b><input class="form-control" type="text" ng-model="inviteUpdate.where" placeholder="{{invite['where']}}"><br>
-              <b>Time & Date: </b><input class="form-control" type="text" ng-model="inviteUpdate.when" placeholder="{{invite['when']}}">
+            <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}; updateSent = false;" ng-submit="updateInvite(invite.senderName, invite.recipientName, invite.id, inviteUpdate);"> 
+              <!-- TRIED: editMode.inviteEditMode===-1; toggle/!toggle -->
+              <b>Location: </b><input class="form-control" type="text" ng-model="inviteUpdate.where" placeholder="{{invite['where']}}"  ng-disable="!toggle"><br>
+              <b>Time & Date: </b><input class="form-control" type="text" ng-model="inviteUpdate.when" placeholder="{{invite['when']}}" ng-disable="!toggle">
               <p><b>Mentor:</b> {{invite['senderName']}}</p>
               <p><b>Mentee:</b> {{invite['recipientName']}}</p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
-              <button class="btn btn-default btn-sm submitInvite" type="submit" >Save</button>
-              <p class="help-block">Update your mentorship session and notify {{invite['recipientName']}}</p>
+              <button class="btn btn-default btn-sm submitInvite" type="submit" ng-click="updateSent=true; toggle = !toggle;" ng-hide="toggle">Save</button>
+              <p ng-show="toggle"><i>{{UImessages.inviteUpdated}}</i></p>
+              <p class="help-block" ng-show="!toggle">Update your mentorship session and notify {{invite['recipientName']}}</p>
             </form>
           <hr>
           </div>
