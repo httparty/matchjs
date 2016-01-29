@@ -1,73 +1,96 @@
 <!-- <nav-bar></nav-bar> -->
 <div class="container">
   <div ng-controller="ProfileController">
-    <div id="profileBasicsAndPhoto" class='profileBasicsContainer' ng-model="selectedStyle.basics" ng-style="selectedStyle.basics">
-
-<!-- PROFILE PHOTO -->
+<!-- PHOTO AND BASICS SECTION -->
+    <div id="profileBasicsAndPhoto" class='col-sm-6 portfolio-item' ng-model="selectedStyle.basics" ng-style="selectedStyle.basics">
+  <!-- PROFILE PHOTO -->
       <div class='profilePhoto'>
       <!-- photo upload stuff goes here -->
-        <img ng-src={{user.avatar}} height="200" width="200">
-      </div> 
+        <img ng-src={{profileUser.photo}} height="200" width="200">
+      </div>
 
-<!-- PROFILE BASICS, EXCLUDING PHOTO -->
-
+  <!-- PROFILE BASICS, EXCLUDING PHOTO -->
       <div class="profileBasics">
         <div ng-hide="saveEditButton.basics.buttonText === 'Save'">
           <p>
-            <strong>{{user.displayName}}</strong><br>
-            Username: {{user.username}}<br>
-            Location: {{user.location || 'San Francisco'}} <br>
-            Github: <a href="{{user.github}}">{{user.github}}</a><br>
-            Karma: {{user.karmaPoints || '0'}} <br>
+            <strong>{{profileUser.displayName || profileUser.username}}</strong><br>
+            Location: {{profileUser.location || 'San Francisco'}} <br>
+            Github: <a href="{{profileUser.github}}">{{profileUser.github}}</a><br>
+            Karma: {{profileUser.karmaPoints || '0'}} <br>
           </p>
         </div>
         <form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
-          <input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}">
-          <input type="text" ng-model="user.location" placeholder="{{user.location}}">
-          <input type="text" ng-model="user.github" placeholder="{{user.github}}">
+          <!-- input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}"> -->
+          <input type="text" ng-model="profileUser.location" placeholder="{{profileUser.location}}">
+          <input type="text" ng-model="profileUser.github" placeholder="{{profileUser.github}}">
         </form>
         <!-- saveEditButtonBasics -->
-        <button ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
+        <button ng-hide="!isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
       </div>
-
+<!--       <button ng-hide="isSameUser" ng-hide='!inviteSent' ng-click="createNewInvite(profileUser.username)">Invite {{profileUser.displayName || profileUser.username}}</button> -->
+        <a ui-sref="invitations({username: profileUser.username, karmaPoints: profileUser.karmaPoints})" ng-hide="isSameUser" ng-hide="!inviteSent" class="btn btn-primary"> Invite {{profileUser.displayName || profileUser.username}}</a>
     </div>
-  <hr>
+<!-- END PHOTO AND BASICS SECTION -->
 
 <!-- PROFILE SKILLS -->
-    <div id="profileSkills" ng-model="selectedStyle.skills" ng-style="selectedStyle.skills">
-    <h2>Skills</h2>
-    <form>
-      <h3>I want to teach:</h3>
-      <div class="toTeach" ng-model="skills.toTeach">
-        <ng-form>
-          <span ng-repeat="skill in skills.collection">
-            <input type="checkbox"  ng-model="skills.toTeach[skill]" ng-checked="skills.toTeach[skill]" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
-          </span>
-        </ng-form>
-      </div>
-      <h3>I want to learn:</h3>
-      <div>
-        <ng-form>
-          <span ng-repeat="skill in skills.collection">
-            <input type="checkbox"  ng-model="skills.toLearn[skill]" ng-checked="skills.toLearn[skill]" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
-          </span>
-        </ng-form>
-    </form>
-    <br>
-    <button style="margin-top: 10px" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()"> {{ saveEditButton.skills.buttonText }}</button>
+    <div id="profileSkills" class='col-sm-4' ng-model="selectedStyle.skills" ng-style="selectedStyle.skills">
+      <h2>Skills</h2>
+      <form>
+        <h3 ng-hide='!isSameUser'>I want to teach:</h3>
+        <h3 ng-hide='isSameUser'>{{profileUser.displayName || profileUser.username}} wants to teach:</h3>
+        <div class="toTeach" ng-model="skills.toTeach">
+          <ng-form>
+            <span ng-repeat="skill in skills.collection">
+              <input type="checkbox"  ng-model="skills.toTeach[skill]" ng-checked="skills.toTeach[skill]" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+            </span>
+          </ng-form>
+        </div>
+        <h3 ng-hide="!isSameUser">I want to learn:</h3>
+        <h3 ng-hide="isSameUser">{{profileUser.displayName || profileUser.username}} wants to learn:</h3>
+        <div>
+          <ng-form>
+            <span ng-repeat="skill in skills.collection">
+              <input type="checkbox"  ng-model="skills.toLearn[skill]" ng-checked="skills.toLearn[skill]" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+            </span>
+          </ng-form>
+        </div>
+      </form>
+      <br>
+      <button style="margin-top: 10px" ng-hide="!isSameUser" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()" > {{ saveEditButton.skills.buttonText }}</button>
+    </div>
+
+<!-- PROFILE SUMMARY -->
+    <div id="profileSummary" class='col-sm-4' ng-model="selectedStyle.summary" ng-style="selectedStyle.summary">
+      <h2>Summary</h2>
+      <form>
+        <input type ="text" class='col-sm-4' style="width: 400px; height: 250px; margin-bottom: 10px" ng-model="profileUser.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'">
+      </form>
+      <button ng-hide="!isSameUser" ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
+    </div>
+
+<!-- INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
+  <div id="invitations" class='col-sm-4' ng-hide='!isSameUser'>
+    <h2>My Invitations</h2>
+    <div ng-repeat="invite in invitations.mentor">
+      <p>Location: {{invite['where']}}</p>
+      <p>Time & Date: {{invite['when']}}</p>
+      <p>Mentor: {{currentUser.displayName}}</p>
+      <p>Mentee: {{invite['recipientName']}}</p>
+      <p>Summary: {{invite['summary']}}</p>
+    </div>
+    <div ng-repeat="invite in invitations.mentee">
+      <p>Location: {{invite['where']}}</p>
+      <p>Time & Date: {{invite['when']}}</p>
+      <p>Mentor: {{invite['recipientName']}}</p>
+      <p>Mentee: {{currentUser.displayName}}</p>
+      <p>Summary: {{invite['summary']}}</p>
+    </div>
   </div>
 
-<hr>
-  <div id="profileSummary" ng-model="selectedStyle.summary" ng-style="selectedStyle.summary">
-    <h2>Summary</h2>
-    <form>
-      <input type ="text" style="width: 600px; height: 250px; margin-bottom: 10px" ng-model="user.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'"> 
-    </form>
-    <button ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
-    </div>
-    <div ng-init="getCurrentUserProfile()"></div>
-  </div>
+<!-- INITIALIZATION  -->
+  <div ng-init="getUserProfile(); isSameUser = false;"></div>
 
 </div>
+
 
 <footer-dir></footer-dir>

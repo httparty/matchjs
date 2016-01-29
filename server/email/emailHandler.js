@@ -12,6 +12,8 @@ module.exports = {
       +req.cookies['user-profile'].username+'.<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to meet your future Mentor or Mentee!'
     };
     // res.send(console.log(req.cookies['user-profile']));
-    res.send(mailer(mailOptions));
+    // res.send(mailer(mailOptions));
+    mailer(mailOptions);
+    res.redirect('/#/connect');
   }
 };

@@ -2,7 +2,6 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cors = require('cors');
 var githubSessions = require('./githubSessions.js');
-var helpers = require('../db/helpers.js');
 
 module.exports = function(app, express) {
 
@@ -21,12 +20,13 @@ module.exports = function(app, express) {
   var usersRouter = express.Router();
   var messageRouter = express.Router();
   var emailRouter = express.Router();
+  var invitationsRouter = express.Router();
 
   app.use('/auth', authRouter);
   app.use('/api/users', usersRouter);
   app.use('/api/inbox', messageRouter);
   app.use('/api/email', emailRouter);
-
+  app.use('/api/invitations',invitationsRouter);
 
   app.get('/failure', function(req, res) {
     res.status('404');
@@ -46,20 +46,9 @@ module.exports = function(app, express) {
     });
   });
 
-  app.get('/etc', function(req,res) {
-    var got = helpers.getAllUsers();
-    res.send(got);
-  });
-
-  // app.get('/', function(req, res) {
-  //   res.status('200');
-  //   res.send("Hello World");
-  // });
-
   require(__dirname + './../auth/authRoutes.js')(authRouter);
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
   require(__dirname + './../email/emailRoutes.js')(emailRouter);
-
-
+  require(__dirname + './../invitations/invitationsRoutes.js')(invitationsRouter);
 };
 

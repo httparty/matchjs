@@ -1,7 +1,7 @@
 angular.module('app.profile')
 .factory('Profile', ['$http', function($http) {
 
-  var getCurrentUser = function(userDataObj) {
+  var getUserProfile = function(userDataObj) {
     return $http({
       method: 'GET',
       url: '/api/users/userProfile/' + userDataObj.username
@@ -21,7 +21,7 @@ angular.module('app.profile')
   };
 
   return {
-    getCurrentUser : getCurrentUser,
+    getUserProfile : getUserProfile,
     updateProfile : updateProfile
   };
 

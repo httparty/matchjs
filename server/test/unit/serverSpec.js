@@ -1,18 +1,39 @@
 var expect = require('chai').expect;
-var request = require('request');
-// var app = require('../server/server');  //Uncomment this when using the middleware is built out
-var chai = require('chai');
+var request = require('supertest');
+var express = require('express');
+var app = express();
+var middleware = require('../../config/middleware');
 
-describe('Server Tests', function() {
-  describe('Basic Test', function() {
-    it('Passes basic test 1 = 1', function() {
-      expect(1).to.equal(1);
-    });
+middleware(app, express);
+
+describe('Server Spec', function() {
+
+  it('it gets the resource route', function(done) {
+
+    request(app)
+      .get('/resource')
+      .expect(302)
+      .end(function(err, res) {
+        if (err) {
+          throw err;
+        }
+        done();
+      });
   });
 
-  describe('Second Test', function(){
-    it('Passes more than one test', function(){
-      expect(true).to.equal(true);
+  describe('/api/users routes', function() {
+
+    it('it gets a user profile', function(done) {
+
+      request(app)
+        .get('/api/users/userProfile/polinadotio')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            throw err;
+          }
+          done();
+        });
     });
   });
 });
