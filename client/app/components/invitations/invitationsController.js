@@ -10,6 +10,7 @@
     // Current User Information
     var current_user = angular.fromJson(AuthService.getCurrentUser());
     vm.username = current_user.username;
+    vm.name = current_user.displayName;
 
     Profile.getUserProfile({username: vm.username}).then(function(response){
       vm.currentUserProfile = response.data;
@@ -20,6 +21,7 @@
 
     Profile.getUserProfile($state.params).then(function(response){
       vm.recipientProfile = response.data;
+      vm.recipientName = vm.recipientProfile.name;
     });
 
 

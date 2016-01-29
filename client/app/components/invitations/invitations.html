@@ -18,8 +18,8 @@
                 <center><img class="img-responsive" ng-src="{{ctrl.currentUserProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
               </a>
               <div class="list-group">
-                <div class="list-group-item col-md-6"><strong>{{ctrl.username || 'N/A'}}</strong></div>
-                <div class="list-group-item col-md-6"><strong>Karma: {{ctrl.currentUserProfile.karmaPoints || 'N/A'}}</strong></div>
+                <div class="list-group-item col-md-6"><strong>{{ctrl.name || 'N/A'}}</strong></div>
+                <div class="list-group-item col-md-6">Karma: {{ctrl.currentUserProfile.karmaPoints || 'N/A'}}</div>
               </div>
             </div>
           </div>
@@ -34,8 +34,8 @@
                 <center><img class="img-responsive" ng-src="{{ctrl.recipientProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
               </a>
               <div class="list-group">
-                <div class="list-group-item col-md-6"><strong>{{ctrl.recipient || 'N/A'}}</strong></div>
-                <div class="list-group-item col-md-6"><strong>Karma: {{ctrl.recipientProfile.karmaPoints || 'N/A'}}</strong></div>
+                <div class="list-group-item col-md-6"><strong>{{ctrl.recipientName || 'N/A'}}</strong></div>
+                <div class="list-group-item col-md-6">Karma: {{ctrl.recipientProfile.karmaPoints || 'N/A'}}</div>
               </div>
             </div>
           </div>
