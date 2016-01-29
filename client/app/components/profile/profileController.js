@@ -30,7 +30,7 @@ angular.module('app.profile', [])
   $scope.skills.toTeach = {};
   $scope.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
 
-  $scope.editMode = {}
+  $scope.editMode = {};
   $scope.editMode.isSameUser = '';
   $scope.editMode.inviteEditMode = '';
 
@@ -139,7 +139,7 @@ angular.module('app.profile', [])
       .then(function(response) {
         $scope.updateSent = true;
         UImessages.inviteUpdated = 'Your invitation has been updated, and ' + $scope.invite.recipientName + ' has been notified.';
-        console.log("here is the updated invite", response.body);
+        console.log('here is the updated invite', response.body);
       });
   };
 
@@ -170,7 +170,7 @@ angular.module('app.profile', [])
                 noMentorInvites = true;
               } else {
                 mentorResp.data.forEach(function(invite) {
-                  invite.when = moment(invite.when).format("dddd, MMMM Do YYYY, h:mm a");
+                  invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
                   invites.push(invite);                
                 });
               }
@@ -181,7 +181,7 @@ angular.module('app.profile', [])
                 UImessages.noInvites = 'You have no current invitations.';
               } else {
                 menteeResp.data.forEach(function(invite) {
-                  invite.when = moment(invite.when).format("dddd, MMMM Do YYYY, h:mm a");
+                  invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
                   invite.readOnly = true;
                   console.log('NOWWWW invite.when', invite);
                   invites.push(invite);
