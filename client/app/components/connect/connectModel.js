@@ -28,12 +28,30 @@
       });
     };
 
-    model.getUsersByLocation = function(location) {
+    model.searchUsers = function(params) {
+      var locations = [];
+      var skills = [];
+
+      _.each(params, function(item) {
+        if (item.type === 'location') {
+          locations.push(item.text);
+        }
+        if (item.type === 'skill') {
+          skills.push(item.text);
+        }
+      });
+
+      var queryObj = {locations: locations,
+                      skills: skills};
+
+      // console.log("QUERY OBJECT", queryObj);
+
       return $http({
         method: 'GET',
-        url: '/api/users/location/' + location
-      });
-    };
+        url: '/api/users/search',
+        params: queryObj
+      })
+    }
 
     return model;
   });
