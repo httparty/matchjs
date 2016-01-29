@@ -37,13 +37,18 @@ module.exports = {
   updateInvitationBySender: function(req, res) {
     var username = req.params.username;
     var inviteData = req.body;
+    // console.log('here is inviteData WOOOO', inviteData);
     helpers.updateInvitation(inviteData)
     .then(function(invite) {
-      res.send(invite);
+      res.status(200).send(invite);
     });
   },
 
-  deleteInvitationByInvitationID: function(req, res) {
-
+  deleteInvitation: function(req, res) {
+    var inviteId = req.params.inviteId;
+    helpers.deleteInvitation(inviteId)
+    .then(function(invite) {
+      res.status(200).send('Invitation has been deleted.')
+    })
   }
 };
