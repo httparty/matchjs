@@ -4,7 +4,7 @@ exports.getSearchResults = function(queryParams, usersArray) {
 
   // console.log(queryParams);
 
-  result = usersArray;
+  var result = usersArray;
 
   if (!_.isEmpty(queryParams)) {
 
@@ -29,7 +29,7 @@ exports.getSearchResults = function(queryParams, usersArray) {
       }
 
       result = _.filter(result, function(item) {
-        return _.intersection(queryParams.skills, item.dataValues.toTeach).length > 0
+        return _.intersection(queryParams.skills, item.dataValues.toTeach).length > 0;
       });
 
       // _.each(result, function(item) {

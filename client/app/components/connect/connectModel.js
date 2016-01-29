@@ -50,8 +50,8 @@
         method: 'GET',
         url: '/api/users/search',
         params: queryObj
-      })
-    }
+      });
+    };
 
     return model;
   });

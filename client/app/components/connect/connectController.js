@@ -37,23 +37,23 @@
 
     var containsQueryParam = function(param) {
       return _.find(vm.tags, function(tag){ return tag.text === param; });
-    }
+    };
 
     vm.removeTag = function(tag) {
-      $scope.$broadcast('query-changed', { removed: tag.text});
+      $scope.$broadcast('query-changed');
     };
 
     vm.addLocation = function(location) {
       if (!containsQueryParam(location)) {
-        vm.tags.push({type: "location", text: location});
-        $scope.$broadcast('query-changed', { added: location });
+        vm.tags.push({type: 'location', text: location});
+        $scope.$broadcast('query-changed');
       }
     };
 
     vm.addSkill = function(skill) {
       if (!containsQueryParam(skill)) {
-        vm.tags.push({type: "skill", text: skill});
-        $scope.$broadcast('query-changed', { added: location });
+        vm.tags.push({type: 'skill', text: skill});
+        $scope.$broadcast('query-changed');
       }
     };
 
@@ -61,7 +61,7 @@
 
         $scope.$on('query-changed', function(event, args) {
           observer.onNext();
-        })
+        });
       }).flatMapLatest(function() {
           return Rx.Observable.fromPromise(connectModel.searchUsers(vm.tags));
         });
