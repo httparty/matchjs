@@ -123,7 +123,7 @@ helpers.createInvitation = function(username, invitee, sessionInfo){
       senderName: user.get('username'),
       recipientName: invitee,
       when: sessionInfo.when,
-      where: sessionInfo.where,
+      location: sessionInfo.where,
       summary: sessionInfo.summary,
     }).then(function(invitation) {
       // console.log(invitation);
