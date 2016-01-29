@@ -34,6 +34,16 @@ module.exports = {
     });
   },
 
+  updateInvitationBySender: function(req, res) {
+    var username = req.params.username;
+    var inviteData = req.body;
+    helpers.updateInvitation(inviteData)
+    .then(function(invite) {
+      res.send(invite);
+    });
+  },
+
   deleteInvitationByInvitationID: function(req, res) {
+
   }
 };

@@ -2,7 +2,7 @@ var db = require('./config.js');
 var rec = require('../recommender/recommend');
 var helpers = {};
 
-//---------------AUTHENTICATION----------------------
+//---------------AUTHENTICATION---------------------- 
 
 helpers.deleteUser = function(userToDeleteObj) {
   db.User.findOne({
@@ -120,9 +120,10 @@ helpers.createInvitation = function(username, invitee, sessionInfo){
   }).then(function(user) {
     return db.Invitation.create({
       UserId: user.dataValues.id,
+      senderName: user.get('username'),
       recipientName: invitee,
       when: sessionInfo.when,
-      where: sessionInfo.where,
+      location: sessionInfo.where,
       summary: sessionInfo.summary,
     }).then(function(invitation) {
       // console.log(invitation);
@@ -161,6 +162,21 @@ helpers.getInvitationsByRecipient = function(username) {
       return null;
     }
     return invitations;
+  });
+};
+
+
+helpers.updateInvitation = function(inviteObj) {
+  return db.Invitation.findOne({
+    where: {'id': inviteObj.id} 
+  }).then(function(invite) {
+    if(!invite) {
+      throw Error('Invitation not found.');
+    }
+    return invite.updateAttributes({
+      'when': inviteObj.when || invite.get('when'),
+      'location': inviteObj.where || invite.get('location')
+    });
   });
 };
 

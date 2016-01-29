@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.invitations')
-    .factory('invitationsModel', function($http){
+    .factory('invitationsModel', ['$http', function($http){
       var model = {};
 
       model.createInvitation = function(inviteObj){
@@ -27,10 +27,23 @@
         });
       };
 
-      model.deleteInvitationByInvitationID = function(inviteObj){
+//NOTE TO RACHEL: - NEED NEW ROUTE FOR BELOW?
+      model.deleteInvitation = function(inviteObj) {
+        // return $http({
+        //   method: 'GET',
+        //   url: '/api/invitations/sender/' + inviteObj.id
+        // });
       };
 
-      return model;
-  });
+      model.updateInvitation = function(inviteObj) {
+        return $http({
+          method: 'POST',
+          url: '/api/invitations/sender/' + inviteObj.username, //updated by the sender/mentor
+          data: inviteObj
+        });
+      };
+    
+    return model;
+  }]);
 
 })();
