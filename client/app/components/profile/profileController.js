@@ -2,125 +2,167 @@ angular.module('app.profile', [])
   .constant('moment', moment)
   .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile, AuthService, invitationsModel) {
     
-    var noMentorInvites;    
+  var noMentorInvites;    
 
-    $scope.currentUser = angular.fromJson(AuthService.getCurrentUser());
+  var current = new Date();
 
-    $scope.profileUser = {};
-    $scope.profileUser.username = $state.params.username;
+  $scope.currentUser = angular.fromJson(AuthService.getCurrentUser());
 
-    $scope.profileUser.toLearn = [];
-    $scope.profileUser.toTeach = [];
+  $scope.profileUser = {};
+  $scope.profileUser.username = $state.params.username;
 
-    $scope.saveEditButton = {};
-    $scope.saveEditButton.skills = {};
-    $scope.saveEditButton.skills.buttonText = 'Edit';
-    $scope.saveEditButton.basics = {};
-    $scope.saveEditButton.basics.buttonText = 'Edit';
-    $scope.saveEditButton.summary = {};
-    $scope.saveEditButton.summary.buttonText = 'Edit';
+  $scope.profileUser.toLearn = [];
+  $scope.profileUser.toTeach = [];
 
-    $scope.selectedStyle = {};
-    $scope.skills = {};
-    $scope.skills.toLearn = {};
-    $scope.skills.toTeach = {};
-    $scope.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
+  $scope.saveEditButton = {};
+  $scope.saveEditButton.skills = {};
+  $scope.saveEditButton.skills.buttonText = 'Edit';
+  $scope.saveEditButton.basics = {};
+  $scope.saveEditButton.basics.buttonText = 'Edit';
+  $scope.saveEditButton.summary = {};
+  $scope.saveEditButton.summary.buttonText = 'Edit';
+  $scope.saveEditButton.invites = {};
+  $scope.saveEditButton.invites.buttonText = 'Edit';
 
-    $scope.isSameUser = '';
+  $scope.selectedStyle = {};
+  $scope.skills = {};
+  $scope.skills.toLearn = {};
+  $scope.skills.toTeach = {};
+  $scope.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
 
-    $scope.invitations = [];
+  $scope.editMode = {}
+  $scope.editMode.isSameUser = '';
+  $scope.editMode.inviteEditMode = '';
 
-    $scope.UImessages = {};
+  $scope.invitations = [];
 
-    $scope.inviteSent = '';
+  $scope.UImessages = {};
+
+  // $scope.inviteSent = '';
+
+
+
+  // $scope.selectedInvite = {};
+  // $scope.selectedInvite.invite = null;
+
+
 
   //-------------------BASICS--------------------
-    $scope.toggleEditShowBasics = function() {
-      if($scope.saveEditButton.basics.buttonText === 'Edit') {
-        $scope.saveEditButton.basics.buttonText = 'Save';
-        $scope.selectedStyle.basics = {'background-color' : '#FFFFCC'};
-      } else {
-        $scope.saveEditButton.basics.buttonText='Edit';
-        $scope.selectedStyle.basics = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.profileUser); //call to fn
-      }
-    };
+  $scope.toggleEditShowBasics = function() {
+    if($scope.saveEditButton.basics.buttonText === 'Edit') {
+      $scope.saveEditButton.basics.buttonText = 'Save';
+      $scope.selectedStyle.basics = {'background-color' : '#FFFFCC'};
+    } else {
+      $scope.saveEditButton.basics.buttonText='Edit';
+      $scope.selectedStyle.basics = {'background-color' : '#FFFFFF'};
+      updateProfile($scope.profileUser); //call to fn
+    }
+  };
 
 
   //---------SHARED BY BASICS, SKILLS, & SUMMARY-
-    var updateProfile = function() {
-      for(var learnKey in $scope.skills.toLearn) {
-          if(!contains(learnKey, $scope.skills.toLearn)) {
-            $scope.profileUser.toLearn.push(learnKey);
-          }
-          if(!$scope.skills.toLearn[learnKey]) {
-            $scope.profileUser.toLearn.splice($scope.profileUser.toLearn.indexOf(learnKey),1);
-          }
-      }
-      for(var teachKey in $scope.skills.toTeach) {
-        if(!contains(teachKey, $scope.skills.toTeach)) {
-            $scope.profileUser.toTeach.push(teachKey);
+  var updateProfile = function() {
+    for(var learnKey in $scope.skills.toLearn) {
+        if(!contains(learnKey, $scope.skills.toLearn)) {
+          $scope.profileUser.toLearn.push(learnKey);
         }
-        if(!$scope.skills.toTeach[teachKey]) {
-          $scope.profileUser.toTeach.splice($scope.profileUser.toTeach.indexOf(teachKey),1);
+        if(!$scope.skills.toLearn[learnKey]) {
+          $scope.profileUser.toLearn.splice($scope.profileUser.toLearn.indexOf(learnKey),1);
         }
+    }
+    for(var teachKey in $scope.skills.toTeach) {
+      if(!contains(teachKey, $scope.skills.toTeach)) {
+          $scope.profileUser.toTeach.push(teachKey);
       }
-      Profile.updateProfile($scope.profileUser) //update DB
-      .then(function(response) {
-        console.log('server response to profile update:', response);
-        $scope.getUserProfile();
-      });
-    };
+      if(!$scope.skills.toTeach[teachKey]) {
+        $scope.profileUser.toTeach.splice($scope.profileUser.toTeach.indexOf(teachKey),1);
+      }
+    }
+    Profile.updateProfile($scope.profileUser) //update DB
+    .then(function(response) {
+      console.log('server response to profile update:', response);
+      $scope.getUserProfile();
+    });
+  };
 
-    var contains = function(elem, arr) {
-      for(var j = 0; j < arr.length; j++) {
-        if (elem === arr[j]) {
-          return true;
-        }
+  var contains = function(elem, arr) {
+    for(var j = 0; j < arr.length; j++) {
+      if (elem === arr[j]) {
+        return true;
       }
-      return false;
-    };
+    }
+    return false;
+  };
 
   //-------------------SKILLS--------------------
   		//called when SKILLS edit/show button is clicked
-    $scope.toggleEditShowSkills = function() {
-      if($scope.saveEditButton.skills.buttonText === 'Edit') {
-        $scope.saveEditButton.skills.buttonText = 'Save';
-        $scope.selectedStyle.skills = {'background-color' : '#FFFFCC'};
-      } else {
-        $scope.selectedStyle.skills = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.profileUser);
-        $scope.saveEditButton.skills.buttonText='Edit';
-      }
-    };
+  $scope.toggleEditShowSkills = function() {
+    if($scope.saveEditButton.skills.buttonText === 'Edit') {
+      $scope.saveEditButton.skills.buttonText = 'Save';
+      $scope.selectedStyle.skills = {'background-color' : '#FFFFCC'};
+    } else {
+      $scope.selectedStyle.skills = {'background-color' : '#FFFFFF'};
+      updateProfile($scope.profileUser);
+      $scope.saveEditButton.skills.buttonText='Edit';
+    }
+  };
 
   //-------------------SUMMARY-------------------
-    $scope.toggleEditShowSummary = function() {
-      if($scope.saveEditButton.summary.buttonText === 'Edit') {
-        $scope.saveEditButton.summary.buttonText = 'Save';
-        $scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
-      } else {
-        $scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
-        //call to fn that saves summary
-        updateProfile($scope.profileUser);
-        $scope.saveEditButton.summary.buttonText='Edit';
-      }
-    };
-  //--------------CREATE INVITATION -------------
-  $scope.createNewInvite = function(username) {
-    //call to invitation controller
-    //set scope.inviteSent = true;
+  $scope.toggleEditShowSummary = function() {
+    if($scope.saveEditButton.summary.buttonText === 'Edit') {
+      $scope.saveEditButton.summary.buttonText = 'Save';
+      $scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
+    } else {
+      $scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
+      //call to fn that saves summary
+      updateProfile($scope.profileUser);
+      $scope.saveEditButton.summary.buttonText='Edit';
+    }
   };
+  //--------------CREATE INVITATION -------------
+  
+  $scope.toggleInviteEditForm = function(inviteId) {
+    if($scope.saveEditButton.invites.buttonText === 'Edit') {
+      $scope.saveEditButton.invites.buttonText = 'Save';
+    } else {
+      // $scope.inviteUpdate.id = inviteId;
+      updateInvite($scope.inviteUpdate);
+      $scope.saveEditButton.invites.buttonText = 'Edit';
+    }
+  };
+
+  $scope.updateInvite = function(inviteId, inviteObj) { 
+    console.log('yep');
+    inviteObj.id = inviteId;
+    console.log(inviteObj);
+    invitationsModel.updateInvitation(inviteObj)
+      .then(function(response) {
+        UImessages.inviteUpdated = 'Your invitation has been updated, and ' + $scope.invite.recipientName + ' has been notified.';
+        console.log("here is the updated invite", response.body);
+      });
+  };
+
+  $scope.deleteInvite = function(invite) {
+    // invitationsModel.deleteInvitation(invite)
+    //   .then(function(response) {
+    //     invite = response.body;
+    //     //add message text
+    //   })
+  };
+
+  // $scope.test = function() {
+  //   console.log('inside test');
+  // };
 
   //---------RETRIEVE USER PROFILE DATA FROM DB--
   	//called on the initialization of the HTML page, ng-init
-    $scope.getUserProfile = function() {
+  $scope.getUserProfile = function() {
       Profile.getUserProfile($state.params)
       .then(function(response) {
-        //---if the current user is the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons.---
+        //---if the current user is the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons. Then get their invitations and populate the scope.---
         var invites = [];
         if($scope.currentUser.username === $scope.profileUser.username) {
-          $scope.isSameUser = true;
+          $scope.editMode.isSameUser = true;
           invitationsModel.getInvitationsByMentor($scope.currentUser)
             .then(function(mentorResp) {
               if(mentorResp.data.length === 0) {
@@ -135,20 +177,17 @@ angular.module('app.profile', [])
           invitationsModel.getInvitationsByMentee($scope.currentUser)
             .then(function(menteeResp) {
               if(menteeResp.data.length === 0 && noMentorInvites) {
-                console.log('hello face');
-                UImessages.noInvites = 'You have no invitations, and totally suck at life.';
+                UImessages.noInvites = 'You have no current invitations.';
               } else {
                 menteeResp.data.forEach(function(invite) {
                   invite.when = moment(invite.when).format("dddd, MMMM Do YYYY, h:mm a");
-                  console.log('NOWWWW invite.when', invite.when);
+                  console.log('NOWWWW invite.when', invite);
                   invites.push(invite);
                 });
-                invites = bubbleSort(invites);
                 $scope.invitations = invites;
               }
             });
         }
-
         //---populate the scope with the data returning from DB query.---
         $scope.profileUser.photo = response.data.photo;
         $scope.profileUser.location = response.data.location;
@@ -166,17 +205,6 @@ angular.module('app.profile', [])
 
         //---
       });
-    };
-  var bubbleSort = function(array) {
-    for(var j = 0; j < array.length; j++) {   
-      for(var i = 0; i < array.length -1; i++) {
-        if(array[i]['when'] > array[i+1]['when']) {
-          var temp = array[i];
-          array[i] = array[i+1];
-          array[i+1] = temp;
-        }
-      }
-    }
-    return array;
   };
+
 }]);
