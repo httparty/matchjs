@@ -131,24 +131,24 @@ angular.module('app.profile', [])
     }
   };
 
-  $scope.updateInvite = function(username, inviteId, inviteObj) {
+  $scope.updateInvite = function(username, recipient, inviteId, inviteObj) {
     inviteObj.id = inviteId;
     inviteObj.username = username;
-    console.log(inviteObj);
+    // console.log(inviteObj);
     invitationsModel.updateInvitation(inviteObj)
       .then(function(response) {
-        $scope.updateSent = true;
-        UImessages.inviteUpdated = 'Your invitation has been updated, and ' + $scope.invite.recipientName + ' has been notified.';
-        console.log('here is the updated invite', response.body);
+        $scope.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
+        console.log('here is the updated invite', response.data);
       });
   };
 
   $scope.deleteInvite = function(invite) {
-    // invitationsModel.deleteInvitation(invite)
-    //   .then(function(response) {
-    //     invite = response.body;
-    //     //add message text
-    //   })
+    // console.log(invite);
+    invitationsModel.deleteInvitation(invite)
+      .then(function(response) {
+        invite = response.body;
+        //add message text
+      })
   };
 
   // $scope.test = function() {
