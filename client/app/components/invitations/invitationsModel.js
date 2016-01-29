@@ -27,12 +27,11 @@
         });
       };
 
-//NOTE TO RACHEL: - NEED NEW ROUTE FOR BELOW?
       model.deleteInvitation = function(inviteObj) {
-        // return $http({
-        //   method: 'GET',
-        //   url: '/api/invitations/sender/' + inviteObj.id
-        // });
+        return $http({
+          method: 'DELETE',
+          url: '/api/invitations/invite/' + inviteObj.id
+        });
       };
 
       model.updateInvitation = function(inviteObj) {
