@@ -180,4 +180,17 @@ helpers.updateInvitation = function(inviteObj) {
   });
 };
 
+helpers.deleteInvitation = function(inviteId) {
+  return db.Invitation.findOne({
+    where: {'id': inviteId}
+  }).then(function(invite) {
+    if(!invite) {
+      throw Error('Invitation not found.');
+    }
+    return invite.destroy();
+  });
+};
+
+
+
 module.exports = helpers;
