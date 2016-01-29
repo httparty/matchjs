@@ -22,13 +22,13 @@
         <form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
           <!-- input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}"> -->
           <input type="text" ng-model="profileUser.location" placeholder="{{profileUser.location}}">
+          <input type="text" ng-model="profileUser.location" placeholder="{{profileUser.github}} || San Francisco">
           <input type="text" ng-model="profileUser.github" placeholder="{{profileUser.github}}">
         </form>
         <!-- saveEditButtonBasics -->
-        <button ng-hide="!isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
+        <button ng-hide="!editMode.isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
       </div>
-<!--       <button ng-hide="isSameUser" ng-hide='!inviteSent' ng-click="createNewInvite(profileUser.username)">Invite {{profileUser.displayName || profileUser.username}}</button> -->
-        <a ui-sref="invitations({username: profileUser.username, karmaPoints: profileUser.karmaPoints})" ng-hide="isSameUser" ng-hide="!inviteSent" class="btn btn-primary"> Invite {{profileUser.displayName || profileUser.username}}</a>
+        <a ui-sref="invitations({username: profileUser.username, karmaPoints: profileUser.karmaPoints})" ng-hide="editMode.isSameUser" ng-hide="!inviteSent" class="btn btn-primary"> Invite {{profileUser.displayName || profileUser.username}}</a>
     </div>
 <!-- END PHOTO AND BASICS SECTION -->
 
@@ -36,8 +36,8 @@
     <div id="profileSkills" class='col-sm-4' ng-model="selectedStyle.skills" ng-style="selectedStyle.skills">
       <h2>Skills</h2>
       <form>
-        <h3 ng-hide='!isSameUser'>I want to teach:</h3>
-        <h3 ng-hide='isSameUser'>{{profileUser.displayName || profileUser.username}} wants to teach:</h3>
+        <h3 ng-hide='!editMode.isSameUser'>I want to teach:</h3>
+        <h3 ng-hide='editMode.isSameUser'>{{profileUser.displayName || profileUser.username}} wants to teach:</h3>
         <div class="toTeach" ng-model="skills.toTeach">
           <ng-form>
             <span ng-repeat="skill in skills.collection">
@@ -45,8 +45,8 @@
             </span>
           </ng-form>
         </div>
-        <h3 ng-hide="!isSameUser">I want to learn:</h3>
-        <h3 ng-hide="isSameUser">{{profileUser.displayName || profileUser.username}} wants to learn:</h3>
+        <h3 ng-hide="!editMode.isSameUser">I want to learn:</h3>
+        <h3 ng-hide="editMode.isSameUser">{{profileUser.displayName || profileUser.username}} wants to learn:</h3>
         <div>
           <ng-form>
             <span ng-repeat="skill in skills.collection">
@@ -56,7 +56,7 @@
         </div>
       </form>
       <br>
-      <button style="margin-top: 10px" ng-hide="!isSameUser" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()" > {{ saveEditButton.skills.buttonText }}</button>
+      <button style="margin-top: 10px" ng-hide="!editMode.isSameUser" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()" > {{ saveEditButton.skills.buttonText }}</button>
     </div>
 
 <!-- PROFILE SUMMARY -->
@@ -65,24 +65,37 @@
       <form>
         <input type ="text" class='col-sm-4' style="width: 400px; height: 250px; margin-bottom: 10px" ng-model="profileUser.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'">
       </form>
-      <button ng-hide="!isSameUser" ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
+      <button ng-hide="!editMode.isSameUser" ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
     </div>
 
 <!-- INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
-  <div id="invitations" class='col-sm-4' ng-hide='!isSameUser'>
+  <div id="invitations" class="col-sm-4" ng-hide="!editMode.isSameUser">
     <h2>My Invitations</h2>
     <p>{{UImessages.noInvites}}</p>
-    <div ng-repeat="invite in invitations">
-      <p><b>Location:</b> {{invite['where']}}</p>
-      <p><b>Time & Date:</b> {{invite['when']}}</p>
-      <p><b>Mentor:</b> {{invite['senderName']}}</p>
-      <p><b>Mentee:</b> {{invite['recipientName']}}</p>
-      <p><b>Summary:</b> {{invite['summary']}}</p>
-      <hr>
+    <div ng-repeat="invite in invitations | orderBy:'when'">
+      <div ng-hide="editMode.inviteEditMode=== $index">
+        <p><b>Location:</b> {{invite['where']}}</p>
+        <p><b>Time & Date:</b> {{invite['when']}}</p>
+        <p><b>Mentor:</b> {{invite['senderName']}}</p>
+        <p><b>Mentee:</b> {{invite['recipientName']}}</p>
+        <p><b>Summary:</b> {{invite['summary']}}</p>
+        <button ng-click="toggleInviteEditForm(); editMode.inviteEditMode = $index">Edit</button>
+        <button ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite)">Delete</button>
+      </div>
+      <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}" ng-submit="updateInvite(invite.id, inviteUpdate)">
+        <b>Location: </b><input type="text" ng-model="inviteUpdate.where" placeholder="{{invite['where']}}"><br>
+        <b>Time & Date: </b><input type="text" ng-model="inviteUpdate.when" placeholder="{{invite['when']}}">
+        <p><b>Mentor:</b> {{invite['senderName']}}</p>
+        <p><b>Mentee:</b> {{invite['recipientName']}}</p>
+        <p><b>Summary:</b> {{invite['summary']}}</p>
+        <button class="submitInvite" type="submit" >Save</button>
+      </form>
+    <hr>
     </div>
+  </div>
 
 <!-- INITIALIZATION  -->
-  <div ng-init="getUserProfile(); isSameUser = false;"></div>
+  <div ng-init="getUserProfile(); editMode.isSameUser = false; editMode.inviteEditMode = false;"></div>
 
 </div>
 
