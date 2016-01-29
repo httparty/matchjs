@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/httparty/matchjs#readme",
   "dependencies": {
-    "angular-momentjs": "0.2.2",
     "async": "1.5.2",
     "body-parser": "1.14.2",
     "bootstrap": "3.3.6",
