@@ -36,8 +36,7 @@
     "rxjs": "2.3.22",
     "ng-tags-input": "3.0.0",
     "underscore": "~1.8.3",
-    "moment": "~2.11.1",
-    "angular-moment": "~0.10.3"
+    "moment": "~2.11.1"
   },
   "resolutions": {
     "rxjs": "2.3.22"
