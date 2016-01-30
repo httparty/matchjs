@@ -82,13 +82,13 @@ helpers.addPadawan = function(mentor, padawan) {
 
 helpers.getPadawansByMentor = function(username) {
   return db.Padawan.findAll({
-    where: {'mentorName': username}
+    where: {'mentorUsername': username}
   }).then(function(padawansArr) {
     // console.log("padawans", padawansArr);
     if (!padawansArr) {
       return null;
     }
-    return padawans;
+    return padawansArr;
   });
 };
 
@@ -98,7 +98,7 @@ helpers.deletePadawan = function(mentor, padawan) {
             'padawanUsername': padawan}
   }).then(function(padawanEntry) {
     return padawanEntry.destroy();
-  })
+  });
 };
 
 
