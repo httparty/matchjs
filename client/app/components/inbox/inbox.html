@@ -1,45 +1,45 @@
 <div class="container-fluid inbox" ng-controller="InboxController as ctrl" ng-init="ctrl.getAllUsers()">
   <div class="row mainContainer">
 
-  <div class="col-md-4 conversations" >
+    <div class="col-md-4 conversations" >
 
       <div class="conversationBox">
         <div class="conversationsHeader"><h1>Conversations</h1></div>
 
+        <!-- HISTORICAL CONVERSATIONS -->
+          <ul class="conversationList">
+            <li ng-repeat="conversation in ctrl.conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="ctrl.switchConversation(conversation)" ng-if="conversation.username != ctrl.username">
+              <img class="img-rounded" ng-src="{{conversation.photo || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px">
+            <h5>{{conversation.name}}</h5>
+            </li>
+          </ul>
 
-        <ul class="conversationList">
-          <li ng-repeat="conversation in ctrl.conversationList track by $index" class = "conversation" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="ctrl.switchConversation(conversation)" ng-if="conversation.username != ctrl.username">
-            <img class="img-rounded" ng-src="{{conversation.photo || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px">
-          <h5>{{conversation.name}}</h5>
-          </li>
-        </ul>
+          <!-- SEARCH USERS -->
+          <ui-select ng-model="user.selected" theme="bootstrap" ng-disabled="disabled" style="min-width: 100px;">
+            <ui-select-match placeholder="Start a new conversation">Start a new conversation</ui-select-match>
+            <ui-select-choices repeat="user in ctrl.users | filter: {name: $select.search}">
+              <div ng-bind-html="user.name | highlight: $select.search"></div>
+              <small>
+              <span ng-bind-html="''| highlight: $select.search"></span>
+              </small>
+            </ui-select-choices>
+          </ui-select>
 
-      <!-- drop down search -->
-
-    <ui-select ng-model="user.selected" theme="bootstrap" ng-disabled="disabled" style="min-width: 100px;">
-      <ui-select-match placeholder="Start a new conversation">Start a new conversation</ui-select-match>
-      <ui-select-choices repeat="user in ctrl.users | filter: {name: $select.search}">
-        <div ng-bind-html="user.name | highlight: $select.search"></div>
-        <small>
-        <span ng-bind-html="''| highlight: $select.search"></span>
-        </small>
-      </ui-select-choices>
-    </ui-select>
-
+      </div>
     </div>
-  </div>
 
     <div class="col-md-7 messages">
 
-      <!-- Message History -->
+      <!-- MESSAGE HISTORY -->
       <div ng-show="ctrl.currentRecipient" class="messageBox">
         <div class="messagesHeader">
-            <h1>Messages with {{ctrl.currentRecipientName}} <img class="img-rounded" ng-src="{{ctrl.currentRecipientPhoto || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px"></h1>
+          <h1> Messages with {{ctrl.currentRecipientName}} 
+            <img class="img-rounded" ng-src="{{ctrl.currentRecipientPhoto || 'http://placehold.it/80x80'}}" style=" width: 80px; height: 80px">
+          </h1>
         </div>
-        <!-- <h1>{{ enteredText }}</h1> -->
+
         <ul class="messageList" id="msgList">
           <li ng-repeat="message in ctrl.currentMessageList track by $index" class="message" ng-class-odd="'odd'" ng-class-even="'even'">
-
           <div class="row messageContent">
             <div class="col-xs-12">
               <strong>{{message.from}}</strong>
@@ -52,15 +52,11 @@
             <div class="col-xs-12">
               on <i>{{message.time}}</i>
             </div>
-
           </div>
-
           </li>
         </ul>
 
-      <!-- Displayed if no user selected -->
-
-      <!-- send new message -->
+      <!-- SEND MESSAGE -->
       <div class="messageInput">
         <form class="form-group" >
           <input type="text" class="form-control" placeholder="Enter your message" ng-model="ctrl.enteredText" ng-submit="ctrl.sendMessage()">
@@ -68,6 +64,7 @@
         </form>
       </div>
 
+      <!-- WARNING IF NO USER IS SELECTED -->
       </div>
       <div class="alert alert-warning" ng-show="!ctrl.currentRecipient" style="margin-top: 15px; width: 250px; height: 100px; margin: 0 auto">
         <center><h3><i class="fa fa-exclamation-triangle"></i>Select a User</h3></center>
