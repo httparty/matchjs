@@ -10,6 +10,17 @@
     vm.pages = [1, 2, 3, 4, 5];
     var username = angular.fromJson(AuthService.getCurrentUser()).username;
 
+    vm.allCities = {};
+    vm.allNames = {};
+    vm.locations = [];
+    vm.names = [];
+    vm.skills = [{name: 'AngularJS'}, 
+                 {name: 'Express'},
+                 {name: 'JavaScript'},
+                 {name: 'Backbone'},
+                 {name: 'Node.js'},
+                 {name: 'ReactJS'}];
+
     vm.getAllUsersRec = function() {
       connectModel.getAllUsersRec(username).then(function(r) {
         vm.users = r.data;
@@ -19,6 +30,32 @@
     vm.getAllUsers = function() {
       connectModel.getAllUsers().then(function(r) {
         vm.users = r.data;
+        //get distinct locations
+        //get distinct skills
+        //get distinct names
+        _.each(r.data, function(item) {
+          // console.log("item", item.name);
+          if (item.location) {
+            if (!vm.allCities[item.location]) {
+              vm.allCities[item.location] = 1;
+            }
+          }
+
+          if (item.name) {
+            if (!vm.allNames[item.name]) {
+              vm.allNames[item.name] = 1;
+            }
+          }
+        });
+
+          vm.locations = _.map(vm.allCities, function(item, key) {
+            return {name: key};
+          });
+
+          vm.names = _.map(vm.allNames, function(item, key) {
+            return {name: key};
+          });
+          console.log(vm.names);
       });
     };
 
@@ -32,8 +69,6 @@
     **************************************************************/
 
     vm.tags = [];
-    vm.locations = [{name: 'San Francisco'}, {name:'New York'}, {name:'Boston'}];
-    vm.skills = [{name: 'Angular'}, {name: 'Express'}, {name: 'MongoDB'}, {name: 'Backbone'}];
 
     var containsQueryParam = function(param) {
       return _.find(vm.tags, function(tag){ return tag.text === param; });
@@ -53,6 +88,13 @@
     vm.addSkill = function(skill) {
       if (!containsQueryParam(skill)) {
         vm.tags.push({type: 'skill', text: skill});
+        $scope.$broadcast('query-changed');
+      }
+    };
+
+    vm.addName = function(name) {
+      if (!containsQueryParam(name)) {
+        vm.tags.push({type: 'name', text: name});
         $scope.$broadcast('query-changed');
       }
     };

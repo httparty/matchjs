@@ -31,6 +31,7 @@
     model.searchUsers = function(params) {
       var locations = [];
       var skills = [];
+      var names = [];
 
       _.each(params, function(item) {
         if (item.type === 'location') {
@@ -39,12 +40,16 @@
         if (item.type === 'skill') {
           skills.push(item.text);
         }
+        if (item.type === 'name') {
+          names.push(item.text);
+        }
       });
 
       var queryObj = {locations: locations,
-                      skills: skills};
+                      skills: skills,
+                      names: names};
 
-      // console.log("QUERY OBJECT", queryObj);
+      console.log("QUERY OBJECT", queryObj);
 
       return $http({
         method: 'GET',

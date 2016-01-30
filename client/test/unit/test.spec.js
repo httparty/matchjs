@@ -19,4 +19,7 @@ describe("Hello world", function() {
     $scope.$digest()
     expect(element.html()).toBe("4");
   })
-})
+});
+
+
+
