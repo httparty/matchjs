@@ -64,6 +64,10 @@ angular.module('app', [
       templateUrl: 'app/components/settings/settings.html',
       controller: 'settingsController',
       url:'/settings/:username'
+    })
+    .state('about', {
+      templateUrl: 'app/components/about/about.html',
+      url: '/about'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
