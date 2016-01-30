@@ -80,5 +80,16 @@ module.exports = {
     .then(function(usersArray) {
       res.send(search.getSearchResults(req.query, usersArray));
     });
+  },
+
+  deleteAccount: function(req, res) {
+    console.log(req.body, 'this is the delete request coming');
+    helpers.deleteUser(req.body)
+    .then(function(){
+      console.log('This user has been deleted from the database:', req.body.username);
+      res.send('User Account Deleted');
+    });
   }
+
+
 };
