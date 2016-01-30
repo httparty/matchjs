@@ -31,6 +31,7 @@ angular.module('app.profile', [])
   $scope.editMode = {};
   $scope.editMode.isSameUser = '';
   $scope.editMode.inviteEditMode = '';
+  $scope.editMode.isPadwan = '';
 
   $scope.UImessages = {};
 
@@ -152,14 +153,21 @@ angular.module('app.profile', [])
 
   //-------------------PADAWAN--------------------
 
-  $scope.padawanToProfileUser = function(userToFollow, padawan) {
-    console.log("usernameToFollow",userToFollow);
+  $scope.becomePadawan = function(mentor, padawan) {
+    console.log("usernameToFollow",mentor);
     console.log("usernamePadawan", padawan);
-    Profile.addPadawan(userToFollow, padawan)
+    Profile.addPadawan(mentor, padawan)
     .then(function(response) {
+      $scope.editMode.isPadwan = true;
       console.log('here is response', response);
-    })
+    });
+  };
 
+  $scope.stopBeingAPadawan = function(mentor, padawan) {
+    Profile.deletePadawan(mentor, padawan)  
+    .then(function(response) {
+      console.log('you are no longer a Padawan! response body is:', response.body);
+    }); 
   };
 
   //---------------GET USER PROFILE---------------
@@ -172,6 +180,7 @@ angular.module('app.profile', [])
         $scope.editMode.isSameUser = true;
         getUserInvitations($scope.currentUser.username);
       }
+      //CALL TO GET USER PADAWANS HERE
       //---populate the scope with the data returning from DB query.---
       $scope.profileUser.photo = response.data.photo;
       $scope.profileUser.location = response.data.location;

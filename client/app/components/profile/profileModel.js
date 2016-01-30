@@ -29,18 +29,33 @@ angular.module('app.profile')
   };
 
   var deletePadawan = function(mentor, padawan) {
-    // return $http({
-    //   method: 'POST',
-    //   url: '/api/users/profile' + mentor,
-    //   data: padawan
-    // })
+    return $http({
+      method: 'DELETE',
+      url: '/api/users/padawan/' + mentor.username + '/' + padawan.username
+    });
   };
+
+  var getPadawans = function(mentor) {
+    return $http({
+      method: 'GET',
+      url: '/api/users/userProfile/' + mentor.username
+    }).then(function(responseObj){
+      return responseObj;
+    });
+  };
+  // model.deleteInvitation = function(inviteObj) {
+  //   return $http({
+  //     method: 'DELETE',
+  //     url: '/api/invitations/invite/' + inviteObj.id
+  //   });
+  // };
 
   return {
     getUserProfile : getUserProfile,
     updateProfile : updateProfile,
     addPadawan : addPadawan,
-    deletePadawan : deletePadawan
+    deletePadawan : deletePadawan,
+    getPadawans : getPadawans
   };
 
 }]); 

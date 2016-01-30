@@ -35,7 +35,8 @@
             </div>
               <a ui-sref="invitations({username: profileUser.username})" ng-hide="editMode.isSameUser" class="btn btn-primary"> Invite for Mentorship</a>
               <a ui-sref="message({username: profileUser.username})" ng-hide="editMode.isSameUser" class="btn btn-success">Send a Message </a>
-              <button ng-hide="editMode.isSameUser" ng-click="padawanToProfileUser(profileUser, currentUser)" class="btn btn-warning">Become a Padawan</button> 
+              <button ng-hide="editMode.isSameUser" ng-click="becomePadawan(profileUser, currentUser)" class="btn btn-warning">Become a Padawan</button> 
+              <button ng-hide="editMode.isSameUser" ng-click="stopBeingAPadawan(profileUser, currentUser)" class="btn btn-danger">Stop being a Padawan</button> 
           </div><!-- End panel body-->
         </div><!-- End panel panel-default-->
   <!-- END PHOTO AND BASICS SECTION -->
