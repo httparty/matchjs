@@ -8,4 +8,6 @@ module.exports = function(app) {
   app.get('/search', usersHandler.getUsersByQuery);
   app.post('/profile', usersHandler.updateProfile);
   app.post('/addPadawan/:username', usersHandler.addPadawan);
+  app.get('/getPadawans/:username', usersHandler.getPadawans);
+  app.delete('/padawan/:mentor/:padawan', usersHandler.deletePadawan);
 };

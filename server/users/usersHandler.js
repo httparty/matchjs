@@ -52,6 +52,19 @@ module.exports = {
     });
   },
 
+  getPadawans: function(req, res) {
+    
+  },
+
+  deletePadawan: function(req, res) {
+    var mentor = req.params.mentor;
+    var padawan = req.params.padawan;
+    helpers.deletePadawan(mentor, padawan)
+    .then(function(resp) {
+      res.status(200).send('successfully deleted padawan status');
+    })
+  },
+
   getUsersByQuery: function(req, res) {
     helpers.getAllUsers()
     .then(function(usersArray) {
