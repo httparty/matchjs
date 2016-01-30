@@ -152,10 +152,10 @@ angular.module('app.profile', [])
 
   //-------------------PADAWAN--------------------
 
-  $scope.padawanToProfileUser = function(usernameToFollow, usernamePadawan) {
-    console.log("usernameToFollow", usernameToFollow);
-    console.log("usernamePadawan", usernamePadawan);
-    Profile.addPadawan(usernameToFollow, usernamePadawan)
+  $scope.padawanToProfileUser = function(userToFollow, padawan) {
+    console.log("usernameToFollow",userToFollow);
+    console.log("usernamePadawan", padawan);
+    Profile.addPadawan(userToFollow, padawan)
     .then(function(response) {
       console.log('here is response', response);
     })
