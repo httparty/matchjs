@@ -7,4 +7,5 @@ module.exports = function(app) {
   app.get('/location/:cityname', usersHandler.getUsersByLocation);
   app.get('/search', usersHandler.getUsersByQuery);
   app.post('/profile', usersHandler.updateProfile);
+  app.post('/addPadawan/:username', usersHandler.addPadawan);
 };
