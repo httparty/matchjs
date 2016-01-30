@@ -1,6 +1,6 @@
 angular.module('app.profile', [])
   .constant('moment', moment)
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile,$sce, AuthService, invitationsModel) { 
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', '$location', function ($scope, $window, $state, Profile, $sce, AuthService, invitationsModel, $location) { 
 
   var current = new Date();
 
@@ -31,7 +31,7 @@ angular.module('app.profile', [])
   $scope.editMode = {};
   $scope.editMode.isSameUser = '';
   $scope.editMode.inviteEditMode = '';
-  $scope.editMode.isPadwan = '';
+  $scope.editMode.isPadawan = '';
 
   $scope.UImessages = {};
 
@@ -158,7 +158,7 @@ angular.module('app.profile', [])
     console.log("usernamePadawan", padawan);
     Profile.addPadawan(mentor, padawan)
     .then(function(response) {
-      $scope.editMode.isPadwan = true;
+      $scope.editMode.isPadawan = true;
       console.log('here is response', response);
     });
   };
@@ -170,15 +170,24 @@ angular.module('app.profile', [])
     }); 
   };
 
+  var getPadawans = function(mentor) {
+    Profile.getPadawans(mentor)  
+    .then(function(response) {
+      console.log('here are the padawans', response.data);
+      $scope.padawans = response.data;
+    });
+  };
+
   //---------------GET USER PROFILE---------------
   	//called on the initialization of the HTML page, ng-init
-  $scope.getUserProfile = function() {
-    Profile.getUserProfile($state.params)
+  $scope.getUserProfile = function(userObj) {
+    Profile.getUserProfile(userObj)
     .then(function(response) {
       //---if profile belongs to current user, set isSameUser var to true. This toggles the visibility of the edit buttons.
       if($scope.currentUser.username === $scope.profileUser.username) {
         $scope.editMode.isSameUser = true;
         getUserInvitations($scope.currentUser.username);
+        getPadawans($scope.currentUser);
       }
       //CALL TO GET USER PADAWANS HERE
       //---populate the scope with the data returning from DB query.---
@@ -197,5 +206,9 @@ angular.module('app.profile', [])
       });
     });
   };
+
+  $scope.goToOtherUserProfile = function(username) {
+    $location.path('profile/' + username);
+  }; 
 
 }]);

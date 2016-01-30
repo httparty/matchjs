@@ -38,17 +38,11 @@ angular.module('app.profile')
   var getPadawans = function(mentor) {
     return $http({
       method: 'GET',
-      url: '/api/users/userProfile/' + mentor.username
+      url: '/api/users/getPadawans/' + mentor.username
     }).then(function(responseObj){
       return responseObj;
     });
   };
-  // model.deleteInvitation = function(inviteObj) {
-  //   return $http({
-  //     method: 'DELETE',
-  //     url: '/api/invitations/invite/' + inviteObj.id
-  //   });
-  // };
 
   return {
     getUserProfile : getUserProfile,
