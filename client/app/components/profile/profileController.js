@@ -182,6 +182,8 @@ angular.module('app.profile', [])
       for(var i = 0; i < response.data.length; i++) {
         if (response.data[i].padawanUsername === $scope.currentUser.username) {
           $scope.editMode.isPadawan = true;
+        } else {
+          $scope.editMode.isPadawan = false;
         }
       }
       console.log('HERE IS ISPADAWAN STATUS', $scope.editMode.isPadawan);
