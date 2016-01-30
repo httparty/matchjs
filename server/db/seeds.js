@@ -13,20 +13,34 @@ var seedUsers = function() {
 
   var array = _.range(1, 11);
 
+  var randomUser = function() {
+    var num = 1 + Math.floor(Math.random() * (11 - 1));
+    return 'user' + num;
+  };
+
   async.each(array, function(i, next) {
-        
+      var nextUser = 'user' + (i+1);  
       db.User.create({
         username: 'user'+i,
         password: 'password'+i,
         email: 'user'+i+'@email.com',
         name: 'user'+i,
         location: _.sample(locations, 1)[0],
-        karmaPoints: Math.floor(Math.random() * 6),
         toLearn: _.sample(skills, 5),
         toTeach: _.sample(skills, 5)
       }).then(function() {
-        console.log('User successfully created');
-        next();
+        console.log('User successfully created');  
+        db.Padawan.create({
+          mentorUsername: 'user'+i,
+          padawanUsername: randomUser()
+        }).then(function() {
+          db.Padawan.create({
+          mentorUsername: 'dearamerican',
+          padawanUsername: randomUser()
+          }).then(function() {
+          next();
+          });
+        });
       });
 
   }, function(err) {
@@ -43,4 +57,8 @@ var seedInvitations = function() {
 
 };
 
-// seedUsers();
+
+
+
+
+seedUsers();
