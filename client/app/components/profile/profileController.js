@@ -154,8 +154,8 @@ angular.module('app.profile', [])
   //-------------------PADAWAN--------------------
 
   $scope.becomePadawan = function(mentor, padawan) {
-    console.log("usernameToFollow",mentor);
-    console.log("usernamePadawan", padawan);
+    // console.log('usernameToFollow',mentor);
+    // console.log('usernamePadawan', padawan);
     Profile.addPadawan(mentor, padawan)
     .then(function(response) {
       $scope.editMode.isPadawan = true;
