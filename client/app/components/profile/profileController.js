@@ -166,7 +166,9 @@ angular.module('app.profile', [])
   $scope.stopBeingAPadawan = function(mentor, padawan) {
     Profile.deletePadawan(mentor, padawan)  
     .then(function(response) {
-      console.log('you are no longer a Padawan! response body is:', response.body);
+      console.log('you are no longer a Padawan! response data is:', response.data);
+      $scope.editMode.isPadawan = false;
+      getPadawans(mentor);
     }); 
   };
 
@@ -174,7 +176,15 @@ angular.module('app.profile', [])
     Profile.getPadawans(mentor)  
     .then(function(response) {
       console.log('here are the padawans', response.data);
-      $scope.padawans = response.data;
+      if($scope.currentUser.username === $scope.profileUser.username) {
+        $scope.padawans = response.data;
+      }
+      for(var i = 0; i < response.data.length; i++) {
+        if (response.data[i].padawanUsername === $scope.currentUser.username) {
+          $scope.editMode.isPadawan = true;
+        }
+      }
+      console.log('HERE IS ISPADAWAN STATUS', $scope.editMode.isPadawan);
     });
   };
 
@@ -187,8 +197,8 @@ angular.module('app.profile', [])
       if($scope.currentUser.username === $scope.profileUser.username) {
         $scope.editMode.isSameUser = true;
         getUserInvitations($scope.currentUser.username);
-        getPadawans($scope.currentUser);
       }
+      getPadawans($scope.profileUser);
       //CALL TO GET USER PADAWANS HERE
       //---populate the scope with the data returning from DB query.---
       $scope.profileUser.photo = response.data.photo;
