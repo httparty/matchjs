@@ -1,6 +1,6 @@
 angular.module('app.profile', [])
   .constant('moment', moment)
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile, AuthService, invitationsModel) { 
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile,$sce, AuthService, invitationsModel) { 
 
   var current = new Date();
 
@@ -134,11 +134,13 @@ angular.module('app.profile', [])
   };
 
   $scope.deleteInvite = function(invite) {
-    // console.log(invite);
+    console.log(invite);
     invitationsModel.deleteInvitation(invite)
       .then(function(response) {
-        invite = response.body;
+        // invite = response.body;
         //add message text
+        console.log('here is $state params', $state.params.username);
+        getUserInvitations($state.params.username);
       })
   };
 
@@ -163,7 +165,7 @@ angular.module('app.profile', [])
             invites.push(invite);
           });
           if(invites.length === 0) {
-            $scope.UImessages.noInvites = 'You have no current invitations. Connect with more users to set up a mentorship session.'; 
+            $scope.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
           } 
             $scope.invitations = invites;
         });
