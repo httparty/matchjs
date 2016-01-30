@@ -32,14 +32,14 @@ var seedUsers = function() {
         console.log('User successfully created');  
         db.Padawan.create({
           mentorUsername: 'user'+i,
-          padawanUsername: randomUser()
+          padawanUsername: 'user' + (i+1)
         }).then(function() {
           db.Padawan.create({
             mentorUsername: 'dearamerican',
-            padawanUsername: randomUser()
+            padawanUsername: 'user' + (i+1)
           }).then(function() {
             db.Padawan.create({
-              mentorUsername: randomUser(),
+              mentorUsername: 'user' + (i+1),
               padawanUsername: 'dearamerican'
             }).then(function() {
               next();
