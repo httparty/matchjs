@@ -35,14 +35,18 @@ var seedUsers = function() {
           padawanUsername: randomUser()
         }).then(function() {
           db.Padawan.create({
-          mentorUsername: 'dearamerican',
-          padawanUsername: randomUser()
+            mentorUsername: 'dearamerican',
+            padawanUsername: randomUser()
           }).then(function() {
-          next();
+            db.Padawan.create({
+              mentorUsername: randomUser(),
+              padawanUsername: 'dearamerican'
+            }).then(function() {
+              next();
+            });
           });
         });
       });
-
   }, function(err) {
     if (err) {
       console.log('An item failed to process');
