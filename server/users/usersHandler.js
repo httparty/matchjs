@@ -53,7 +53,11 @@ module.exports = {
   },
 
   getPadawans: function(req, res) {
-    
+    var username = req.params.username;
+    helpers.getPadawansByMentor(username)
+    .then(function(padawans) {
+      res.status(200).send(padawans);
+    });
   },
 
   deletePadawan: function(req, res) {
