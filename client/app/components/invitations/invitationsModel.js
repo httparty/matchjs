@@ -13,10 +13,10 @@
         });
       };
 
-      model.getInvitationsByMentor = function(inviteObj){
+      model.getInvitationsByMentor = function(username){
         return $http({
           method: 'GET',
-          url: '/api/invitations/sender/' + inviteObj.username,
+          url: '/api/invitations/sender/' + username,
         });
       };
 

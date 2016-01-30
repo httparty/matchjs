@@ -175,7 +175,7 @@ helpers.updateInvitation = function(inviteObj) {
     }
     return invite.updateAttributes({
       'when': inviteObj.when || invite.get('when'),
-      'location': inviteObj.where || invite.get('location')
+      'location': inviteObj.location || invite.get('location')
     });
   });
 };
