@@ -8,9 +8,6 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING
     },
-    password: {
-      type: DataTypes.STRING
-    },
     email: {
       type: DataTypes.STRING,
       validate: {
@@ -32,17 +29,14 @@ module.exports = function(sequelize, DataTypes) {
     location: {
       type: DataTypes.STRING
     },
-    karmaPoints: {
-      type: DataTypes.INTEGER
-    },
     summary: {
       type: DataTypes.TEXT
     },
     toLearn: {
-      type:DataTypes.ARRAY(DataTypes.STRING)
+      type: DataTypes.ARRAY(DataTypes.STRING)
     },
     toTeach: {
-      type:DataTypes.ARRAY(DataTypes.STRING)
+      type: DataTypes.ARRAY(DataTypes.STRING)
     }
   });
 };
