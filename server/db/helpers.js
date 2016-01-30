@@ -92,7 +92,7 @@ helpers.getPadawansByMentor = function(username) {
   });
 };
 
-helpers.removePadawanStatus = function(mentor, padawan) {
+helpers.deletePadawan = function(mentor, padawan) {
   return db.Padawan.findOne({
     where: {'mentorUsername': mentor,
             'padawanUsername': padawan}
