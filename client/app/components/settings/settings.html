@@ -1,7 +1,16 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="settingsController as ctrl">
   <div class="row">
-    <div class="jumbotron">
-      <h1>Settings Page</h1>
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-8">
+      <div class="jumbotron">
+        <h1>Settings Page</h1>
+      </div>
+      <div class="btn btn-danger" ng-click="ctrl.deleteAccount()">
+        Delete Account
+      </div>
     </div>
+
+    <div class="col-sm-2"></div>
   </div>
 </div>
