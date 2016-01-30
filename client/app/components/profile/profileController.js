@@ -141,7 +141,7 @@ angular.module('app.profile', [])
         //add message text
         console.log('here is $state params', $state.params.username);
         getUserInvitations($state.params.username);
-      })
+      });
   };
 
 
