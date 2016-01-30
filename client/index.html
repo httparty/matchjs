@@ -9,22 +9,19 @@
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css">
+    <link rel="stylesheet" href="bower_components/ui-select/dist/select.min.css">
     <link rel="stylesheet" href="assets/styles/landing-page.css">
     <link rel="stylesheet" href="assets/styles/inbox.css">
     <link rel="stylesheet" href="assets/styles/guidelines.css">
     <link rel="stylesheet" href="assets/styles/invitations.css">
-    <script>
-      function clickX()
-      {
-        $(".validation").animate({ 'height': '16px' }, 500).show();
-      }
-    </script>
+
   </head>
   <body>
     <nav-dir></nav-dir>
     <div ui-view class="indexView"></div>
 
     <!-- bower components -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/underscore/underscore-min.js"></script>
     <script src="bower_components/rxjs/dist/rx.all.min.js"></script>
@@ -34,6 +31,8 @@
     <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/ui-select/dist/select.min.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
@@ -65,5 +64,6 @@
     <!-- custom directives -->
     <script src="app/components/shared/navbar/navbarDirective.js"></script>
     <script src="app/components/shared/footer/footerDirective.js"></script>
+
   </body>
 </html>
