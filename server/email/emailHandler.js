@@ -98,5 +98,27 @@ module.exports = {
 
   receivedNewMessage: function(data) {
 
+  },
+
+  invitationConfirm: function(req, res){
+    var mailOptions1 = {
+      from: 'MatchJS <matchjsteam@gmail.com>',
+      // to: req.body.mentorEmail,
+      to: 'sergeypiterman@gmail.com',
+      subject: 'You have an invitation!',
+      html: '<h1>Hello World!<h1>'
+    };
+
+    // var mailOptions2 = {
+    //   from: 'MatchJS <matchjsteam@gmail.com>',
+    //   to: req.body.menteeEmail,
+    //   subject: 'You have an invitation!',
+    //   html: '<h1>Hello World!<h1>'
+    // };
+
+    mailer(mailOptions1);
+    // mailer(mailOptions2);
+
+
   }
 };
