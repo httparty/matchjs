@@ -118,6 +118,8 @@
       **************************************************************/ 
       vm.sendMessage = function() {
 
+        var today = moment().format('dddd MMMM Do, YYYY @ h:mmA');
+
         //Check if User has entered any text
         //If User has not entered text and
         if (vm.enteredText !== '') {
