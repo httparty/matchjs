@@ -1,8 +1,6 @@
 angular.module('app.profile', [])
   .constant('moment', moment)
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile, AuthService, invitationsModel) {
-    
-  var noMentorInvites;    
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile,$sce, AuthService, invitationsModel) { 
 
   var current = new Date();
 
@@ -34,7 +32,7 @@ angular.module('app.profile', [])
   $scope.editMode.isSameUser = '';
   $scope.editMode.inviteEditMode = '';
 
-  $scope.invitations = [];
+  // $scope.invitations = [];
 
   $scope.UImessages = {};
 
@@ -63,7 +61,7 @@ angular.module('app.profile', [])
   //---------SHARED BY BASICS, SKILLS, & SUMMARY-
   var updateProfile = function() {
     for(var learnKey in $scope.skills.toLearn) {
-        if(!contains(learnKey, $scope.skills.toLearn)) {
+        if(!_.contains($scope.skills.toLearn, learnKey)) {
           $scope.profileUser.toLearn.push(learnKey);
         }
         if(!$scope.skills.toLearn[learnKey]) {
@@ -71,7 +69,7 @@ angular.module('app.profile', [])
         }
     }
     for(var teachKey in $scope.skills.toTeach) {
-      if(!contains(teachKey, $scope.skills.toTeach)) {
+      if(!_.contains($scope.skills.toTeach, teachKey)) {
           $scope.profileUser.toTeach.push(teachKey);
       }
       if(!$scope.skills.toTeach[teachKey]) {
@@ -83,15 +81,6 @@ angular.module('app.profile', [])
       console.log('server response to profile update:', response);
       $scope.getUserProfile();
     });
-  };
-
-  var contains = function(elem, arr) {
-    for(var j = 0; j < arr.length; j++) {
-      if (elem === arr[j]) {
-        return true;
-      }
-    }
-    return false;
   };
 
   //-------------------SKILLS--------------------
@@ -139,74 +128,77 @@ angular.module('app.profile', [])
       .then(function(response) {
         $scope.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
         console.log('here is the updated invite', response.data);
+        $scope.editMode.inviteEditMode = -1;
+        getUserInvitations(username);
       });
   };
 
   $scope.deleteInvite = function(invite) {
-    // console.log(invite);
+    console.log(invite);
     invitationsModel.deleteInvitation(invite)
       .then(function(response) {
-        invite = response.body;
+        // invite = response.body;
         //add message text
-      })
+        console.log('here is $state params', $state.params.username);
+        getUserInvitations($state.params.username);
+      });
   };
 
-  // $scope.test = function() {
-  //   console.log('inside test');
-  // };
+
+  var getUserInvitations = function(username) {
+    console.log('hello inside get user invites fn', username);
+    $scope.invitations = [];
+    var invites = [];
+    invitationsModel.getInvitationsByMentor(username)
+    .then(function(mentorResp) {
+      console.log('mentorResp', mentorResp);
+      mentorResp.data.forEach(function(invite) {
+        invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
+        invites.push(invite);                
+      });
+      invitationsModel.getInvitationsByMentee(username)
+        .then(function(menteeResp) {
+          menteeResp.data.forEach(function(invite) {
+            invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
+            invite.readOnly = true;
+            console.log('NOWWWW invite.when', invite);
+            invites.push(invite);
+          });
+          if(invites.length === 0) {
+            $scope.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
+          } 
+            $scope.invitations = invites;
+        });
+    });
+  };
+
 
   //---------RETRIEVE USER PROFILE DATA FROM DB--
   	//called on the initialization of the HTML page, ng-init
   $scope.getUserProfile = function() {
-      Profile.getUserProfile($state.params)
-      .then(function(response) {
-        //---if the current user is the user that owns the profile, set isSameUser variable to true. This toggles the visibility of the edit buttons. Then get their invitations and populate the scope.---
-        var invites = [];
-        if($scope.currentUser.username === $scope.profileUser.username) {
-          $scope.editMode.isSameUser = true;
-          invitationsModel.getInvitationsByMentor($scope.currentUser)
-            .then(function(mentorResp) {
-              if(mentorResp.data.length === 0) {
-                noMentorInvites = true;
-              } else {
-                mentorResp.data.forEach(function(invite) {
-                  invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
-                  invites.push(invite);                
-                });
-              }
-            });
-          invitationsModel.getInvitationsByMentee($scope.currentUser)
-            .then(function(menteeResp) {
-              if(menteeResp.data.length === 0 && noMentorInvites) {
-                UImessages.noInvites = 'You have no current invitations.';
-              } else {
-                menteeResp.data.forEach(function(invite) {
-                  invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
-                  invite.readOnly = true;
-                  console.log('NOWWWW invite.when', invite);
-                  invites.push(invite);
-                });
-                $scope.invitations = invites;
-              }
-            });
-        }
-        //---populate the scope with the data returning from DB query.---
-        $scope.profileUser.photo = response.data.photo;
-        $scope.profileUser.location = response.data.location;
-        $scope.profileUser.name = response.data.displayName;
-        $scope.profileUser.github = response.data.github;
-        $scope.profileUser.karmaPoints = response.data.karmaPoints;
-        $scope.profileUser.summary =	response.data.summary;
-        $scope.profileUser.displayName = response.data.displayName;
-        response.data.toLearn.forEach(function(skill) {
-          $scope.skills.toLearn[skill] = true;
-        });
-        response.data.toTeach.forEach(function(skill) {
-          $scope.skills.toTeach[skill] = true;
-        });
-
-        //---
+    Profile.getUserProfile($state.params)
+    .then(function(response) {
+      //---if profile belongs to current user, set isSameUser var to true. This toggles the visibility of the edit buttons.
+      if($scope.currentUser.username === $scope.profileUser.username) {
+        console.log('here it is!', $scope.currentUser.username);
+        $scope.editMode.isSameUser = true;
+        getUserInvitations($scope.currentUser.username);
+      }
+      //---populate the scope with the data returning from DB query.---
+      $scope.profileUser.photo = response.data.photo;
+      $scope.profileUser.location = response.data.location;
+      $scope.profileUser.name = response.data.displayName;
+      $scope.profileUser.github = response.data.github;
+      $scope.profileUser.karmaPoints = response.data.karmaPoints;
+      $scope.profileUser.summary =	response.data.summary;
+      $scope.profileUser.displayName = response.data.displayName;
+      response.data.toLearn.forEach(function(skill) {
+        $scope.skills.toLearn[skill] = true;
       });
+      response.data.toTeach.forEach(function(skill) {
+        $scope.skills.toTeach[skill] = true;
+      });
+    });
   };
 
 }]);

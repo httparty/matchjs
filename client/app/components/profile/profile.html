@@ -93,10 +93,10 @@
           <h3 class="panel-title">My Invitations</h3>
         </div>
         <div class="panel-body">
-          <p>{{UImessages.noInvites}}</p>
+          <p ng-bind-html="UImessages.noInvites"></p>
           <div ng-repeat="invite in invitations | orderBy:'when'">
             <div ng-hide="editMode.inviteEditMode=== $index">
-              <p><b>Location:</b> {{invite['where']}}</p>
+              <p><b>Location:</b> {{invite['location']}}</p>
               <p><b>Time & Date:</b> {{invite['when']}}</p>
               <p><b>Mentor:</b> {{invite['senderName']}}</p>
               <p><b>Mentee:</b> {{invite['recipientName']}}</p>
@@ -108,7 +108,7 @@
             </div>
             <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}; updateSent = false;" ng-submit="updateInvite(invite.senderName, invite.recipientName, invite.id, inviteUpdate);"> 
               <!-- TRIED: editMode.inviteEditMode===-1; toggle/!toggle -->
-              <b>Location: </b><input class="form-control" type="text" ng-model="inviteUpdate.where" placeholder="{{invite['where']}}"  ng-disable="!toggle"><br>
+              <b>Location: </b><input class="form-control" type="text" ng-model="inviteUpdate.location" placeholder="{{invite['location']}}" ng-disable="!toggle"><br>
               <b>Time & Date: </b><input class="form-control" type="text" ng-model="inviteUpdate.when" placeholder="{{invite['when']}}" ng-disable="!toggle">
               <p><b>Mentor:</b> {{invite['senderName']}}</p>
               <p><b>Mentee:</b> {{invite['recipientName']}}</p>
