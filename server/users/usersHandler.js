@@ -41,8 +41,18 @@ module.exports = {
     });
   },
 
-  getUsersByQuery: function(req, res) {
+  addPadawan: function(req, res) {
+    var username = req.params.username;
+    var padawan = req.body.username;
+    console.log("ADDPADAWAN: USERNAME", username);
+    console.log("ADDPADAWAN: PADAWAN", padawan);
+    helpers.addPadawan(username, padawan)
+    .then(function(user) {
+      res.send('success');
+    });
+  },
 
+  getUsersByQuery: function(req, res) {
     helpers.getAllUsers()
     .then(function(usersArray) {
       res.send(search.getSearchResults(req.query, usersArray));
