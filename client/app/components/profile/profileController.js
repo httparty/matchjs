@@ -32,16 +32,7 @@ angular.module('app.profile', [])
   $scope.editMode.isSameUser = '';
   $scope.editMode.inviteEditMode = '';
 
-  // $scope.invitations = [];
-
   $scope.UImessages = {};
-
-  // $scope.inviteSent = '';
-
-
-
-  // $scope.selectedInvite = {};
-  // $scope.selectedInvite.invite = null;
 
 
 
@@ -78,7 +69,6 @@ angular.module('app.profile', [])
     }
     Profile.updateProfile($scope.profileUser) //update DB
     .then(function(response) {
-      console.log('server response to profile update:', response);
       $scope.getUserProfile();
     });
   };
@@ -103,19 +93,16 @@ angular.module('app.profile', [])
       $scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
     } else {
       $scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
-      //call to fn that saves summary
       updateProfile($scope.profileUser);
       $scope.saveEditButton.summary.buttonText='Edit';
     }
   };
-  //--------------CREATE INVITATION -------------
+  //-----------------INVITATIONS ----------------
   
   $scope.toggleInviteEditForm = function(inviteId) {
     if($scope.saveEditButton.invites.buttonText === 'Edit') {
       $scope.saveEditButton.invites.buttonText = 'Save';
     } else {
-      // $scope.inviteUpdate.id = inviteId;
-      // updateInvite($scope.inviteUpdate);
       $scope.saveEditButton.invites.buttonText = 'Edit';
     }
   };
@@ -123,35 +110,27 @@ angular.module('app.profile', [])
   $scope.updateInvite = function(username, recipient, inviteId, inviteObj) {
     inviteObj.id = inviteId;
     inviteObj.username = username;
-    // console.log(inviteObj);
     invitationsModel.updateInvitation(inviteObj)
       .then(function(response) {
         $scope.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
-        console.log('here is the updated invite', response.data);
         $scope.editMode.inviteEditMode = -1;
         getUserInvitations(username);
       });
   };
 
   $scope.deleteInvite = function(invite) {
-    console.log(invite);
     invitationsModel.deleteInvitation(invite)
       .then(function(response) {
-        // invite = response.body;
         //add message text
-        console.log('here is $state params', $state.params.username);
         getUserInvitations($state.params.username);
       });
   };
 
-
   var getUserInvitations = function(username) {
-    console.log('hello inside get user invites fn', username);
     $scope.invitations = [];
     var invites = [];
     invitationsModel.getInvitationsByMentor(username)
     .then(function(mentorResp) {
-      console.log('mentorResp', mentorResp);
       mentorResp.data.forEach(function(invite) {
         invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
         invites.push(invite);                
@@ -161,7 +140,6 @@ angular.module('app.profile', [])
           menteeResp.data.forEach(function(invite) {
             invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
             invite.readOnly = true;
-            console.log('NOWWWW invite.when', invite);
             invites.push(invite);
           });
           if(invites.length === 0) {
@@ -172,15 +150,25 @@ angular.module('app.profile', [])
     });
   };
 
+  //-------------------PADAWAN--------------------
 
-  //---------RETRIEVE USER PROFILE DATA FROM DB--
+  $scope.padawanToProfileUser = function(usernameToFollow, usernamePadawan) {
+    console.log("usernameToFollow", usernameToFollow);
+    console.log("usernamePadawan", usernamePadawan);
+    Profile.addPadawan(usernameToFollow, usernamePadawan)
+    .then(function(response) {
+      console.log('here is response', response);
+    })
+
+  };
+
+  //---------------GET USER PROFILE---------------
   	//called on the initialization of the HTML page, ng-init
   $scope.getUserProfile = function() {
     Profile.getUserProfile($state.params)
     .then(function(response) {
       //---if profile belongs to current user, set isSameUser var to true. This toggles the visibility of the edit buttons.
       if($scope.currentUser.username === $scope.profileUser.username) {
-        console.log('here it is!', $scope.currentUser.username);
         $scope.editMode.isSameUser = true;
         getUserInvitations($scope.currentUser.username);
       }
