@@ -1,7 +1,7 @@
 ;(function() {
   'use strict';
 
-  angular.module('app.connect',['ngTagsInput'])
+  angular.module('app.connect',[])
   .controller('connectController', ['connectModel', 'AuthService', '$state', '$scope', function(connectModel, AuthService, $state, $scope) {
 
     var vm = this;
@@ -34,7 +34,7 @@
         //get distinct skills
         //get distinct names
         _.each(r.data, function(item) {
-          // console.log("item", item.name);
+
           if (item.location) {
             if (!vm.allCities[item.location]) {
               vm.allCities[item.location] = 1;
@@ -55,7 +55,6 @@
           vm.names = _.map(vm.allNames, function(item, key) {
             return {name: key};
           });
-          console.log(vm.names);
       });
     };
 

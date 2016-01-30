@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.connect')
-  .factory('connectModel',function($http, $q, $timeout){
+  .factory('connectModel',function($http){
     var model = {};
 
     model.getAllUsersRec = function(username) {
@@ -48,8 +48,6 @@
       var queryObj = {locations: locations,
                       skills: skills,
                       names: names};
-
-      console.log("QUERY OBJECT", queryObj);
 
       return $http({
         method: 'GET',
