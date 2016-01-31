@@ -42,6 +42,15 @@
       $scope.user = {};
 
       /*************************************************************
+      Check if conversation contains conversation with a given user
+      **************************************************************/
+      var containsUser = function(user) {
+        return _.findIndex(vm.conversationList, function(conversation) { 
+          return conversation.username === user.username; 
+        });
+      };
+
+      /*************************************************************
       Get all users for search bar and conversation history
       **************************************************************/ 
       vm.getAllUsers = function() {
@@ -137,15 +146,6 @@
       };
 
       /*************************************************************
-      Check if conversation contains conversation with a given user
-      **************************************************************/
-      var containsUser = function(user) {
-        return _.findIndex(vm.conversationList, function(conversation) { 
-          return conversation.username === user.username; 
-        });
-      };
-
-      /*************************************************************
       Event handler for when current user selects a user from
       the search bar
       **************************************************************/ 
@@ -156,7 +156,8 @@
 
           //Check if selected user has a conversation history 
           //with current user
-          if (containsUser(user) > -1) {
+          var userIndex = containsUser(user);
+          if (userIndex > -1) {
             //Move conversation to the top of the list
             //by first removing it from where it is
             user = vm.conversationList.splice(userIndex, 1);

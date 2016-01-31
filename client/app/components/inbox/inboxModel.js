@@ -17,7 +17,7 @@
           //and time last updated
           var comparator = {};
 
-          firebaseConnection.on("value", function(snapshot) {
+          firebaseConnection.on('value', function(snapshot) {
 
             //get all Firebase user conversations 
             var allFirebaseConvos = snapshot.val();
@@ -31,7 +31,7 @@
             //in order to properly format
             //Get timestamps for comparator mapping
             userConversationHistory = _.map(userConversationHistory, function(item) {
-              var updatedItem = item.conversation.replace(username, "");
+              var updatedItem = item.conversation.replace(username, '');
               comparator[updatedItem] = item.updated;
               return updatedItem;
             });
@@ -42,9 +42,9 @@
               callback(mapping);
             }            
           }, function (errorObject) {
-            console.log("Cannot connect to Firebase: " + errorObject.code);
+            console.log('Cannot connect to Firebase: ' + errorObject.code);
           });
-      }
+      };
 
       return inbox;
     }]);
