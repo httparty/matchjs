@@ -20,9 +20,36 @@ angular.module('app.profile')
     });
   };
 
+  var addPadawan = function(mentor, padawan) {
+    return $http({
+      method: 'POST',
+      url: '/api/users/addPadawan/' + mentor.username,
+      data: padawan
+    });
+  };
+
+  var deletePadawan = function(mentor, padawan) {
+    return $http({
+      method: 'DELETE',
+      url: '/api/users/padawan/' + mentor.username + '/' + padawan.username
+    });
+  };
+
+  var getPadawans = function(mentor) {
+    return $http({
+      method: 'GET',
+      url: '/api/users/getPadawans/' + mentor.username
+    }).then(function(responseObj){
+      return responseObj;
+    });
+  };
+
   return {
     getUserProfile : getUserProfile,
-    updateProfile : updateProfile
+    updateProfile : updateProfile,
+    addPadawan : addPadawan,
+    deletePadawan : deletePadawan,
+    getPadawans : getPadawans
   };
 
 }]); 

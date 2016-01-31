@@ -2,7 +2,7 @@ var db = require('./config.js');
 var rec = require('../recommender/recommend');
 var helpers = {};
 
-//---------------AUTHENTICATION----------------------
+//---------------AUTHENTICATION---------------------- 
 
 helpers.deleteUser = function(userToDeleteObj) {
   db.User.findOne({
@@ -73,6 +73,36 @@ helpers.updateUser = function(profileUpdateObj) {
   });
 };
 
+helpers.addPadawan = function(mentor, padawan) {
+  return db.Padawan.create({ 
+    mentorUsername: mentor,
+    padawanUsername: padawan
+  });
+};
+
+helpers.getPadawansByMentor = function(username) {
+  return db.Padawan.findAll({
+    where: {'mentorUsername': username}
+  }).then(function(padawansArr) {
+    // console.log("padawans", padawansArr);
+    if (!padawansArr) {
+      return null;
+    }
+    return padawansArr;
+  });
+};
+
+helpers.deletePadawan = function(mentor, padawan) {
+  return db.Padawan.findOne({
+    where: {'mentorUsername': mentor,
+            'padawanUsername': padawan}
+  }).then(function(padawanEntry) {
+    return padawanEntry.destroy();
+  });
+};
+
+
+
 //------------------GET RECOMMENDED USERS-------------------------
 
 // helper function for recommender
@@ -120,9 +150,10 @@ helpers.createInvitation = function(username, invitee, sessionInfo){
   }).then(function(user) {
     return db.Invitation.create({
       UserId: user.dataValues.id,
+      senderName: user.get('username'),
       recipientName: invitee,
       when: sessionInfo.when,
-      where: sessionInfo.where,
+      location: sessionInfo.where,
       summary: sessionInfo.summary,
     }).then(function(invitation) {
       // console.log(invitation);
@@ -163,5 +194,33 @@ helpers.getInvitationsByRecipient = function(username) {
     return invitations;
   });
 };
+
+
+helpers.updateInvitation = function(inviteObj) {
+  return db.Invitation.findOne({
+    where: {'id': inviteObj.id} 
+  }).then(function(invite) {
+    if(!invite) {
+      throw Error('Invitation not found.');
+    }
+    return invite.updateAttributes({
+      'when': inviteObj.when || invite.get('when'),
+      'location': inviteObj.location || invite.get('location')
+    });
+  });
+};
+
+helpers.deleteInvitation = function(inviteId) {
+  return db.Invitation.findOne({
+    where: {'id': inviteId}
+  }).then(function(invite) {
+    if(!invite) {
+      throw Error('Invitation not found.');
+    }
+    return invite.destroy();
+  });
+};
+
+
 
 module.exports = helpers;

@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.invitations')
-    .factory('invitationsModel', function($http){
+    .factory('invitationsModel', ['$http', function($http){
       var model = {};
 
       model.createInvitation = function(inviteObj){
@@ -13,10 +13,10 @@
         });
       };
 
-      model.getInvitationsByMentor = function(inviteObj){
+      model.getInvitationsByMentor = function(username){
         return $http({
           method: 'GET',
-          url: '/api/invitations/sender/' + inviteObj.username,
+          url: '/api/invitations/sender/' + username,
         });
       };
 
@@ -27,10 +27,22 @@
         });
       };
 
-      model.deleteInvitationByInvitationID = function(inviteObj){
+      model.deleteInvitation = function(inviteObj) {
+        return $http({
+          method: 'DELETE',
+          url: '/api/invitations/invite/' + inviteObj.id
+        });
       };
 
-      return model;
-  });
+      model.updateInvitation = function(inviteObj) {
+        return $http({
+          method: 'POST',
+          url: '/api/invitations/sender/' + inviteObj.username, //updated by the sender/mentor
+          data: inviteObj
+        });
+      };
+    
+    return model;
+  }]);
 
 })();

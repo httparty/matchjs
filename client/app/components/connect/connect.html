@@ -36,6 +36,17 @@
       </ul>
     </div>
 
+    <div class="btn-group" uib-dropdown>
+      <button id="btn-append-to-single-button" type="button" class="btn btn-primary" uib-dropdown-toggle>
+        Names <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+        <li ng-repeat="u in ctrl.names" ng-click="ctrl.addName(u.name)" role="menuitem">
+          <a href="#">{{u.name}}</a>
+        </li>
+      </ul>
+    </div>
+
   <br>
 
  <!--  <ul ng-init="ctrl.getAllUsers()">
@@ -57,7 +68,7 @@
 
               <div class="list-group">
                 <div class="list-group-item"><strong>{{u.name || 'N/A'}}</strong></div>
-                <div class="list-group-item"><i class="fa fa-map-marker"></i> {{u.location || 'San Francisco'}}</div>
+                <div class="list-group-item"><i class="fa fa-map-marker"></i> {{u.location || 'N/A'}}</div>
                 <div class="list-group-item"><i class="fa fa-github"></i> <a href="{{u.github || 'https://github.com'}}">{{u.github || 'https://github.com'}}</a></div>
                 <div class="list-group-item">Karma: {{u.karmaPoints || 'N/A'}}</div>
               </div>
