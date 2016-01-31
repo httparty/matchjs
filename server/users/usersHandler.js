@@ -41,8 +41,35 @@ module.exports = {
     });
   },
 
-  getUsersByQuery: function(req, res) {
+  addPadawan: function(req, res) {
+    var username = req.params.username;
+    var padawan = req.body.username;
+    console.log("ADDPADAWAN: USERNAME", username);
+    console.log("ADDPADAWAN: PADAWAN", padawan);
+    helpers.addPadawan(username, padawan)
+    .then(function(user) {
+      res.send('success');
+    });
+  },
 
+  getPadawans: function(req, res) {
+    var username = req.params.username;
+    helpers.getPadawansByMentor(username)
+    .then(function(padawans) {
+      res.status(200).send(padawans);
+    });
+  },
+
+  deletePadawan: function(req, res) {
+    var mentor = req.params.mentor;
+    var padawan = req.params.padawan;
+    helpers.deletePadawan(mentor, padawan)
+    .then(function(resp) {
+      res.status(200).send('successfully deleted padawan status');
+    })
+  },
+
+  getUsersByQuery: function(req, res) {
     helpers.getAllUsers()
     .then(function(usersArray) {
       res.send(search.getSearchResults(req.query, usersArray));

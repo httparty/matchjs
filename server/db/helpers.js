@@ -73,6 +73,36 @@ helpers.updateUser = function(profileUpdateObj) {
   });
 };
 
+helpers.addPadawan = function(mentor, padawan) {
+  return db.Padawan.create({ 
+    mentorUsername: mentor,
+    padawanUsername: padawan
+  });
+};
+
+helpers.getPadawansByMentor = function(username) {
+  return db.Padawan.findAll({
+    where: {'mentorUsername': username}
+  }).then(function(padawansArr) {
+    // console.log("padawans", padawansArr);
+    if (!padawansArr) {
+      return null;
+    }
+    return padawansArr;
+  });
+};
+
+helpers.deletePadawan = function(mentor, padawan) {
+  return db.Padawan.findOne({
+    where: {'mentorUsername': mentor,
+            'padawanUsername': padawan}
+  }).then(function(padawanEntry) {
+    return padawanEntry.destroy();
+  });
+};
+
+
+
 //------------------GET RECOMMENDED USERS-------------------------
 
 // helper function for recommender

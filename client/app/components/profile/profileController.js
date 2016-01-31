@@ -1,6 +1,6 @@
 angular.module('app.profile', [])
   .constant('moment', moment)
-  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', function ($scope, $window, $state, Profile,$sce, AuthService, invitationsModel) { 
+  .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', '$location', function ($scope, $window, $state, Profile, $sce, AuthService, invitationsModel, $location) { 
 
   var current = new Date();
 
@@ -31,17 +31,9 @@ angular.module('app.profile', [])
   $scope.editMode = {};
   $scope.editMode.isSameUser = '';
   $scope.editMode.inviteEditMode = '';
-
-  // $scope.invitations = [];
+  $scope.editMode.isPadawan = '';
 
   $scope.UImessages = {};
-
-  // $scope.inviteSent = '';
-
-
-
-  // $scope.selectedInvite = {};
-  // $scope.selectedInvite.invite = null;
 
 
 
@@ -78,7 +70,6 @@ angular.module('app.profile', [])
     }
     Profile.updateProfile($scope.profileUser) //update DB
     .then(function(response) {
-      console.log('server response to profile update:', response);
       $scope.getUserProfile();
     });
   };
@@ -103,19 +94,16 @@ angular.module('app.profile', [])
       $scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
     } else {
       $scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
-      //call to fn that saves summary
       updateProfile($scope.profileUser);
       $scope.saveEditButton.summary.buttonText='Edit';
     }
   };
-  //--------------CREATE INVITATION -------------
+  //-----------------INVITATIONS ----------------
   
   $scope.toggleInviteEditForm = function(inviteId) {
     if($scope.saveEditButton.invites.buttonText === 'Edit') {
       $scope.saveEditButton.invites.buttonText = 'Save';
     } else {
-      // $scope.inviteUpdate.id = inviteId;
-      // updateInvite($scope.inviteUpdate);
       $scope.saveEditButton.invites.buttonText = 'Edit';
     }
   };
@@ -123,35 +111,27 @@ angular.module('app.profile', [])
   $scope.updateInvite = function(username, recipient, inviteId, inviteObj) {
     inviteObj.id = inviteId;
     inviteObj.username = username;
-    // console.log(inviteObj);
     invitationsModel.updateInvitation(inviteObj)
       .then(function(response) {
         $scope.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
-        console.log('here is the updated invite', response.data);
         $scope.editMode.inviteEditMode = -1;
         getUserInvitations(username);
       });
   };
 
   $scope.deleteInvite = function(invite) {
-    console.log(invite);
     invitationsModel.deleteInvitation(invite)
       .then(function(response) {
-        // invite = response.body;
         //add message text
-        console.log('here is $state params', $state.params.username);
         getUserInvitations($state.params.username);
       });
   };
 
-
   var getUserInvitations = function(username) {
-    console.log('hello inside get user invites fn', username);
     $scope.invitations = [];
     var invites = [];
     invitationsModel.getInvitationsByMentor(username)
     .then(function(mentorResp) {
-      console.log('mentorResp', mentorResp);
       mentorResp.data.forEach(function(invite) {
         invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
         invites.push(invite);                
@@ -161,7 +141,6 @@ angular.module('app.profile', [])
           menteeResp.data.forEach(function(invite) {
             invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
             invite.readOnly = true;
-            console.log('NOWWWW invite.when', invite);
             invites.push(invite);
           });
           if(invites.length === 0) {
@@ -172,18 +151,57 @@ angular.module('app.profile', [])
     });
   };
 
+  //-------------------PADAWAN--------------------
 
-  //---------RETRIEVE USER PROFILE DATA FROM DB--
+  $scope.becomePadawan = function(mentor, padawan) {
+    // console.log('usernameToFollow',mentor);
+    // console.log('usernamePadawan', padawan);
+    Profile.addPadawan(mentor, padawan)
+    .then(function(response) {
+      $scope.editMode.isPadawan = true;
+      console.log('here is response', response);
+    });
+  };
+
+  $scope.stopBeingAPadawan = function(mentor, padawan) {
+    Profile.deletePadawan(mentor, padawan)  
+    .then(function(response) {
+      console.log('you are no longer a Padawan! response data is:', response.data);
+      $scope.editMode.isPadawan = false;
+      getPadawans(mentor);
+    }); 
+  };
+
+  var getPadawans = function(mentor) {
+    Profile.getPadawans(mentor)  
+    .then(function(response) {
+      console.log('here are the padawans', response.data);
+      if($scope.currentUser.username === $scope.profileUser.username) {
+        $scope.padawans = response.data;
+      }
+      for(var i = 0; i < response.data.length; i++) {
+        if (response.data[i].padawanUsername === $scope.currentUser.username) {
+          $scope.editMode.isPadawan = true;
+        } else {
+          $scope.editMode.isPadawan = false;
+        }
+      }
+      console.log('HERE IS ISPADAWAN STATUS', $scope.editMode.isPadawan);
+    });
+  };
+
+  //---------------GET USER PROFILE---------------
   	//called on the initialization of the HTML page, ng-init
-  $scope.getUserProfile = function() {
-    Profile.getUserProfile($state.params)
+  $scope.getUserProfile = function(userObj) {
+    Profile.getUserProfile(userObj)
     .then(function(response) {
       //---if profile belongs to current user, set isSameUser var to true. This toggles the visibility of the edit buttons.
       if($scope.currentUser.username === $scope.profileUser.username) {
-        console.log('here it is!', $scope.currentUser.username);
         $scope.editMode.isSameUser = true;
         getUserInvitations($scope.currentUser.username);
       }
+      getPadawans($scope.profileUser);
+      //CALL TO GET USER PADAWANS HERE
       //---populate the scope with the data returning from DB query.---
       $scope.profileUser.photo = response.data.photo;
       $scope.profileUser.location = response.data.location;
@@ -200,5 +218,9 @@ angular.module('app.profile', [])
       });
     });
   };
+
+  $scope.goToOtherUserProfile = function(username) {
+    $location.path('profile/' + username);
+  }; 
 
 }]);
