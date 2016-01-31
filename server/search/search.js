@@ -40,6 +40,17 @@ exports.getSearchResults = function(queryParams, usersArray) {
       //   console.log("check", _.intersection(req.query.skills, item.dataValues.toTeach));
       // })
     }
+
+    if (queryParams.names) {
+      if (typeof queryParams.names === 'string') {
+        queryParams.names = [queryParams.names];
+      }
+
+      result = _.filter(result, function(item) {
+        return _.contains(queryParams.names, item.dataValues.name);
+      });
+
+    }
     return result;
 
   } else {

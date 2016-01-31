@@ -4,11 +4,7 @@ var _ = require('underscore');
 
 var seedUsers = function() {
 
-  var skills = ['Angular','HTML', 'MongoDB', 
-                'Grunt', 'PostgreSQL', 'Express', 
-                'Node', 'React', 'Backbone',
-                'Ember', 'Neo4j', 'AWS', 'Redis'];
-
+  var skills = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
   var locations = ['San Francisco', 'Boston', 'New York'];
 
   var array = _.range(1, 11);
@@ -22,7 +18,6 @@ var seedUsers = function() {
       var nextUser = 'user' + (i+1);  
       db.User.create({
         username: 'user'+i,
-        password: 'password'+i,
         email: 'user'+i+'@email.com',
         name: 'user'+i,
         location: _.sample(locations, 1)[0],

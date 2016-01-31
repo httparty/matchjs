@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.connect')
-  .factory('connectModel',function($http, $q, $timeout){
+  .factory('connectModel',function($http){
     var model = {};
 
     model.getAllUsersRec = function(username) {
@@ -31,6 +31,7 @@
     model.searchUsers = function(params) {
       var locations = [];
       var skills = [];
+      var names = [];
 
       _.each(params, function(item) {
         if (item.type === 'location') {
@@ -39,12 +40,14 @@
         if (item.type === 'skill') {
           skills.push(item.text);
         }
+        if (item.type === 'name') {
+          names.push(item.text);
+        }
       });
 
       var queryObj = {locations: locations,
-                      skills: skills};
-
-      // console.log("QUERY OBJECT", queryObj);
+                      skills: skills,
+                      names: names};
 
       return $http({
         method: 'GET',

@@ -1,60 +1,173 @@
 ;(function() {
   'use strict';
 
-  angular.module('app.inbox', ['firebase'])
-    .constant('moment',moment)
-    .controller('InboxController', ['$scope', '$firebaseArray', 'AuthService', 'connectModel', 'moment', function($scope, $firebaseArray, AuthService, connectModel, moment) {
+  angular.module('app.inbox', ['firebase','ngSanitize','ui.select'])
+    .constant('moment', moment)
+    .controller('InboxController', ['$scope', '$firebaseArray', '$firebaseObject', 'AuthService', 'connectModel', 'moment', 'inboxModel', function($scope, $firebaseArray, $firebaseObject, AuthService, connectModel, moment, inboxModel) {
 
       var vm = this;
-      vm.selected = undefined;
-      vm.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-      //Firebase
+      
+      /*************************************************************
+      Firebase
+      **************************************************************/
       var baseURL = 'https://matchjs.firebaseio.com/chat/';
       var firebaseConnection = '';
 
+      /*************************************************************
+      Current User
+      **************************************************************/
       var currentUser = angular.fromJson(AuthService.getCurrentUser());
-
       vm.username = currentUser.username;
       vm.name = currentUser.displayName;
-      vm.conversationList = [];
 
-      //Person with whom you are currently chatting
+      /*************************************************************
+      Current conversation
+      Person with whom you are current having a conversation with
+      **************************************************************/
       vm.currentRecipient = '';
       vm.currentMessageList = [];
       vm.enteredText = '';
 
-      vm.getAllUsers = function() {
+      /*************************************************************
+      All past conversations
+      **************************************************************/
+      vm.conversationList = [];
 
-        connectModel.getAllUsers().then(function(r) {
-          vm.conversationList = r.data;
+      /*************************************************************
+      Search Bar
+      **************************************************************/
+      //all users available to search
+      vm.users = [];
+      //user selected from search
+      $scope.user = {};
+
+      /*************************************************************
+      Check if conversation contains conversation with a given user
+      **************************************************************/
+      var containsUser = function(user) {
+        return _.findIndex(vm.conversationList, function(conversation) { 
+          return conversation.username === user.username; 
         });
       };
 
+      /*************************************************************
+      Get all users for search bar and conversation history
+      **************************************************************/ 
+      vm.getAllUsers = function() {
+
+        inboxModel.getAllFirebaseConvos(vm.username, baseURL, function(mapping) {
+
+          //all historical conversations
+          var conversations = mapping[1];
+          //comparator used to sort historical conversations
+          var comparator = mapping[0];
+
+          connectModel.getAllUsers().then(function(r) {
+
+            _.each(r.data, function(item) {
+
+              //Get all users except current user
+              //to populate search bar
+              if (item.username !== vm.username) {
+                vm.users.push(item);
+              }
+
+              //Get all users that have a conversation
+              //history with current user
+              if (_.contains(conversations, item.username)) {
+
+                //check if User has already been added
+                //to conversation list
+                if (containsUser(item) === -1) {
+                  vm.conversationList.push(item);
+                }
+              }
+            });
+
+            //sort conversationList by timestamp in comparator
+            //so that conversations are ordered by last messaged 
+            vm.conversationList.sort(function(a,b) {
+              return comparator[a.username] < comparator[b.username];
+            });
+          });
+        });      
+      };
+
+      /*************************************************************
+      Display all messages for a single conversation
+      **************************************************************/ 
       vm.displayMessages = function() {
-        
         vm.currentMessageList = $firebaseArray(firebaseConnection.child('messages'));
       };
 
+      /*************************************************************
+      Send a message to a user in a current conversation
+      **************************************************************/ 
       vm.sendMessage = function() {
-        var today = moment().format('dddd MMMM Do, YYYY @ h:mA');
 
-        vm.currentMessageList.$add({message : vm.enteredText, toUsername: vm.currentRecipient, to: vm.currentRecipientName, fromUsername: vm.username, from: vm.name, time: today});
-        vm.enteredText = '';
+        //Check if User has entered any text
+        //If User has not entered text and
+        if (vm.enteredText !== '') {
+
+          vm.currentMessageList.$add({message : vm.enteredText, 
+                                      toUsername: vm.currentRecipient, 
+                                      to: vm.currentRecipientName, 
+                                      fromUsername: vm.username, 
+                                      from: vm.name, 
+                                      time: moment().format('dddd MMMM Do, YYYY @ h:mA')});
+          
+          //update last time conversation was updated
+          var conversationTimestamp = $firebaseObject(firebaseConnection.child('updated'));
+          conversationTimestamp.$value = moment().format();
+          conversationTimestamp.$save();
+
+          //clear entered text
+          vm.enteredText = '';
+        }
       };
 
+      /*************************************************************
+      Display all messages for a single conversation
+      **************************************************************/
       vm.switchConversation = function(conversation) {
 
+        //Update the current recipient
         vm.currentRecipient = conversation.username;
         vm.currentRecipientName = conversation.name;
         vm.currentRecipientPhoto = conversation.photo;
-        var arr = [vm.currentRecipient, vm.username].sort();
-        var convoURL = baseURL + arr[0] + arr[1];
-        firebaseConnection = new Firebase(convoURL);
+
+        //Update the current conversation
+        var conversationName = [vm.currentRecipient, vm.username].sort();
+        var conversationURL = baseURL + conversationName[0] + conversationName[1];
+        firebaseConnection = new Firebase(conversationURL);
+
+        //Fetch all messages for that conversation
         vm.displayMessages();
       };
 
-      vm.getAllUsers();
+      /*************************************************************
+      Event handler for when current user selects a user from
+      the search bar
+      **************************************************************/ 
+      $scope.$watch('user.selected', function(value) {
+        if ($scope.user.selected) {
+
+          var user = $scope.user.selected;
+
+          //Check if selected user has a conversation history 
+          //with current user
+          var userIndex = containsUser(user);
+          if (userIndex > -1) {
+            //Move conversation to the top of the list
+            //by first removing it from where it is
+            user = vm.conversationList.splice(userIndex, 1);
+            vm.conversationList.unshift(user[0]);
+          } else {
+            //Move new conversation to the top of the list
+            vm.conversationList.unshift(user);
+          }
+        }
+      });
 
     }]);
 
