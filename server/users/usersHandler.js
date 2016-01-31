@@ -74,5 +74,16 @@ module.exports = {
     .then(function(usersArray) {
       res.send(search.getSearchResults(req.query, usersArray));
     });
+  },
+
+  deleteAccount: function(req, res) {
+    // console.log(req.params.username, 'this is the delete request coming');
+    helpers.deleteUser(req.params)
+    .then(function(user){
+      // console.log('This user has been deleted from the database:', req.body.username);
+      res.status(200).send(user);
+    });
   }
+
+
 };
