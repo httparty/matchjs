@@ -5,8 +5,7 @@
     'settingsModel', '$state', function(settingsModel, $state){
 
     var vm = this;
-    vm.username = $state.params;
-
+    vm.username = $state.params.username;
 
     //Allows user to edit preferences page
     vm.editPreferences = function() {
