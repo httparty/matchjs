@@ -1,7 +1,7 @@
 ;(function() {
   'use strict';
 
-  angular.module('app.connect',[])
+  angular.module('app.connect',['ngTagsInput'])
   .controller('connectController', ['connectModel', 'AuthService', '$state', '$scope', function(connectModel, AuthService, $state, $scope) {
 
     var vm = this;
