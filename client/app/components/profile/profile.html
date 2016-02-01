@@ -17,7 +17,8 @@
   <!-- PROFILE BASICS, EXCLUDING PHOTO -->
             <div class="profileBasics">
               <div>
-                  <h4>{{profileUser.displayName || profileUser.username}}</h4><br>
+                  <h4>{{profileUser.name || profileUser.username}}</h4><br>
+                <p>
                   <strong>Github:</strong> <a href="{{profileUser.github}}">{{profileUser.github}}</a><br>
                   <div ng-hide="saveEditButton.basics.buttonText === 'Save'">
                     <strong>Location: </strong>{{profileUser.location || 'San Francisco'}} <br>

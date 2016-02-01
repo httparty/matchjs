@@ -1,9 +1,9 @@
 ;(function() {
   'use strict';
-
+    
   angular.module('app.profile', [])
     .constant('moment', moment)
-    .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', '$location', function ($scope, $window, $state, Profile, $sce, AuthService, invitationsModel, $location) { 
+    .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', '$location', function ($scope, $window, $state, Profile, $sce, AuthService, invitationsModel, $location) {
 
     var current = new Date();
 
@@ -202,7 +202,8 @@
         //---populate the scope with the data returning from DB query.---
         $scope.profileUser.photo = response.data.photo;
         $scope.profileUser.location = response.data.location;
-        $scope.profileUser.name = response.data.displayName;
+        // $scope.profileUser.name = response.data.displayName;
+        $scope.profileUser.name = (response.data.username === $scope.currentUser.username ? $scope.currentUser.displayName : response.data.name);
         $scope.profileUser.github = response.data.github;
         $scope.profileUser.karmaPoints = response.data.karmaPoints;
         $scope.profileUser.summary =	response.data.summary;
@@ -224,7 +225,5 @@
     $scope.sendMessage = function(username) {
       $location.path('inbox');
     }; 
-
   }]);
-
 })();

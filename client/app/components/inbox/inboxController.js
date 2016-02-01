@@ -7,9 +7,13 @@
 
       var vm = this;
       
-      /*************************************************************
-      Firebase
-      **************************************************************/
+      // will store information of recipient for email notification
+      var recipientInfo = {
+      };
+
+      vm.selected = undefined;
+
+      //Firebase
       var baseURL = 'https://matchjs.firebaseio.com/chat/';
       var firebaseConnection = '';
 
@@ -127,12 +131,15 @@
                                       to: vm.currentRecipientName, 
                                       fromUsername: vm.username, 
                                       from: vm.name, 
-                                      time: moment().format('dddd MMMM Do, YYYY @ h:mA')});
+                                      time: moment().format('dddd MMMM Do, YYYY @ h:mmA')});
           
           //update last time conversation was updated
           var conversationTimestamp = $firebaseObject(firebaseConnection.child('updated'));
           conversationTimestamp.$value = moment().format();
           conversationTimestamp.$save();
+
+          // trigger email notification to recipient
+          inboxModel.sentMessage(recipientInfo);
 
           //clear entered text
           vm.enteredText = '';
@@ -153,6 +160,11 @@
         var conversationName = [vm.currentRecipient, vm.username].sort();
         var conversationURL = baseURL + conversationName[0] + conversationName[1];
         firebaseConnection = new Firebase(conversationURL);
+
+        // store recipient info for email notification
+        recipientInfo.name = conversation.name;
+        recipientInfo.username = conversation.username;
+        recipientInfo.email = conversation.email;
 
         //Fetch all messages for that conversation
         vm.displayMessages();
@@ -181,7 +193,5 @@
           }
         }
       });
-
-    }]);
-
+  }]);
 })();
