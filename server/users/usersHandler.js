@@ -45,10 +45,11 @@ module.exports = {
   addPadawan: function(req, res) {
     var username = req.params.username;
     var padawan = req.body.username;
-    console.log("ADDPADAWAN: USERNAME", username);
-    console.log("ADDPADAWAN: PADAWAN", padawan);
+    console.log('ADDPADAWAN: USERNAME', username);
+    console.log('ADDPADAWAN: PADAWAN', padawan);
     helpers.addPadawan(username, padawan)
     .then(function(user) {
+      // get
       // sendEmail.newPadawan()
       res.send('success');
     });
@@ -68,7 +69,7 @@ module.exports = {
     helpers.deletePadawan(mentor, padawan)
     .then(function(resp) {
       res.status(200).send('successfully deleted padawan status');
-    })
+    });
   },
 
   getUsersByQuery: function(req, res) {
