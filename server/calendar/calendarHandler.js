@@ -1,15 +1,12 @@
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var callback = "http://127.0.0.1:5000/api/calendar/auth/google/callback";
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  //not sure if this callback url is necessary
-  "http://127.0.0.1:5000/api/calendar/google/callback");
+  process.env.GOOGLE_CLIENT_SECRET, callback);
 
-//in order to set credentials
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var callback = "http://127.0.0.1:5000/api/calendar/google/callback";
-
+//Passport Strategy for Google
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -29,7 +26,7 @@ passport.use(new GoogleStrategy({
 
 module.exports = {
 
-  initialLogin: passport.authenticate('google', {scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar']}),
+  initialAuthorization: passport.authenticate('google', {scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar']}),
 
   redirect:  passport.authenticate('google'),
 
@@ -46,7 +43,7 @@ module.exports = {
     //check to see if authorized with google
     //if not authorized, go to authorization route
     if (!req.user || !req.user.accessToken) {
-      res.redirect('/api/calendar/google');
+      res.redirect('/api/calendar/auth/google');
     } else {
 
       oauth2Client.setCredentials({
