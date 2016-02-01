@@ -114,6 +114,7 @@
     $scope.updateInvite = function(username, recipient, inviteId, inviteObj) {
       inviteObj.id = inviteId;
       inviteObj.username = username;
+      inviteObj.mentee = recipient;
       invitationsModel.updateInvitation(inviteObj)
         .then(function(response) {
           $scope.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';

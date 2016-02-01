@@ -1,4 +1,6 @@
 var helpers = require('../db/helpers.js');
+var emailer = require('../email/emailHandler');
+
 
 module.exports = {
   createInvitation: function(req,res) {
@@ -35,12 +37,25 @@ module.exports = {
   },
 
   updateInvitationBySender: function(req, res) {
-    var username = req.params.username;
+    var mentorObj = req.params;
     var inviteData = req.body;
-    // console.log('here is inviteData WOOOO', inviteData);
-    helpers.updateInvitation(inviteData)
+    var menteeObj = {};
+    menteeObj.username = req.body.mentee;
+
+    helpers.updateInvitation(inviteData) 
     .then(function(invite) {
-      res.status(200).send(invite);
+      var updatedInvite = invite.dataValues;
+      helpers.getUserByUserName(mentorObj) 
+        .then(function(mentor) {
+          updatedInvite.mentorEmail = mentor.email;
+          helpers.getUserByUserName(menteeObj)
+            .then(function(mentee) {
+              updatedInvite.menteeEmail = mentee.email;
+              console.log('HERE IS UPDATED INVITE', updatedInvite);
+              emailer.inviteHasBeenUpdated(updatedInvite);
+              res.send('success! invite has been updated and mentor and mentee have received emails.');
+            });
+        });
     });
   },
 
@@ -52,3 +67,15 @@ module.exports = {
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
