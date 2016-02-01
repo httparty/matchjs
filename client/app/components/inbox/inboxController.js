@@ -95,7 +95,7 @@
             });
             //if url contains state params, user came to inbox by way of another user's profile with the intention of messaging them, so switch to their conversation
             if($state.params) {
-              console.log("hitting this use case");
+              // console.log("hitting this use case");
               Profile.getUserProfile($state.params)
               .then(function(r) {
                 var selectedUser = r.data;
