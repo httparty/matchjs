@@ -221,6 +221,10 @@
       $location.path('profile/' + username);
     }; 
 
+    $scope.sendMessage = function(username) {
+      $location.path('inbox');
+    }; 
+
   }]);
 
 })();
