@@ -36,6 +36,10 @@ module.exports = {
   success: function(req, res) {
     // Successful authentication with google, do something here
     console.log("THERE WAS SUCCESSFUL AUTHENTICATION");
+    console.log("ACCESS", req.user.accessToken);
+    console.log("REFRESH", req.user.refreshToken);
+
+    // res.cookie('google-calendar', profile, { maxAge: 2592000000 });  // Expires in one month
     res.redirect('/');
   },
 
@@ -44,12 +48,10 @@ module.exports = {
   exportGoogleCalendar: function(req, res) {
 
     //current do not know how I'm going to set credentials
-    // oauth2Client.setCredentials({
-    //   access_token: req.user.accessToken,
-    //   refresh_token: req.user.refreshToken
-    // });
-
-    
+    oauth2Client.setCredentials({
+      access_token: req.user.accessToken,
+      refresh_token: req.user.refreshToken
+    });
 
     var event = {
       'summary': "Meetup at my apt",
@@ -63,26 +65,22 @@ module.exports = {
     };
 
     //POST to google calendar
-    // var calendar = google.calendar('v3');
+    var calendar = google.calendar('v3');
 
-    // calendar.events.insert({
-    //   auth: oauth2Client,
-    //   calendarId: 'primary',
-    //   resource: event,
-    // }, function(err, event) {
-    //   if (err) {
-    //     console.log('There was an error contacting the Calendar service: ' + err);
-    //     return;
-    //   }
+    calendar.events.insert({
+      auth: oauth2Client,
+      calendarId: 'primary',
+      resource: event,
+    }, function(err, event) {
+      if (err) {
+        console.log('There was an error contacting the Google Calendar service: ' + err);
+        return;
+      }
 
-    //   var email = req.user.profile.emails[0].value;
+      res.json(event.htmlLink);
+    });
 
-    //   mailer.sendMail(email, event.htmlLink);
-
-    //   res.json(event.htmlLink);
-    // });
-
-    res.send('Okay');
+    // res.send('Okay');
   } 
 
 };  
