@@ -11,7 +11,6 @@ angular.module('app', [
   'app.inbox',
   'app.guidelines',
   'app.invitations'
-  // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -53,6 +52,11 @@ angular.module('app', [
       templateUrl: 'app/components/invitations/invitations.html',
       controller: 'invitationsController',
       url: '/invitations/:username'
+    })
+    .state('auth', {
+      templateUrl: 'app/components/auth/auth.html',
+      controller: 'AuthController',
+      url: '/auth'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
