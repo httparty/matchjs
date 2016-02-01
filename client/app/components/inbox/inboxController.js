@@ -6,12 +6,11 @@
     .controller('InboxController', ['$scope', '$firebaseArray', '$firebaseObject', 'AuthService', 'connectModel', 'moment', 'inboxModel', '$state', 'Profile', function($scope, $firebaseArray, $firebaseObject, AuthService, connectModel, moment, inboxModel, $state, Profile) {
 
       var vm = this;
-
+      
       // will store information of recipient for email notification
       var recipientInfo = {
       };
 
-      var vm = this;
       vm.selected = undefined;
 
       //Firebase

@@ -12,7 +12,6 @@ module.exports = {
       +req.cookies['user-profile'].username+'.<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to meet your future Mentor or Mentee!'
     };
     // res.send(console.log(req.cookies['user-profile']));
-    // res.send(mailer(mailOptions));
     mailer(mailOptions);
     res.redirect('/#/connect');
   },
@@ -23,7 +22,6 @@ module.exports = {
       from: 'MatchJS <matchjsteam@gmail.com>',
       to: req.body.email,
       subject: 'New Message Received on MatchJS!',
-      // text: 'Hello World!',
       html: 'Hello '+req.body.name+',<br><br>'
       +'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
       +'<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to read it!'
