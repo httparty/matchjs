@@ -42,10 +42,10 @@
       $scope.user = {};
 
       /*************************************************************
-      Check if conversation contains conversation with a given user
+      Check if user list contains a given user
       **************************************************************/
-      var containsUser = function(user) {
-        return _.findIndex(vm.conversationList, function(conversation) { 
+      var containsUser = function(list, user) {
+        return _.findIndex(list, function(conversation) { 
           return conversation.username === user.username; 
         });
       };
@@ -66,10 +66,14 @@
 
             _.each(r.data, function(item) {
 
-              //Get all users except current user
-              //to populate search bar
-              if (item.username !== vm.username) {
-                vm.users.push(item);
+              //check if user is already populated in
+              //search bar
+              if (containsUser(vm.users, item) === -1) {
+                //add user to search bar if not
+                //current user
+                if (item.username !== vm.username) {
+                  vm.users.push(item);
+                }
               }
 
               //Get all users that have a conversation
@@ -78,7 +82,7 @@
 
                 //check if User has already been added
                 //to conversation list
-                if (containsUser(item) === -1) {
+                if (containsUser(vm.conversationList, item) === -1) {
                   vm.conversationList.push(item);
                 }
               }
@@ -91,6 +95,7 @@
             });
             //if url contains state params, user came to inbox by way of another user's profile with the intention of messaging them, so switch to their conversation
             if($state.params) {
+              // console.log("hitting this use case");
               Profile.getUserProfile($state.params)
               .then(function(r) {
                 var selectedUser = r.data;
@@ -164,7 +169,7 @@
 
           //Check if selected user has a conversation history 
           //with current user
-          var userIndex = containsUser(user);
+          var userIndex = containsUser(vm.conversationList, user);
           if (userIndex > -1) {
             //Move conversation to the top of the list
             //by first removing it from where it is
