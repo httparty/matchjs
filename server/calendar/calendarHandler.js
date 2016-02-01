@@ -1,16 +1,15 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var callback = "http://127.0.0.1:5000/api/calendar/auth/google/callback";
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET, callback);
+  process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_CALLBACK);
 
 //Passport Strategy for Google
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: callback
+    callbackURL: process.env.GOOGLE_CALLBACK
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
@@ -31,19 +30,28 @@ module.exports = {
   redirect:  passport.authenticate('google'),
 
   success: function(req, res) {
-
-    //once authorized, complete export to google calendar
+    //complete event export upon
+    //successful authorization
     res.redirect('/api/calendar/export');
   },
 
-  //POST request that sends event to 
-  //Google Calendar
   exportGoogleCalendar: function(req, res) {
 
     //check to see if authorized with google
     //if not authorized, go to authorization route
+    //and set event info in session
     if (!req.user || !req.user.accessToken) {
+
+      var mentorshipEvent = {
+        summary: req.query.summary,
+        description: req.query.description,
+        start: req.query.start,
+        end: req.query.end
+      };
+
+      req.session.mentorshipEvent = mentorshipEvent;
       res.redirect('/api/calendar/auth/google');
+
     } else {
 
       oauth2Client.setCredentials({
@@ -51,18 +59,22 @@ module.exports = {
         refresh_token: req.user.refreshToken
       });
 
+      var summary = req.query.summary || req.session.mentorshipEvent.summary;
+      var description = req.query.description || req.session.mentorshipEvent.description;
+      var start = req.query.start || req.session.mentorshipEvent.start;
+      var end = req.query.end || req.session.mentorshipEvent.end;
+
       var event = {
-        'summary': "Meetup at my apt",
-        'description': "Watch Borat",
+        'summary': summary,
+        'description': description,
         'start': {
-          'dateTime': new Date(),
+          'dateTime': start,
         },
         'end': {
-          'dateTime': new Date(),
+          'dateTime': end,
         }
       };
 
-      //POST to google calendar
       var calendar = google.calendar('v3');
 
       calendar.events.insert({
@@ -74,8 +86,8 @@ module.exports = {
           console.log('There was an error contacting the Google Calendar service: ' + err);
           return;
         }
-
-        res.json(event.htmlLink);
+        //redirect to newly exported event
+        res.redirect(event.htmlLink);
       });
     }
   } 
