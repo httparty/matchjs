@@ -134,14 +134,16 @@
                                       to: vm.currentRecipientName, 
                                       fromUsername: vm.username, 
                                       from: vm.name, 
-                                      time: moment().format('dddd MMMM Do, YYYY @ h:mA')});
+                                      time: moment().format('dddd MMMM Do, YYYY @ h:mmA')});
           
           //update last time conversation was updated
           var conversationTimestamp = $firebaseObject(firebaseConnection.child('updated'));
           conversationTimestamp.$value = moment().format();
           conversationTimestamp.$save();
 
+          // trigger email notification to recipient
           inboxModel.sentMessage(recipientInfo);
+
           //clear entered text
           vm.enteredText = '';
         }
