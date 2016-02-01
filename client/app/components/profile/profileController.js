@@ -34,7 +34,7 @@
     $scope.editMode = {};
     $scope.editMode.isSameUser = '';
     $scope.editMode.inviteEditMode = '';
-    $scope.editMode.isPadawan = '';
+    $scope.editMode.isPadawan = false;
 
     $scope.UImessages = {};
 
@@ -184,7 +184,6 @@
             $scope.editMode.isPadawan = true;
           }
         }
-        $scope.editMode.isPadawan = false;
       });
     };
 
