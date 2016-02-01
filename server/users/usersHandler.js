@@ -49,8 +49,11 @@ module.exports = {
     console.log('ADDPADAWAN: PADAWAN', padawan);
     helpers.addPadawan(username, padawan)
     .then(function(user) {
-      // get
+      // helpers.getUserByUserName()
+        .then(function(thisUser) {
+          var mentorEmail = thisUser.get('email');
       // sendEmail.newPadawan()
+        })
       res.send('success');
     });
   },
