@@ -34,7 +34,7 @@
     $scope.editMode = {};
     $scope.editMode.isSameUser = '';
     $scope.editMode.inviteEditMode = '';
-    $scope.editMode.isPadawan = false;
+    $scope.editMode.isPadawan = '';
 
     $scope.UImessages = {};
 
@@ -213,6 +213,7 @@
         response.data.toTeach.forEach(function(skill) {
           $scope.skills.toTeach[skill] = true;
         });
+        $scope.contentLoaded = true;
       });
     };
 
