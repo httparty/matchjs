@@ -1,21 +1,4 @@
-/*
-.btn.active {
 
-}*/
-
-/*.selected {
-	background-color: #000019
-}*/
-
-/*.btn-primary, */
-
-/*.btn-primary:hover, */
-
-/*.redBtn {
-	background-color: red !important;
-} 
-
-.btn-primary:visited {
-    background-color: #8064A2;
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
 }
-*/
