@@ -6,10 +6,16 @@
     .controller('InboxController', ['$scope', '$firebaseArray', '$firebaseObject', 'AuthService', 'connectModel', 'moment', 'inboxModel', '$state', 'Profile', function($scope, $firebaseArray, $firebaseObject, AuthService, connectModel, moment, inboxModel, $state, Profile) {
 
       var vm = this;
-      
-      /*************************************************************
-      Firebase
-      **************************************************************/
+
+      var userObj = {
+        name: 'Anthony',
+        email: 'anthonybibbs@gmail.com'
+      };
+
+      var vm = this;
+      vm.selected = undefined;
+
+      //Firebase
       var baseURL = 'https://matchjs.firebaseio.com/chat/';
       var firebaseConnection = '';
 
@@ -183,7 +189,7 @@
           }
         }
       });
-
-    }]);
-
+    vm.getAllUsers();
+    inboxModel.sentMessage(userObj);
+  }]);
 })();

@@ -17,6 +17,11 @@ module.exports = {
     res.redirect('/#/connect');
   },
 
+  sentMessage: function(req,res) {
+    console.log(req.cookies['user-profile'].username, ':', req.params);
+    res.send('Success@');
+  },
+
   newPadawan: function(userData) {
 
   },
@@ -40,5 +45,4 @@ module.exports = {
   receivedNewMessage: function(data) {
 
   }
-
 };

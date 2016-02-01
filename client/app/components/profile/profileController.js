@@ -1,6 +1,7 @@
 ;(function() {
   'use strict';
 
+    
   angular.module('app.profile', [])
     .constant('moment', moment)
     .controller('ProfileController', ['$scope', '$window', '$state', 'Profile','$sce', 'AuthService', 'invitationsModel', '$location', function ($scope, $window, $state, Profile, $sce, AuthService, invitationsModel, $location) {
