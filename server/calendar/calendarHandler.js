@@ -3,9 +3,41 @@ var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
   //not sure if this callback url is necessary
-  "http://127.0.0.1:5000/auth/google/callback");
+  "http://127.0.0.1:5000/api/calendar/google/callback");
+
+//in order to set credentials
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var callback = "http://127.0.0.1:5000/api/calendar/google/callback";
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: callback
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+      var user = {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        profile: profile
+      };        
+      return done(null, user);
+    });
+  }
+));
 
 module.exports = {
+
+  initialLogin: passport.authenticate('google', {scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar']}),
+
+  redirect:  passport.authenticate('google'),
+
+  success: function(req, res) {
+    // Successful authentication with google, do something here
+    console.log("THERE WAS SUCCESSFUL AUTHENTICATION");
+    res.redirect('/');
+  },
 
   //POST request that sends event to 
   //Google Calendar
@@ -16,6 +48,8 @@ module.exports = {
     //   access_token: req.user.accessToken,
     //   refresh_token: req.user.refreshToken
     // });
+
+    
 
     var event = {
       'summary': "Meetup at my apt",
