@@ -50,10 +50,9 @@ module.exports = {
     helpers.addPadawan(username, padawan)
     .then(function(user) {
       // helpers.getUserByUserName()
-        .then(function(thisUser) {
-          var mentorEmail = thisUser.get('email');
+        // .then(function(thisUser) {
+        //   var mentorEmail = thisUser.get('email');
       // sendEmail.newPadawan()
-        })
       res.send('success');
     });
   },
