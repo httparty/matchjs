@@ -34,7 +34,7 @@ models.Invitation.sync({force: false}).then(function(){
   console.log('Invitation table created!');
 });
 
-models.Padawan.sync({force: true}).then(function() {
+models.Padawan.sync({force: false}).then(function() {
   console.log('Padawan table created!');
 });
 

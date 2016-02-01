@@ -1,5 +1,6 @@
 var helpers = require('../db/helpers');
 var search = require('../search/search');
+var sendEmail = require('../email/emailHandler');
 
 module.exports = {
 
@@ -42,13 +43,18 @@ module.exports = {
   },
 
   addPadawan: function(req, res) {
+    var mentorObj = req.params; 
     var username = req.params.username;
     var padawan = req.body.username;
-    console.log("ADDPADAWAN: USERNAME", username);
-    console.log("ADDPADAWAN: PADAWAN", padawan);
     helpers.addPadawan(username, padawan)
     .then(function(user) {
-      res.send('success');
+      helpers.getUserByUserName(mentorObj) 
+        .then(function(mentor) {
+          var mentorData = mentor.dataValues;
+          mentorData.padawan = padawan;
+          sendEmail.newPadawan(mentorData);
+          res.send('success! padawan added and email sent');
+        });
     });
   },
 
@@ -66,7 +72,7 @@ module.exports = {
     helpers.deletePadawan(mentor, padawan)
     .then(function(resp) {
       res.status(200).send('successfully deleted padawan status');
-    })
+    });
   },
 
   getUsersByQuery: function(req, res) {
