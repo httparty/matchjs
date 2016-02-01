@@ -1,5 +1,6 @@
 var helpers = require('../db/helpers');
 var search = require('../search/search');
+var sendEmail = require('../email/emailHandler');
 
 module.exports = {
 
@@ -48,6 +49,7 @@ module.exports = {
     console.log("ADDPADAWAN: PADAWAN", padawan);
     helpers.addPadawan(username, padawan)
     .then(function(user) {
+      // sendEmail.newPadawan()
       res.send('success');
     });
   },

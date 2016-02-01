@@ -15,5 +15,30 @@ module.exports = {
     // res.send(mailer(mailOptions));
     mailer(mailOptions);
     res.redirect('/#/connect');
+  },
+
+  newPadawan: function(userData) {
+
+  },
+
+  newInvitation: function(inviteData) {
+
+  },
+
+  inviteHasBeenUpdated: function(inviteData) {
+
+  },
+
+  inviteHasBeenDeclined: function(inviteData) {
+
+  },
+
+  dayOfMeetingReminder: function(inviteData) {
+
+  },
+
+  receivedNewMessage: function(data) {
+
   }
+
 };
