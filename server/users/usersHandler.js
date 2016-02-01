@@ -43,17 +43,24 @@ module.exports = {
   },
 
   addPadawan: function(req, res) {
+    var mentorObj = req.params; 
     var username = req.params.username;
     var padawan = req.body.username;
     console.log('ADDPADAWAN: USERNAME', username);
     console.log('ADDPADAWAN: PADAWAN', padawan);
     helpers.addPadawan(username, padawan)
     .then(function(user) {
-      // helpers.getUserByUserName()
-        // .then(function(thisUser) {
-        //   var mentorEmail = thisUser.get('email');
-      // sendEmail.newPadawan()
-      res.send('success');
+      console.log('HERE IS THE USER', user);
+      helpers.getUserByUserName(mentorObj) //user.dataValues.mentorUsername
+        .then(function(mentor) {
+          // var mentorEmail = mentor.get('email');
+          var mentorData = mentor.dataValues;
+          mentorData.padawan = padawan;
+          // console.log(mentorData)
+          console.log('HERE IS MENTORDATA, lINE 56 USERHANDLER', mentorData);
+          sendEmail.newPadawan(mentorData);
+          res.send('success! padawan added and email sent');
+        });
     });
   },
 
