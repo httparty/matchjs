@@ -2,14 +2,14 @@
   'use strict';
 
   angular.module('app.inbox')
-    .factory('inboxModel', [function() {
+    .factory('inboxModel', ['$http',function($http) {
       var model = {};
 
-      model.sentMessage = function(userObj) {
+      model.sentMessage = function(recipientInfo) {
         return $http({
           method: 'POST',
-          url: '/api/email/sentMessage/' + userObj,
-          data: userObj
+          url: '/api/email/sentMessage/',
+          data: recipientInfo
         });
       };
 

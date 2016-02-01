@@ -7,9 +7,8 @@
 
       var vm = this;
 
-      var userObj = {
-        name: 'Anthony',
-        email: 'anthonybibbs@gmail.com'
+      // will store information of recipient for email notification
+      var recipientInfo = {
       };
 
       var vm = this;
@@ -142,6 +141,7 @@
           conversationTimestamp.$value = moment().format();
           conversationTimestamp.$save();
 
+          inboxModel.sentMessage(recipientInfo);
           //clear entered text
           vm.enteredText = '';
         }
@@ -161,6 +161,11 @@
         var conversationName = [vm.currentRecipient, vm.username].sort();
         var conversationURL = baseURL + conversationName[0] + conversationName[1];
         firebaseConnection = new Firebase(conversationURL);
+
+        // store recipient info for email notification
+        recipientInfo.name = conversation.name;
+        recipientInfo.username = conversation.username;
+        recipientInfo.email = conversation.email;
 
         //Fetch all messages for that conversation
         vm.displayMessages();
@@ -190,6 +195,5 @@
         }
       });
     vm.getAllUsers();
-    inboxModel.sentMessage(userObj);
   }]);
 })();

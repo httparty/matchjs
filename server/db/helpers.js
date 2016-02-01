@@ -17,10 +17,9 @@ helpers.getUserByUserName = function(userObj) {
     where: {'username': userObj.username}
   })
   .then(function(user) {
-    if(!user) {
-      throw Error('Cannot locate user.');
+    if(user) {
+      return user;
     }
-    return user;
   });
 };
 
