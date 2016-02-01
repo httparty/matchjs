@@ -34,53 +34,52 @@ module.exports = {
   redirect:  passport.authenticate('google'),
 
   success: function(req, res) {
-    // Successful authentication with google, do something here
-    console.log("THERE WAS SUCCESSFUL AUTHENTICATION");
-    console.log("ACCESS", req.user.accessToken);
-    console.log("REFRESH", req.user.refreshToken);
 
-    // res.cookie('google-calendar', profile, { maxAge: 2592000000 });  // Expires in one month
-    res.redirect('/');
+    //once authorized, complete export to google calendar
+    res.redirect('/api/calendar/export');
   },
 
   //POST request that sends event to 
   //Google Calendar
   exportGoogleCalendar: function(req, res) {
 
-    //current do not know how I'm going to set credentials
-    oauth2Client.setCredentials({
-      access_token: req.user.accessToken,
-      refresh_token: req.user.refreshToken
-    });
+    //check to see if authorized with google
+    //if not authorized, go to authorization route
+    if (!req.user || !req.user.accessToken) {
+      res.redirect('/api/calendar/google');
+    } else {
 
-    var event = {
-      'summary': "Meetup at my apt",
-      'description': "Watch Borat",
-      'start': {
-        'dateTime': new Date(),
-      },
-      'end': {
-        'dateTime': new Date(),
-      }
-    };
+      oauth2Client.setCredentials({
+        access_token: req.user.accessToken,
+        refresh_token: req.user.refreshToken
+      });
 
-    //POST to google calendar
-    var calendar = google.calendar('v3');
+      var event = {
+        'summary': "Meetup at my apt",
+        'description': "Watch Borat",
+        'start': {
+          'dateTime': new Date(),
+        },
+        'end': {
+          'dateTime': new Date(),
+        }
+      };
 
-    calendar.events.insert({
-      auth: oauth2Client,
-      calendarId: 'primary',
-      resource: event,
-    }, function(err, event) {
-      if (err) {
-        console.log('There was an error contacting the Google Calendar service: ' + err);
-        return;
-      }
+      //POST to google calendar
+      var calendar = google.calendar('v3');
 
-      res.json(event.htmlLink);
-    });
+      calendar.events.insert({
+        auth: oauth2Client,
+        calendarId: 'primary',
+        resource: event,
+      }, function(err, event) {
+        if (err) {
+          console.log('There was an error contacting the Google Calendar service: ' + err);
+          return;
+        }
 
-    // res.send('Okay');
+        res.json(event.htmlLink);
+      });
+    }
   } 
-
 };  
