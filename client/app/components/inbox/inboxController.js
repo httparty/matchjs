@@ -3,7 +3,7 @@
 
   angular.module('app.inbox', ['firebase','ngSanitize','ui.select'])
     .constant('moment', moment)
-    .controller('InboxController', ['$scope', '$firebaseArray', '$firebaseObject', 'AuthService', 'connectModel', 'moment', 'inboxModel', function($scope, $firebaseArray, $firebaseObject, AuthService, connectModel, moment, inboxModel) {
+    .controller('InboxController', ['$scope', '$firebaseArray', '$firebaseObject', 'AuthService', 'connectModel', 'moment', 'inboxModel', '$state', 'Profile', function($scope, $firebaseArray, $firebaseObject, AuthService, connectModel, moment, inboxModel, $state, Profile) {
 
       var vm = this;
       
@@ -89,6 +89,14 @@
             vm.conversationList.sort(function(a,b) {
               return comparator[a.username] < comparator[b.username];
             });
+            //if url contains state params, user came to inbox by way of another user's profile with the intention of messaging them, so switch to their conversation
+            if($state.params) {
+              Profile.getUserProfile($state.params)
+              .then(function(r) {
+                var selectedUser = r.data;
+                vm.switchConversation(selectedUser);
+              });
+            }
           });
         });      
       };

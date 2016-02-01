@@ -38,7 +38,14 @@ angular.module('app', [
       templateUrl: 'app/components/inbox/inbox.html',
       controller: 'InboxController',
       url: '/inbox'
-    }) //;
+    }) 
+    //warning experiment below! 
+    .state('inbox/conversation', {
+      templateUrl: 'app/components/inbox/inbox.html',
+      controller: 'InboxController',
+      url: '/inbox/conversation/:username'
+    }) 
+    //end experiment
     .state('guidelines', {
       templateUrl: 'app/components/guidelines/guidelines.html',
       controller: 'GuidelinesController',
