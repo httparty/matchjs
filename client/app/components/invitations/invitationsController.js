@@ -116,8 +116,8 @@
       console.log('Invitation Submitted!');
       vm.formData.mentor = vm.name;
       vm.formData.mentee = vm.recipientName;
-      vm.formData.mentorUsername = vm.username
-      vm.formData.menteeUsername = vm.recipientUsername
+      vm.formData.mentorUsername = vm.username;
+      vm.formData.menteeUsername = vm.recipientUsername;
       vm.formData.sessionInfo.when = new Date(vm.date.getFullYear(), vm.date.getMonth(), vm.date.getDate(), vm.date.getHours(), vm.date.getMinutes());
       vm.submitted = true;
       console.log(vm.formData);

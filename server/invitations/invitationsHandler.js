@@ -2,8 +2,6 @@ var helpers = require('../db/helpers.js');
 var emailer = require('../email/emailHandler');
 
 
-var emailer = require('../email/emailHandler.js')
-
 module.exports = {
   createInvitation: function(req,res) {
     // var username = req.cookies['user-profile'].username;
@@ -44,10 +42,10 @@ module.exports = {
     var menteeObj = {};
     menteeObj.username = req.body.mentee;
 
-    helpers.updateInvitation(inviteData) 
+    helpers.updateInvitation(inviteData)
     .then(function(invite) {
       var updatedInvite = invite.dataValues;
-      helpers.getUserByUserName(mentorObj) 
+      helpers.getUserByUserName(mentorObj)
         .then(function(mentor) {
           updatedInvite.mentorEmail = mentor.email;
           helpers.getUserByUserName(menteeObj)
@@ -72,11 +70,11 @@ module.exports = {
     deletedInviteData.mentee = {};
     deletedInviteData.mentee.username = menteeObj.username;
 
-    helpers.getInvitationById(inviteId) 
+    helpers.getInvitationById(inviteId)
     .then(function(invite) {
       deletedInviteData.when = invite.dataValues.when;
       deletedInviteData.location = invite.dataValues.location;
-      helpers.getUserByUserName(mentorObj) 
+      helpers.getUserByUserName(mentorObj)
         .then(function(mentor) {
           deletedInviteData.mentor.email = mentor.dataValues.email;
           deletedInviteData.mentor.name = mentor.dataValues.name;
@@ -91,7 +89,7 @@ module.exports = {
                 });
             });
         });
-      
+
     });
 
   }

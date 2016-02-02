@@ -62,8 +62,8 @@ describe('/api/invitations routes', function(){
       location: 'San Francisco',
       when: '2016-01-30T04:15:00.000Z',
       summary: 'Some summary'
-    }
-    console.log(invite, 'THIS IS THE INVITE LOOK AT IT!!!')
+    };
+    console.log(invite, 'THIS IS THE INVITE LOOK AT IT!!!');
 
     it('it gets the invitation page', function(done){
       request(app)

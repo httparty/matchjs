@@ -5,14 +5,14 @@ var helpers = {};
 //---------------AUTHENTICATION----------------------
 
 helpers.deleteUser = function(userToDeleteObj) {
-  console.log('This is the userToDeleteObj username', userToDeleteObj.username)
+  console.log('This is the userToDeleteObj username', userToDeleteObj.username);
   return db.User.findOne({
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
     if(!user){
       throw Error('Cannot locate user to delete.');
     }
-    console.log('Line 16', user)
+    console.log('Line 16', user);
     return user.destroy();
   });
 };
@@ -41,7 +41,7 @@ helpers.addUser = function(userObj) {
     toLearn: [],
     toTeach: []
   });
-}
+};
 
 helpers.signInUser = function(userObj) {
   return db.User.findOne({
