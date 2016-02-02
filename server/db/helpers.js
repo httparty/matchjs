@@ -24,25 +24,29 @@ helpers.getUserByUserName = function(userObj) {
   });
 };
 
-helpers.signupUser = function(userObj) {
+helpers.addUser = function(userObj) {
+  return db.User.create({
+    username: userObj.username,
+    password: userObj.id,
+    email: userObj._json.email,
+    name: userObj.displayName,
+    github: userObj.profileUrl,
+    photo: userObj._json.avatar_url,
+    location: userObj._json.location,
+    karmaPoints: 0,
+    toLearn: [],
+    toTeach: []
+  });
+}
+
+helpers.signInUser = function(userObj) {
   return db.User.findOne({
     where: {'username': userObj.username}
   }).then(function(user) {
     if(user) {
       return user;
     } else {
-      return db.User.create({
-        username: userObj.username,
-        password: userObj.id,
-        email: userObj._json.email || userObj.username + '@users.noreply.github.com',
-        name: userObj.displayName,
-        github: userObj.profileUrl,
-        photo: userObj._json.avatar_url,
-        location: userObj._json.location,
-        karmaPoints: 0,
-        toLearn: [],
-        toTeach: []
-      });
+      return undefined;
     }
   });
 };
