@@ -2,15 +2,11 @@
   'use strict';
 
   angular.module('app.auth', [])
-    .controller('AuthController', ['$scope', function($scope) {
+    .controller('AuthController', ['$scope','AuthService', function($scope, AuthService) {
+      
       var vm = this;
       vm.email = '';
-
-      $scope.submitEmail = function() {
-        if (vm.email !== undefined) {
-          console.log("submitted email", vm.email);
-        }
-      }
+      vm.action = '/auth/email/';
 
     }]);
 })();

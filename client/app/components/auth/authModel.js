@@ -2,11 +2,7 @@
   'use strict';
 
   angular.module('app.auth')
-    .factory('AuthService', ['$cookies', '$http', function($cookies, $http) {
-
-      var updateEmail = function(email) {
-        
-      };
+    .factory('AuthService', ['$cookies', function($cookies) {
 
       var isAuthenticated = function () {
         return !!$cookies.get('user-profile');
