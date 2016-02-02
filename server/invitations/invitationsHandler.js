@@ -11,13 +11,8 @@ module.exports = {
 
     var invitee = req.body.mentee;
     var sessionInfo = req.body.sessionInfo;
-    // console.log('Invitee', invitee);
-    // console.log('Username', username);
-    // console.log('SessionInfo', sessionInfo);
-    console.log(username, "HEY THIS IS THE USERNAME PULLED FROM THE COOKIES!!!");
-    console.log(req.body, "This is the invitation Object on the server");
 
-    emailer.invitationConfirm(req, res);
+    emailer.invitationConfirm(req.body);
 
     helpers.createInvitation(username,invitee,sessionInfo)
     .then(function(invitation) {
