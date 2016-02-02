@@ -1,0 +1,4 @@
+/*for making mouse turn to cursor on navbar menu hover*/
+li:hover {
+    cursor: pointer;
+}
