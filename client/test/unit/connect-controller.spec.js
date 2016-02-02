@@ -42,7 +42,10 @@ describe('Controller: ConnectController', function() {
     it('test', function() {
       // expect(AuthController.email).toBeDefined();
       // expect(AuthController.action).toBeDefined();
+    });
 
+    it('should equal 4', function() {
+      expect("4").toBe("4");
     });
   });
 });
