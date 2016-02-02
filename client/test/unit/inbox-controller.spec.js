@@ -32,14 +32,14 @@ describe('Controller: InboxController', function() {
     
     // InboxController = $controller('InboxController', {
     //   $scope: $scope,
-    //   AuthService : AuthService,
-    //   $firebaseArray : $firebaseArray,
-    //   $firebaseObject : $firebaseObject,
-    //   connectModel : connectModel,
-    //   moment : moment,
-    //   inboxModel : inboxModel,
-    //   $state : $state,
-    //   Profile : Profile
+    //   AuthService: AuthService,
+    //   $firebaseArray: $firebaseArray,
+    //   $firebaseObject: $firebaseObject,
+    //   connectModel: connectModel,
+    //   moment: moment,
+    //   inboxModel: inboxModel,
+    //   $state: $state,
+    //   Profile: Profile
     // });
 
   }));

@@ -21,10 +21,10 @@ describe('Controller: InvitationsController', function() {
 
     //need to mock a cookie
     // InvitationsController = $controller('InvitationsController', {
-    //   AuthService : AuthService,
-    //   invitationsModel : invitationsModel,
-    //   $state : $state,
-    //   Profile : Profile
+    //   AuthService: AuthService,
+    //   invitationsModel: invitationsModel,
+    //   $state: $state,
+    //   Profile: Profile
     // });
 
   }));

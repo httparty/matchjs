@@ -16,7 +16,7 @@ describe('Controller: AuthController', function() {
 
     AuthController = $controller('AuthController', {
       $scope: $scope,
-      AuthService : AuthService
+      AuthService: AuthService
     });
 
   }));

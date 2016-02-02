@@ -25,9 +25,9 @@ describe('Controller: ConnectController', function() {
 
     // ConnectController = $controller('connectController', {
     //   $scope: $scope,
-    //   AuthService : AuthService,
-    //   connectModel : connectModel,
-    //   $state : $state
+    //   AuthService: AuthService,
+    //   connectModel: connectModel,
+    //   $state: $state
     // });
 
   }));

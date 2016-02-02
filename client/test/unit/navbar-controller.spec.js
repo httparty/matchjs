@@ -16,7 +16,7 @@ describe('Controller: NavController', function() {
     //Need to mock a cookie
     // NavController = $controller('NavController', {
     //   $state: $state,
-    //   AuthService : AuthService
+    //   AuthService: AuthService
     // });
 
   }));
