@@ -70,7 +70,26 @@ module.exports = {
   },
 
   inviteHasBeenDeclined: function(inviteData) {
+    var mentorEmail = inviteData.mentor.email;
+    var menteeEmail = inviteData.mentee.email;
 
+    var mailOptionsMentor = {
+      from: 'MatchJS <matchjsteam@gmail.com>',
+      to: mentorEmail,
+      subject: 'Your upcoming mentorship session has been cancelled.',
+      html: 'Hello ' + inviteData.mentor.name + ',<br><br>'+
+      'You\'ve recently cancelled your mentorship session with ' + inviteData.mentee.name + ' on ' + inviteData.when + ' at ' + inviteData.location + '.<br><br> To reschedule your mentorship meeting or to send a message directly to your mentee, log in to MatchJS.<br><br>Thanks for being a member of the MatchJS community!<br><br> - The MatchJS Team'
+    };
+    var mailOptionsMentee = {
+      from: 'MatchJS <matchjsteam@gmail.com>',
+      to: menteeEmail,
+      subject: 'Please note: Your upcoming mentorship session has been cancelled.',
+      html: 'Hello ' + inviteData.mentee.name + ',<br><br>'+
+      'Your mentorship session on ' + inviteData.when + ' at ' + inviteData.location + ' with '+ inviteData.mentor.name + ' has been cancelled.<br><br>To send a message to your mentor or find another mentor to pair with, log in to MatchJS.<br><br>Thanks for being a member of the MatchJS community!<br><br> - The MatchJS Team'
+    };
+    mailer(mailOptionsMentor);
+    mailer(mailOptionsMentee);
+    return;
   },
 
   dayOfMeetingReminder: function(inviteData) {

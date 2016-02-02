@@ -1,6 +1,6 @@
 var helpers = require('../db/helpers');
 var search = require('../search/search');
-var sendEmail = require('../email/emailHandler');
+var emailer = require('../email/emailHandler');
 
 module.exports = {
 
@@ -52,7 +52,7 @@ module.exports = {
         .then(function(mentor) {
           var mentorData = mentor.dataValues;
           mentorData.padawan = padawan;
-          sendEmail.newPadawan(mentorData);
+          emailer.newPadawan(mentorData);
           res.send('success! padawan added and email sent');
         });
     });

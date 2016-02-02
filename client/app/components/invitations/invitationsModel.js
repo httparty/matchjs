@@ -30,7 +30,7 @@
       model.deleteInvitation = function(inviteObj) {
         return $http({
           method: 'DELETE',
-          url: '/api/invitations/invite/' + inviteObj.id
+          url: '/api/invitations/invite/' + inviteObj.id + '/' + inviteObj.senderName + '/' + inviteObj.recipientName
         });
       };
 

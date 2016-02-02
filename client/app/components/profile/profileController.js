@@ -124,6 +124,7 @@
     };
 
     $scope.deleteInvite = function(invite) {
+      console.log('here is invite of deleteInvite', invite);
       invitationsModel.deleteInvitation(invite)
         .then(function(response) {
           //add message text
