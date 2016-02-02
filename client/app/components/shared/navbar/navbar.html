@@ -6,10 +6,8 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right" ng-show="ctrl.isLoggedIn()">
-          <!-- <li ng-click="ctrl.getThisUserProfile(ctrl.user.username)"> Hello, {{ctrl.user.displayName}}</li> -->
           <li uib-dropdown on-toggle="toggled(open)">
                  <a href id="simple-dropdown" uib-dropdown-toggle> Hello, {{ctrl.user.displayName}}</a>
-            <!-- <a class="dropdown-toggle" data-toggle="dropdown" >Hello, {{ctrl.user.displayName}}<span class="caret"></span></a> -->
           <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="nav">
             <li><a ng-click="ctrl.getThisUserProfile(ctrl.user.username)"> Profile </a></li>
             <li><a href="/"> Settings </a></li>
