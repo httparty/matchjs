@@ -53,11 +53,11 @@
         </div><!-- End panel body-->
       </div><!-- End panel panel-default-->
 <!-- END PHOTO, BASICS, SUMMARY SECTION -->
-<!-- PADAWANS  - ONLY VISBLE IF CURRENTUSER === PROFILEUSER -->
+<!-- PADAWANS -->
       <div class="panel panel-default" id="padawans">
         <div class="panel-heading">
           <h3 ng-hide="!editMode.isSameUser" class="panel-title">My Followers</h3>
-          <h3 ng-show="!editMode.isSameUser" class="panel-title">{{profileUser.name || profileUser.username}}'s Followers</h3>
+          <h3 ng-show="!editMode.isSameUser" class="panel-title">Followers</h3>
         </div>
         <div class="panel-body">
           <p ng-bind-html="UImessages.noPadawans"></p>

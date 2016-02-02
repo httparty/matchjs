@@ -161,7 +161,6 @@
       Profile.addPadawan(mentor, padawan)
       .then(function(response) {
         $scope.editMode.isPadawan = true;
-        console.log('here is response', response);
       });
     };
 
@@ -176,10 +175,7 @@
     var getPadawans = function(mentor) {
       Profile.getPadawans(mentor)  
       .then(function(response) {
-        console.log('here are the padawans', response.data);
-        if($scope.currentUser.username === $scope.profileUser.username) {
-          $scope.padawans = response.data;
-        }
+        $scope.padawans = response.data;
         for(var i = 0; i < response.data.length; i++) {
           if (response.data[i].padawanUsername === $scope.currentUser.username) {
             $scope.editMode.isPadawan = true;
@@ -191,7 +187,6 @@
     var getMentors = function(mentee) {
       Profile.getMentors(mentee)
       .then(function(response) {
-        console.log("response.data", response.data);
         $scope.mentors = response.data;
       });
     };
