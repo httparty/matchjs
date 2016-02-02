@@ -9,9 +9,23 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../../../../node_modules/angular/angular.js',
-      '../../../../node_modules/angular-mocks/angular-mocks.js',
-      './../*.js'
+      '../../../bower_components/jquery/dist/jquery.min.js',
+      '../../../bower_components/angular/angular.min.js',
+      '../../../bower_components/angular-mocks/angular-mocks.js',
+      '../../../bower_components/angular-ui-router/release/angular-ui-router.min.js',
+      '../../../bower_components/ng-tags-input/ng-tags-input.js',
+      '../../../bower_components/underscore/underscore-min.js',
+      '../../../bower_components/rxjs/dist/rx.all.min.js',
+      '../../../bower_components/angular-cookies/angular-cookies.min.js',
+      '../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      '../../../bower_components/angular-sanitize/angular-sanitize.min.js',
+      '../../../bower_components/ui-select/dist/select.min.js',
+      '../../../bower_components/firebase/firebase.js',
+      '../../../bower_components/angularfire/dist/angularfire.min.js',
+      '../../../bower_components/moment/min/moment.min.js',
+
+      './../*.js', //spec files
+      '../../../../client/app/**/*.js' //client
     ],
 
     // test result reporter
