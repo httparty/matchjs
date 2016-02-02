@@ -18,7 +18,6 @@ angular.module('app', [
 
     $urlRouterProvider.otherwise('/');
 
-
     $stateProvider
     .state('home', {
       templateUrl: 'app/components/home/home.html',
