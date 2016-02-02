@@ -138,21 +138,23 @@
       invitationsModel.getInvitationsByMentor(username)
       .then(function(mentorResp) {
         mentorResp.data.forEach(function(invite) {
+          console.log("HERE IS INVITE - MENTORRR", invite);
           invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
           invites.push(invite);                
-        });
-        invitationsModel.getInvitationsByMentee(username)
-          .then(function(menteeResp) {
-            menteeResp.data.forEach(function(invite) {
-              invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
-              invite.readOnly = true;
-              invites.push(invite);
+          invitationsModel.getInvitationsByMentee(username)
+            .then(function(menteeResp) {
+              menteeResp.data.forEach(function(invite) {
+                console.log("HERE IS INVITE - MENTEE", invite);
+                invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
+                invite.readOnly = true;
+                invites.push(invite);
+              });
+              if(invites.length === 0) {
+                $scope.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
+              } 
+                $scope.invitations = invites;
             });
-            if(invites.length === 0) {
-              $scope.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
-            } 
-              $scope.invitations = invites;
-          });
+        });
       });
     };
 
