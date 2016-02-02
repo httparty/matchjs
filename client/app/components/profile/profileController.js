@@ -114,6 +114,7 @@
     $scope.updateInvite = function(username, recipient, inviteId, inviteObj) {
       inviteObj.id = inviteId;
       inviteObj.username = username;
+      inviteObj.mentee = recipient;
       invitationsModel.updateInvitation(inviteObj)
         .then(function(response) {
           $scope.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
@@ -123,6 +124,7 @@
     };
 
     $scope.deleteInvite = function(invite) {
+      console.log('here is invite of deleteInvite', invite);
       invitationsModel.deleteInvitation(invite)
         .then(function(response) {
           //add message text
@@ -138,19 +140,19 @@
         mentorResp.data.forEach(function(invite) {
           invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
           invites.push(invite);                
-        });
-        invitationsModel.getInvitationsByMentee(username)
-          .then(function(menteeResp) {
-            menteeResp.data.forEach(function(invite) {
-              invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
-              invite.readOnly = true;
-              invites.push(invite);
+          invitationsModel.getInvitationsByMentee(username)
+            .then(function(menteeResp) {
+              menteeResp.data.forEach(function(invite) {
+                invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
+                invite.readOnly = true;
+                invites.push(invite);
+              });
+              if(invites.length === 0) {
+                $scope.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
+              } 
+                $scope.invitations = invites;
             });
-            if(invites.length === 0) {
-              $scope.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
-            } 
-              $scope.invitations = invites;
-          });
+        });
       });
     };
 

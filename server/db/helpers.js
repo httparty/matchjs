@@ -198,6 +198,17 @@ helpers.getInvitationsByRecipient = function(username) {
   });
 };
 
+helpers.getInvitationById = function(inviteId) {
+  return db.Invitation.findOne({
+    where: {'id': inviteId}
+  }).then(function(invite) {
+    if (!invite) {
+      return null;
+    }
+    return invite;
+  });
+};
+
 
 helpers.updateInvitation = function(inviteObj) {
   return db.Invitation.findOne({
