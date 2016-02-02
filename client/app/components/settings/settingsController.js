@@ -1,7 +1,7 @@
 ;(function(){
   'use strict';
   angular.module('app.settings', [])
-  .controller('settingsController', [
+  .controller('SettingsController', [
     'settingsModel', '$state', function(settingsModel, $state){
 
     var vm = this;

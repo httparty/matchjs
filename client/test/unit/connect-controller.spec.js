@@ -17,15 +17,17 @@ describe('Controller: ConnectController', function() {
     AuthService = $injector.get('AuthService');
     connectModel = $injector.get('connectModel')
     $state = $injector.get('$state');
+    
+    //inject a mock cookie somewhere
 
     //this is currently not working
     //because it can't get info from a cookie
 
     // ConnectController = $controller('connectController', {
     //   $scope: $scope,
-    //   AuthService : AuthService,
-    //   connectModel : connectModel,
-    //   $state : $state
+    //   AuthService: AuthService,
+    //   connectModel: connectModel,
+    //   $state: $state
     // });
 
   }));
@@ -40,7 +42,10 @@ describe('Controller: ConnectController', function() {
     it('test', function() {
       // expect(AuthController.email).toBeDefined();
       // expect(AuthController.action).toBeDefined();
+    });
 
+    it('should equal 4', function() {
+      expect("4").toBe("4");
     });
   });
 });
