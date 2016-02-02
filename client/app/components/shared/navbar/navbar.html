@@ -5,17 +5,17 @@
         <a class="navbar-brand topnav" href="/" style="font: verdana; color: #000000"><strong>MatchJS</strong></a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right" ng-show="ctrl.isLoggedIn()">
+        <ul class="nav navbar-nav navbar-right" ng-show="ctrl.isLoggedIn()" >
           <li uib-dropdown on-toggle="toggled(open)">
-                 <a href id="simple-dropdown" uib-dropdown-toggle> Hello, {{ctrl.user.displayName}} <i class="fa fa-bars"></i></a>
+            <img class="img-circle" ng-src="{{ctrl.user.avatar || 'http://placehold.it/48x48'}}" style=" width: 48px; height: 48px; vertical-align: middle;">
+            <span><a href id="simple-dropdown" uib-dropdown-toggle>{{ctrl.user.displayName}} <i class="fa fa-caret-down"></i></a></span>
           <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="nav">
             <li><a ng-click="ctrl.getThisUserProfile(ctrl.user.username)"> Profile <i class="fa fa-user"></i></a></li>
+            <li><a href="/#/inbox">Messages <i class="fa fa-envelope"></i></a></li>
             <li><a href="/"> Settings <i class="fa fa-cog"></i></a></li>
-            <li class="divider"></li>
             <li><a href="/logout"> Sign Out <i class="fa fa-sign-out"></i></a></li>
           </ul>
           </li>
-          <li><a href="/#/inbox">Messages <i class="fa fa-envelope-o"></i></a></li>
         </ul>
       </div>
     </div>
