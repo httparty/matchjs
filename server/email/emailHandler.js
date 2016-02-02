@@ -114,7 +114,7 @@ module.exports = {
       to: inviteObj.mentorEmail,
       subject: "Your invitation has been sent!",
       html: "<h1>Your mentorship session has been scheduled!<h1><h3>Here are the details:</h3>" +
-      "<h5>When:</h5>" + "<p>" + appointment.format("dddd, MMMM Do YYYY, h:mm:ss a") + "</p>"+
+      "<h5>When:</h5>" + "<p>" + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
       "<h5>Where:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
       "<h5>Who:</h5>" + "<p>" + inviteObj.mentee + "</p>" +
       "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
@@ -127,7 +127,7 @@ module.exports = {
       to: inviteObj.menteeEmail,
       subject: 'You have an invitation!',
       html: "<h1>You have an invitation from a mentor!<h1><h3>Here are the details:</h3>" +
-      "<h5>When:</h5>" + "<p>" + appointment.format("dddd, MMMM Do YYYY, h:mm:ss a") + "</p>"+
+      "<h5>When:</h5>" + "<p>" + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
       "<h5>Location:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
       "<h5>Who:</h5>" + "<p>" + inviteObj.mentor + "</p>" +
       "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
@@ -151,7 +151,9 @@ module.exports = {
 // { where: 'asdfasdf',
 // summary: 'asdfasdf',
 // when: '2016-02-01T19:45:00.000Z' },
-// mentor: 'spiterman',
+// mentorUsername: 'spiterman',
+// menteeUsername: 'user2',
+// mentor: 'Sergey Piterman',
 // mentee: 'user2' }
 
 

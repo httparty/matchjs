@@ -56,20 +56,20 @@ describe('/api/invitations routes', function(){
     var invite = {};
     invite.menteeEmail = 'mentee@yahoo.com';
     invite.mentorEmail = 'mentor@yahoo.com';
-    invite.mentee = 'user1';
-    invite.mentor = 'spiterman';
+    invite.mentee = 'John Doe';
+    invite.mentor = 'Jane Doe';
+    invite.mentorUsername = "user1"
+    invite.menteeUsername = "user2";
     invite.sessionInfo = {
       location: 'San Francisco',
       when: '2016-01-30T04:15:00.000Z',
       summary: 'Some summary'
     };
-    console.log(invite, 'THIS IS THE INVITE LOOK AT IT!!!');
-
     it('it gets the invitation page', function(done){
       request(app)
         .post('/api/invitations/createInvitation')
         .send(invite)
-        // .expect(200)
+        .expect(200)
         .end(function(err, res){
           if(err){throw err;}
           // expect(res).to.exist;
@@ -78,5 +78,11 @@ describe('/api/invitations routes', function(){
         });
     });
   });
+
+describe('/api/addPadawan', function(){
+
+
+
+})
 
 });
