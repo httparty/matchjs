@@ -44,14 +44,24 @@ module.exports = {
 
         } else {
 
-          console.log("USER NOT FOUND IN DB WITH NO EMAIL");
           //if user not found and email is not available
           res.redirect('/#/auth');
-          //send to auth/getemail route
-
-          
         }
       }
+    });
+  },
+
+  addEmail: function(req, res) {
+
+    //set email and add user to database
+    req.user._json.email = req.params.email;
+
+    helpers.addUser(req.user)
+    .then(function(user) {
+
+      var cookie = setCookieProfile(req.user);
+      res.cookie('user-profile', cookie, { maxAge: 2592000000 });  // Expires in one month
+      res.redirect('/api/email/signupConfirm');
     });
   }
 };
