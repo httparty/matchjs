@@ -21,13 +21,15 @@
     });
 
     //Recipient Information
-    vm.recipient = $state.params.username;
+    vm.recipientUsername = $state.params.username;
 
     Profile.getUserProfile($state.params).then(function(response){
       vm.recipientProfile = response.data;
       vm.recipientName = vm.recipientProfile.name;
       vm.formData.menteeEmail = vm.recipientProfile.email;
     });
+    // console.log(vm.name)
+    // console.log(vm.recipientName)
 
 
 //Scope Variables
@@ -112,10 +114,13 @@
     //Submits the actual invitation
     vm.createInvitation = function() {
       console.log('Invitation Submitted!');
-      vm.formData.mentor = vm.username;
-      vm.formData.mentee = vm.recipient;
+      vm.formData.mentor = vm.name;
+      vm.formData.mentee = vm.recipientName;
+      vm.formData.mentorUsername = vm.username
+      vm.formData.menteeUsername = vm.recipientUsername
       vm.formData.sessionInfo.when = new Date(vm.date.getFullYear(), vm.date.getMonth(), vm.date.getDate(), vm.date.getHours(), vm.date.getMinutes());
       vm.submitted = true;
+      console.log(vm.formData);
       invitationsModel.createInvitation(vm.formData)
         .then(function(r){
           vm.formData = {};
