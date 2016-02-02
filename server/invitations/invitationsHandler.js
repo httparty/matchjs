@@ -5,14 +5,14 @@ var emailer = require('../email/emailHandler');
 module.exports = {
   createInvitation: function(req,res) {
     // var username = req.cookies['user-profile'].username;
-    var username = req.body.mentor;
+    var username = req.body.mentorUsername;
 
-    var invitee = req.body.mentee;
+    var invitee = req.body.menteeUsername;
     var sessionInfo = req.body.sessionInfo;
 
     emailer.invitationConfirm(req.body);
 
-    helpers.createInvitation(username,invitee,sessionInfo)
+    helpers.createInvitation(username, invitee, sessionInfo)
     .then(function(invitation) {
       res.send(invitation);
     });
