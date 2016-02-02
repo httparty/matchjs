@@ -109,6 +109,13 @@ helpers.deletePadawan = function(mentor, padawan) {
   });
 };
 
+helpers.getMentors = function(padawan) {
+  return db.Padawan.findAll({
+    where: {'padawanUsername': padawan}
+  }).then(function(padawanRelArr) {
+    return padawanRelArr;
+  });
+};
 
 
 //------------------GET RECOMMENDED USERS-------------------------

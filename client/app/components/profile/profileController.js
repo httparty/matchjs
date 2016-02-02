@@ -124,7 +124,6 @@
     };
 
     $scope.deleteInvite = function(invite) {
-      console.log('here is invite of deleteInvite', invite);
       invitationsModel.deleteInvitation(invite)
         .then(function(response) {
           //add message text
@@ -189,6 +188,15 @@
       });
     };
 
+    var getMentors = function(mentee) {
+      Profile.getMentors(mentee)
+      .then(function(response) {
+        console.log("response.data", response.data);
+        $scope.mentors = response.data;
+      });
+    };
+
+
     //---------------GET USER PROFILE---------------
     	//called on the initialization of the HTML page, ng-init
     $scope.getUserProfile = function(userObj) {
@@ -200,8 +208,9 @@
           getUserInvitations($scope.currentUser.username);
         }
         getPadawans($scope.profileUser);
-        //CALL TO GET USER PADAWANS HERE
-        //---populate the scope with the data returning from DB query.---
+        getMentors($scope.profileUser);
+
+        //---populate the scope with the data returning from getUserProfile query.---
         $scope.profileUser.photo = response.data.photo;
         $scope.profileUser.location = response.data.location;
         // $scope.profileUser.name = response.data.displayName;

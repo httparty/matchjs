@@ -75,6 +75,15 @@ module.exports = {
     });
   },
 
+  getMentors: function(req, res) {
+    console.log('HERE IS REQ.PARAMS', req.params);
+    var mentee = req.params.username;
+    helpers.getMentors(mentee)
+    .then(function(padawanRelArr) {
+      res.status(200).send(padawanRelArr);
+    });
+  },
+
   getUsersByQuery: function(req, res) {
     helpers.getAllUsers()
     .then(function(usersArray) {
