@@ -4,20 +4,20 @@ var emailer = require('../email/emailHandler');
 
 module.exports = {
   createInvitation: function(req,res) {
-    var username = req.cookies['user-profile'].username;
+    // var username = req.cookies['user-profile'].username;
+    var username = req.body.mentor;
+
     var invitee = req.body.mentee;
     var sessionInfo = req.body.sessionInfo;
-    console.log('Invitee', invitee);
-    console.log('Username', username);
-    console.log('SessionInfo', sessionInfo);
 
+    emailer.invitationConfirm(req.body);
 
     helpers.createInvitation(username,invitee,sessionInfo)
     .then(function(invitation) {
       res.send(invitation);
     });
   },
-  
+
   getInvitationsBySender: function(req, res) {
     var username = req.params.username;
 
@@ -42,10 +42,10 @@ module.exports = {
     var menteeObj = {};
     menteeObj.username = req.body.mentee;
 
-    helpers.updateInvitation(inviteData) 
+    helpers.updateInvitation(inviteData)
     .then(function(invite) {
       var updatedInvite = invite.dataValues;
-      helpers.getUserByUserName(mentorObj) 
+      helpers.getUserByUserName(mentorObj)
         .then(function(mentor) {
           updatedInvite.mentorEmail = mentor.email;
           helpers.getUserByUserName(menteeObj)
@@ -70,11 +70,11 @@ module.exports = {
     deletedInviteData.mentee = {};
     deletedInviteData.mentee.username = menteeObj.username;
 
-    helpers.getInvitationById(inviteId) 
+    helpers.getInvitationById(inviteId)
     .then(function(invite) {
       deletedInviteData.when = invite.dataValues.when;
       deletedInviteData.location = invite.dataValues.location;
-      helpers.getUserByUserName(mentorObj) 
+      helpers.getUserByUserName(mentorObj)
         .then(function(mentor) {
           deletedInviteData.mentor.email = mentor.dataValues.email;
           deletedInviteData.mentor.name = mentor.dataValues.name;
@@ -89,7 +89,7 @@ module.exports = {
                 });
             });
         });
-      
+
     });
 
   }

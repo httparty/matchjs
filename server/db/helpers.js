@@ -2,12 +2,17 @@ var db = require('./config.js');
 var rec = require('../recommender/recommend');
 var helpers = {};
 
-//---------------AUTHENTICATION---------------------- 
+//---------------AUTHENTICATION----------------------
 
 helpers.deleteUser = function(userToDeleteObj) {
-  db.User.findOne({
+  console.log('This is the userToDeleteObj username', userToDeleteObj.username);
+  return db.User.findOne({
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
+    if(!user){
+      throw Error('Cannot locate user to delete.');
+    }
+    console.log('Line 16', user);
     return user.destroy();
   });
 };
@@ -36,7 +41,7 @@ helpers.addUser = function(userObj) {
     toLearn: [],
     toTeach: []
   });
-}
+};
 
 helpers.signInUser = function(userObj) {
   return db.User.findOne({
@@ -77,7 +82,7 @@ helpers.updateUser = function(profileUpdateObj) {
 };
 
 helpers.addPadawan = function(mentor, padawan) {
-  return db.Padawan.create({ 
+  return db.Padawan.create({
     mentorUsername: mentor,
     padawanUsername: padawan
   });
@@ -212,7 +217,7 @@ helpers.getInvitationById = function(inviteId) {
 
 helpers.updateInvitation = function(inviteObj) {
   return db.Invitation.findOne({
-    where: {'id': inviteObj.id} 
+    where: {'id': inviteObj.id}
   }).then(function(invite) {
     if(!invite) {
       throw Error('Invitation not found.');

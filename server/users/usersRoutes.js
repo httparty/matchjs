@@ -10,4 +10,5 @@ module.exports = function(app) {
   app.post('/addPadawan/:username', usersHandler.addPadawan);
   app.get('/getPadawans/:username', usersHandler.getPadawans);
   app.delete('/padawan/:mentor/:padawan', usersHandler.deletePadawan);
+  app.delete('/settings/deleteAccount/:username', usersHandler.deleteAccount);
 };

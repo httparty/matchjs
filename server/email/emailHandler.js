@@ -1,4 +1,5 @@
 var mailer = require('../config/mailer.js');
+var moment = require('moment');
 
 module.exports = {
   signupConfirm: function(req,res) {
@@ -16,7 +17,8 @@ module.exports = {
     res.redirect('/#/connect');
   },
 
-  sentMessage: function(req,res) {
+
+  sentMessage: function(req, res) {
     // console.log(req.cookies['user-profile'].username, ':', req.body);
     var mailOptions = {
       from: 'MatchJS <matchjsteam@gmail.com>',
@@ -98,5 +100,64 @@ module.exports = {
 
   receivedNewMessage: function(data) {
 
+  },
+
+
+  invitationConfirm: function(inviteObj){
+
+
+    var appointment = moment(inviteObj.sessionInfo.when);
+
+
+    var mailOptionsMentor = {
+      from: "MatchJS <matchjsteam@gmail.com>",
+      to: inviteObj.mentorEmail,
+      subject: "Your invitation has been sent!",
+      html: "<h1>Your mentorship session has been scheduled!<h1><h3>Here are the details:</h3>" +
+      "<h5>When:</h5>" + "<p>" + appointment.format("dddd, MMMM Do YYYY, h:mm:ss a") + "</p>"+
+      "<h5>Where:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
+      "<h5>Who:</h5>" + "<p>" + inviteObj.mentee + "</p>" +
+      "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
+      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='http://127.0.0.1:5000/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentee + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
+      "<h2>Enjoy your meeting!</h2>"
+    };
+
+    var mailOptionsMentee = {
+      from: 'MatchJS <matchjsteam@gmail.com>',
+      to: inviteObj.menteeEmail,
+      subject: 'You have an invitation!',
+      html: "<h1>You have an invitation from a mentor!<h1><h3>Here are the details:</h3>" +
+      "<h5>When:</h5>" + "<p>" + appointment.format("dddd, MMMM Do YYYY, h:mm:ss a") + "</p>"+
+      "<h5>Location:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
+      "<h5>Who:</h5>" + "<p>" + inviteObj.mentor + "</p>" +
+      "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
+      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='http://127.0.0.1:5000/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentor + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
+      "<h2>Enjoy your meeting!</h2>"
+    };
+
+    mailer(mailOptionsMentor);
+    console.log('Mentor Email Sent');
+    mailer(mailOptionsMentee);
+    console.log('Mentee Email Sent');
+
+
   }
 };
+
+
+// { mentorEmail: 'spiterman@users.noreply.github.com',
+// menteeEmail: 'user2@email.com',
+// sessionInfo:
+// { where: 'asdfasdf',
+// summary: 'asdfasdf',
+// when: '2016-02-01T19:45:00.000Z' },
+// mentor: 'spiterman',
+// mentee: 'user2' }
+
+
+// <a href="http://127.0.0.1:5000/api/calendar/export
+// ?summary=test
+// &description=testing
+// &start=2014-09-08T08:02:17-05:00
+// &end=2014-09-08T08:02:17-05:00">
+// Submit request to export to Google Calendar Event</a>

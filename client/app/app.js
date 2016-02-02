@@ -10,7 +10,9 @@ angular.module('app', [
   'app.connect',
   'app.inbox',
   'app.guidelines',
-  'app.invitations'
+  'app.invitations',
+  'app.settings'
+  // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -37,12 +39,12 @@ angular.module('app', [
       templateUrl: 'app/components/inbox/inbox.html',
       controller: 'InboxController',
       url: '/inbox'
-    }) 
+    })
     .state('inbox/conversation', {
       templateUrl: 'app/components/inbox/inbox.html',
       controller: 'InboxController',
       url: '/inbox/conversation/:username'
-    }) 
+    })
     .state('guidelines', {
       templateUrl: 'app/components/guidelines/guidelines.html',
       controller: 'GuidelinesController',
@@ -57,6 +59,15 @@ angular.module('app', [
       templateUrl: 'app/components/auth/auth.html',
       controller: 'AuthController',
       url: '/auth'
+    })
+    .state('settings', {
+      templateUrl: 'app/components/settings/settings.html',
+      controller: 'settingsController',
+      url:'/settings/:username'
+    })
+    .state('about', {
+      templateUrl: 'app/components/about/about.html',
+      url: '/about'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
