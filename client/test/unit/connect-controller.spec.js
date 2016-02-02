@@ -17,6 +17,8 @@ describe('Controller: ConnectController', function() {
     AuthService = $injector.get('AuthService');
     connectModel = $injector.get('connectModel')
     $state = $injector.get('$state');
+    
+    //inject a mock cookie somewhere
 
     //this is currently not working
     //because it can't get info from a cookie
