@@ -138,13 +138,11 @@
       invitationsModel.getInvitationsByMentor(username)
       .then(function(mentorResp) {
         mentorResp.data.forEach(function(invite) {
-          console.log("HERE IS INVITE - MENTORRR", invite);
           invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
           invites.push(invite);                
           invitationsModel.getInvitationsByMentee(username)
             .then(function(menteeResp) {
               menteeResp.data.forEach(function(invite) {
-                console.log("HERE IS INVITE - MENTEE", invite);
                 invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
                 invite.readOnly = true;
                 invites.push(invite);
