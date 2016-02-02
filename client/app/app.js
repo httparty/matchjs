@@ -11,7 +11,6 @@ angular.module('app', [
   'app.inbox',
   'app.guidelines',
   'app.invitations'
-  // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -53,16 +52,23 @@ angular.module('app', [
       templateUrl: 'app/components/invitations/invitations.html',
       controller: 'invitationsController',
       url: '/invitations/:username'
+    })
+    .state('auth', {
+      templateUrl: 'app/components/auth/auth.html',
+      controller: 'AuthController',
+      url: '/auth'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-      if (!AuthService.isAuthenticated() && toState.name !== 'home') {
-        console.log('hello in isauth');
-        event.preventDefault();
-        $state.go('home');
-        return;
+
+      if (toState.name !== 'auth') {
+        if (!AuthService.isAuthenticated() && toState.name !== 'home') {
+          event.preventDefault();
+          $state.go('home');
+          return;
+        }
       }
 
       if (AuthService.isAuthenticated() && toState.name === 'home') {

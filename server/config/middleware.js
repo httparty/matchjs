@@ -54,4 +54,3 @@ module.exports = function(app, express) {
   require(__dirname + './../invitations/invitationsRoutes.js')(invitationsRouter);
   require(__dirname + './../calendar/calendarRoutes.js')(calendarRouter);
 };
-
