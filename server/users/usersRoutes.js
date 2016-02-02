@@ -11,4 +11,5 @@ module.exports = function(app) {
   app.get('/getPadawans/:username', usersHandler.getPadawans);
   app.delete('/padawan/:mentor/:padawan', usersHandler.deletePadawan);
   app.delete('/settings/deleteAccount/:username', usersHandler.deleteAccount);
+  app.get('/getMentors/:username', usersHandler.getMentors);
 };
