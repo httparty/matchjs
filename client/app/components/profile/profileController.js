@@ -169,19 +169,19 @@
     var getPadawans = function(mentor) {
       Profile.getPadawans(mentor)  
       .then(function(response) {
-
-//NOTE TO RACHEL: YOU LEFT OFF TRYING TO FIGURE OUT WHY PADAWANS GETS POPULATED WITH EMPTY PANELS WHEN THERE ARE NONE//        
-        console.log('here are the padawans!!', response.body);
-        vm.padawans = response.data;
-        vm.padawans.forEach(function(padawan) {
+        vm.padawans = [];
+        response.data.forEach(function(padawan, i) {
           if (padawan.padawanUsername === vm.currentUser.username) {
             vm.editMode.isPadawan = true;
           }
-          var padawanObj = {username: padawan.padawanUsername};
-          Profile.getUserProfile(padawanObj) 
-          .then(function(response) {
-            padawan.photo = response.data.photo;
-          });
+          if(padawan.padawanUsername) {
+            var padawanObj = {username: padawan.padawanUsername};
+            Profile.getUserProfile(padawanObj) 
+            .then(function(response) {
+              padawan.photo = response.data.photo;
+              vm.padawans.push(padawan);
+            });
+          }
         });
       });
     };

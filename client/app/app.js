@@ -88,4 +88,9 @@ angular.module('app', [
       }
 
     });
+
+    $rootScope.$on('$stateChangeStart', function(event, currentRoute, previousRoute) {
+      window.scrollTo(0, 0);
+    });
+
   }]);
