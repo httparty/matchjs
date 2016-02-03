@@ -62,7 +62,7 @@
               <div ng-repeat="padawan in ctrl.padawans | orderBy:'username'">
                 <div class="panel panel-default miniPanel" ng-click="ctrl.goToOtherUserProfile(padawan['padawanUsername'])">
                   <div class="panel-body miniPanelBody">
-                    <img class="img-rounded" ng-src={{padawan.photo}} height="40" width="40" />
+                    <img class="img-circle" ng-src={{padawan.photo}} height="40" width="40" />
                     <span class="followUsername">{{padawan['padawanUsername']}}</span>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
               <div ng-repeat="mentor in ctrl.mentors | orderBy:'username'">
                 <div class="panel panel-default miniPanel" ng-click="ctrl.goToOtherUserProfile(mentor['mentorUsername'])">
                   <div class="panel-body miniPanelBody">
-                    <img class="img-rounded" ng-src={{mentor.photo}} height="40" width="40" />
+                    <img class="img-circle" ng-src={{mentor.photo}} height="40" width="40" />
                     <span class="followUsername">{{mentor['mentorUsername']}}</span>
                   </div>
                 </div>
