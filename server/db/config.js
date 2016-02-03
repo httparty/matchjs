@@ -21,7 +21,6 @@ models.User = new User(sequelize, Sequelize);
 models.Invitation = new Invitation(sequelize, Sequelize);
 models.Padawan = new Padawan(sequelize, Sequelize);
 
-
 models.User.hasMany(models.Invitation);
 models.User.hasMany(models.Padawan);
 
@@ -30,7 +29,7 @@ models.User.sync({force: false}).then(function(){
 	console.log('User table created!');
 });
 
-models.Invitation.sync({force: false}).then(function(){
+models.Invitation.sync({force: true}).then(function(){
   console.log('Invitation table created!');
 });
 
