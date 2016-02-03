@@ -13,7 +13,7 @@ MatchJS is an app designed to connect current and aspiring software engineers se
 Documentation
 ============
 
-[Check out our wiki](github.com/httparty/matchjs/wiki)
+[Check out our wiki](https://github.com/httparty/matchjs/wiki)
 
 Architecture
 ========
@@ -42,13 +42,13 @@ Testing
 Contributing
 =============
 
-Thanks for your interest! Please read our [CONTRIBUTE.md](https://github.com/httparty/matchjs/blob/master/_CONTRIBUTING.md) for instructions on how to contribute.
+Thanks for your interest! Please read our [CONTRIBUTE.md](https://github.com/httparty/matchjs/blob/master/CONTRIBUTING.md) for instructions on how to contribute.
 
 Authors
 =======
 
 - Anthony Bibbs
-- Sergey Piterman
 - Rachel Jenkins
+- Sergey Piterman
 - Polina Soshnin
 

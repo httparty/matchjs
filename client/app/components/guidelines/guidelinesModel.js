@@ -1,17 +1,22 @@
-angular.module('app.guidelines')
-  .factory('Guidelines', ['$http', function($http){
+;(function() {
+  'use strict';
 
-    var guidelines = {};
+  angular.module('app.guidelines')
+    .factory('Guidelines', ['$http', function($http){
 
-    guidelines.displayGuidelines = function() {
+      var guidelines = {};
 
-      return $http({
-        method: 'GET',
-        url: '/api/auth/guidelines'
-      }).then(function(responseObj){
-        return responseObj;
-      });
-    };
+      guidelines.displayGuidelines = function() {
 
-    return guidelines;
-  }]);
+        return $http({
+          method: 'GET',
+          url: '/api/auth/guidelines'
+        }).then(function(responseObj){
+          return responseObj;
+        });
+      };
+
+      return guidelines;
+    }]);
+  
+})();

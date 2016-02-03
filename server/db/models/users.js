@@ -37,6 +37,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     toTeach: {
       type: DataTypes.ARRAY(DataTypes.STRING)
+    },
+    wantEmails: {
+      type: DataTypes.BOOLEAN
     }
   });
 };

@@ -2,10 +2,18 @@
   'use strict';
 
   angular.module('app.inbox')
-    .factory('inboxModel', [ function() {
-      var inbox = {};
+    .factory('inboxModel', ['$http',function($http) {
+      var model = {};
 
-      inbox.getAllFirebaseConvos = function(username, firebaseUrl, callback) {
+      model.sentMessage = function(recipientInfo) {
+        return $http({
+          method: 'POST',
+          url: '/api/email/sentMessage/',
+          data: recipientInfo
+        });
+      };
+
+      model.getAllFirebaseConvos = function(username, firebaseUrl, callback) {
 
         var firebaseConnection = new Firebase(firebaseUrl);
 
@@ -46,7 +54,6 @@
           });
       };
 
-      return inbox;
-    }]);
-    
+      return model;
+  }]);
 })();

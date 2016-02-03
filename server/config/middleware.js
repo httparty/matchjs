@@ -21,12 +21,14 @@ module.exports = function(app, express) {
   var messageRouter = express.Router();
   var emailRouter = express.Router();
   var invitationsRouter = express.Router();
+  var calendarRouter = express.Router();
 
   app.use('/auth', authRouter);
   app.use('/api/users', usersRouter);
   app.use('/api/inbox', messageRouter);
   app.use('/api/email', emailRouter);
-  app.use('/api/invitations',invitationsRouter);
+  app.use('/api/invitations', invitationsRouter);
+  app.use('/api/calendar', calendarRouter);
 
   app.get('/failure', function(req, res) {
     res.status('404');
@@ -50,5 +52,5 @@ module.exports = function(app, express) {
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
   require(__dirname + './../email/emailRoutes.js')(emailRouter);
   require(__dirname + './../invitations/invitationsRoutes.js')(invitationsRouter);
+  require(__dirname + './../calendar/calendarRoutes.js')(calendarRouter);
 };
-

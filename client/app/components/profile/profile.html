@@ -1,60 +1,88 @@
 <!-- <nav-bar></nav-bar> -->
-<div class="container">
-  <div ng-controller="ProfileController">
+<div class="container" ng-controller="ProfileController">
 <!-- PHOTO AND BASICS SECTION -->
-    <div class="row">
-      <div class="col-sm-6">
+  <div class="row">
+    <div class="col-sm-6">
 
-        <div id="profileBasicsAndPhoto"  class="panel panel-default" ng-model="selectedStyle.basics" ng-style="selectedStyle.basics">
-          <div class="panel-body"> 
-            
-            <!-- PROFILE PHOTO -->
-            <div class='profilePhoto'>
-            <!-- photo upload stuff goes here -->
-              <img class="img-rounded" ng-src={{profileUser.photo}} height="200" width="200">
-            </div>
-
-        <!-- PROFILE BASICS, EXCLUDING PHOTO -->
-            <div class="profileBasics">
-              <div>
-                  <h4>{{profileUser.displayName || profileUser.username}}</h4><br>
-<!--                   <button></button>
-                  <button></button> -->
-                  <strong>Github:</strong> <a href="{{profileUser.github}}">{{profileUser.github}}</a><br>
-                  <div ng-hide="saveEditButton.basics.buttonText === 'Save'">
-                    <strong>Location: </strong>{{profileUser.location || 'San Francisco'}} <br>
-                  </div>
-              </div>
-              <form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
-                <!-- input type="text" ng-model="user.displayName" placeholder="{{user.displayName}}"> -->
-                <input class="form-control" type="text" ng-model="profileUser.location" placeholder="Location:  {{profileUser.location}}">
-              </form>
-              <br>
-              <!-- saveEditButtonBasics -->
-              <button class="btn btn-default" ng-hide="!editMode.isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
-            </div>
-              <a ui-sref="invitations({username: profileUser.username})" ng-hide="editMode.isSameUser" class="btn btn-primary"> Invite for Mentorship</a>
-              <a ui-sref="message({username: profileUser.username})" ng-hide="editMode.isSameUser" class="btn btn-success">Send a Message </a>
-              <button ng-hide="editMode.isSameUser" ng-show="!editMode.isPadawan" ng-click="becomePadawan(profileUser, currentUser)" class="btn btn-warning">Become a Padawan</button> 
-              <button ng-hide="editMode.isSameUser" ng-show="editMode.isPadawan" ng-click="stopBeingAPadawan(profileUser, currentUser)" class="btn btn-danger">Stop being a Padawan</button> 
-          </div><!-- End panel body-->
-        </div><!-- End panel panel-default-->
-  <!-- END PHOTO AND BASICS SECTION -->
-
-  <!-- PROFILE SUMMARY -->
-        <div id="profileSummary" class="panel panel-default clearfix" ng-model="selectedStyle.summary" ng-style="selectedStyle.summary" >
-          <div class="panel-heading">
-            <h3 class="panel-title">Summary</h3>
+      <div id="profileBasicsAndPhoto"  class="panel panel-default" ng-model="selectedStyle.basics" ng-style="selectedStyle.basics">
+        <div class="panel-body" ng-cloak> 
+          
+<!-- PROFILE PHOTO -->
+          <div class='profilePhoto'>
+          <!-- photo upload stuff goes here -->
+            <img class="img-rounded" ng-src={{profileUser.photo}} height="200" width="200" />
           </div>
-          <div class="panel body">
+
+<!-- PROFILE BASICS, EXCLUDING PHOTO -->
+          <div class="profileBasics">
+            <div>
+              <h4>{{profileUser.name || profileUser.username}}</h4>
+              <br>
+              <p>
+                <strong>Github:</strong> <a href="{{profileUser.github}}">{{profileUser.github}}</a><br>
+              </p>
+              <div ng-hide="saveEditButton.basics.buttonText === 'Save'">
+                <strong>Location: </strong>{{profileUser.location || 'San Francisco'}} <br>
+              </div>
+            </div>
+          </div>
+          <div>
+            <form ng-hide="saveEditButton.basics.buttonText === 'Edit'">
+              <input class="form-control" type="text" ng-model="profileUser.location" placeholder="Location:  {{profileUser.location}}">
+            </form>
+            <br>
+            <!-- saveEditButtonBasics -->
+            <button class="btn btn-default" ng-hide="!editMode.isSameUser" ng-model="saveEditButton.basics" ng-click="toggleEditShowBasics()"> {{ saveEditButton.basics.buttonText }}</button>
+          </div>
+          <div ng-show="contentLoaded">
+            <a ui-sref="invitations({username: profileUser.username})" ng-hide="editMode.isSameUser" class="btn btn-primary"> Invite for Mentorship</a>
+            <a ui-sref="inbox/conversation({username: profileUser.username})" ng-hide="editMode.isSameUser" class="btn btn-success">Send a Message </a>
+            <button ng-show="!editMode.isSameUser && !editMode.isPadawan" ng-click="becomePadawan(profileUser, currentUser)" class="btn btn-warning" ng-cloak>Become a Padawan</button> 
+            <button ng-show="!editMode.isSameUser && editMode.isPadawan" ng-click="stopBeingAPadawan(profileUser, currentUser)" class="btn btn-danger" ng-cloak>Stop being a Padawan</button> 
+          </div>
+  <!-- PROFILE SUMMARY -->
+          <br>
+          <div id="profileSummary" ng-model="selectedStyle.summary" ng-style="selectedStyle.summary" >
+            <h4 ng-hide='!editMode.isSameUser'>Bio:</h4>
             <form>
-              <input class="form-control" type ="text" class='col-sm-4' ng-model="profileUser.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'">
+              <input class="form-control" type ="text" class='col-sm-4' ng-model="profileUser.summary" ng-disabled="saveEditButton.summary.buttonText === 'Edit'" />
             </form>
             <br>
             <button class="btn btn-default" ng-hide="!editMode.isSameUser" ng-model="saveEditButton.summary" ng-click="toggleEditShowSummary()">{{saveEditButton.summary.buttonText}}</button>
-          </div> <!--panel body end -->
+          </div> <!-- #profileSummary -->
+        </div><!-- End panel body-->
+      </div><!-- End panel panel-default-->
+<!-- END PHOTO, BASICS, SUMMARY SECTION -->
+<!-- PADAWANS  - ONLY VISBLE IF CURRENTUSER === PROFILEUSER -->
+      <div class="panel panel-default" id="padawans">
+        <div class="panel-heading">
+          <h3 ng-hide="!editMode.isSameUser" class="panel-title">My Followers</h3>
+          <h3 ng-show="!editMode.isSameUser" class="panel-title">{{profileUser.name || profileUser.username}}'s Followers</h3>
         </div>
+        <div class="panel-body">
+          <p ng-bind-html="UImessages.noPadawans"></p>
+          <div ng-repeat="padawan in padawans | orderBy:'username'">
+            <button class="btn btn-info" ng-click="goToOtherUserProfile(padawan['padawanUsername'])">{{padawan['padawanUsername']}}</button>
+          </div>
+        </div> <!--panel body end -->
+      </div><!-- End panel -->
+
+<!-- MENTORS FOLLOWED -->
+      <div class="panel panel-default" id="mentorsFollowed">
+        <div class="panel-heading">
+          <h3 ng-hide="!editMode.isSameUser" class="panel-title">My Mentors</h3>
+          <h3 ng-show="!editMode.isSameUser" class="panel-title">{{profileUser.name || profileUser.username}}'s Mentors</h3>
+        </div>
+        <div class="panel-body">
+          <p ng-bind-html="UImessages.noFollowers"></p>
+          <div ng-repeat="mentor in mentors | orderBy:'username'">
+            <button class="btn btn-info" ng-click="goToOtherUserProfile(mentor['mentorUsername'])">{{mentor['mentorUsername']}}</button>
+          </div>
+        </div> <!--panel body end -->
+      </div><!-- End panel -->
+    
     </div><!-- End col-sm-6 -->
+
 
     <div class="col-sm-6">
 <!-- PROFILE SKILLS -->
@@ -80,18 +108,18 @@
               <ng-form>
                 <label class="checkbox-inline" ng-repeat="skill in skills.collection">
                   <input type="checkbox"  ng-model="skills.toLearn[skill]" ng-checked="skills.toLearn[skill]" ng-disabled="saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
-                </span>
+                </label>
               </ng-form>
             </div>
           </form>
           <br>
           <button class="btn btn-default" style="margin-top: 10px" ng-hide="!editMode.isSameUser" ng-model="saveEditButton.skills" ng-click="toggleEditShowSkills()" > {{ saveEditButton.skills.buttonText }}</button>
-        </div>
-      </div>
+        </div> <!--panel body end --> 
+      </div> <!--Skills end --> 
 
 
 <!-- INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
-      <div class="panel panel-default" id="invitations" ng-hide="!editMode.isSameUser">
+      <div class="panel panel-default" id="invitations" ng-hide="!editMode.isSameUser" ng-cloak>
         <div class="panel-heading">
           <h3 class="panel-title">My Invitations</h3>
         </div>
@@ -109,10 +137,9 @@
                 <button class="btn btn-default btn-sm" ng-show="invite['senderName'] === currentUser.username" ng-click="deleteInvite(invite)">Delete</button>
               </div>
             </div>
-            <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}; updateSent = false;" ng-submit="updateInvite(invite.senderName, invite.recipientName, invite.id, inviteUpdate);"> 
-              <!-- TRIED: editMode.inviteEditMode===-1; toggle/!toggle -->
-              <b>Location: </b><input class="form-control" type="text" ng-model="inviteUpdate.location" placeholder="{{invite['location']}}" ng-disable="!toggle"><br>
-              <b>Time & Date: </b><input class="form-control" type="text" ng-model="inviteUpdate.when" placeholder="{{invite['when']}}" ng-disable="!toggle">
+            <form ng-show="editMode.inviteEditMode=== $index" ng-init="inviteUpdate={}; updateSent = false;" ng-submit="updateInvite(invite.senderName, invite.recipientName, invite.id, inviteUpdate);">
+              <b>Location: </b><input class="form-control" type="text" ng-model="inviteUpdate.location" placeholder="{{invite['location']}}" ng-disable="!toggle" /><br>
+              <b>Time & Date: </b><input class="form-control" type="text" ng-model="inviteUpdate.when" placeholder="{{invite['when']}}" ng-disable="!toggle" />
               <p><b>Mentor:</b> {{invite['senderName']}}</p>
               <p><b>Mentee:</b> {{invite['recipientName']}}</p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
@@ -121,29 +148,13 @@
               <p class="help-block" ng-show="!toggle">Update your mentorship session and notify {{invite['recipientName']}}</p>
             </form>
           <hr>
-          </div>
+          </div><!-- end ng-repeat -->
         </div> <!--panel body end -->
-      </div>
-
-
-<!-- PADAWANS  - ONLY VISBLE IF CURRENTUSER === PROFILEUSER -->
-      <div class="panel panel-default" id="padawans" ng-hide="!editMode.isSameUser">  
-        <div class="panel panel-default" id="padawans" ng-hide="!editMode.isSameUser">
-          <div class="panel-heading">
-            <h3 class="panel-title">My Padawans</h3>
-          </div>
-          <div class="panel-body">
-            <p ng-bind-html="UImessages.noPadawans"></p>
-            <div ng-repeat="padawan in padawans | orderBy:'username'">
-              <button class="btn btn-info" ng-click="goToOtherUserProfile(padawan['padawanUsername'])">{{padawan['padawanUsername']}}</button>
-            </div>
-          </div> <!--panel body end -->
-        </div>
-      </div>
+      </div><!-- end panel -->
     </div><!-- col-sm-6 -->
 
 <!-- INITIALIZATION  -->
-    <div ng-init="getUserProfile(profileUser); editMode.isSameUser = false; editMode.inviteEditMode = false;"></div>
+  <div ng-init="getUserProfile(profileUser); editMode.isSameUser = false; editMode.inviteEditMode = false;"></div>
 
   </div><!-- row -->
 </div><!-- container -->

@@ -5,6 +5,9 @@
 
     var vm = this;
 
+//Submission Form Data
+    vm.formData = {};
+
 //Loading User Information
 
     // Current User Information
@@ -14,18 +17,23 @@
 
     Profile.getUserProfile({username: vm.username}).then(function(response){
       vm.currentUserProfile = response.data;
+      vm.formData.mentorEmail = vm.currentUserProfile.email;
     });
 
     //Recipient Information
-    vm.recipient = $state.params.username;
+    vm.recipientUsername = $state.params.username;
 
     Profile.getUserProfile($state.params).then(function(response){
       vm.recipientProfile = response.data;
       vm.recipientName = vm.recipientProfile.name;
+      vm.formData.menteeEmail = vm.recipientProfile.email;
     });
+    // console.log(vm.name)
+    // console.log(vm.recipientName)
 
 
 //Scope Variables
+    //Submission Form Data
 
     vm.date = new Date(); //Sets time/date to current
 
@@ -53,8 +61,6 @@
     //Calendar popup
     vm.isCalendarOpen = false;
 
-    //Submission Form Data
-    vm.formData = {};
 
 
 
@@ -108,10 +114,13 @@
     //Submits the actual invitation
     vm.createInvitation = function() {
       console.log('Invitation Submitted!');
-      vm.formData.mentor = vm.username;
-      vm.formData.mentee = vm.recipient;
+      vm.formData.mentor = vm.name;
+      vm.formData.mentee = vm.recipientName;
+      vm.formData.mentorUsername = vm.username;
+      vm.formData.menteeUsername = vm.recipientUsername;
       vm.formData.sessionInfo.when = new Date(vm.date.getFullYear(), vm.date.getMonth(), vm.date.getDate(), vm.date.getHours(), vm.date.getMinutes());
       vm.submitted = true;
+      console.log(vm.formData);
       invitationsModel.createInvitation(vm.formData)
         .then(function(r){
           vm.formData = {};

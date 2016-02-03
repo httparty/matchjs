@@ -10,13 +10,13 @@ angular.module('app', [
   'app.connect',
   'app.inbox',
   'app.guidelines',
-  'app.invitations'
+  'app.invitations',
+  'app.settings'
   // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
-
 
     $stateProvider
     .state('home', {
@@ -38,7 +38,12 @@ angular.module('app', [
       templateUrl: 'app/components/inbox/inbox.html',
       controller: 'InboxController',
       url: '/inbox'
-    }) //;
+    })
+    .state('inbox/conversation', {
+      templateUrl: 'app/components/inbox/inbox.html',
+      controller: 'InboxController',
+      url: '/inbox/conversation/:username'
+    })
     .state('guidelines', {
       templateUrl: 'app/components/guidelines/guidelines.html',
       controller: 'GuidelinesController',
@@ -48,16 +53,32 @@ angular.module('app', [
       templateUrl: 'app/components/invitations/invitations.html',
       controller: 'invitationsController',
       url: '/invitations/:username'
+    })
+    .state('auth', {
+      templateUrl: 'app/components/auth/auth.html',
+      controller: 'AuthController',
+      url: '/auth'
+    })
+    .state('settings', {
+      templateUrl: 'app/components/settings/settings.html',
+      controller: 'SettingsController',
+      url:'/settings'
+    })
+    .state('about', {
+      templateUrl: 'app/components/about/about.html',
+      url: '/about'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-      if (!AuthService.isAuthenticated() && toState.name !== 'home') {
-        console.log('hello in isauth');
-        event.preventDefault();
-        $state.go('home');
-        return;
+
+      if (toState.name !== 'auth') {
+        if (!AuthService.isAuthenticated() && toState.name !== 'home') {
+          event.preventDefault();
+          $state.go('home');
+          return;
+        }
       }
 
       if (AuthService.isAuthenticated() && toState.name === 'home') {

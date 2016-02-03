@@ -35,6 +35,11 @@
     "ng-tags-input": "3.0.0",
     "underscore": "~1.8.3",
     "ui-select": "angular-ui-select#~0.14.2",
-    "angular-sanitize": "~1.4.9"
+    "angular-sanitize": "~1.4.9",
+    "angular-mocks": "~1.4.9",
+    "angular-scroll-glue": "~2.0.6"
+  },
+  "resolutions": {
+    "angular": "~1.4.9"
   }
 }

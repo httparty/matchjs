@@ -1,0 +1,9 @@
+/*for making mouse turn to cursor on navbar menu hover*/
+ul.nav li:hover {
+    cursor: pointer;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+}

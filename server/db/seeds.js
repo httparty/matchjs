@@ -15,7 +15,7 @@ var seedUsers = function() {
   };
 
   async.each(array, function(i, next) {
-      var nextUser = 'user' + (i+1);  
+      var nextUser = 'user' + (i+1);
       db.User.create({
         username: 'user'+i,
         email: 'user'+i+'@email.com',
@@ -24,7 +24,7 @@ var seedUsers = function() {
         toLearn: _.sample(skills, 5),
         toTeach: _.sample(skills, 5)
       }).then(function() {
-        console.log('User successfully created');  
+        console.log('User successfully created');
         db.Padawan.create({
           mentorUsername: 'user'+i,
           padawanUsername: 'user' + (i+1)
@@ -60,4 +60,4 @@ var seedInvitations = function() {
 
 
 
-seedUsers();
+// seedUsers();

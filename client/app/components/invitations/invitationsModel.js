@@ -20,17 +20,17 @@
         });
       };
 
-      model.getInvitationsByMentee = function(inviteObj){
+      model.getInvitationsByMentee = function(username){
         return $http({
           method: 'GET',
-          url: '/api/invitations/recipient/' + inviteObj.username,
+          url: '/api/invitations/recipient/' + username,
         });
       };
 
       model.deleteInvitation = function(inviteObj) {
         return $http({
           method: 'DELETE',
-          url: '/api/invitations/invite/' + inviteObj.id
+          url: '/api/invitations/invite/' + inviteObj.id + '/' + inviteObj.senderName + '/' + inviteObj.recipientName
         });
       };
 

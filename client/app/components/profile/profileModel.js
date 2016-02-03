@@ -44,12 +44,22 @@ angular.module('app.profile')
     });
   };
 
+  var getMentors = function(mentee) {
+    return $http({
+      method: 'GET',
+      url: '/api/users/getMentors/' + mentee.username
+    }).then(function(responseObj) {
+      return responseObj;
+    });
+  };
+
   return {
     getUserProfile : getUserProfile,
     updateProfile : updateProfile,
     addPadawan : addPadawan,
     deletePadawan : deletePadawan,
-    getPadawans : getPadawans
+    getPadawans : getPadawans,
+    getMentors : getMentors
   };
 
 }]); 
