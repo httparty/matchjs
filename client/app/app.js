@@ -62,7 +62,7 @@ angular.module('app', [
     .state('settings', {
       templateUrl: 'app/components/settings/settings.html',
       controller: 'SettingsController',
-      url:'/settings/:username'
+      url:'/settings'
     })
     .state('about', {
       templateUrl: 'app/components/about/about.html',

@@ -39,7 +39,8 @@ helpers.addUser = function(userObj) {
     location: userObj._json.location,
     karmaPoints: 0,
     toLearn: [],
-    toTeach: []
+    toTeach: [],
+    wantEmails: true
   });
 };
 
@@ -58,6 +59,7 @@ helpers.signInUser = function(userObj) {
 //-----------------USER PROFILE--------------------------
 
 helpers.updateUser = function(profileUpdateObj) {
+  console.log(profileUpdateObj.wantEmails, 'Want emails on the update user function');
   return db.User.findOne({
   	where: {'username': profileUpdateObj.username}
   })
@@ -76,7 +78,8 @@ helpers.updateUser = function(profileUpdateObj) {
       photo : profileUpdateObj.photo || user.get('photo'),
       karmaPoints : profileUpdateObj.karmaPoints || user.get('karmaPoints'),
       toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
-      toTeach: profileUpdateObj.toTeach || user.get('toTeach')
+      toTeach: profileUpdateObj.toTeach || user.get('toTeach'),
+      wantEmails: typeof profileUpdateObj.wantEmails === 'boolean'? profileUpdateObj.wantEmails : user.get('wantEmails')
     });
   });
 };
