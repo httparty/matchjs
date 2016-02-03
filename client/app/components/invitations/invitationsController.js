@@ -27,6 +27,7 @@
       vm.recipientProfile = response.data;
       vm.recipientName = vm.recipientProfile.name;
       vm.formData.menteeEmail = vm.recipientProfile.email;
+      console.log(vm.recipientProfile);
     });
     // console.log(vm.name)
     // console.log(vm.recipientName)
@@ -119,6 +120,8 @@
       vm.formData.mentorUsername = vm.username;
       vm.formData.menteeUsername = vm.recipientUsername;
       vm.formData.sessionInfo.when = new Date(vm.date.getFullYear(), vm.date.getMonth(), vm.date.getDate(), vm.date.getHours(), vm.date.getMinutes());
+      vm.formData.mentorEmailPreferences = vm.currentUserProfile.wantEmails;
+      vm.formData.menteeEmailPreferences = vm.recipientProfile.wantEmails;
       vm.submitted = true;
       console.log(vm.formData);
       invitationsModel.createInvitation(vm.formData)
