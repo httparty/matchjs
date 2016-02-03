@@ -5,18 +5,23 @@
     .factory('settingsModel', function($http){
       var model = {};
 
+      model.getPreferences = function(){
+        return $http({
+          method: 'GET',
+          url: '/api/users/settings'
+        })
+        .then(function(responseObj){
+          return responseObj;
+        });
+      };
+
       model.savePreferences = function(userObj){
         return $http({
           method: 'POST',
-          url: '/api/users/settings/save/' + userObj.username
-        });
-
-      };
-
-      model.editPreferences = function(userObj){
-        return $http({
-          method: 'GET',
-          url: '/api/users/settings/edit/' + userObj.username
+          url: '/api/users/settings',
+          data: userObj
+        }).then(function(responseObj){
+          return responseObj;
         });
       };
 

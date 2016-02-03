@@ -4,11 +4,29 @@
 
     <div class="col-sm-8">
       <div class="jumbotron">
-        <h1>Settings Page</h1>
+        <h2>Settings Page</h2>
       </div>
-      <div class="btn btn-danger" ng-click="ctrl.deleteAccount()">
-        Delete Account
-      </div>
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><h5>Email Preferences</h5></td>
+            <td>
+              <div class="checkbox">
+                <label><input type="checkbox" ng-model="ctrl.wantEmails" ng-disabled="ctrl.blockEditing">Yes, I would like to receive emails about new invitations for mentorship</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><h5>Account Preferences</h5></td>
+            <td><button class="btn btn-danger" ng-click="ctrl.deleteAccount()" ng-disabled="ctrl.blockEditing">Delete account</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="btn btn-default" ng-click="ctrl.editPreferences()" ng-disabled="!ctrl.blockEditing">Edit Preferences</button>
+      <button class="btn btn-default" ng-click="ctrl.savePreferences()" ng-disabled="ctrl.blockEditing">Save Preferences</button>
+
     </div>
 
     <div class="col-sm-2"></div>
