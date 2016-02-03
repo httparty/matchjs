@@ -7,107 +7,110 @@
 
     var current = new Date();
 
-    $scope.currentUser = angular.fromJson(AuthService.getCurrentUser());
+    var vm = this;
 
-    $scope.profileUser = {};
-    $scope.profileUser.username = $state.params.username;
+    vm.currentUser = angular.fromJson(AuthService.getCurrentUser());
 
-    $scope.profileUser.toLearn = [];
-    $scope.profileUser.toTeach = [];
+    vm.profileUser = {};
+    vm.profileUser.username = $state.params.username;
 
-    $scope.saveEditButton = {};
-    $scope.saveEditButton.skills = {};
-    $scope.saveEditButton.skills.buttonText = 'Edit';
-    $scope.saveEditButton.basics = {};
-    $scope.saveEditButton.basics.buttonText = 'Edit';
-    $scope.saveEditButton.invites = {};
-    $scope.saveEditButton.invites.buttonText = 'Edit';
+    vm.profileUser.toLearn = [];
+    vm.profileUser.toTeach = [];
 
-    $scope.skills = {};
-    $scope.skills.toLearn = {};
-    $scope.skills.toTeach = {};
-    $scope.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
+    vm.saveEditButton = {};
+    vm.saveEditButton.skills = {};
+    vm.saveEditButton.skills.buttonText = 'Edit';
+    vm.saveEditButton.basics = {};
+    vm.saveEditButton.basics.buttonText = 'Edit';
+    vm.saveEditButton.invites = {};
+    vm.saveEditButton.invites.buttonText = 'Edit';
 
-    $scope.editMode = {};
-    $scope.editMode.isSameUser = '';
-    $scope.editMode.inviteEditMode = '';
-    $scope.editMode.isPadawan = '';
+    vm.skills = {};
+    vm.skills.toLearn = {};
+    vm.skills.toTeach = {};
+    vm.skills.collection = ['AngularJS', 'Express', 'JavaScript', 'Backbone', 'Node.js', 'ReactJS'];
 
-    $scope.UImessages = {};
+    vm.editMode = {};
+    vm.editMode.isSameUser = '';
+    vm.editMode.inviteEditMode = '';
+    vm.editMode.isPadawan = '';
+
+    vm.UImessages = {};
+    vm.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
 
 
 
     //-------------------BASICS------------------------
-    $scope.toggleEditShowBasics = function() {
-      if($scope.saveEditButton.basics.buttonText === 'Edit') {
-        $scope.saveEditButton.basics.buttonText = 'Save';
+    vm.toggleEditShowBasics = function() {
+      if(vm.saveEditButton.basics.buttonText === 'Edit') {
+        vm.saveEditButton.basics.buttonText = 'Save';
       } else {
-        $scope.saveEditButton.basics.buttonText='Edit';
-        updateProfile($scope.profileUser); 
+        vm.saveEditButton.basics.buttonText='Edit';
+        updateProfile(vm.profileUser); 
       }
     };
 
 
     //-------------------SKILLS------------------------
     		//called when SKILLS edit/show button is clicked
-    $scope.toggleEditShowSkills = function() {
-      if($scope.saveEditButton.skills.buttonText === 'Edit') {
-        $scope.saveEditButton.skills.buttonText = 'Save';
+    vm.toggleEditShowSkills = function() {
+      if(vm.saveEditButton.skills.buttonText === 'Edit') {
+        vm.saveEditButton.skills.buttonText = 'Save';
       } else {
-        updateProfile($scope.profileUser);
-        $scope.saveEditButton.skills.buttonText='Edit';
+        updateProfile(vm.profileUser);
+        vm.saveEditButton.skills.buttonText='Edit';
       }
     };
 
 
     //---------SHARED BY BASICS & SKILLS---------------
     var updateProfile = function(userObj) {
-      for(var learnKey in $scope.skills.toLearn) {
-          if(!_.contains($scope.skills.toLearn, learnKey)) {
+      for(var learnKey in vm.skills.toLearn) {
+          if(!_.contains(vm.skills.toLearn, learnKey)) {
             userObj.toLearn.push(learnKey);
           }
-          if(!$scope.skills.toLearn[learnKey]) {
+          if(!vm.skills.toLearn[learnKey]) {
             userObj.toLearn.splice(userObj.toLearn.indexOf(learnKey),1);
           }
       }
-      for(var teachKey in $scope.skills.toTeach) {
-        if(!_.contains($scope.skills.toTeach, teachKey)) {
+      for(var teachKey in vm.skills.toTeach) {
+        if(!_.contains(vm.skills.toTeach, teachKey)) {
             userObj.toTeach.push(teachKey);
         }
-        if(!$scope.skills.toTeach[teachKey]) {
+        if(!vm.skills.toTeach[teachKey]) {
           userObj.toTeach.splice(userObj.toTeach.indexOf(teachKey),1);
         }
       }
       Profile.updateProfile(userObj) 
       .then(function(response) {
-        $scope.getUserProfile(userObj);
+        vm.getUserProfile(userObj);
       });
     };
 
 
     //-----------------INVITATIONS ----------------
     
-    $scope.toggleInviteEditForm = function(inviteId) {
-      if($scope.saveEditButton.invites.buttonText === 'Edit') {
-        $scope.saveEditButton.invites.buttonText = 'Save';
+    vm.toggleInviteEditForm = function(inviteId) {
+      if(vm.saveEditButton.invites.buttonText === 'Edit') {
+        vm.saveEditButton.invites.buttonText = 'Save';
       } else {
-        $scope.saveEditButton.invites.buttonText = 'Edit';
+        vm.saveEditButton.invites.buttonText = 'Edit';
       }
     };
 
-    $scope.updateInvite = function(username, recipient, inviteId, inviteObj) {
+    vm.updateInvite = function(username, recipient, inviteId, inviteObj) {
       inviteObj.id = inviteId;
       inviteObj.username = username;
       inviteObj.mentee = recipient;
       invitationsModel.updateInvitation(inviteObj)
         .then(function(response) {
-          $scope.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
-          $scope.editMode.inviteEditMode = -1;
+          vm.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
+          vm.editMode.inviteEditMode = -1;
           getUserInvitations(username);
         });
     };
 
-    $scope.deleteInvite = function(invite) {
+    vm.deleteInvite = function(invite) {
       invitationsModel.deleteInvitation(invite)
         .then(function(response) {
           //add message text
@@ -116,24 +119,31 @@
     };
 
     var getUserInvitations = function(username) {
-      $scope.invitations = [];
+
+      vm.invitations = [];
       var invites = [];
       invitationsModel.getInvitationsByMentor(username)
       .then(function(mentorResp) {
         mentorResp.data.forEach(function(invite) {
           invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
-          invites.push(invite);                
+          console.log('here is invite, mentor', invite);
+          invites.push(invite);
           invitationsModel.getInvitationsByMentee(username)
             .then(function(menteeResp) {
+              console.log('here is menteeResp', menteeResp);
               menteeResp.data.forEach(function(invite) {
                 invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
+                console.log('here is invite, mentee', invite);
                 invite.readOnly = true;
                 invites.push(invite);
               });
               if(invites.length === 0) {
-                $scope.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
-              } 
-                $scope.invitations = invites;
+                vm.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
+              }
+              else {
+                vm.UImessages.noInvites = '';
+              }
+                vm.invitations = invites;
             });
         });
       });
@@ -141,17 +151,17 @@
 
     //-------------FOLLOWERS, AKA PADAWANS-----------------
 
-    $scope.becomePadawan = function(mentor, padawan) {
+    vm.becomePadawan = function(mentor, padawan) {
       Profile.addPadawan(mentor, padawan)
       .then(function(response) {
-        $scope.editMode.isPadawan = true;
+        vm.editMode.isPadawan = true;
       });
     };
 
-    $scope.stopBeingAPadawan = function(mentor, padawan) {
+    vm.stopBeingAPadawan = function(mentor, padawan) {
       Profile.deletePadawan(mentor, padawan)  
       .then(function(response) {
-        $scope.editMode.isPadawan = false;
+        vm.editMode.isPadawan = false;
         getPadawans(mentor);
       }); 
     };
@@ -159,60 +169,76 @@
     var getPadawans = function(mentor) {
       Profile.getPadawans(mentor)  
       .then(function(response) {
-        $scope.padawans = response.data;
-        for(var i = 0; i < response.data.length; i++) {
-          if (response.data[i].padawanUsername === $scope.currentUser.username) {
-            $scope.editMode.isPadawan = true;
+
+//NOTE TO RACHEL: YOU LEFT OFF TRYING TO FIGURE OUT WHY PADAWANS GETS POPULATED WITH EMPTY PANELS WHEN THERE ARE NONE//        
+        console.log('here are the padawans!!', response.body);
+        vm.padawans = response.data;
+        vm.padawans.forEach(function(padawan) {
+          if (padawan.padawanUsername === vm.currentUser.username) {
+            vm.editMode.isPadawan = true;
           }
-        }
+          var padawanObj = {username: padawan.padawanUsername};
+          Profile.getUserProfile(padawanObj) 
+          .then(function(response) {
+            padawan.photo = response.data.photo;
+          });
+        });
       });
     };
 
     var getMentors = function(mentee) {
       Profile.getMentors(mentee)
       .then(function(response) {
-        $scope.mentors = response.data;
+        vm.mentors = response.data;
+        vm.mentors.forEach(function(mentor) {
+          var mentorObj = {username: mentor.mentorUsername};
+          Profile.getUserProfile(mentorObj) 
+          .then(function(response) {
+            mentor.photo = response.data.photo;
+          });
+        });
       });
     };
 
 
     //---------------GET USER PROFILE---------------------
     	//called on the initialization of the HTML page, ng-init
-    $scope.getUserProfile = function(userObj) {
+    vm.getUserProfile = function(userObj) {
       Profile.getUserProfile(userObj)
       .then(function(response) {
         //---if profile belongs to current user, set isSameUser var to true. This toggles the visibility of the edit buttons.
-        if($scope.currentUser.username === $scope.profileUser.username) {
-          $scope.editMode.isSameUser = true;
-          getUserInvitations($scope.currentUser.username);
+        if(vm.currentUser.username === vm.profileUser.username) {
+          vm.editMode.isSameUser = true;
+          getUserInvitations(vm.currentUser.username);
         }
-        getPadawans($scope.profileUser);
-        getMentors($scope.profileUser);
+        getPadawans(vm.profileUser);
+        getMentors(vm.profileUser);
 
         //---populate the scope with the data returning from getUserProfile query.---
-        $scope.profileUser.photo = response.data.photo;
-        $scope.profileUser.location = response.data.location;
-        // $scope.profileUser.name = response.data.displayName;
-        $scope.profileUser.name = (response.data.username === $scope.currentUser.username ? $scope.currentUser.displayName : response.data.name);
-        $scope.profileUser.github = response.data.github;
-        $scope.profileUser.karmaPoints = response.data.karmaPoints;
-        $scope.profileUser.summary =	response.data.summary;
-        $scope.profileUser.displayName = response.data.displayName;
+        console.log('HERE IS RESPONSE.DATA', response.data);
+        vm.profileUser.photo = response.data.photo;
+        vm.profileUser.location = response.data.location;
+        // vm.profileUser.name = response.data.displayName;
+        vm.profileUser.name = (response.data.username === vm.currentUser.username ? vm.currentUser.displayName : response.data.name);
+        vm.profileUser.github = response.data.github;
+        vm.profileUser.karmaPoints = response.data.karmaPoints;
+        vm.profileUser.summary =	response.data.summary;
+        vm.profileUser.displayName = response.data.displayName;
         response.data.toLearn.forEach(function(skill) {
-          $scope.skills.toLearn[skill] = true;
+          vm.skills.toLearn[skill] = true;
         });
         response.data.toTeach.forEach(function(skill) {
-          $scope.skills.toTeach[skill] = true;
+          vm.skills.toTeach[skill] = true;
         });
-        $scope.contentLoaded = true;
+        vm.contentLoaded = true;
       });
     };
 
-    $scope.goToOtherUserProfile = function(username) {
+    vm.goToOtherUserProfile = function(username) {
       $location.path('profile/' + username);
     }; 
 
-    $scope.sendMessage = function(username) {
+    vm.sendMessage = function(username) {
       $location.path('inbox');
     }; 
   }]);

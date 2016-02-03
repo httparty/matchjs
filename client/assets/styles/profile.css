@@ -1,3 +1,27 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.miniPanel {
+  height: 60px !important;
+  margin-bottom: 10px !important; 
+}
+
+.miniPanelBody {
+  padding: 10px !important;
+  cursor: pointer;
+  overflow: hidden !important;
+}
+
+.miniPanel:hover {
+  background-color: #f5f5f5 !important;
+  overflow: hidden !important;
+}
+
+.followPanel {
+    overflow-y: scroll !important;
+}
+
+.tinyPic {
+  padding-right: 10px  !important;
+}
