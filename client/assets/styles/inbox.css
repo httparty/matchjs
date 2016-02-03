@@ -44,8 +44,7 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
 
 .panel-body
 {
-   /* overflow-y: scroll;*/
-    height: 500px;
+  height: 500px;
 }
 
 #panel-chat {
@@ -70,9 +69,6 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
     background-color: #555;
 }
 
-.indexView {
-  margin-top:40px;
-}
 
 /*               */
 /*Shared Features*/
@@ -106,17 +102,6 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   height: 20%;
 }
 
-/*For the LIs*/
-.odd {
-  background-color: #eee;
-}
-.even{
-  background-color: white;
-}
-
-/*                */
-/*Message Features*/
-/*                */
 .messages{
   border-left: solid 1px;
 }
@@ -127,26 +112,8 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   /*overflow: auto;*/
 }
 
-.messageContent {
-  width: 95%;
-  margin: 0px;
-}
-
-.text {
-  word-wrap: break-word;
-  overflow-y: auto;
-}
-
-/*                     */
-/*Conversation Features*/
-/*                     */
 
 .conversation {
   padding: 1%;
   border: solid 1px;
-}
-
-.plus {
-  width: 100%;
-  margin: 0px;
 }
