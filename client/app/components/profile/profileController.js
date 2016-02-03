@@ -37,7 +37,8 @@
 
     vm.UImessages = {};
     vm.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
-
+    // vm.UImessages.noPadawans = $sce.trustAsHtml('You don\'t have any followers yet. Make sure you\'ve selected some skills you\'re able to teach. Then, <a href="#/inbox"> start a conversation</a> with developers trying to acquire one of your teachable skills, and set up a mentorship session to start teaching.');
+    vm.UImessages.noMentors = $sce.trustAsHtml('You haven\'t followed anyone yet. <a href="/">Find users</a> who can help teach you the skills you\'re trying to learn. Let them know you\'re interested in a mentorship session by following them.');
 
 
     //-------------------BASICS------------------------
@@ -126,14 +127,11 @@
       .then(function(mentorResp) {
         mentorResp.data.forEach(function(invite) {
           invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
-          console.log('here is invite, mentor', invite);
           invites.push(invite);
           invitationsModel.getInvitationsByMentee(username)
             .then(function(menteeResp) {
-              console.log('here is menteeResp', menteeResp);
               menteeResp.data.forEach(function(invite) {
                 invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
-                console.log('here is invite, mentee', invite);
                 invite.readOnly = true;
                 invites.push(invite);
               });
@@ -183,6 +181,13 @@
             });
           }
         });
+        if(vm.padawans.length === 0) {
+          // console.log('padawan leng 0');
+          // vm.UImessages.noPadawans = $sce.trustAsHtml('You don\'t have any followers yet. Make sure you\'ve selected some skills you\'re able to teach. Then, <a href="#/inbox"> start a conversation</a> with developers trying to acquire one of your teachable skills, and set up a mentorship session to start teaching.');
+        } else {
+          vm.UImessages.noPadawans = '';
+        }
+
       });
     };
 
@@ -197,6 +202,11 @@
             mentor.photo = response.data.photo;
           });
         });
+        if(vm.mentors.length === 0) {
+          vm.UImessages.noMentors = $sce.trustAsHtml('You haven\'t followed anyone yet. <a href="/">Find users</a> who can help teach you the skills you\'re trying to learn. Let them know you\'re interested in a mentorship session by following them.');
+        } else {
+          vm.UImessages.noMentors = '';
+        }
       });
     };
 
@@ -215,7 +225,6 @@
         getMentors(vm.profileUser);
 
         //---populate the scope with the data returning from getUserProfile query.---
-        console.log('HERE IS RESPONSE.DATA', response.data);
         vm.profileUser.photo = response.data.photo;
         vm.profileUser.location = response.data.location;
         // vm.profileUser.name = response.data.displayName;
