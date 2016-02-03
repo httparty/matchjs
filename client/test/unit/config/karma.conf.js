@@ -23,6 +23,7 @@ module.exports = function(config) {
       '../../../bower_components/firebase/firebase.js',
       '../../../bower_components/angularfire/dist/angularfire.min.js',
       '../../../bower_components/moment/min/moment.min.js',
+      '../../../bower_components/angular-scroll-glue/src/scrollglue.js',
 
       './../*.js', //spec files
       '../../../../client/app/**/*.js' //client
