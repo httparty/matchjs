@@ -21,6 +21,7 @@
           url: '/api/users/settings',
           data: userObj
         }).then(function(responseObj){
+          console.log('response obj', responseObj);
           return responseObj;
         });
       };
