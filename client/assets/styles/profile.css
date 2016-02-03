@@ -25,3 +25,7 @@
 .followUsername {
   padding-left: 10px !important;
 }
+
+#invitations {
+  overflow-y: scroll !important;
+}
