@@ -44,7 +44,8 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
 
 .panel-body
 {
-  height: 500px;
+   /* overflow-y: scroll;*/
+    height: 500px;
 }
 
 #panel-chat {
@@ -69,6 +70,9 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
     background-color: #555;
 }
 
+.indexView {
+  margin-top:40px;
+}
 
 /*               */
 /*Shared Features*/
