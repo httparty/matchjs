@@ -134,7 +134,7 @@
           <h3 class="panel-title">My Invitations</h3>
         </div>
         <div class="panel-body">
-          <p ng-bind-html="ctrl.UImessages.noInvites"></p>
+          <p ng-show="ctrl.contentLoaded" ng-bind-html="ctrl.UImessages.noInvites"></p>
           <div ng-repeat="invite in ctrl.invitations | orderBy:'when'">
             <div ng-hide="ctrl.editMode.inviteEditMode=== $index">
               <p><b>Location:</b> {{invite['location']}}</p>
@@ -149,7 +149,20 @@
             </div>
             <form ng-show="ctrl.editMode.inviteEditMode=== $index" ng-init="ctrl.inviteUpdate={}; ctrl.updateSent = false;" ng-submit="ctrl.updateInvite(invite.senderName, invite.recipientName, invite.id, ctrl.inviteUpdate);">
               <b>Location: </b><input class="form-control" type="text" ng-model="ctrl.inviteUpdate.location" placeholder="{{invite['location']}}" ng-disable="!toggle" /><br>
-              <b>Time & Date: </b><input class="form-control" type="text" ng-model="ctrl.inviteUpdate.when" placeholder="{{invite['when']}}" ng-disable="!toggle" />
+                <div ng-controller="invitationsController as invCtrl">  
+                  <b>Time & Date: </b>
+              <!--TIME/DATE PICKER --> 
+                <!-- Time Picker -->
+                    <uib-timepicker ng-model="ctrl.inviteUpdate.date" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
+                <!-- Date Picker-->
+                    <div class="input-group">
+                      <input type="text" class="form-control" uib-datepicker-popup="{{invCtrl.format}}" ng-model="ctrl.inviteUpdate.date" is-open="invCtrl.isCalendarOpen" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="invCtrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="invCtrl.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </div>
+                </div> 
+              <!-- END TIME/DATE PICKER -->
               <p><b>Mentor:</b> {{invite['senderName']}}</p>
               <p><b>Mentee:</b> {{invite['recipientName']}}</p>
               <p><b>Summary:</b> {{invite['summary']}}</p>

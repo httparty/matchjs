@@ -35,6 +35,14 @@
     vm.editMode.inviteEditMode = '';
     vm.editMode.isPadawan = '';
 
+    vm.minDate = new Date(); //Blocks past dates
+    vm.maxDate = new Date(2050, 5, 22); //Set Max Date
+    vm.ismeridian = true;  //AM/PM or 24H
+    vm.hstep = 1;  //Hour Step
+    vm.mstep = 15;  //Minute Step
+    vm.submitted = false;  //Hides form upon submission
+
+
     vm.UImessages = {};
     vm.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
     // vm.UImessages.noPadawans = $sce.trustAsHtml('You don\'t have any followers yet. Make sure you\'ve selected some skills you\'re able to teach. Then, <a href="#/inbox"> start a conversation</a> with developers trying to acquire one of your teachable skills, and set up a mentorship session to start teaching.');
@@ -103,6 +111,8 @@
       inviteObj.id = inviteId;
       inviteObj.username = username;
       inviteObj.mentee = recipient;
+      inviteObj.when = inviteObj.date;
+      console.log("here is the invite obj", inviteObj);
       invitationsModel.updateInvitation(inviteObj)
         .then(function(response) {
           vm.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
