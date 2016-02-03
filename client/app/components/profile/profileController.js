@@ -20,12 +20,9 @@
     $scope.saveEditButton.skills.buttonText = 'Edit';
     $scope.saveEditButton.basics = {};
     $scope.saveEditButton.basics.buttonText = 'Edit';
-    $scope.saveEditButton.summary = {};
-    $scope.saveEditButton.summary.buttonText = 'Edit';
     $scope.saveEditButton.invites = {};
     $scope.saveEditButton.invites.buttonText = 'Edit';
 
-    $scope.selectedStyle = {};
     $scope.skills = {};
     $scope.skills.toLearn = {};
     $scope.skills.toTeach = {};
@@ -40,20 +37,30 @@
 
 
 
-    //-------------------BASICS--------------------
+    //-------------------BASICS------------------------
     $scope.toggleEditShowBasics = function() {
       if($scope.saveEditButton.basics.buttonText === 'Edit') {
         $scope.saveEditButton.basics.buttonText = 'Save';
-        $scope.selectedStyle.basics = {'background-color' : '#FFFFCC'};
       } else {
         $scope.saveEditButton.basics.buttonText='Edit';
-        $scope.selectedStyle.basics = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.profileUser); //call to fn
+        updateProfile($scope.profileUser); 
       }
     };
 
 
-    //---------SHARED BY BASICS, SKILLS, & SUMMARY-
+    //-------------------SKILLS------------------------
+    		//called when SKILLS edit/show button is clicked
+    $scope.toggleEditShowSkills = function() {
+      if($scope.saveEditButton.skills.buttonText === 'Edit') {
+        $scope.saveEditButton.skills.buttonText = 'Save';
+      } else {
+        updateProfile($scope.profileUser);
+        $scope.saveEditButton.skills.buttonText='Edit';
+      }
+    };
+
+
+    //---------SHARED BY BASICS & SKILLS---------------
     var updateProfile = function(userObj) {
       for(var learnKey in $scope.skills.toLearn) {
           if(!_.contains($scope.skills.toLearn, learnKey)) {
@@ -71,36 +78,13 @@
           userObj.toTeach.splice(userObj.toTeach.indexOf(teachKey),1);
         }
       }
-      Profile.updateProfile(userObj) //update DB
+      Profile.updateProfile(userObj) 
       .then(function(response) {
         $scope.getUserProfile(userObj);
       });
     };
 
-    //-------------------SKILLS--------------------
-    		//called when SKILLS edit/show button is clicked
-    $scope.toggleEditShowSkills = function() {
-      if($scope.saveEditButton.skills.buttonText === 'Edit') {
-        $scope.saveEditButton.skills.buttonText = 'Save';
-        $scope.selectedStyle.skills = {'background-color' : '#FFFFCC'};
-      } else {
-        $scope.selectedStyle.skills = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.profileUser);
-        $scope.saveEditButton.skills.buttonText='Edit';
-      }
-    };
 
-    //-------------------SUMMARY-------------------
-    $scope.toggleEditShowSummary = function() {
-      if($scope.saveEditButton.summary.buttonText === 'Edit') {
-        $scope.saveEditButton.summary.buttonText = 'Save';
-        $scope.selectedStyle.summary = {'background-color' : '#FFFFCC'};
-      } else {
-        $scope.selectedStyle.summary = {'background-color' : '#FFFFFF'};
-        updateProfile($scope.profileUser);
-        $scope.saveEditButton.summary.buttonText='Edit';
-      }
-    };
     //-----------------INVITATIONS ----------------
     
     $scope.toggleInviteEditForm = function(inviteId) {
@@ -155,7 +139,7 @@
       });
     };
 
-    //-------------------PADAWAN--------------------
+    //-------------FOLLOWERS, AKA PADAWANS-----------------
 
     $scope.becomePadawan = function(mentor, padawan) {
       Profile.addPadawan(mentor, padawan)
@@ -192,7 +176,7 @@
     };
 
 
-    //---------------GET USER PROFILE---------------
+    //---------------GET USER PROFILE---------------------
     	//called on the initialization of the HTML page, ng-init
     $scope.getUserProfile = function(userObj) {
       Profile.getUserProfile(userObj)
