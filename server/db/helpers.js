@@ -39,7 +39,8 @@ helpers.addUser = function(userObj) {
     location: userObj._json.location,
     karmaPoints: 0,
     toLearn: [],
-    toTeach: []
+    toTeach: [],
+    wantEmails: true
   });
 };
 
@@ -76,7 +77,8 @@ helpers.updateUser = function(profileUpdateObj) {
       photo : profileUpdateObj.photo || user.get('photo'),
       karmaPoints : profileUpdateObj.karmaPoints || user.get('karmaPoints'),
       toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
-      toTeach: profileUpdateObj.toTeach || user.get('toTeach')
+      toTeach: profileUpdateObj.toTeach || user.get('toTeach'),
+      wantEmails: profileUpdateObj.wantEmails || user.get('wantEmails')
     });
   });
 };

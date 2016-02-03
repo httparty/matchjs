@@ -43,12 +43,12 @@ module.exports = {
   },
 
   addPadawan: function(req, res) {
-    var mentorObj = req.params; 
+    var mentorObj = req.params;
     var username = req.params.username;
     var padawan = req.body.username;
     helpers.addPadawan(username, padawan)
     .then(function(user) {
-      helpers.getUserByUserName(mentorObj) 
+      helpers.getUserByUserName(mentorObj)
         .then(function(mentor) {
           var mentorData = mentor.dataValues;
           mentorData.padawan = padawan;
@@ -98,7 +98,15 @@ module.exports = {
       // console.log('This user has been deleted from the database:', req.body.username);
       res.status(200).send(user);
     });
-  }
+  },
 
+  saveUserPreferences: function(req, res) {
+    var username = req.cookies['user-profile'].username;
+    var wantEmails = req.body.wantEmails;
+    helpers.updateUser({username: username, wantEmails: wantEmails})
+    .then(function(){
+      res.status(200).send('Preferences Successfully Updated')
+    });
+  }
 
 };
