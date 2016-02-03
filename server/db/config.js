@@ -29,7 +29,7 @@ models.User.sync({force: false}).then(function(){
 	console.log('User table created!');
 });
 
-models.Invitation.sync({force: true}).then(function(){
+models.Invitation.sync({force: false}).then(function(){
   console.log('Invitation table created!');
 });
 
