@@ -13,7 +13,6 @@
 
       //DRY refactor needed: this function is copied over from connectController
       vm.getThisUserProfile = function(username) {
-        console.log('in navbarController: user', username);
         $state.go('profile', {username: username});
       };
 
