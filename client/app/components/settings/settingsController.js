@@ -2,29 +2,20 @@
   'use strict';
   angular.module('app.settings', [])
   .controller('SettingsController', [
-    'settingsModel', '$state', 'Profile', function(settingsModel, $state, Profile){
+    'settingsModel', '$state', 'Profile', 'AuthService', function(settingsModel, $state, Profile, AuthService){
 
 //*** SCOPE VARIABLES ***//
     var vm = this;
     vm.username = $state.params.username;
     vm.blockEditing = true;
-    // vm.wantEmails = true;
-    //vm.wantEmails = vm.userPreferences.wantEmails, what we want after routes are set up
+    vm.username = angular.fromJson(AuthService.getCurrentUser()).username;
+
     Profile.getUserProfile({username: vm.username}).then(function(response){
       vm.currentUserProfile = response.data;
       vm.wantEmails = vm.currentUserProfile.wantEmails;
-      console.log(vm.currentUserProfile);
     });
-    // console.log(vm.currentUserProfile)
-
 
 //*** BASIC PREFERENCE MANIPULATION FUNCTIONS ***//
-
-    //Loads a users preferences
-    // vm.getPreferences = function() {
-    //   vm.userPreferences = settingsModel.getPreferences(); //vm.userPreferences is the object getting passed around
-    //   //this should return {wantEmails: true or false};
-    // };
 
     //Allows user to edit preferences page
     vm.editPreferences = function() {
