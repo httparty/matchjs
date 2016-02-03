@@ -76,7 +76,6 @@ module.exports = {
   },
 
   getMentors: function(req, res) {
-    console.log('HERE IS REQ.PARAMS', req.params);
     var mentee = req.params.username;
     helpers.getMentors(mentee)
     .then(function(padawanRelArr) {
