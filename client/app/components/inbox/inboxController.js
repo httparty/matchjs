@@ -115,7 +115,6 @@
             //populate current conversation if there isn't a selected 
             //conversation
             if (vm.currentRecipient === '') {
-              console.log('conversation is currently empty');
               vm.switchConversation(vm.conversationList[0]);
             }
 
