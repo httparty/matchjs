@@ -56,8 +56,4 @@ var seedInvitations = function() {
 
 };
 
-
-
-
-
 // seedUsers();
