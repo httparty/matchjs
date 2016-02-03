@@ -25,7 +25,7 @@ models.Padawan = new Padawan(sequelize, Sequelize);
 models.User.hasMany(models.Invitation);
 models.User.hasMany(models.Padawan);
 
-models.User.sync({force: true}).then(function(){
+models.User.sync({force: false}).then(function(){
   //Set force: true for development, false for deployment
 	console.log('User table created!');
 });
