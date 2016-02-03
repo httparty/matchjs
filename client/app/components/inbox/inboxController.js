@@ -124,17 +124,6 @@
       };
 
       /*************************************************************
-      Scroll to bottom when adding a new message
-      **************************************************************/ 
-
-      $scope.$watchCollection('currentMessageList', function (newValue) {
-        // if (newValue) { 
-          console.log("added a new message");
-          // $(element).scrollTop($(element)[0].scrollHeight);
-        // }
-      });
-
-      /*************************************************************
       Display all messages for a single conversation
       **************************************************************/ 
       vm.displayMessages = function() {
@@ -183,10 +172,7 @@
       Display all messages for a single conversation
       **************************************************************/
       vm.switchConversation = function(conversation) {
-        console.log("switching conversation");
 
-        //Update the current recipient
-        console.log("current", vm.currentRecipient);
         vm.currentRecipient = conversation.username;
         vm.currentRecipientName = conversation.name;
         vm.currentRecipientPhoto = conversation.photo;
