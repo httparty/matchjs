@@ -101,7 +101,7 @@
         <div class="panel-body">
           <form>
             <h4 ng-hide='!ctrl.editMode.isSameUser'>I want to teach:</h4>
-            <h4 ng-hide='ctrl.editMode.isSameUser'>{{ctrl.profileUser.displayName || ctrl.profileUser.username}} wants to teach:</h4>
+            <h4 ng-hide='ctrl.editMode.isSameUser'>{{ctrl.profileUser.firstName || ctrl.profileUser.username}} wants to teach:</h4>
             <div class="toTeach" ng-model="skills.toTeach">
               <ng-form>
                 <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
@@ -111,7 +111,7 @@
             </div>
             <br>
             <h4 ng-hide="!ctrl.editMode.isSameUser">I want to learn:</h4>
-            <h4 ng-hide="ctrl.editMode.isSameUser">{{ctrl.profileUser.displayName || ctrl.profileUser.username}} wants to learn:</h4>
+            <h4 ng-hide="ctrl.editMode.isSameUser">{{ctrl.profileUser.firstName || ctrl.profileUser.username}} wants to learn:</h4>
             <div>
               <ng-form>
                 <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">

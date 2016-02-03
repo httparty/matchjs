@@ -35,6 +35,7 @@
     vm.editMode.inviteEditMode = '';
     vm.editMode.isPadawan = '';
 
+//-------------FOR INVITATION EDITING----------------
     vm.minDate = new Date(); //Blocks past dates
     vm.maxDate = new Date(2050, 5, 22); //Set Max Date
     vm.ismeridian = true;  //AM/PM or 24H
@@ -42,7 +43,7 @@
     vm.mstep = 15;  //Minute Step
     vm.submitted = false;  //Hides form upon submission
 
-
+//-------------UI MESSAGES-------------
     vm.UImessages = {};
     vm.UImessages.noInvites = $sce.trustAsHtml('You have no current invitations. <a href="/">Connect with more users</a> to set up a mentorship session.'); 
     // vm.UImessages.noPadawans = $sce.trustAsHtml('You don\'t have any followers yet. Make sure you\'ve selected some skills you\'re able to teach. Then, <a href="#/inbox"> start a conversation</a> with developers trying to acquire one of your teachable skills, and set up a mentorship session to start teaching.');
@@ -239,10 +240,11 @@
         vm.profileUser.location = response.data.location;
         // vm.profileUser.name = response.data.displayName;
         vm.profileUser.name = (response.data.username === vm.currentUser.username ? vm.currentUser.displayName : response.data.name);
+        var nameArr = response.data.name.split(' ');
+        vm.profileUser.firstName = nameArr[0];
         vm.profileUser.github = response.data.github;
         vm.profileUser.karmaPoints = response.data.karmaPoints;
         vm.profileUser.summary =	response.data.summary;
-        vm.profileUser.displayName = response.data.displayName;
         response.data.toLearn.forEach(function(skill) {
           vm.skills.toLearn[skill] = true;
         });
