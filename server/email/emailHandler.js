@@ -135,10 +135,14 @@ module.exports = {
       "<h2>Enjoy your meeting!</h2>"
     };
 
-    mailer(mailOptionsMentor);
-    console.log('Mentor Email Sent');
-    mailer(mailOptionsMentee);
-    console.log('Mentee Email Sent');
+    if(inviteObj.mentorEmailPreferences){
+      mailer(mailOptionsMentor);
+      console.log('Mentor Email Sent');
+    };
+    if(inviteObj.menteeEmailPreferences){
+      mailer(mailOptionsMentee);
+      console.log('Mentee Email Sent');
+    };
 
 
   }

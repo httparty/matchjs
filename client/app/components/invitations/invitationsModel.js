@@ -41,7 +41,7 @@
           data: inviteObj
         });
       };
-    
+
       // model.declineInvitation = function(inviteObj) {
       //   return $http({
       //     method: 'POST',
@@ -49,6 +49,8 @@
       //     data: inviteObj
       //   });
       // };
+
+
     return model;
   }]);
 
