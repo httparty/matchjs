@@ -12,6 +12,7 @@ ul.nav li:hover {
   background-color: #009E9A;
   border-color: #008D8A;
   border-bottom-width: 3px;
+  height: 50px;
 }
 
 .navbar-inverse .navbar-brand {
@@ -21,7 +22,25 @@ ul.nav li:hover {
 
 #simple-dropdown {
   color: #fff;
+  font: verdana;
 }
 #simple-dropdown :visited {
   color: #fff;
+}
+
+.ui.menu {
+  /*min-height: 100px;*/
+  /*display: none;*/
+  /*padding: 0px;*/
+  /*margin: -50%;*/
+  background-color: #009E9A;
+  border-color: #008D8A;
+  height: 50px;
+  color: #ffffff;
+}
+
+#brand {
+  color: #ffffff;
+  font: verdana;
+  font-size: 17px;
 }

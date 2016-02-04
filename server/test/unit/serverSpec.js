@@ -5,6 +5,11 @@ var app = express();
 var middleware = require('../../config/middleware');
 
 middleware(app, express);
+//auth
+//api/users
+//api/inbox
+//api/email
+//api/invitations
 
 describe('Server Spec', function() {
 
