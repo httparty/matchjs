@@ -40,9 +40,10 @@
 }
 
 .editButton {
-  margin-top: -52px;
+  margin-top: 0px;
 }
 
 .otherUserProfileActionButtons {
   margin-top: 10px;
+  padding-left: 7px;
 }

@@ -20,41 +20,40 @@
             <div class="profileBasics col-md-6 pull-right">
               <div>
                 <h4>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h4>
-
+              </div>
           <!--PROFILE INFO, INCL BIO/SUMMARY-->
-                <br>
-                <p>
-                  <strong>Github:</strong> <a href="{{ctrl.profileUser.github}}">{{ctrl.profileUser.github}}</a><br>
-                </p>
-                <p ng-hide="ctrl.saveEditButton.basics.buttonText === 'Save'">
-                  <strong>Location: </strong>{{ctrl.profileUser.location || 'San Francisco'}} <br>
-                </p>
-                <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'">
-                  <input class="form-control" type="text" ng-model="ctrl.profileUser.location" placeholder="Location: {{ctrl.profileUser.location}}">
-                </form>
-                <p>
-                  <strong>Bio:</strong> 
-                  <span ng-show="ctrl.saveEditButton.basics.buttonText === 'Edit'">{{ctrl.profileUser.summary}}</span>
-                </p>
-                <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'" >
-                  <input class="form-control" type ="text" class='col-sm-4' ng-model="ctrl.profileUser.summary" />
-                </form>
-              </div>
+              <br>
+              <p>
+                <strong>Github:</strong> <a href="{{ctrl.profileUser.github}}">{{ctrl.profileUser.github}}</a><br>
+              </p>
+              <p ng-hide="ctrl.saveEditButton.basics.buttonText === 'Save'">
+                <strong>Location: </strong>{{ctrl.profileUser.location || 'San Francisco'}} <br>
+              </p>
+              <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'">
+                <input class="form-control" type="text" ng-model="ctrl.profileUser.location" placeholder="Location: {{ctrl.profileUser.location}}">
+              </form>
+              <p>
+                <strong>Bio:</strong> 
+                <span ng-show="ctrl.saveEditButton.basics.buttonText === 'Edit'">{{ctrl.profileUser.summary}}</span>
+              </p>
+              <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'" >
+                <input class="form-control" type ="text" class='col-sm-4' ng-model="ctrl.profileUser.summary" />
+              </form>
+            </div>
             <!-- PROFILE BASICS SAVE/EDIT BUTTON -->
-              <div>
-                <br>
-                <br>
-                <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
-              </div>
+            <br>
+            <br>
+            <div>
+              <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
             </div>
           </div>  <!--CLOSE ROW-->
 
          <!--FOLLOW, MESSAGE, AND INVITE BUTTONS -->
           <div class="otherUserProfileActionButtons button-inline" ng-show="ctrl.contentLoaded">
-            <a ui-sref="invitations({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-success">Mentor</a>
-            <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary">Message</a>
-            <button ng-show="!ctrl.editMode.isSameUser && !ctrl.editMode.isPadawan" ng-click="ctrl.becomePadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-warning" ng-cloak>Follow</button> 
-            <button ng-show="!ctrl.editMode.isSameUser && ctrl.editMode.isPadawan" ng-click="ctrl.stopBeingAPadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-danger" ng-cloak>Unfollow</button> 
+            <a ui-sref="invitations({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-success btn-sm">Mentor</a>
+            <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary btn-sm">Message</a>
+            <button ng-show="!ctrl.editMode.isSameUser && !ctrl.editMode.isPadawan" ng-click="ctrl.becomePadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-warning btn-sm" ng-cloak>Follow</button> 
+            <button ng-show="!ctrl.editMode.isSameUser && ctrl.editMode.isPadawan" ng-click="ctrl.stopBeingAPadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-danger btn-sm" ng-cloak>Unfollow</button> 
           </div>
           <br>
           <br>
@@ -130,7 +129,8 @@
           <!--END TABBED FOLLOWING/FOLLOWER PANEL-->      
           <!-- ==================================  -->
         </div><!-- End panel body-->
-      </div><!-- End panel panel-default-->
+      </div><!-- End panel panel-default-->  
+
       <!-- END PROFILE BASICS SECTION -->
       <!-- ==================================  -->
       
