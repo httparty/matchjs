@@ -7,6 +7,32 @@
       background-color: #009E9A;
     }
 
+    #drop3 {
+      min-height: 300px;
+      padding: 5em 0em;
+    }
+
+    #drop4 {
+      min-height: 300px;
+      padding: 5em 0em;
+    }
+    #userIcon {
+      font-size: 10em;
+    }
+
+    #igniteIcon {
+      font-size: 10em;
+    }
+
+    #githubIcon {
+      font-size: 1.5em;
+    }
+
+    #signupText {
+      font-weight: bold;
+      font-size: .8em;
+    }
+
     .masthead.segment {
       min-height: 500px;
       padding: 7em 0em;
@@ -21,7 +47,7 @@
       margin-top: 1.5em;
       margin-bottom: -5%;
       font-size: 4em;
-      font-weight: normal;
+      font-weight: bold;
     }
     .masthead h2 {
       font-size: 1.7em;
