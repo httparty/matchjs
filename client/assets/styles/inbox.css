@@ -1,6 +1,8 @@
-/*                    */
-/* Universal settings */
-/*                    */
+
+.btn .btn-default .form-control .ui-select-toggle {
+  background-color: #00676C;
+}
+
 html, body, .indexView, .inbox, .row, .conversations, .messages{
   height: 97%;
   box-sizing: border-box;
@@ -49,7 +51,7 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
 }
 
 #inbox-reply-button {
-  background-color: #009E9A;
+  background-color: #00676C;
   color: #FFFFFF;
 }
 
