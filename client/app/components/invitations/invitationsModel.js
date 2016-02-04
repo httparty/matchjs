@@ -6,7 +6,6 @@
       var model = {};
 
       model.createInvitation = function(inviteObj){
-        console.log(inviteObj);
         return $http({
           method: 'POST',
           url: '/api/invitations/createInvitation',

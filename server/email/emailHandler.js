@@ -137,12 +137,12 @@ module.exports = {
 
     if(inviteObj.mentorEmailPreferences){
       mailer(mailOptionsMentor);
+      console.log('Mentor Email Sent');
     };
-    console.log('Mentor Email Sent');
     if(inviteObj.menteeEmailPreferences){
       mailer(mailOptionsMentee);
+      console.log('Mentee Email Sent');
     };
-    console.log('Mentee Email Sent');
 
 
   }
