@@ -211,9 +211,6 @@
             //Move new conversation to the top of the list
             vm.conversationList.unshift(user);
           }
-          //switch conversation
-          // console.log("switch conversation");
-          // vm.switchConversation(user)
         }
       });
   }]);
