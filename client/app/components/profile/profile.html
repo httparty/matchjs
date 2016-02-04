@@ -52,7 +52,7 @@
          <!--FOLLOW, MESSAGE, AND INVITE BUTTONS -->
           <div class="otherUserProfileActionButtons button-inline" ng-show="ctrl.contentLoaded">
             <a ui-sref="invitations({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-success">Mentor</a>
-            <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary">Message </a>
+            <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary">Message</a>
             <button ng-show="!ctrl.editMode.isSameUser && !ctrl.editMode.isPadawan" ng-click="ctrl.becomePadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-warning" ng-cloak>Follow</button> 
             <button ng-show="!ctrl.editMode.isSameUser && ctrl.editMode.isPadawan" ng-click="ctrl.stopBeingAPadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-danger" ng-cloak>Unfollow</button> 
           </div>
@@ -61,6 +61,39 @@
           <!-- ==================================  -->
           <!--BEGIN TABBED FOLLOWING/FOLLOWER PANEL-->
           <tabs ng-show="ctrl.contentLoaded" class="clearfix">
+            <pane title="Skills">
+              <!-- ==================================  -->
+              <!-- BEGIN PROFILE SKILLS SECTION-->
+              <div class="panel panel-default" id="profileSkills">
+                <div class="panel-body">
+                  <form>
+                    <h4 ng-hide='!ctrl.editMode.isSameUser'>I want to teach:</h4>
+                    <h4 ng-hide='ctrl.editMode.isSameUser'>{{ctrl.profileUser.firstName || ctrl.profileUser.username}} wants to teach:</h4>
+                    <div class="toTeach" ng-model="skills.toTeach">
+                      <ng-form>
+                        <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
+                          <input type="checkbox" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                        </label>
+                      </ng-form>
+                    </div>
+                    <br>
+                    <h4 ng-hide="!ctrl.editMode.isSameUser">I want to learn:</h4>
+                    <h4 ng-hide="ctrl.editMode.isSameUser">{{ctrl.profileUser.firstName || ctrl.profileUser.username}} wants to learn:</h4>
+                    <div>
+                      <ng-form>
+                        <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
+                          <input type="checkbox" ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                        </label>
+                      </ng-form>
+                    </div>
+                  </form>
+                  <br>
+                  <button class="btn btn-default btn-sm" style="margin-top: 10px" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.skills" ng-click="ctrl.toggleEditShowSkills()" > {{ ctrl.saveEditButton.skills.buttonText }}</button>
+                </div> <!--panel body end --> 
+              </div> <!-- end panel -->
+              <!--END SKILLS SECTION --> 
+              <!-- ==================================  -->
+            </pane>
             <!-- PADAWANS/FOLLOWERS -->
             <pane title="Followers">
               <div class="panel panel-default followPanel">
@@ -104,40 +137,6 @@
     </div><!-- End col-sm-6 -->
     
     <div class="col-sm-6">
-      <!-- ==================================  -->
-      <!-- BEGIN PROFILE SKILLS SECTION-->
-      <div id="profileSkills" class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Skills</h3>
-        </div>
-        <div class="panel-body">
-          <form>
-            <h4 ng-hide='!ctrl.editMode.isSameUser'>I want to teach:</h4>
-            <h4 ng-hide='ctrl.editMode.isSameUser'>{{ctrl.profileUser.firstName || ctrl.profileUser.username}} wants to teach:</h4>
-            <div class="toTeach" ng-model="skills.toTeach">
-              <ng-form>
-                <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                  <input type="checkbox" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
-                </label>
-              </ng-form>
-            </div>
-            <br>
-            <h4 ng-hide="!ctrl.editMode.isSameUser">I want to learn:</h4>
-            <h4 ng-hide="ctrl.editMode.isSameUser">{{ctrl.profileUser.firstName || ctrl.profileUser.username}} wants to learn:</h4>
-            <div>
-              <ng-form>
-                <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                  <input type="checkbox" ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
-                </label>
-              </ng-form>
-            </div>
-          </form>
-          <br>
-          <button class="btn btn-default" style="margin-top: 10px" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.skills" ng-click="ctrl.toggleEditShowSkills()" > {{ ctrl.saveEditButton.skills.buttonText }}</button>
-        </div> <!--panel body end --> 
-      </div> <!-- end panel -->
-      <!--END SKILLS SECTION --> 
-      <!-- ==================================  -->
     
       <!-- ==================================  -->
       <!-- BEGIN INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
