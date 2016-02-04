@@ -40,7 +40,9 @@ helpers.addUser = function(userObj) {
     karmaPoints: 0,
     toLearn: [],
     toTeach: [],
-    wantEmails: true
+    wantFollowerEmails: true,
+    wantInvitationEmails: true,
+    wantChatEmails: true
   });
 };
 
@@ -79,7 +81,9 @@ helpers.updateUser = function(profileUpdateObj) {
       karmaPoints : profileUpdateObj.karmaPoints || user.get('karmaPoints'),
       toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
       toTeach: profileUpdateObj.toTeach || user.get('toTeach'),
-      wantEmails: typeof profileUpdateObj.wantEmails === 'boolean'? profileUpdateObj.wantEmails : user.get('wantEmails')
+      wantFollowerEmails: typeof profileUpdateObj.wantFollowerEmails === 'boolean'? profileUpdateObj.wantFollowerEmails : user.get('wantFollowerEmails'),
+      wantInvitationEmails: typeof profileUpdateObj.wantInvitationEmails === 'boolean'? profileUpdateObj.wantFollowerEmails : user.get('wantInvitationEmails'),
+      wantChatEmails: typeof profileUpdateObj.wantChatEmails === 'boolean'? profileUpdateObj.wantChatEmails : user.get('wantChatEmails')
     });
   });
 };

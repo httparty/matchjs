@@ -117,8 +117,8 @@
       vm.formData.mentorUsername = vm.username;
       vm.formData.menteeUsername = vm.recipientUsername;
       vm.formData.sessionInfo.when = new Date(vm.date.getFullYear(), vm.date.getMonth(), vm.date.getDate(), vm.date.getHours(), vm.date.getMinutes());
-      vm.formData.mentorEmailPreferences = vm.currentUserProfile.wantEmails;
-      vm.formData.menteeEmailPreferences = vm.recipientProfile.wantEmails;
+      vm.formData.mentorEmailPreferences = vm.currentUserProfile.wantInvitationEmails;
+      vm.formData.menteeEmailPreferences = vm.recipientProfile.wantInvitationEmails;
       vm.submitted = true;
       invitationsModel.createInvitation(vm.formData)
         .then(function(r){
