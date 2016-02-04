@@ -7,3 +7,21 @@ ul.nav li:hover {
   width: 48px;
   height: 48px;
 }
+
+.navbar-inverse {
+  background-color: #009E9A;
+  border-color: #008D8A;
+  border-bottom-width: 3px;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #fff;
+  font: verdana;
+}
+
+#simple-dropdown {
+  color: #fff;
+}
+#simple-dropdown :visited {
+  color: #fff;
+}
