@@ -54,7 +54,12 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
 }
 
 #panel-chat {
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
+  overflow: hidden;
+}
+
+#panel-chat:hover {
+    overflow-y: scroll;
 }
 
 ::-webkit-scrollbar-track
