@@ -164,6 +164,7 @@
       Profile.addPadawan(mentor, padawan)
       .then(function(response) {
         vm.editMode.isPadawan = true;
+        getPadawans(mentor);
       });
     };
 

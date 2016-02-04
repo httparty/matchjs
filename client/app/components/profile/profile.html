@@ -4,96 +4,108 @@
 <!-- PROFILE BASICS SECTION -->
   <div class="row">
     <div class="col-sm-6">
-
+      <!--experient! --> 
+        <!-- <div class="ui special cards">
+        <div class="card"> -->
+      <!--experient! --> 
       <div id="profileBasicsAndPhoto"  class="panel panel-default">
         <div class="panel-body" ng-cloak>           
-  <!-- PROFILE PHOTO -->
-          <div class='profilePhoto'>
-            <img class="img-rounded" ng-src={{ctrl.profileUser.photo}} height="200" width="200" />
-          </div>
-  <!-- NAME OR USERNAME -->
-          <div class="profileBasics">
-            <div>
-              <h4>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h4>
-  <!--FOLLOW, MESSAGE, AND INVITE BUTTONS -->
-              <div ng-show="ctrl.contentLoaded">
-                <a ui-sref="invitations({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary"> Invite for Mentorship</a>
-                <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-success">Send a Message </a>
-                <button ng-show="!ctrl.editMode.isSameUser && !ctrl.editMode.isPadawan" ng-click="ctrl.becomePadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-warning" ng-cloak>Follow</button> 
-                <button ng-show="!ctrl.editMode.isSameUser && ctrl.editMode.isPadawan" ng-click="ctrl.stopBeingAPadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-danger" ng-cloak>Unfollow</button> 
-              </div>
-  <!--PROFILE INFO, INCL BIO/SUMMARY-->
-              <br>
-              <p>
-                <strong>Github:</strong> <a href="{{ctrl.profileUser.github}}">{{ctrl.profileUser.github}}</a><br>
-              </p>
-              <p ng-hide="ctrl.saveEditButton.basics.buttonText === 'Save'">
-                <strong>Location: </strong>{{ctrl.profileUser.location || 'San Francisco'}} <br>
-              </p>
-              <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'">
-                <input class="form-control" type="text" ng-model="ctrl.profileUser.location" placeholder="Location: {{ctrl.profileUser.location}}">
-              </form>
-              <p>
-                <strong>Bio:</strong>
-              </p>
-              <form>
-                <input class="form-control" type ="text" class='col-sm-4' ng-model="ctrl.profileUser.summary" ng-disabled="ctrl.saveEditButton.basics.buttonText === 'Edit'" />
-              </form>
+        <!-- PROFILE PHOTO -->
+          <div class="row"> <!-- TEST -->
+
+            <div class="profilePhoto col-md-6">
+              <img class="img-rounded img-responsive" ng-src={{ctrl.profileUser.photo}}/>
             </div>
+          <!-- NAME OR USERNAME -->
+            <div class="profileBasics col-md-6 pull-right">
+              <div>
+                <h4>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h4>
+
+          <!--PROFILE INFO, INCL BIO/SUMMARY-->
+                <br>
+                <p>
+                  <strong>Github:</strong> <a href="{{ctrl.profileUser.github}}">{{ctrl.profileUser.github}}</a><br>
+                </p>
+                <p ng-hide="ctrl.saveEditButton.basics.buttonText === 'Save'">
+                  <strong>Location: </strong>{{ctrl.profileUser.location || 'San Francisco'}} <br>
+                </p>
+                <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'">
+                  <input class="form-control" type="text" ng-model="ctrl.profileUser.location" placeholder="Location: {{ctrl.profileUser.location}}">
+                </form>
+                <p>
+                  <strong>Bio:</strong> 
+                  <span ng-show="ctrl.saveEditButton.basics.buttonText === 'Edit'">{{ctrl.profileUser.summary}}</span>
+                </p>
+                <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'" >
+                  <input class="form-control" type ="text" class='col-sm-4' ng-model="ctrl.profileUser.summary" />
+                </form>
+              </div>
+            <!-- PROFILE BASICS SAVE/EDIT BUTTON -->
+              <div>
+                <br>
+                <br>
+                <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
+              </div>
+            </div>
+          </div>  <!--CLOSE ROW-->
+
+         <!--FOLLOW, MESSAGE, AND INVITE BUTTONS -->
+          <div class="otherUserProfileActionButtons button-inline" ng-show="ctrl.contentLoaded">
+            <a ui-sref="invitations({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-success">Mentor</a>
+            <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary">Message </a>
+            <button ng-show="!ctrl.editMode.isSameUser && !ctrl.editMode.isPadawan" ng-click="ctrl.becomePadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-warning" ng-cloak>Follow</button> 
+            <button ng-show="!ctrl.editMode.isSameUser && ctrl.editMode.isPadawan" ng-click="ctrl.stopBeingAPadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-danger" ng-cloak>Unfollow</button> 
           </div>
-  <!-- PROFILE BASICS SAVE/EDIT BUTTON -->
-          <div>
-            <br>
-            <button class="btn btn-default" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
-          </div>
+          <br>
+          <br>
+          <!-- ==================================  -->
+          <!--BEGIN TABBED FOLLOWING/FOLLOWER PANEL-->
+          <tabs ng-show="ctrl.contentLoaded" class="clearfix">
+            <!-- PADAWANS/FOLLOWERS -->
+            <pane title="Followers">
+              <div class="panel panel-default followPanel">
+                <div class="panel-body">
+                  <p ng-hide="!ctrl.editMode.isSameUser" ng-bind-html="ctrl.UImessages.noPadawans"></p>
+                  <div ng-repeat="padawan in ctrl.padawans | orderBy:'username'">
+                    <div class="panel panel-default miniPanel" ng-click="ctrl.goToOtherUserProfile(padawan['padawanUsername'])">
+                      <div class="panel-body miniPanelBody">
+                        <img class="img-circle" ng-src={{padawan.photo}} height="40" width="40" />
+                        <span class="followUsername">{{padawan['padawanUsername']}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!--panel body end -->
+              </div><!-- End panel -->
+            </pane>
+            <!-- FOLLOWING/MENTORS FOLLOWED -->
+            <pane title="Following">
+              <div class="panel panel-default followPanel">
+                <div class="panel-body">
+                  <p ng-hide="!ctrl.editMode.isSameUser" ng-bind-html="ctrl.UImessages.noMentors"></p>
+                  <div ng-repeat="mentor in ctrl.mentors | orderBy:'username'">
+                    <div class="panel panel-default miniPanel" ng-click="ctrl.goToOtherUserProfile(mentor['mentorUsername'])">
+                      <div class="panel-body miniPanelBody">
+                        <img class="img-circle" ng-src={{mentor.photo}} height="40" width="40" />
+                        <span class="followUsername">{{mentor['mentorUsername']}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!--panel body end -->
+              </div><!-- End panel -->
+            </pane>
+          </tabs>
+          <!--END TABBED FOLLOWING/FOLLOWER PANEL-->      
+          <!-- ==================================  -->
         </div><!-- End panel body-->
       </div><!-- End panel panel-default-->
-<!-- END PROFILE BASICS SECTION -->
-<!-- ==================================  -->
-
-<!-- ==================================  -->
-<!--BEGIN TABBED FOLLOWING/FOLLOWER PANEL-->
-      <tabs ng-show="ctrl.contentLoaded">
-  <!-- PADAWANS/FOLLOWERS -->
-        <pane title="Followers">
-          <div class="panel panel-default followPanel">
-            <div class="panel-body">
-              <p ng-hide="!ctrl.editMode.isSameUser" ng-bind-html="ctrl.UImessages.noPadawans"></p>
-              <div ng-repeat="padawan in ctrl.padawans | orderBy:'username'">
-                <div class="panel panel-default miniPanel" ng-click="ctrl.goToOtherUserProfile(padawan['padawanUsername'])">
-                  <div class="panel-body miniPanelBody">
-                    <img class="img-circle" ng-src={{padawan.photo}} height="40" width="40" />
-                    <span class="followUsername">{{padawan['padawanUsername']}}</span>
-                  </div>
-                </div>
-              </div>
-            </div> <!--panel body end -->
-          </div><!-- End panel -->
-        </pane>
-  <!-- FOLLOWING/MENTORS FOLLOWED -->
-        <pane title="Following">
-          <div class="panel panel-default followPanel">
-            <div class="panel-body">
-              <p ng-hide="!ctrl.editMode.isSameUser" ng-bind-html="ctrl.UImessages.noMentors"></p>
-              <div ng-repeat="mentor in ctrl.mentors | orderBy:'username'">
-                <div class="panel panel-default miniPanel" ng-click="ctrl.goToOtherUserProfile(mentor['mentorUsername'])">
-                  <div class="panel-body miniPanelBody">
-                    <img class="img-circle" ng-src={{mentor.photo}} height="40" width="40" />
-                    <span class="followUsername">{{mentor['mentorUsername']}}</span>
-                  </div>
-                </div>
-              </div>
-            </div> <!--panel body end -->
-          </div><!-- End panel -->
-        </pane>
-      </tabs>
-<!--END TABBED FOLLOWING/FOLLOWER PANEL-->      
-<!-- ==================================  -->
+      <!-- END PROFILE BASICS SECTION -->
+      <!-- ==================================  -->
+      
     </div><!-- End col-sm-6 -->
-
+    
     <div class="col-sm-6">
-<!-- ==================================  -->
-<!-- BEGIN PROFILE SKILLS SECTION-->
+      <!-- ==================================  -->
+      <!-- BEGIN PROFILE SKILLS SECTION-->
       <div id="profileSkills" class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Skills</h3>
@@ -124,11 +136,11 @@
           <button class="btn btn-default" style="margin-top: 10px" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.skills" ng-click="ctrl.toggleEditShowSkills()" > {{ ctrl.saveEditButton.skills.buttonText }}</button>
         </div> <!--panel body end --> 
       </div> <!-- end panel -->
-<!--END SKILLS SECTION --> 
-<!-- ==================================  -->
-
-<!-- ==================================  -->
-<!-- BEGIN INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
+      <!--END SKILLS SECTION --> 
+      <!-- ==================================  -->
+    
+      <!-- ==================================  -->
+      <!-- BEGIN INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
       <div ng-show="ctrl.contentLoaded; ctrl.editMode.isSameUser" class="panel panel-default" id="invitations">
         <div class="panel-heading">
           <h3 class="panel-title">My Invitations</h3>
@@ -174,15 +186,15 @@
           </div><!-- end ng-repeat -->
         </div> <!--panel body end -->
       </div><!-- end panel -->
-<!-- END INVITATIONS SECTION -->
-<!-- ==================================  -->
+    <!-- END INVITATIONS SECTION -->
+    <!-- ==================================  -->
     </div><!-- col-sm-6 -->
-
-<!-- ==================================  -->
-<!-- INITIALIZATION  -->
-  <div ng-init="ctrl.getUserProfile(ctrl.profileUser); ctrl.editMode.isSameUser = false; ctrl.editMode.inviteEditMode = false;"></div>
-<!-- END INITIALIZATION -->  
-<!-- ==================================  -->
+    
+    <!-- ==================================  -->
+    <!-- INITIALIZATION  -->
+    <div ng-init="ctrl.getUserProfile(ctrl.profileUser); ctrl.editMode.isSameUser = false; ctrl.editMode.inviteEditMode = false;"></div>
+    <!-- END INITIALIZATION -->  
+    <!-- ==================================  -->
   </div><!-- row -->
 </div><!-- container -->
 

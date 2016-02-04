@@ -29,3 +29,20 @@
 #invitations {
   overflow-y: scroll !important;
 }
+
+.profileBasics {
+  margin-top: 20px;
+  float: right;
+}
+.profileBasics h4 {
+  margin-bottom:0;
+  font-size: 1.5rem;
+}
+
+.editButton {
+  margin-top: -52px;
+}
+
+.otherUserProfileActionButtons {
+  margin-top: 10px;
+}
