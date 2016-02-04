@@ -101,9 +101,11 @@ module.exports = {
 
   saveUserPreferences: function(req, res) {
     var username = req.cookies['user-profile'].username;
-    var wantEmails = req.body.wantEmails;
-    console.log(wantEmails, 'Want emails');
-    helpers.updateUser({username: username, wantEmails: wantEmails})
+    var wantFollowerEmails = req.body.wantFollowerEmails;
+    var wantChatEmails = req.body.wantChatEmails;
+    var wantInvitationEmails = req.body.wantInvitationEmails;
+    // console.log(wantInvitationEmails, 'Want Invitation emails');
+    helpers.updateUser({username: username, wantChatEmails: wantChatEmails, wantInvitationEmails: wantInvitationEmails, wantFollowerEmails: wantFollowerEmails})
     .then(function(user){
       res.status(200).send(user);
     });

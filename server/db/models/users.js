@@ -38,7 +38,13 @@ module.exports = function(sequelize, DataTypes) {
     toTeach: {
       type: DataTypes.ARRAY(DataTypes.STRING)
     },
-    wantEmails: {
+    wantFollowerEmails: {
+      type: DataTypes.BOOLEAN
+    },
+    wantInvitationEmails: {
+      type: DataTypes.BOOLEAN
+    },
+    wantChatEmails: {
       type: DataTypes.BOOLEAN
     }
   });
