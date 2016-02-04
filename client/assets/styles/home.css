@@ -5,11 +5,16 @@
 
     #homeButton {
       background-color: #009E9A;
+      color: #ffffff;
     }
 
     #drop3 {
       min-height: 300px;
       padding: 5em 0em;
+    }
+
+    #drop3Header {
+      color: #E8E8E8;
     }
 
     #drop4 {
@@ -25,7 +30,7 @@
     }
 
     #githubIcon {
-      font-size: 1.5em;
+      font-size: 1.4em;
     }
 
     #signupText {
