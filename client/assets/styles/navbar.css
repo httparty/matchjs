@@ -1,6 +1,18 @@
 /*for making mouse turn to cursor on navbar menu hover*/
+/*.navbar-header:hover {
+  background-color: #551A8B;
+}
+*/
+.page-scroll:hover {
+  background-color: #009E9A;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 ul.nav li:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .avatar {
@@ -24,6 +36,11 @@ ul.nav li:hover {
   color: #fff;
   font: verdana;
 }
+
+#navbar-profile-dropdown:hover{
+  background-color: #551A8B;
+}
+
 #simple-dropdown :visited {
   color: #fff;
 }
