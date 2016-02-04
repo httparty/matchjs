@@ -28,6 +28,7 @@ module.exports = {
       +'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
       +'<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to read it!'
     };
+    console.log(req.body);
     mailer(mailOptions);
     res.send('Mesage sent!');
   },
@@ -40,7 +41,9 @@ module.exports = {
       html: 'Hello '+ mentorData.username +',<br><br>'
       + mentorData.padawan + ' is now following you on MatchJS! <a href="http://matchjs.herokuapp.com/#/profile/'+ mentorData.padawan +'">View their profile</a> and <a href="http://matchjs.herokuapp.com/#/invitations/'+ mentorData.padawan +'"> set up a mentorship session</a>.<br><br> Have a great Day!<br><br> - The MatchJS Team'
     };
-    mailer(mailOptions);
+    if(mentorData.wantFollowerEmails){
+      mailer(mailOptions);
+    }
     return;
   },
 
