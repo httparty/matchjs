@@ -37,7 +37,8 @@
     "ui-select": "angular-ui-select#~0.14.2",
     "angular-sanitize": "~1.4.9",
     "angular-mocks": "~1.4.9",
-    "angular-scroll-glue": "~2.0.6"
+    "angular-scroll-glue": "~2.0.6",
+    "semantic": "semantic-ui#~2.1.8"
   },
   "resolutions": {
     "angular": "~1.4.9"
