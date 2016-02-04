@@ -1,11 +1,7 @@
-<div class="container-fluid" ng-controller="SettingsController as ctrl">
-  <div class="row">
-    <div class="col-sm-2"></div>
+<link rel="stylesheet" href="bower_components/semantic/dist/semantic.min.css">
+<div class="ui raised very padded text container segment" ng-controller="SettingsController as ctrl">
 
-    <div class="col-sm-8">
-      <div class="jumbotron">
-        <h2>Settings</h2>
-      </div>
+    <h2>Profile Settings</h2>
 
       <table class="table">
         <tbody>
@@ -46,8 +42,5 @@
       <button class="btn btn-default" ng-click="ctrl.editPreferences()" ng-disabled="!ctrl.blockEditing">Edit Preferences</button>
       <button class="btn btn-default" ng-click="ctrl.savePreferences()" ng-disabled="ctrl.blockEditing">Save Preferences</button>
 
-    </div>
 
-    <div class="col-sm-2"></div>
-  </div>
 </div>
