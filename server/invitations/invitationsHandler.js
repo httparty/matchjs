@@ -81,10 +81,12 @@ module.exports = {
         .then(function(mentor) {
           deletedInviteData.mentor.email = mentor.dataValues.email;
           deletedInviteData.mentor.name = mentor.dataValues.name;
+          deletedInviteData.mentorInvitationEmailPreferences = mentor.wantInvitationEmails;
           helpers.getUserByUserName(menteeObj)
             .then(function(mentee) {
               deletedInviteData.mentee.email = mentee.dataValues.email;
               deletedInviteData.mentee.name = mentee.dataValues.name;
+              deletedInviteData.menteeInvitationEmailPreferences = mentee.wantInvitationEmails;
               emailer.inviteHasBeenDeclined(deletedInviteData);
               helpers.deleteInvitation(inviteId)
                 .then(function(invite) {
