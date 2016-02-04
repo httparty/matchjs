@@ -48,6 +48,11 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
     height: 500px;
 }
 
+#inbox-reply-button {
+  background-color: #009E9A;
+  color: #FFFFFF;
+}
+
 #panel-chat {
   overflow-y: scroll;
 }
