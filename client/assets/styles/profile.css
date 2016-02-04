@@ -18,7 +18,7 @@
   overflow: hidden !important;
 }
 
-.followPanel {
+.tabbedPanel {
     overflow-y: scroll !important;
 }
 
@@ -26,7 +26,7 @@
   padding-left: 10px !important;
 }
 
-#invitations {
+#invitationsPanelBody {
   overflow-y: scroll !important;
 }
 
@@ -34,9 +34,16 @@
   margin-top: 20px;
   float: right;
 }
-.profileBasics h4 {
+
+.bio h4 {
   margin-bottom:0;
-  font-size: 1.5rem;
+  font-size: 12px;
+  margin-top: 30px;
+}
+
+.profileBasics h4 {
+  margin-bottom: 0px;
+  font-size: 12px;
 }
 
 .editButton {
@@ -46,4 +53,21 @@
 .otherUserProfileActionButtons {
   margin-top: 10px;
   padding-left: 7px;
+}
+
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+ html, body, .container-table {
+    height: 100%;
+}
+.container-table {
+    display: table;
+}
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
 }
