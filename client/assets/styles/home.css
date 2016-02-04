@@ -3,9 +3,13 @@
       margin-top: -10%;
     }
 
+    #homeButton {
+      background-color: #009E9A;
+    }
+
     .masthead.segment {
       min-height: 500px;
-      padding: 6em 0em;
+      padding: 7em 0em;
     }
     .masthead .logo.item img {
       margin-right: 1em;
