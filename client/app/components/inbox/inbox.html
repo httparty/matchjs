@@ -18,7 +18,7 @@
             </div>
           </div>
 
-          <div class="panel-body" class="conversationBox" >
+          <div class="panel-body" class="conversationBox" id="panel-chat">
             <ul class="media-list">
               <li class="left clearfix" class="media" ng-repeat="conversation in ctrl.conversationList track by $index" class = "conversation" ng-click="ctrl.switchConversation(conversation)" ng-if="conversation.username != ctrl.username">
                 <div class="media-body">
