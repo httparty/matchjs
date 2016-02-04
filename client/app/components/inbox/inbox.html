@@ -1,9 +1,11 @@
 <div id="inbox" class="container"  ng-controller="InboxController as ctrl" ng-init="ctrl.getAllUsers()">
   <div class="row">
     <div class="col-md-4">
+
       <!-- User Search Bar/Drop Down -->
       <div class="ui segment">
-        <ui-select ng-model="user.selected" on-select="ctrl.switchConversation(ctrl.conversationList[0])" theme="bootstrap" ng-disabled="disabled" style="min-width: 100px;">
+
+        <ui-select ng-model="user.selected" on-select="ctrl.switchConversation(ctrl.conversationList[0])" ng-disabled="disabled" style="min-width: 100px;">
           <ui-select-match placeholder="Start a new conversation">Start a new conversation</ui-select-match>
           <ui-select-choices repeat="user in ctrl.users | filter: {name: $select.search}">
             <div ng-bind-html="user.name | highlight: $select.search"></div>
@@ -12,6 +14,7 @@
             </small>
           </ui-select-choices>
         </ui-select>
+
         <br>
 
         <!-- List of historical conversations -->
@@ -32,7 +35,7 @@
     <div class="col-md-8">
       <div class="ui text container segment">
         <div class="ui threaded comments">
-          <h3 class="ui dividing header">Conversation with <a href="{{'/#/profile/'+ ctrl.currentRecipient}}">{{ctrl.currentRecipientName}}</a></h3>
+          <h3 class="ui dividing header">Conversation with <a class="teal-href" href="{{'/#/profile/'+ ctrl.currentRecipient}}">{{ctrl.currentRecipientName}}</a></h3>
           <div class="panel-body"  id="panel-chat" scroll-glue>
             <div class="comment" ng-model="ctrl.currentMessageList" ng-repeat="message in ctrl.currentMessageList track by $index">
               <a class="ui avatar image">
