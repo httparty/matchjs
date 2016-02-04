@@ -30,7 +30,7 @@
     <div class="col-md-8">
       <div class="ui text container segment">
         <div class="ui threaded comments">
-          <h3 class="ui dividing header">Conversation with {{ctrl.currentRecipientName}}</h3>
+          <h3 class="ui dividing header">Conversation with <a href="{{'/#/profile/'+ ctrl.currentRecipient}}">{{ctrl.currentRecipientName}}</a></h3>
           <div class="panel-body"  id="panel-chat" scroll-glue>
             <div class="comment" ng-model="ctrl.currentMessageList" ng-repeat="message in ctrl.currentMessageList track by $index">
               <a class="ui avatar image">
