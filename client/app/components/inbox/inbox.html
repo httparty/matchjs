@@ -13,10 +13,12 @@
           </ui-select-choices>
         </ui-select>
         <br>
+
         <!-- List of historical conversations -->
         <div class="panel-body"  id="panel-chat">
           <div class="ui middle aligned selection list" >
-            <div class="item" ng-repeat="conversation in ctrl.conversationList track by $index" class = "conversation" ng-click="ctrl.switchConversation(conversation)" ng-if="conversation.username != ctrl.username">
+
+            <div class="item" ng-repeat="conversation in ctrl.conversationList track by $index" class = "conversation" ng-if="conversation.username != ctrl.username" ui-sref="inbox/conversation({username: conversation.username})">
               <img class="ui avatar image" ng-src="{{conversation.photo || 'http://placehold.it/80x80'}}">
               <div class="content">
                 <div class="header">{{conversation.name}}</div>

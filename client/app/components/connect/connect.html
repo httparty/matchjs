@@ -102,7 +102,7 @@
                         <div class="ui inverted button" ng-click="ctrl.getThisUserProfile(u.username)">Go to Profile</div>
                       </div>
                       <div class="center">
-                        <div class="ui inverted button" ng-click="ctrl.getThisUserProfile(u.username)">Send a Message</div>
+                        <div class="ui inverted button" ui-sref="inbox/conversation({username: u.username})">Send a Message</div>
                       </div>
                     </div>
                   </div>
