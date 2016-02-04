@@ -44,9 +44,9 @@ module.exports = {
     return;
   },
 
-  newInvitation: function(inviteData) {
+  // newInvitation: function(inviteData) {
 
-  },
+  // },
 
   inviteHasBeenUpdated: function(inviteData) {
     var mentorEmail = inviteData.mentorEmail;
@@ -94,13 +94,13 @@ module.exports = {
     return;
   },
 
-  dayOfMeetingReminder: function(inviteData) {
+  // dayOfMeetingReminder: function(inviteData) {
 
-  },
+  // },
 
-  receivedNewMessage: function(data) {
+  // receivedNewMessage: function(data) {
 
-  },
+  // },
 
 
   invitationConfirm: function(inviteObj){
@@ -143,8 +143,7 @@ module.exports = {
       mailer(mailOptionsMentee);
       console.log('Mentee Email Sent');
     };
-
-
+    return;
   }
 };
 
