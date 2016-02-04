@@ -48,9 +48,12 @@ module.exports = {
       helpers.getUserByUserName(mentorObj)
         .then(function(mentor) {
           updatedInvite.mentorEmail = mentor.email;
+          updatedInvite.mentorInvitationEmailPreferences = mentor.wantInvitationEmails;
           helpers.getUserByUserName(menteeObj)
             .then(function(mentee) {
               updatedInvite.menteeEmail = mentee.email;
+              updatedInvite.menteeInvitationEmailPreferences = mentee.wantInvitationEmails;
+              // console.log('The updated invite object', updatedInvite) //Console log
               emailer.inviteHasBeenUpdated(updatedInvite);
               res.send('success! invite has been updated and mentor and mentee have received emails.');
             });
@@ -78,10 +81,12 @@ module.exports = {
         .then(function(mentor) {
           deletedInviteData.mentor.email = mentor.dataValues.email;
           deletedInviteData.mentor.name = mentor.dataValues.name;
+          deletedInviteData.mentorInvitationEmailPreferences = mentor.wantInvitationEmails;
           helpers.getUserByUserName(menteeObj)
             .then(function(mentee) {
               deletedInviteData.mentee.email = mentee.dataValues.email;
               deletedInviteData.mentee.name = mentee.dataValues.name;
+              deletedInviteData.menteeInvitationEmailPreferences = mentee.wantInvitationEmails;
               emailer.inviteHasBeenDeclined(deletedInviteData);
               helpers.deleteInvitation(inviteId)
                 .then(function(invite) {

@@ -1,5 +1,6 @@
 var mailer = require('../config/mailer.js');
 var moment = require('moment');
+var helpers = require('../db/helpers');
 
 module.exports = {
   signupConfirm: function(req,res) {
@@ -20,16 +21,24 @@ module.exports = {
 
   sentMessage: function(req, res) {
     // console.log(req.cookies['user-profile'].username, ':', req.body);
-    var mailOptions = {
-      from: 'MatchJS <matchjsteam@gmail.com>',
-      to: req.body.email,
-      subject: 'New Message Received on MatchJS!',
-      html: 'Hello '+req.body.name+',<br><br>'
-      +'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
-      +'<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to read it!'
-    };
-    mailer(mailOptions);
-    res.send('Mesage sent!');
+    var recipientUsername = req.body.username;
+
+    helpers.getUserByUserName({username: req.body.username})
+    .then(function(user){
+      var mailOptions = {
+        from: 'MatchJS <matchjsteam@gmail.com>',
+        to: req.body.email,
+        subject: 'New Message Received on MatchJS!',
+        html: 'Hello '+req.body.name+',<br><br>'
+        +'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
+        +'<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to read it!'
+      };
+
+      if(user.wantChatEmails){
+        mailer(mailOptions);
+      }
+      res.send('Mesage sent!');
+    });
   },
 
   newPadawan: function(mentorData) {
@@ -40,7 +49,9 @@ module.exports = {
       html: 'Hello '+ mentorData.username +',<br><br>'
       + mentorData.padawan + ' is now following you on MatchJS! <a href="http://matchjs.herokuapp.com/#/profile/'+ mentorData.padawan +'">View their profile</a> and <a href="http://matchjs.herokuapp.com/#/invitations/'+ mentorData.padawan +'"> set up a mentorship session</a>.<br><br> Have a great Day!<br><br> - The MatchJS Team'
     };
-    mailer(mailOptions);
+    if(mentorData.wantFollowerEmails){
+      mailer(mailOptions);
+    }
     return;
   },
 
@@ -51,6 +62,8 @@ module.exports = {
   inviteHasBeenUpdated: function(inviteData) {
     var mentorEmail = inviteData.mentorEmail;
     var menteeEmail = inviteData.menteeEmail;
+    var mentorInvitationEmailPreferences = inviteData.mentorInvitationEmailPreferences;
+    var menteeInvitationEmailPreferences = inviteData.menteeInvitationEmailPreferences;
 
     var mailOptionsMentor = {
       from: 'MatchJS <matchjsteam@gmail.com>',
@@ -66,8 +79,12 @@ module.exports = {
       html: 'Hello,<br><br>'+
       'Your mentorship session with ' + inviteData.senderName + ' has been updated. Your new meeting details are as follows: <br><br>' + 'Time & Date: ' + inviteData.when + '<br> Location: ' + inviteData.location + '<br><br> If you need to send a message to your mentor directly, log in to MatchJS.<br><br>Have a great mentorship session!<br><br> - The MatchJS Team'
     };
-    mailer(mailOptionsMentor);
-    mailer(mailOptionsMentee);
+    if(mentorInvitationEmailPreferences){
+      mailer(mailOptionsMentor);
+    }
+    if(menteeInvitationEmailPreferences){
+      mailer(mailOptionsMentee);
+    }
     return;
   },
 
@@ -89,8 +106,12 @@ module.exports = {
       html: 'Hello ' + inviteData.mentee.name + ',<br><br>'+
       'Your mentorship session on ' + inviteData.when + ' at ' + inviteData.location + ' with '+ inviteData.mentor.name + ' has been cancelled.<br><br>To send a message to your mentor or find another mentor to pair with, log in to MatchJS.<br><br>Thanks for being a member of the MatchJS community!<br><br> - The MatchJS Team'
     };
-    mailer(mailOptionsMentor);
-    mailer(mailOptionsMentee);
+    if(inviteData.mentorInvitationEmailPreferences){
+      mailer(mailOptionsMentor);
+    };
+    if(inviteData.menteeInvitationEmailPreferences){
+      mailer(mailOptionsMentee);
+    };
     return;
   },
 

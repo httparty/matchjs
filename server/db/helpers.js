@@ -82,7 +82,7 @@ helpers.updateUser = function(profileUpdateObj) {
       toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
       toTeach: profileUpdateObj.toTeach || user.get('toTeach'),
       wantFollowerEmails: typeof profileUpdateObj.wantFollowerEmails === 'boolean'? profileUpdateObj.wantFollowerEmails : user.get('wantFollowerEmails'),
-      wantInvitationEmails: typeof profileUpdateObj.wantInvitationEmails === 'boolean'? profileUpdateObj.wantFollowerEmails : user.get('wantInvitationEmails'),
+      wantInvitationEmails: typeof profileUpdateObj.wantInvitationEmails === 'boolean'? profileUpdateObj.wantInvitationEmails : user.get('wantInvitationEmails'),
       wantChatEmails: typeof profileUpdateObj.wantChatEmails === 'boolean'? profileUpdateObj.wantChatEmails : user.get('wantChatEmails')
     });
   });
