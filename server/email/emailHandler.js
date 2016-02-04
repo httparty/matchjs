@@ -1,5 +1,6 @@
 var mailer = require('../config/mailer.js');
 var moment = require('moment');
+var helpers = require('../db/helpers');
 
 module.exports = {
   signupConfirm: function(req,res) {
@@ -20,17 +21,24 @@ module.exports = {
 
   sentMessage: function(req, res) {
     // console.log(req.cookies['user-profile'].username, ':', req.body);
-    var mailOptions = {
-      from: 'MatchJS <matchjsteam@gmail.com>',
-      to: req.body.email,
-      subject: 'New Message Received on MatchJS!',
-      html: 'Hello '+req.body.name+',<br><br>'
-      +'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
-      +'<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to read it!'
-    };
-    console.log(req.body);
-    mailer(mailOptions);
-    res.send('Mesage sent!');
+    var recipientUsername = req.body.username;
+
+    helpers.getUserByUserName({username: req.body.username})
+    .then(function(user){
+      var mailOptions = {
+        from: 'MatchJS <matchjsteam@gmail.com>',
+        to: req.body.email,
+        subject: 'New Message Received on MatchJS!',
+        html: 'Hello '+req.body.name+',<br><br>'
+        +'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
+        +'<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to read it!'
+      };
+
+      if(user.wantChatEmails){
+        mailer(mailOptions);
+      }
+      res.send('Mesage sent!');
+    });
   },
 
   newPadawan: function(mentorData) {
