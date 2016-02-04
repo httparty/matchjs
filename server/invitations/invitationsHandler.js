@@ -48,9 +48,12 @@ module.exports = {
       helpers.getUserByUserName(mentorObj)
         .then(function(mentor) {
           updatedInvite.mentorEmail = mentor.email;
+          updatedInvite.mentorInvitationEmailPreferences = mentor.wantInvitationEmails;
           helpers.getUserByUserName(menteeObj)
             .then(function(mentee) {
               updatedInvite.menteeEmail = mentee.email;
+              updatedInvite.menteeInvitationEmailPreferences = mentee.wantInvitationEmails;
+              // console.log('The updated invite object', updatedInvite) //Console log
               emailer.inviteHasBeenUpdated(updatedInvite);
               res.send('success! invite has been updated and mentor and mentee have received emails.');
             });

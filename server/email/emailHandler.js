@@ -51,6 +51,8 @@ module.exports = {
   inviteHasBeenUpdated: function(inviteData) {
     var mentorEmail = inviteData.mentorEmail;
     var menteeEmail = inviteData.menteeEmail;
+    var mentorInvitationEmailPreferences = inviteData.mentorInvitationEmailPreferences;
+    var menteeInvitationEmailPreferences = inviteData.menteeInvitationEmailPreferences;
 
     var mailOptionsMentor = {
       from: 'MatchJS <matchjsteam@gmail.com>',
@@ -66,8 +68,12 @@ module.exports = {
       html: 'Hello,<br><br>'+
       'Your mentorship session with ' + inviteData.senderName + ' has been updated. Your new meeting details are as follows: <br><br>' + 'Time & Date: ' + inviteData.when + '<br> Location: ' + inviteData.location + '<br><br> If you need to send a message to your mentor directly, log in to MatchJS.<br><br>Have a great mentorship session!<br><br> - The MatchJS Team'
     };
-    mailer(mailOptionsMentor);
-    mailer(mailOptionsMentee);
+    if(mentorInvitationEmailPreferences){
+      mailer(mailOptionsMentor);
+    }
+    if(menteeInvitationEmailPreferences){
+      mailer(mailOptionsMentee);
+    }
     return;
   },
 
