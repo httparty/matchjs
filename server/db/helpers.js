@@ -5,7 +5,6 @@ var helpers = {};
 //---------------AUTHENTICATION----------------------
 
 helpers.deleteUser = function(userToDeleteObj) {
-  console.log('This is the userToDeleteObj username', userToDeleteObj.username);
   return db.User.findOne({
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
