@@ -103,19 +103,19 @@
             });
             
             //if url contains state params, user came to inbox by way of another user's profile with the intention of messaging them, so switch to their conversation
-            // if($state.params) {
-            //   console.log("hitting this use case");
-            //   Profile.getUserProfile($state.params)
-            //   .then(function(r) {
-            //     var selectedUser = r.data;
-            //     vm.switchConversation(selectedUser);
-            //   });
-            // }
+            if(!_.isEmpty($state.params)) {
+              Profile.getUserProfile($state.params)
+              .then(function(r) {
+                var selectedUser = r.data;
+                vm.switchConversation(selectedUser);
+              });
+            } else {
 
-            //populate current conversation if there isn't a selected 
-            //conversation
-            if (vm.currentRecipient === '') {
-              vm.switchConversation(vm.conversationList[0]);
+              //populate current conversation if there isn't a selected 
+              //conversation
+              if (vm.currentRecipient === '') {
+                vm.switchConversation(vm.conversationList[0]);
+              }
             }
 
           });
@@ -155,15 +155,6 @@
 
           //clear entered text
           vm.enteredText = '';
-
-          //scroll down to the bottom of the newly added message
-          //Trying to attempt scrolling to the bottom
-          // console.log("scrolling");
-          // $location.hash('bottom');
-          // $anchorScroll();
-          // $location.hash('');
-          // window.history.back(1);
-          // $location.search('bottom', null)
         }
       };
 
@@ -211,9 +202,6 @@
             //Move new conversation to the top of the list
             vm.conversationList.unshift(user);
           }
-          //switch conversation
-          // console.log("switch conversation");
-          // vm.switchConversation(user)
         }
       });
   }]);

@@ -1,34 +1,46 @@
-<div class="container-fluid" ng-controller="SettingsController as ctrl">
-  <div class="row">
-    <div class="col-sm-2"></div>
+<div class="ui raised very padded text container segment" ng-controller="SettingsController as ctrl">
 
-    <div class="col-sm-8">
-      <div class="jumbotron">
-        <h2>Settings Page</h2>
-      </div>
+    <h2>Profile Settings</h2>
 
       <table class="table">
         <tbody>
           <tr>
-            <td><h5>Email Preferences</h5></td>
+            <td><h5>Follower Email Preferences</h5></td>
             <td>
               <div class="checkbox">
-                <label><input type="checkbox" ng-model="ctrl.wantEmails" ng-disabled="ctrl.blockEditing">Yes, I would like to receive emails about new invitations for mentorship</label>
+                <label><input type="checkbox" ng-model="ctrl.wantFollowerEmails" ng-disabled="ctrl.blockEditing">Yes, I would like to receive emails when I receive a new follower.</label>
               </div>
             </td>
           </tr>
+
+          <tr>
+            <td><h5>Invitation Email Preferences</h5></td>
+            <td>
+              <div class="checkbox">
+                <label><input type="checkbox" ng-model="ctrl.wantInvitationEmails" ng-disabled="ctrl.blockEditing">Yes, I would like to receive emails about new, deleted and updated invitations for mentorship.</label>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><h5>Message Email Preferences</h5></td>
+            <td>
+              <div class="checkbox">
+                <label><input type="checkbox" ng-model="ctrl.wantChatEmails" ng-disabled="ctrl.blockEditing">Yes, I would like to receive emails when I receive new messages in my inbox.</label>
+              </div>
+            </td>
+          </tr>
+
           <tr>
             <td><h5>Account Preferences</h5></td>
-            <td><button class="btn btn-danger" ng-click="ctrl.deleteAccount()" ng-disabled="ctrl.blockEditing">Delete account</button></td>
+            <td><a class="btn btn-danger" href="{{'/api/users/settings/deleteAccount/' + ctrl.username}}" ng-disabled="ctrl.blockEditing">Delete account</a></td>
           </tr>
         </tbody>
       </table>
 
-      <button class="btn btn-default" ng-click="ctrl.editPreferences()" ng-disabled="!ctrl.blockEditing">Edit Preferences</button>
-      <button class="btn btn-default" ng-click="ctrl.savePreferences()" ng-disabled="ctrl.blockEditing">Save Preferences</button>
+      <button class="btn teal-button" ng-click="ctrl.editPreferences()" ng-disabled="!ctrl.blockEditing">Edit Preferences</button>
+      <button class="btn teal-button" ng-click="ctrl.savePreferences()" ng-disabled="ctrl.blockEditing">Save Preferences</button>
 
-    </div>
 
-    <div class="col-sm-2"></div>
-  </div>
 </div>
+<footer-dir></footer-dir>

@@ -76,7 +76,6 @@ module.exports = {
   },
 
   getMentors: function(req, res) {
-    console.log('HERE IS REQ.PARAMS', req.params);
     var mentee = req.params.username;
     helpers.getMentors(mentee)
     .then(function(padawanRelArr) {
@@ -92,19 +91,18 @@ module.exports = {
   },
 
   deleteAccount: function(req, res) {
-    // console.log(req.params.username, 'this is the delete request coming');
     helpers.deleteUser(req.params)
     .then(function(user){
-      // console.log('This user has been deleted from the database:', req.body.username);
-      res.status(200).send(user);
+      res.redirect('/logout');
     });
   },
 
   saveUserPreferences: function(req, res) {
     var username = req.cookies['user-profile'].username;
-    var wantEmails = req.body.wantEmails;
-    console.log(wantEmails, 'Want emails');
-    helpers.updateUser({username: username, wantEmails: wantEmails})
+    var wantFollowerEmails = req.body.wantFollowerEmails;
+    var wantChatEmails = req.body.wantChatEmails;
+    var wantInvitationEmails = req.body.wantInvitationEmails;
+    helpers.updateUser({username: username, wantChatEmails: wantChatEmails, wantInvitationEmails: wantInvitationEmails, wantFollowerEmails: wantFollowerEmails})
     .then(function(user){
       res.status(200).send(user);
     });

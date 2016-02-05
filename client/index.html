@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <title>MatchJS</title>
     <!-- stylesheets-->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/lumen/bootstrap.min.css"> -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css">
     <link rel="stylesheet" href="bower_components/ui-select/dist/select.min.css">
+    <link rel="stylesheet" href="bower_components/semantic/dist/semantic.min.css">
     <link rel="stylesheet" href="assets/styles/landing-page.css">
+    <link rel="stylesheet" href="assets/styles/connect.css">
     <link rel="stylesheet" href="assets/styles/navbar.css">
+    <link rel="stylesheet" href="assets/styles/footer.css">
     <link rel="stylesheet" href="assets/styles/inbox.css">
     <link rel="stylesheet" href="assets/styles/profile.css">
     <link rel="stylesheet" href="assets/styles/guidelines.css">
     <link rel="stylesheet" href="assets/styles/invitations.css">
+    <link rel="stylesheet" href="assets/styles/home.css">
+    <link rel="stylesheet" href="assets/styles/app.css">
 
   </head>
   <body>
+    
     <nav-dir></nav-dir>
     <div ui-view class="indexView"></div>
 
@@ -38,6 +43,8 @@
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
     <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+    <script src="bower_components/semantic/dist/semantic.min.js"></script>
+    <script src="bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
 
     <!-- main config/routing -->
     <script src="app/app.js"></script>
@@ -47,6 +54,7 @@
     <script src="app/components/home/homeController.js"></script>
     <script src="app/components/connect/connectController.js"></script>
     <script src="app/components/profile/profileController.js"></script>
+    <script src="app/components/profile/profileDirective.js"></script>
     <script src="app/components/shared/navbar/navbarController.js"></script>
     <script src="app/components/shared/footer/footerController.js"></script>
     <script src="app/components/auth/authController.js"></script>

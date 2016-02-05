@@ -1,3 +1,160 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.miniPanel {
+  height: 60px !important;
+  margin-bottom: 10px !important; 
+}
+
+.miniPanelBody {
+  padding: 10px !important;
+  cursor: pointer;
+  overflow: hidden !important;
+}
+
+.miniPanel:hover {
+  background-color: #f5f5f5 !important;
+  overflow: hidden !important;
+}
+
+.tabbedPanel {
+  overflow-y: scroll !important;
+}
+
+.followUsername {
+  padding-left: 10px !important;
+}
+
+#invitationsPanelBody {
+  overflow-y: scroll !important;
+}
+
+.profileBasics {
+  margin-top: 20px;
+  float: right;
+}
+
+.bio h4 {
+  margin-bottom:0;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.profileBasics h4 {
+  margin-bottom:0;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.profileSkills h4 {
+  margin-bottom:0;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.editButton {
+  margin-top: 0px;
+  float: right;
+}
+
+.profileBasics .editButton {
+  float: right;
+  margin-right: 30px;
+}
+
+.bio .editButton {
+  margin-right: -12px;
+}
+
+.invitations .editButton {
+  float: right;
+  margin-right: 30px;
+}
+
+.otherUserProfileActionButtons {
+  margin-top: 10px;
+  padding-left: 7px;
+}
+
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html, body, .container-table {
+  height: 100%;
+}
+.container-table {
+  display: table;
+}
+.vertical-center-row {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.otherUserProfilePhoto {
+  width: 232px;
+  height: 232px;
+}
+
+.bio .container {
+  width: 100%;
+}
+
+.otherUserProfile .container {
+  width: 100%;
+}
+
+.checkbox {
+  background-color: #00676C;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/*<input type="checkbox" id="checkboxStyleId" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+<label for="checkboxStyleId" ng-repeat="skill in ctrl.skills.collection"></label>
+
+.checkboxStyle {
+  width: 25px;
+  height: 25px;
+  margin: 20px 100px;
+  position: relative;
+}
+
+.checkboxStyle label {
+  cursor: pointer;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 0;
+    left: 0;
+  background: #eee;
+  border:1px solid #ddd;
+}
+
+.checkboxStyle label:after {
+  opacity: 0.2;
+  content: '';
+  position: absolute;
+/*  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 6px;
+  left: 7px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+
+  transform: rotate(-45deg);
+}
+
+.checkboxStyle label:hover::after {
+  opacity: 0.5;
+}
+
+.checkboxStyle input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}*/

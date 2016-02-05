@@ -11,7 +11,8 @@ angular.module('app', [
   'app.inbox',
   'app.guidelines',
   'app.invitations',
-  'app.settings'
+  'app.settings',
+  'ui.checkbox'
   // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -73,6 +74,18 @@ angular.module('app', [
 
     $rootScope.$on('$stateChangeStart', function(event, toState) {
 
+      if (toState.name === 'guidelines') {
+        return;
+      }
+
+      if (toState.name === 'about') {
+        return;
+      }
+
+      if (toState.name === 'contact') {
+        return;
+      }
+
       if (toState.name !== 'auth') {
         if (!AuthService.isAuthenticated() && toState.name !== 'home') {
           event.preventDefault();
@@ -84,6 +97,13 @@ angular.module('app', [
       if (AuthService.isAuthenticated() && toState.name === 'home') {
         event.preventDefault();
         $state.go('connect');
+        return;
+      }
+
+      if (AuthService.isAuthenticated() && toState.name === 'profile') {
+        (function (event, currentRoute, previousRoute) {
+          window.scrollTo(0, 0);
+        })();
         return;
       }
 

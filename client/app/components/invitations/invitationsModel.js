@@ -41,7 +41,16 @@
           data: inviteObj
         });
       };
-    
+
+      // model.declineInvitation = function(inviteObj) {
+      //   return $http({
+      //     method: 'POST',
+      //     url: '/api/invitations/decline/recipient/' + inviteObj.username, //updated by the sender/mentor
+      //     data: inviteObj
+      //   });
+      // };
+
+
     return model;
   }]);
 

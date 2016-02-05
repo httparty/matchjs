@@ -5,7 +5,6 @@ var helpers = {};
 //---------------AUTHENTICATION----------------------
 
 helpers.deleteUser = function(userToDeleteObj) {
-  console.log('This is the userToDeleteObj username', userToDeleteObj.username);
   return db.User.findOne({
     where: {'username': userToDeleteObj.username}
   }).then(function(user) {
@@ -40,7 +39,9 @@ helpers.addUser = function(userObj) {
     karmaPoints: 0,
     toLearn: [],
     toTeach: [],
-    wantEmails: true
+    wantFollowerEmails: true,
+    wantInvitationEmails: true,
+    wantChatEmails: true
   });
 };
 
@@ -79,7 +80,9 @@ helpers.updateUser = function(profileUpdateObj) {
       karmaPoints : profileUpdateObj.karmaPoints || user.get('karmaPoints'),
       toLearn: profileUpdateObj.toLearn || user.get('toLearn'),
       toTeach: profileUpdateObj.toTeach || user.get('toTeach'),
-      wantEmails: typeof profileUpdateObj.wantEmails === 'boolean'? profileUpdateObj.wantEmails : user.get('wantEmails')
+      wantFollowerEmails: typeof profileUpdateObj.wantFollowerEmails === 'boolean'? profileUpdateObj.wantFollowerEmails : user.get('wantFollowerEmails'),
+      wantInvitationEmails: typeof profileUpdateObj.wantInvitationEmails === 'boolean'? profileUpdateObj.wantInvitationEmails : user.get('wantInvitationEmails'),
+      wantChatEmails: typeof profileUpdateObj.wantChatEmails === 'boolean'? profileUpdateObj.wantChatEmails : user.get('wantChatEmails')
     });
   });
 };
