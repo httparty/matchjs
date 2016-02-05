@@ -11,6 +11,12 @@
   color:  #00676C; 
 }
 /*BUTTON FIX*/
+
+.btn-link {
+  color:#009E9A !important;
+  border-color:transparent !important;
+}
+
 .btn-default{
   color:#ffffff !important;
   background-color:#009E9A !important;
