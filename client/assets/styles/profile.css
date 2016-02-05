@@ -108,6 +108,12 @@ html, body, .container-table {
   width: 100%;
 }
 
+.checkbox {
+  background-color: #00676C;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 /*<input type="checkbox" id="checkboxStyleId" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
 <label for="checkboxStyleId" ng-repeat="skill in ctrl.skills.collection"></label>
 

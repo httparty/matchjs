@@ -38,7 +38,7 @@
             <br>
             <br>
             <div class='profileBasics'>
-              <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
+              <button class="btn btn-default btn-sm teal-button editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
             </div>
           </div>  <!--CLOSE ROW-->
           <br>
@@ -57,7 +57,7 @@
                     <div class="toTeach" ng-model="skills.toTeach">
                       <ng-form>
                         <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                          <checkbox ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                          <checkbox class="checkbox" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                         </label>
                       </ng-form>
                     </div>
@@ -67,13 +67,13 @@
                     <div>
                       <ng-form>
                         <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                          <checkbox ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                          <checkbox class="checkbox" ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                         </label>
                       </ng-form>
                     </div>
                   </form>
                   <br>
-                  <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.skills" ng-click="ctrl.toggleEditShowSkills()" > {{ ctrl.saveEditButton.skills.buttonText }}</button>
+                  <button class="btn btn-default btn-sm editButton teal-button" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.skills" ng-click="ctrl.toggleEditShowSkills()" > {{ ctrl.saveEditButton.skills.buttonText }}</button>
                 </div> <!--panel body end --> 
               </div> <!-- end panel -->
             </pane>
@@ -89,7 +89,7 @@
                   </form>
                   <br>
                   <br>
-                  <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.bio" ng-click="ctrl.toggleEditShowBio()"> {{ ctrl.saveEditButton.bio.buttonText }}</button>
+                  <button class="btn btn-default btn-sm editButton teal-button" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.bio" ng-click="ctrl.toggleEditShowBio()"> {{ ctrl.saveEditButton.bio.buttonText }}</button>
                 </div>
               </div>
             </pane> 
@@ -151,8 +151,8 @@
               <p><b>Mentee:</b> <a ui-sref="profile({username: invite['recipientName']})">{{invite['recipientName']}}</a></p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
               <div class="editButton" ng-hide="ctrl.invite.readOnly">
-                <button class="btn btn-default btn-sm" ng-click="ctrl.toggleInviteEditForm(); ctrl.editMode.inviteEditMode = $index">Edit</button>
-                <button class="btn btn-default btn-sm" ng-show="invite['senderName'] === ctrl.currentUser.username" ng-click="ctrl.deleteInvite(invite)">Delete</button>
+                <button class="btn btn-default btn-sm teal-button" ng-click="ctrl.toggleInviteEditForm(); ctrl.editMode.inviteEditMode = $index">Edit</button>
+                <button class="btn btn-default btn-sm teal-button" ng-show="invite['senderName'] === ctrl.currentUser.username" ng-click="ctrl.deleteInvite(invite)">Delete</button>
               </div>
             </div>
             <form ng-show="ctrl.editMode.inviteEditMode=== $index" ng-init="ctrl.inviteUpdate={}; ctrl.updateSent = false;" ng-submit="ctrl.updateInvite(invite.senderName, invite.recipientName, invite.id, ctrl.inviteUpdate);">
@@ -166,7 +166,7 @@
                     <div class="input-group">
                       <input type="text" class="form-control" uib-datepicker-popup="{{invCtrl.format}}" ng-model="ctrl.inviteUpdate.date" is-open="invCtrl.isCalendarOpen" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="invCtrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="invCtrl.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default teal-button" ng-click="invCtrl.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                     </div>
                 </div> 
@@ -174,7 +174,7 @@
               <p><b>Mentor:</b> {{invite['senderName']}}</p>
               <p><b>Mentee:</b> {{invite['recipientName']}}</p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
-              <button class="btn btn-default btn-sm submitInvite" type="submit" ng-click="ctrl.updateSent=true; toggle = !toggle;" ng-hide="toggle">Save</button>
+              <button class="btn btn-default btn-sm teal-button submitInvite" type="submit" ng-click="ctrl.updateSent=true; toggle = !toggle;" ng-hide="toggle">Save</button>
               <p ng-show="toggle"><i>{{ctrl.UImessages.inviteUpdated}}</i></p>
               <p class="help-block" ng-show="!toggle">Update your mentorship session and notify {{invite['recipientName']}}</p>
             </form>
@@ -221,7 +221,7 @@
               <!-- PROFILE BASICS SAVE/EDIT BUTTON -->
               <br>
               <br>
-                <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
+                <button class="btn btn-default btn-sm teal-button editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
             </div>  <!--CLOSE ROW-->
 
            <!--FOLLOW, MESSAGE, AND INVITE BUTTONS -->
@@ -247,7 +247,7 @@
                       <div class="toTeach" ng-model="skills.toTeach">
                         <ng-form>
                           <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                            <checkbox ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                            <checkbox class="checkbox" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                           </label>
                         </ng-form>
                       </div>
@@ -257,7 +257,7 @@
                       <div>
                         <ng-form>
                           <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                            <checkbox ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                            <checkbox class="checkbox" ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                           </label>
                         </ng-form>
                       </div>
