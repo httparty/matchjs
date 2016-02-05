@@ -131,16 +131,26 @@ html, body, .container-table {
   width: 25px;
   height: 25px;
 }
+/*
+.btn-success {
+  background-color: #D58E00 !important; 
+}
+.btn-danger {
+  background-color: #F10026 !important; /*Nice red color*/
+/*}
+.btn-primary {
+  background-color: #42B1D6 !important;
+}*/
 
 .checkbox.btn-default {
-  background-color: #ffffff !important;
+  /*background-color: #ffffff !important;*/
   border-color: #DFD7CA !important;
   border-width: 1px !important;
   border-style: solid !important;
 }
 
 .checkbox.btn-default:hover {
-  background-color: #ffffff !important;
+  /*background-color: #ffffff !important;*/
   border-color: #DFD7CA !important;
   border-width: 1px !important;
   border-style: solid !important;
