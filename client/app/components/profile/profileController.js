@@ -142,13 +142,13 @@
     };
 
     var getUserInvitations = function(username) {
-
       vm.invitations = [];
       var invites = [];
       invitationsModel.getInvitationsByMentor(username)
       .then(function(mentorResp) {
         mentorResp.data.forEach(function(invite) {
           invite.when = moment(invite.when).format('dddd, MMMM Do YYYY, h:mm a');
+          invite.readOnly = false;
           invites.push(invite);
           invitationsModel.getInvitationsByMentee(username)
             .then(function(menteeResp) {

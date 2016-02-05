@@ -8,3 +8,6 @@
   color: #fff;
 }
 
+#connectContainer {
+  min-height: 450px;
+}

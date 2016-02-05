@@ -34,7 +34,7 @@ helpers.addUser = function(userObj) {
     email: userObj._json.email,
     name: userObj.displayName,
     github: userObj.profileUrl,
-    photo: userObj._json.avatar_url,
+    photo: userObj._json.avatar_url || '../../../client/assets/img/default-profile.png',
     location: userObj._json.location,
     karmaPoints: 0,
     toLearn: [],
@@ -188,11 +188,12 @@ helpers.getInvitationsBySender = function(username) {
   return db.User.findOne({
     where: {'username': username}
   }).then(function(user) {
+    console.log('here is user! booooo', user);
     if(!user) {
       throw Error('Cannot locate user.');
     }
     return db.Invitation.findAll({
-      where: {'UserId': user.dataValues.id}
+      where: {'senderName': username}
     }).then(function(invitations) {
       if (!invitations) {
         console.log('You have created no invitations');

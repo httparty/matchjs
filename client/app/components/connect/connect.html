@@ -1,6 +1,6 @@
 <div ng-controller="connectController as ctrl">
 
-<div class="container">
+<div class="container" id="connectContainer">
 
   <div class="row">
     <div class="col-lg-12">
@@ -13,93 +13,91 @@
   <div class="row">
     <div class="col-lg-8">
 
-    <tags-input  class="bootstrap" ng-model="ctrl.tags" display-property="text" placeholder="Add a search tag" on-tag-removed="ctrl.removeTag($tag)">
-    </tags-input>
+      <tags-input  class="bootstrap" ng-model="ctrl.tags" display-property="text" placeholder="Add a search tag" on-tag-removed="ctrl.removeTag($tag)">
+      </tags-input>
 
-    <div class="btn-group" uib-dropdown is-open="status.isopen">
-      <button id="single-button" type="button" class="btn teal-button" uib-dropdown-toggle ng-disabled="disabled">
-        Location <span class="caret"></span>
-      </button>
+      <div class="btn-group" uib-dropdown is-open="status.isopen">
+        <button id="single-button" type="button" class="btn teal-button" uib-dropdown-toggle ng-disabled="disabled">
+          Location <span class="caret"></span>
+        </button>
 
-      <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <li ng-repeat="u in ctrl.locations" ng-click="ctrl.addLocation(u.name)" role="menuitem">
-          <a href="#"> {{u.name}} </a>
-        </li>
-      </ul>
-    </div>
+        <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li ng-repeat="u in ctrl.locations" ng-click="ctrl.addLocation(u.name)" role="menuitem">
+            <a href="#"> {{u.name}} </a>
+          </li>
+        </ul>
+      </div>
 
-    <div class="btn-group" uib-dropdown>
-      <button id="btn-append-to-single-button" type="button" class="btn teal-button" uib-dropdown-toggle>
-        Teachable Skills <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
-        <li ng-repeat="u in ctrl.skills" ng-click="ctrl.addSkill(u.name)" role="menuitem">
-          <a href="#">{{u.name}}</a>
-        </li>
-      </ul>
-    </div>
+      <div class="btn-group" uib-dropdown>
+        <button id="btn-append-to-single-button" type="button" class="btn teal-button" uib-dropdown-toggle>
+          Teachable Skills <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+          <li ng-repeat="u in ctrl.skills" ng-click="ctrl.addSkill(u.name)" role="menuitem">
+            <a href="#">{{u.name}}</a>
+          </li>
+        </ul>
+      </div>
 
-    <div class="btn-group" uib-dropdown>
-      <button id="btn-append-to-single-button" type="button" class="btn teal-button" uib-dropdown-toggle>
-        Names <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
-        <li ng-repeat="u in ctrl.names" ng-click="ctrl.addName(u.name)" role="menuitem">
-          <a href="#">{{u.name}}</a>
-        </li>
-      </ul>
+      <div class="btn-group" uib-dropdown>
+        <button id="btn-append-to-single-button" type="button" class="btn teal-button" uib-dropdown-toggle>
+          Names <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+          <li ng-repeat="u in ctrl.names" ng-click="ctrl.addName(u.name)" role="menuitem">
+            <a href="#">{{u.name}}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-    </div>
 
   <br>
 
   <div class="row" ng-init="ctrl.getAllUsers()">
 
-    <div ng-repeat="u in ctrl.users">
+    <div ng-repeat="u in ctrl.users" ng-if="u.username != ctrl.username">
 
       <script type="text/javascript">
         $('.special.cards .image').dimmer({
           on: 'hover'
         });
-    </script>
+      </script>
 
       <div class="clearfix" ng-if="$index % 3 == 0">
       </div>
         <div class="col-sm-4 portfolio-item">
-            <div class="ui special cards">
-              <div class="card">
-                <div class="blurring dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button" ng-click="ctrl.getThisUserProfile(u.username)">Go to Profile</div>
-                      </div>
-                      <div class="center">
-                        <div class="ui inverted button" ui-sref="inbox/conversation({username: u.username})">Send a Message</div>
-                      </div>
+          <div class="ui special cards">
+            <div class="card">
+              <div class="blurring dimmable image">
+                <div class="ui dimmer">
+                  <div class="content">
+                    <div class="center">
+                      <div class="ui inverted button" ng-click="ctrl.getThisUserProfile(u.username)">Go to Profile</div>
+                    </div>
+                    <div class="center">
+                      <div class="ui inverted button" ui-sref="inbox/conversation({username: u.username})">Send a Message</div>
                     </div>
                   </div>
-                  <img ng-src="{{u.photo || 'http://placehold.it/242x242'}}" >
                 </div>
-                <div class="content">
-                  <a class="header">{{u.name || 'N/A'}}</a>
-                  <div class="meta">
-                    <span class="date">{{u.location || 'N/A'}}</span>
-                  </div>
-                  <div class="description">
-                    <i class="fa fa-github"></i>
-                    <a href="{{u.github || 'https://github.com'}}" target="_blank">{{u.github || 'https://github.com'}}</a>
-                  </div>
+                <img ng-src="{{u.photo || 'http://placehold.it/242x242'}}" >
+              </div>
+              <div class="content">
+                <a class="header">{{u.name || 'N/A'}}</a>
+                <div class="meta">
+                  <span class="date">{{u.location || 'N/A'}}</span>
+                </div>
+                <div class="description">
+                  <i class="fa fa-github"></i>
+                  <a href="{{u.github || 'https://github.com'}}" target="_blank">{{u.github || 'https://github.com'}}</a>
                 </div>
               </div>
             </div>
+          </div>
         </div>
       
       </div>
     </div>
-</div>
-
-</div>
+  </div>
 </div>
 <footer-dir></footer-dir>
