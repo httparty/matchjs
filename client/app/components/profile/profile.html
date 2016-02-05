@@ -9,12 +9,12 @@
     <!-- ======================================= -->
     <!-- ======================================= -->
     <div ng-show="ctrl.contentLoaded; ctrl.editMode.isSameUser" class="col-sm-6">
-      <div class="panel panel-default">
+      <div class="ui segment panel panel-default">
         <div class="panel-body" ng-cloak>           
         <!-- PROFILE PHOTO -->
           <div class="row"> <!-- TEST -->
 
-            <div class="profilePhoto col-md-6">
+            <div class="col-md-6">
               <img class="img-rounded img-responsive" ng-src={{ctrl.profileUser.photo}}/>
             </div>
           <!-- NAME OR USERNAME -->
@@ -22,7 +22,7 @@
               <div>
                 <h4>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h4>
               </div>
-          <!--PROFILE INFO, INCL BIO/SUMMARY-->
+          <!--PROFILE INFO -->
               <br>
               <p>
                 <strong>Github:</strong> <a href="{{ctrl.profileUser.github}}">{{ctrl.profileUser.github}}</a><br>
@@ -33,23 +33,23 @@
               <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'">
                 <input class="form-control" type="text" ng-model="ctrl.profileUser.location" placeholder="Location: {{ctrl.profileUser.location}}">
               </form>
-            </div>
+            </div> <!--END COL-MD-6 PULL RIGHT -->
             <!-- PROFILE BASICS SAVE/EDIT BUTTON -->
             <br>
             <br>
-            <div>
+            <div class='profileBasics'>
               <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
             </div>
           </div>  <!--CLOSE ROW-->
           <br>
           <br>
-          <!-- ==================================  -->
-          <!--BEGIN TABBED FOLLOWING/FOLLOWER PANEL-->
+<!-- ==================================  -->
+<!--BEGIN TABBED FOLLOWING/FOLLOWER PANEL-->
           <tabs ng-show="ctrl.contentLoaded" class="clearfix">
             <pane title="Skills">
-              <!-- ==================================  -->
-              <!-- BEGIN PROFILE SKILLS SECTION-->
-              <div class="panel panel-default" id="profileSkills">
+<!-- ==================================  -->
+<!-- BEGIN PROFILE SKILLS SECTION-->
+              <div class="panel panel-default profileSkills">
                 <div class="panel-body">
                   <form>
                     <h4 ng-hide='!ctrl.editMode.isSameUser'>I want to teach:</h4>
@@ -73,22 +73,23 @@
                     </div>
                   </form>
                   <br>
-                  <button class="btn btn-default btn-sm" style="margin-top: 10px" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.skills" ng-click="ctrl.toggleEditShowSkills()" > {{ ctrl.saveEditButton.skills.buttonText }}</button>
+                  <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.skills" ng-click="ctrl.toggleEditShowSkills()" > {{ ctrl.saveEditButton.skills.buttonText }}</button>
                 </div> <!--panel body end --> 
               </div> <!-- end panel -->
-          <!--END SKILLS SECTION --> 
-          <!-- ==================================  -->
             </pane>
-            <!-- BIO/ABOUT SECTION -->
+<!-- ==================================  -->
+<!--BEGIN BIO/ABOUT SECTION --> 
             <pane title="About {{ctrl.profileUser.firstName}}">
               <div class="panel panel-default">
                 <div class="panel-body tabbedPanel bio">
                   <h4>Personal Bio:</h4> 
-                  <span ng-show="ctrl.saveEditButton.basics.buttonText === 'Edit'">{{ctrl.profileUser.summary}}</span>
-                  <form ng-hide="ctrl.saveEditButton.basics.buttonText === 'Edit'" >
-                    <input class="form-control" type ="text" class='col-sm-4' ng-model="ctrl.profileUser.summary" />
+                  <span ng-show="ctrl.saveEditButton.bio.buttonText === 'Edit'">{{ctrl.profileUser.summary}}</span>
+                  <form ng-hide="ctrl.saveEditButton.bio.buttonText === 'Edit'" >
+                    <textarea rows="8" class="form-control" type ="text" class='col-sm-4' ng-model="ctrl.profileUser.summary" />
                   </form>
-                  <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
+                  <br>
+                  <br>
+                  <button class="btn btn-default btn-sm editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.bio" ng-click="ctrl.toggleEditShowBio()"> {{ ctrl.saveEditButton.bio.buttonText }}</button>
                 </div>
               </div>
             </pane> 
@@ -125,19 +126,18 @@
               </div><!-- End panel -->
             </pane>
           </tabs>
-        <!--END TABBED FOLLOWING/FOLLOWER PANEL-->      
-        <!-- ==================================  -->
+<!--END TABBED FOLLOWING/FOLLOWER PANEL-->      
+<!-- ==================================  -->
         </div><!-- End panel body-->
       </div><!-- End panel panel-default-->  
-      <!-- END PROFILE BASICS SECTION -->
-      <!-- ==================================  -->    
+<!-- END PROFILE BASICS SECTION -->
+<!-- ==================================  -->    
     </div><!-- End col-sm-6 -->
     
-    <div class="col-sm-6">
-    
-      <!-- ==================================  -->
-      <!-- BEGIN INVITATIONS - ONLY VISIBLE IF CURRENTUSER === PROFILEUSER -->
-      <div ng-show="ctrl.contentLoaded; ctrl.editMode.isSameUser" class="panel panel-default">
+    <div class="col-sm-6">    
+<!-- ==================================  -->
+<!-- BEGIN INVITATIONS -->
+      <div ng-show="ctrl.contentLoaded; ctrl.editMode.isSameUser" class="ui segment panel panel-default invitations">
         <div class="panel-heading">
           <h3 class="panel-title">My Invitations</h3>
         </div>
@@ -147,10 +147,10 @@
             <div ng-hide="ctrl.editMode.inviteEditMode=== $index">
               <p><b>Location:</b> {{invite['location']}}</p>
               <p><b>Time & Date:</b> {{invite['when']}}</p>
-              <p><b>Mentor:</b> {{invite['senderName']}}</p>
-              <p><b>Mentee:</b> {{invite['recipientName']}}</p>
+              <p><b>Mentor:</b> <a ui-sref="profile({username: invite['recipientName']})">{{invite['senderName']}}</a></p>
+              <p><b>Mentee:</b> <a ui-sref="profile({username: invite['recipientName']})">{{invite['recipientName']}}</a></p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
-              <div ng-hide="ctrl.invite.readOnly">
+              <div class="editButton" ng-hide="ctrl.invite.readOnly">
                 <button class="btn btn-default btn-sm" ng-click="ctrl.toggleInviteEditForm(); ctrl.editMode.inviteEditMode = $index">Edit</button>
                 <button class="btn btn-default btn-sm" ng-show="invite['senderName'] === ctrl.currentUser.username" ng-click="ctrl.deleteInvite(invite)">Delete</button>
               </div>
@@ -160,9 +160,9 @@
                 <div ng-controller="invitationsController as invCtrl">  
                   <b>Time & Date: </b>
               <!--TIME/DATE PICKER --> 
-                <!-- Time Picker -->
+                <!-- Time -->
                     <uib-timepicker ng-model="ctrl.inviteUpdate.date" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
-                <!-- Date Picker-->
+                <!-- Date-->
                     <div class="input-group">
                       <input type="text" class="form-control" uib-datepicker-popup="{{invCtrl.format}}" ng-model="ctrl.inviteUpdate.date" is-open="invCtrl.isCalendarOpen" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="invCtrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
                       <span class="input-group-btn">
@@ -178,7 +178,8 @@
               <p ng-show="toggle"><i>{{ctrl.UImessages.inviteUpdated}}</i></p>
               <p class="help-block" ng-show="!toggle">Update your mentorship session and notify {{invite['recipientName']}}</p>
             </form>
-          <hr>
+            <br>
+            <hr>
           </div><!-- end ng-repeat -->
         </div> <!--panel body end -->
       </div><!-- end panel -->
@@ -198,7 +199,7 @@
           <!-- PROFILE PHOTO -->
             <div class="row">
               <div class="profilePhoto col-md-6">
-                <img class="img-rounded img-responsive" ng-src={{ctrl.profileUser.photo}}/>
+                <img class="img-rounded img-responsive otherUserProfilePhoto" ng-src={{ctrl.profileUser.photo}}/>
               </div>
             <!-- NAME OR USERNAME -->
               <div class="profileBasics col-md-6 pull-right">

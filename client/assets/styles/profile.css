@@ -47,8 +47,29 @@
   margin-top: 30px;
 }
 
+.profileSkills h4 {
+  margin-bottom:0;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
 .editButton {
   margin-top: 0px;
+  float: right;
+}
+
+.profileBasics .editButton {
+  float: right;
+  margin-right: 30px;
+}
+
+.bio .editButton {
+  margin-right: -12px;
+}
+
+.invitations .editButton {
+  float: right;
+  margin-right: 30px;
 }
 
 .otherUserProfileActionButtons {
@@ -71,4 +92,18 @@ html, body, .container-table {
 .vertical-center-row {
   display: table-cell;
   vertical-align: middle;
+  width: 100%;
+}
+
+.otherUserProfilePhoto {
+  width: 232px;
+  height: 232px;
+}
+
+.bio .container {
+  width: 100%;
+}
+
+.otherUserProfile .container {
+  width: 100%;
 }
