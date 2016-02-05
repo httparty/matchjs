@@ -56,7 +56,7 @@
 
   <div class="row" ng-init="ctrl.getAllUsers()">
 
-    <div ng-repeat="u in ctrl.users">
+    <div ng-repeat="u in ctrl.users" ng-if="u.username != ctrl.username">
 
       <script type="text/javascript">
         $('.special.cards .image').dimmer({

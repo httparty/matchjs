@@ -2,8 +2,6 @@ var _ = require('underscore');
 
 exports.getSearchResults = function(queryParams, usersArray) {
 
-  // console.log(queryParams);
-
   var result = usersArray;
 
   if (!_.isEmpty(queryParams)) {
@@ -51,6 +49,7 @@ exports.getSearchResults = function(queryParams, usersArray) {
       });
 
     }
+
     return result;
 
   } else {
