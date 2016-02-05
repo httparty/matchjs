@@ -5,6 +5,44 @@
 
     #homeButton {
       background-color: #009E9A;
+      color: #ffffff;
+    }
+
+    #drop3 {
+      min-height: 300px;
+      padding: 5em 0em;
+    }
+
+    #drop3Header {
+      color: #E8E8E8;
+    }
+
+    #drop4 {
+      min-height: 300px;
+      padding: 5em 0em;
+    }
+    #userIcon {
+      font-size: 7em;
+    }
+
+    #igniteIcon {
+      font-size: 7em;
+    }
+
+    #githubIcon {
+      font-size: 1.4em;
+    }
+
+    #signupText {
+      font-weight: bold;
+      font-size: .8em;
+      margin-left: -2%;
+    }
+
+    #devPics {
+      max-height: 200px;
+      max-width: 200px;
+      /*margin-right: 2%;*/
     }
 
     .masthead.segment {
@@ -21,7 +59,7 @@
       margin-top: 1.5em;
       margin-bottom: -5%;
       font-size: 4em;
-      font-weight: normal;
+      font-weight: bold;
     }
     .masthead h2 {
       font-size: 1.7em;
