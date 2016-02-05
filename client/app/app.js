@@ -11,7 +11,8 @@ angular.module('app', [
   'app.inbox',
   'app.guidelines',
   'app.invitations',
-  'app.settings'
+  'app.settings',
+  'ui.checkbox'
   // 'firebase'
   ])
   .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

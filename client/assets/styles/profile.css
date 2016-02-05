@@ -107,3 +107,48 @@ html, body, .container-table {
 .otherUserProfile .container {
   width: 100%;
 }
+
+/*<input type="checkbox" id="checkboxStyleId" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+<label for="checkboxStyleId" ng-repeat="skill in ctrl.skills.collection"></label>
+
+.checkboxStyle {
+  width: 25px;
+  height: 25px;
+  margin: 20px 100px;
+  position: relative;
+}
+
+.checkboxStyle label {
+  cursor: pointer;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 0;
+    left: 0;
+  background: #eee;
+  border:1px solid #ddd;
+}
+
+.checkboxStyle label:after {
+  opacity: 0.2;
+  content: '';
+  position: absolute;
+/*  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 6px;
+  left: 7px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+
+  transform: rotate(-45deg);
+}
+
+.checkboxStyle label:hover::after {
+  opacity: 0.5;
+}
+
+.checkboxStyle input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}*/

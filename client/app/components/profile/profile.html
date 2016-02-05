@@ -57,7 +57,7 @@
                     <div class="toTeach" ng-model="skills.toTeach">
                       <ng-form>
                         <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                          <input type="checkbox" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                          <checkbox ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                         </label>
                       </ng-form>
                     </div>
@@ -67,7 +67,7 @@
                     <div>
                       <ng-form>
                         <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                          <input type="checkbox" ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                          <checkbox ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                         </label>
                       </ng-form>
                     </div>
@@ -247,7 +247,7 @@
                       <div class="toTeach" ng-model="skills.toTeach">
                         <ng-form>
                           <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                            <input type="checkbox" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                            <checkbox ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                           </label>
                         </ng-form>
                       </div>
@@ -257,7 +257,7 @@
                       <div>
                         <ng-form>
                           <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
-                            <input type="checkbox" ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
+                            <checkbox ng-model="ctrl.skills.toLearn[skill]" ng-checked="ctrl.skills.toLearn[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
                           </label>
                         </ng-form>
                       </div>
