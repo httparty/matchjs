@@ -22,6 +22,8 @@
     vm.saveEditButton.skills.buttonText = 'Edit';
     vm.saveEditButton.basics = {};
     vm.saveEditButton.basics.buttonText = 'Edit';
+    vm.saveEditButton.bio = {};
+    vm.saveEditButton.bio.buttonText = 'Edit';
     vm.saveEditButton.invites = {};
     vm.saveEditButton.invites.buttonText = 'Edit';
 
@@ -60,6 +62,15 @@
       }
     };
 
+    //-------------------BASICS------------------------
+    vm.toggleEditShowBio = function() {
+      if(vm.saveEditButton.bio.buttonText === 'Edit') {
+        vm.saveEditButton.bio.buttonText = 'Save';
+      } else {
+        vm.saveEditButton.bio.buttonText='Edit';
+        updateProfile(vm.profileUser); 
+      }
+    };
 
     //-------------------SKILLS------------------------
     		//called when SKILLS edit/show button is clicked
