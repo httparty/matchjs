@@ -1,30 +1,32 @@
-<div class="ui raised very padded text container segment">
-  <h2 class="ui header">Community Guidelines</h2>
+<div ng-controller="GuidelinesController as ctrl">
+  <div class="ui raised very padded text container segment">
+    <h2 class="ui header">Community Guidelines</h2>
+          <p>
+          The MatchJS community is committed to creating a welcoming, civil, open, safe and constructive environment. We expect all users to follow the standards laid out below when participating in any interactions on the site or in-person during mentorhship meetings.
+        </p>
+        <h3>Be respectful and inclusive</h3>
         <p>
-        The MatchJS community is committed to creating a welcoming, civil, open, safe and constructive environment. We expect all users to follow the standards laid out below when participating in any interactions on the site or in-person during mentorhship meetings.
-      </p>
-      <h3>Be respectful and inclusive</h3>
-      <p>
-        Please do not use overtly sexual language or imagery, and do not attack anyone based on any aspect of personal identity, including gender, sexuality, religion, ethnicity, race, age or ability. What you say and write, whether it's in person or online, should be treated as public behavior, subject to the opinions and views of many people who don’t know you personally. You may not be aware of all the people who end up reading what you say so please refrain from making sexual or prejudiced jokes or comments. Try to be empathetic; think about how what you say will make someone else feel, particularly if it could make them feel alienated or unwelcome.
-      </p>
-      <h3>Be professional</h3>
-      <p>
-        MatchJS is a professional social network designed to help software engineers gain real world mentorship experience. Though it can be challenging and even frustrating at times, it's important that both mentors and mentees act in a way that is conducive to learning and growth, both on the site and in person. Constructive criticism and suggestions are welcome, but remember to be tactful and mindful of others' feelings.
-      </p>
-      <h3>Get involved</h3>
-      <p>
-        The MatchJS community is built on a culture of openness, honesty, collaboration and growth. The goal of this project was to help people in the software community build more real life connections because we believe it's a great way of humanizing something that can seem very technical and alien, especially to outsiders and beginners. We want to encourage all users to participate in mentor-mentee relationships; don't hesitate to reach out to someone out of fear of rejection or a lack of prior knowledge. The point mentorship is to learn, but doing research beforehand on the material you are interested in can help both you and your mentor make the most out of the experience.
-        <br><br>
-        Be aware that mentors contribute their time on a voluntary basis, and that they don't 'owe' you their time. With that said, mentors are expected to adhere to the above guidelines when offering their time, maintaining a culture of respect and good faith.
-      </p>
-      <h3>Report a problem</h3>
-      <p>
-        Meetings are set at both parties discretion and the history made public to ensure accountability for both parties. However, if you encounter any problems using this site, either technical or community based, or with any of the in-person meetings, please don't hesitate to contact the MatchJS team at matchjsteam@gmail.com.
-      </p>
+          Please do not use overtly sexual language or imagery, and do not attack anyone based on any aspect of personal identity, including gender, sexuality, religion, ethnicity, race, age or ability. What you say and write, whether it's in person or online, should be treated as public behavior, subject to the opinions and views of many people who don’t know you personally. You may not be aware of all the people who end up reading what you say so please refrain from making sexual or prejudiced jokes or comments. Try to be empathetic; think about how what you say will make someone else feel, particularly if it could make them feel alienated or unwelcome.
+        </p>
+        <h3>Be professional</h3>
+        <p>
+          MatchJS is a professional social network designed to help software engineers gain real world mentorship experience. Though it can be challenging and even frustrating at times, it's important that both mentors and mentees act in a way that is conducive to learning and growth, both on the site and in person. Constructive criticism and suggestions are welcome, but remember to be tactful and mindful of others' feelings.
+        </p>
+        <h3>Get involved</h3>
+        <p>
+          The MatchJS community is built on a culture of openness, honesty, collaboration and growth. The goal of this project was to help people in the software community build more real life connections because we believe it's a great way of humanizing something that can seem very technical and alien, especially to outsiders and beginners. We want to encourage all users to participate in mentor-mentee relationships; don't hesitate to reach out to someone out of fear of rejection or a lack of prior knowledge. The point mentorship is to learn, but doing research beforehand on the material you are interested in can help both you and your mentor make the most out of the experience.
+          <br><br>
+          Be aware that mentors contribute their time on a voluntary basis, and that they don't 'owe' you their time. With that said, mentors are expected to adhere to the above guidelines when offering their time, maintaining a culture of respect and good faith.
+        </p>
+        <h3>Report a problem</h3>
+        <p>
+          Meetings are set at both parties discretion and the history made public to ensure accountability for both parties. However, if you encounter any problems using this site, either technical or community based, or with any of the in-person meetings, please don't hesitate to contact the MatchJS team at matchjsteam@gmail.com.
+        </p>
 
-      <div class="guidelinesFooter">
-        <h2>Thank You!</h2>
-        <a href="/#/connect" class="btn teal-button">Agree and Cotinue</a>
-      </div>
+        <div class="guidelinesFooter">
+          <h2>Thank You!</h2>
+          <a href="/#/connect" class="btn teal-button" ng-show="ctrl.isLoggedIn()">Agree and Continue</a>
+        </div>
+  </div>
 </div>
 <footer-dir></footer-dir>
