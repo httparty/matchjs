@@ -73,6 +73,18 @@ angular.module('app', [
 
     $rootScope.$on('$stateChangeStart', function(event, toState) {
 
+      if (toState.name === 'guidelines') {
+        return;
+      }
+
+      if (toState.name === 'about') {
+        return;
+      }
+
+      if (toState.name === 'contact') {
+        return;
+      }
+
       if (toState.name !== 'auth') {
         if (!AuthService.isAuthenticated() && toState.name !== 'home') {
           event.preventDefault();
