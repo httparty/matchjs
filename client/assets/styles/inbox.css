@@ -1,6 +1,23 @@
 /*                    */
 /* Universal settings */
 /*                    */
+
+.btn .btn-default .form-control .ui-select-toggle {
+  background-color: #00676C;
+}
+
+.selectBar .ui-select-toggle,
+.selectBar .ui-select-toggle:hover,
+.selectBar .ui-select-toggle:active,
+.selectBar .ui-select-toggle:focus,
+.selectBar .ui-select-toggle:focus:active {
+    color: #3e3f3a !important;
+    background-color: #fff !important;
+    border: 1px solid #dfd7ca !important;
+    cursor:pointer;
+    cursor: hand;
+}
+
 html, body, .indexView, .inbox, .row, .conversations, .messages{
   height: 97%;
   box-sizing: border-box;
@@ -125,7 +142,6 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   padding: 1%;
   /*overflow: auto;*/
 }
-
 
 .conversation {
   padding: 1%;
