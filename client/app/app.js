@@ -68,6 +68,10 @@ angular.module('app', [
     .state('about', {
       templateUrl: 'app/components/about/about.html',
       url: '/about'
+    })
+    .state('contact', {
+      templateUrl: 'app/components/contact/contact.html',
+      url: '/contact'
     });
   }])
   .run(['$rootScope','$state','$cookies','$window', 'AuthService', function($rootScope, $state, $cookies, $window, AuthService) {
