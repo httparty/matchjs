@@ -11,5 +11,12 @@
 }
 
 #gitFooter {
+  color: inherit;
+  text-decoration: inherit;
   font-size: 3em;
 }
+
+/*a.gitFooter {
+  text-decoration: inherit;
+  color: inherit;
+}*/
