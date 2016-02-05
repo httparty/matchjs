@@ -18,8 +18,13 @@
   overflow: hidden !important;
 }
 
+.panel-body .mainPanel {
+  max-height: 1000px !important;
+}
+
 .tabbedPanel {
   overflow-y: scroll !important;
+  max-height: 720px;
 }
 
 .followUsername {
@@ -28,7 +33,7 @@
 
 .invitationsPanelBody {
   overflow-y: scroll !important;
-  max-height: 720px;
+  max-height: 724.5px !important;
 }
 
 .profileBasics {
@@ -134,6 +139,27 @@ html, body, .container-table {
   border-style: solid !important;
 }
 
+.checkbox.btn-default:hover {
+  background-color: #ffffff !important;
+  border-color: #DFD7CA !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+
+/*.checkbox-inline-default:active:hover,
+.open>.dropdown-toggle.checkbox-inline-default:hover,
+.checkbox-inline-default:active:focus,
+.checkbox-inline-default.active:focus,
+.open>.dropdown-toggle.checkbox-inline-default:focus,
+.checkbox-inline-default:active.focus,
+.checkbox-inline-default.active.focus,
+.open>.dropdown-toggle.checkbox-inline-default.focus {
+  background-color: #ffffff !important;
+  border-color: #DFD7CA !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+}*/
+
 .checkbox-inline+.checkbox-inline {
   margin-left: 0;
 }
@@ -153,4 +179,8 @@ html, body, .container-table {
 
 .checkbox:disabled:hover{
   background-color: #dfd7ca;
+}
+
+.row {
+  height: auto;
 }
