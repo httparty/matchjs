@@ -59,8 +59,7 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
     margin-right: 5px;
 }
 
-.panel-body
-{
+#inbox .panel-body{
    /* overflow-y: scroll;*/
     height: 500px;
 }
