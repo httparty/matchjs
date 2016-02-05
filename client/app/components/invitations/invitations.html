@@ -1,66 +1,67 @@
 <div class="container-fluid" ng-controller="invitationsController as ctrl" ng-model="ctrl.submitted">
 
     <!-- White Space -->
-    <div class="col-md-2"></div>
+    <div class="col-sm-2"></div>
 
     <!-- Invite Content -->
-    <div class="col-md-8 inviteInfo" ng-hide="ctrl.submitted">
+    <div class="col-sm-8 inviteInfo" ng-hide="ctrl.submitted">
 
       <!-- Mentor/Mentee Row -->
       <div class="row">
+        <div class="col-sm-12">
 
-        <!-- Mentor -->
-        <div class="col-md-6">
-          <h3>Mentor:</h3>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <a href="#">
-                <center><img class="img-responsive" ng-src="{{ctrl.currentUserProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
-              </a>
-              <div class="list-group">
-                <div class="list-group-item col-md-6"><strong>{{ctrl.name || 'N/A'}}</strong></div>
-                <div class="list-group-item col-md-6">Karma: {{ctrl.currentUserProfile.karmaPoints || 'N/A'}}</div>
+      <!-- Mentor Card -->
+        <div class="col-sm-6 portfolio-item">
+          <h2>Mentor:</h2>
+            <div class="ui special cards">
+              <div class="card">
+                <div class="blurring dimmable image">
+                  <img ng-src="{{ctrl.currentUserProfile.photo || 'http://placehold.it/242x242'}}" >
+                </div>
+                <div class="content">
+                  <a class="header">{{ctrl.name || 'N/A'}}</a>
+                </div>
               </div>
             </div>
-          </div>
         </div>
 
-        <!-- Mentee -->
-        <div class="col-md-6">
-          <h3>Mentee: </h3>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <a href="#">
-                <center><img class="img-responsive" ng-src="{{ctrl.recipientProfile.photo || 'http://placehold.it/242x242'}}" alt="" style="margin-bottom: 10px; width: 242px; height: 242px"></center>
-              </a>
-              <div class="list-group">
-                <div class="list-group-item col-md-6"><strong>{{ctrl.recipientName || 'N/A'}}</strong></div>
-                <div class="list-group-item col-md-6">Karma: {{ctrl.recipientProfile.karmaPoints || 'N/A'}}</div>
+      <!-- Mentee Card -->
+        <div class="col-sm-6 portfolio-item">
+          <h2>Mentee:</h2>
+            <div class="ui special cards">
+              <div class="card">
+                <div class="blurring dimmable image">
+                  <img ng-src="{{ctrl.recipientProfile.photo || 'http://placehold.it/242x242'}}" >
+                </div>
+                <div class="content">
+                  <a class="header">{{ctrl.recipientName || 'N/A'}}</a>
+                </div>
               </div>
             </div>
-          </div>
         </div>
 
+        </div>
       </div><!--  End Mentor/Mentee Row  -->
+      <br>
 
       <!-- Location Row -->
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
         <h3>Where:</h3>
-          <div class="col-md-6">
+          <div class="col-sm-12">
             <input type="text" class="form-control" placeholder="Enter location" ng-model="ctrl.formData.sessionInfo.where">
           </div>
         </div>
       </div> <!-- End Location Row -->
-
+      <br>
 
       <!-- Time/Date Row -->
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
           <h3>When:</h3>
 
           <!-- Time/Date Picker -->
-          <div class="col-md-6">
+          <div class="col-sm-12">
 
           <!-- Time Picker -->
             <uib-timepicker ng-model="ctrl.date" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
@@ -74,22 +75,15 @@
             </div>
           </div> <!-- End Time/Date Picker -->
 
-          <!-- Preview/Buttons -->
-          <div class="col-md-6">
-            <pre>Selected date is: <br><em>{{ctrl.date | date:'fullDate' }} <br>at {{ctrl.date.getHours()}}:{{ctrl.displayMinutesCorrectly()}}</em>
-            </pre>
-            <button type="button" class="btn btn-info" ng-click="ctrl.toggleMode()">12H / 24H</button>
-            <button type="button" class="btn btn-danger" ng-click="ctrl.clear()">Clear</button>
-          </div> <!-- End Preview/Buttons  -->
-
         </div>
       </div> <!-- End Time/Date Row -->
+      <br>
 
       <!-- Description Row -->
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
           <h3>Meeting Description:</h3>
-          <div class="col-md-12">
+          <div class="col-sm-12">
             <input type="text" class="form-control" placeholder="Enter a brief description of the meeting" ng-model="ctrl.formData.sessionInfo.summary">
           </div>
         </div>
@@ -99,18 +93,21 @@
       <!-- Submit Button -->
       <div class="row">
         <!-- White Space -->
-        <div class="col-md-5"></div>
+        <div class="col-sm-12">
+          <div class="col-sm-5"></div>
 
-        <!-- Button -->
-        <div class="col-md-2">
-          <button class="btn btn-primary" ng-click="ctrl.attemptSubmit()">
-            Submit Invite
-          </button>
+          <!-- Button -->
+          <div class="col-sm-2">
+            <button class="btn btn-default" ng-click="ctrl.attemptSubmit()">
+              Submit Invite
+            </button>
+          </div>
+
+          <!-- White Space -->
+          <div class="col-sm-5"></div>
         </div>
-
-        <!-- White Space -->
-        <div class="col-md-5"></div>
       </div> <!-- End Submit Button -->
+      <br><br>
 
     </div>
 
@@ -121,6 +118,6 @@
   </div>
 
   <!-- White Space -->
-  <div class="col-md-2"></div>
+  <div class="col-sm-2"></div>
 
 </div>

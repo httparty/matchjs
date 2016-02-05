@@ -26,7 +26,6 @@ describe('Controller: AuthController', function() {
   });
 
   describe('vm.email', function () {
-
     it('should expose action route to the view', function() {
       expect(AuthController.email).toBeDefined();
       expect(AuthController.action).toBeDefined();
