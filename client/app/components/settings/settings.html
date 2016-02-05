@@ -33,7 +33,7 @@
 
           <tr>
             <td><h5>Account Preferences</h5></td>
-            <td><button class="btn btn-danger" ng-click="ctrl.deleteAccount()" ng-disabled="ctrl.blockEditing">Delete account</button></td>
+            <td><a class="btn btn-danger" href="{{'/api/users/settings/deleteAccount/' + ctrl.username}}" ng-disabled="ctrl.blockEditing">Delete account</a></td>
           </tr>
         </tbody>
       </table>

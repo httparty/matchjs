@@ -91,11 +91,9 @@ module.exports = {
   },
 
   deleteAccount: function(req, res) {
-    // console.log(req.params.username, 'this is the delete request coming');
     helpers.deleteUser(req.params)
     .then(function(user){
-      // console.log('This user has been deleted from the database:', req.body.username);
-      res.status(200).send(user);
+      res.redirect('/logout');
     });
   },
 
@@ -104,7 +102,6 @@ module.exports = {
     var wantFollowerEmails = req.body.wantFollowerEmails;
     var wantChatEmails = req.body.wantChatEmails;
     var wantInvitationEmails = req.body.wantInvitationEmails;
-    // console.log(wantInvitationEmails, 'Want Invitation emails');
     helpers.updateUser({username: username, wantChatEmails: wantChatEmails, wantInvitationEmails: wantInvitationEmails, wantFollowerEmails: wantFollowerEmails})
     .then(function(user){
       res.status(200).send(user);

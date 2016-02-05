@@ -1,5 +1,6 @@
 var passport = require('passport');
 var helpers = require('../db/helpers.js');
+var mailer = require('../config/mailer.js');
 
 var setCookieProfile = function(userObj) {
   var profile = {
@@ -14,6 +15,18 @@ var setCookieProfile = function(userObj) {
   return profile;
 };
 
+var setMailOptions = function(userObj) {
+  var mailOptions = {
+    from: 'MatchJS <matchjsteam@gmail.com>',
+    to: userObj._json.email,
+    subject: 'Welcome to MatchJS!',
+    html: 'Hello '+userObj.displayName+',<br><br>'
+    +'Welcome to <b>MatchJS</b>!<br> Your username is: '
+    +userObj.username+'.<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to meet your future Mentor or Mentee!'
+  };
+  return mailOptions;
+}
+
 module.exports = {
   initialLogin: passport.authenticate('github'),
 
@@ -24,11 +37,13 @@ module.exports = {
     helpers.signInUser(req.user)
     .then(function(user) {
 
-      //if user found, set cookie information
+      //if user is found, set cookie information and redirect to connect
       if (user) {
         var cookie = setCookieProfile(req.user);
         res.cookie('user-profile', cookie, { maxAge: 2592000000 });  // Expires in one month
-        res.redirect('/api/email/signupConfirm');
+        console.log("redirecting to connect");
+
+        res.redirect('/#/connect');
       } else {
 
         //if user not found and email is available
@@ -39,7 +54,13 @@ module.exports = {
 
             var cookie = setCookieProfile(req.user);
             res.cookie('user-profile', cookie, { maxAge: 2592000000 });  // Expires in one month
-            res.redirect('/api/email/signupConfirm');
+
+            //send signup email
+            var mailOptions = setMailOptions(req.user);
+            mailer(mailOptions);
+            //redirect to user's profile
+            var profileURL = '/#/profile/' + req.user.username;
+            res.redirect(profileURL);
           });
 
         } else {
@@ -61,7 +82,13 @@ module.exports = {
 
       var cookie = setCookieProfile(req.user);
       res.cookie('user-profile', cookie, { maxAge: 2592000000 });  // Expires in one month
-      res.redirect('/api/email/signupConfirm');
+
+      //send signup email
+      var mailOptions = setMailOptions(req.user);
+      mailer(mailOptions);
+      //redirect to user's profile
+      var profileURL = '/#/profile/' + req.user.username;
+      res.redirect(profileURL);
     });
   }
 };
