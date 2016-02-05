@@ -5,9 +5,9 @@
       <!-- User Search Bar/Drop Down -->
       <div class="ui segment">
 
-        <ui-select ng-model="user.selected" on-select="ctrl.switchConversation(ctrl.conversationList[0])" ng-disabled="disabled" style="min-width: 100px;">
-          <ui-select-match placeholder="Start a new conversation">Start a new conversation</ui-select-match>
-          <ui-select-choices repeat="user in ctrl.users | filter: {name: $select.search}">
+        <ui-select ng-model="user.selected" class="selectBar" on-select="ctrl.switchConversation(ctrl.conversationList[0])" ng-disabled="disabled" style="min-width: 100px;">
+          <ui-select-match class="selectBar" placeholder="Start a new conversation">Start a new conversation</ui-select-match>
+          <ui-select-choices class="selectBar" repeat="user in ctrl.users | filter: {name: $select.search}">
             <div ng-bind-html="user.name | highlight: $select.search"></div>
             <small>
             <span ng-bind-html="''| highlight: $select.search"></span>
