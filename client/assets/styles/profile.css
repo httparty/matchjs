@@ -18,16 +18,22 @@
   overflow: hidden !important;
 }
 
+.panel-body .mainPanel {
+  max-height: 1000px !important;
+}
+
 .tabbedPanel {
   overflow-y: scroll !important;
+  max-height: 720px;
 }
 
 .followUsername {
   padding-left: 10px !important;
 }
 
-#invitationsPanelBody {
+.invitationsPanelBody {
   overflow-y: scroll !important;
+  max-height: 724.5px !important;
 }
 
 .profileBasics {
@@ -35,21 +41,25 @@
   float: right;
 }
 
+.profileStyle h4 {
+  font-size: 16px;
+}
+
 .bio h4 {
   margin-bottom:0;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 30px;
 }
 
 .profileBasics h4 {
   margin-bottom:0;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 30px;
 }
 
 .profileSkills h4 {
   margin-bottom:0;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 30px;
 }
 
@@ -70,6 +80,12 @@
 .invitations .editButton {
   float: right;
   margin-right: 30px;
+}
+
+.invitations {
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
 }
 
 .otherUserProfileActionButtons {
@@ -109,52 +125,62 @@ html, body, .container-table {
 }
 
 .checkbox {
-  background-color: #00676C;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-/*<input type="checkbox" id="checkboxStyleId" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
-<label for="checkboxStyleId" ng-repeat="skill in ctrl.skills.collection"></label>
-
-.checkboxStyle {
+  margin-left: 5px;
   width: 25px;
   height: 25px;
-  margin: 20px 100px;
-  position: relative;
 }
 
-.checkboxStyle label {
-  cursor: pointer;
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  top: 0;
-    left: 0;
-  background: #eee;
-  border:1px solid #ddd;
+.checkbox.btn-default {
+  background-color: #ffffff !important;
+  border-color: #DFD7CA !important;
+  border-width: 1px !important;
+  border-style: solid !important;
 }
 
-.checkboxStyle label:after {
-  opacity: 0.2;
-  content: '';
-  position: absolute;
-/*  width: 9px;
-  height: 5px;
-  background: transparent;
-  top: 6px;
-  left: 7px;
-  border: 3px solid #333;
-  border-top: none;
-  border-right: none;
-
-  transform: rotate(-45deg);
+.checkbox.btn-default:hover {
+  background-color: #ffffff !important;
+  border-color: #DFD7CA !important;
+  border-width: 1px !important;
+  border-style: solid !important;
 }
 
-.checkboxStyle label:hover::after {
-  opacity: 0.5;
-}
-
-.checkboxStyle input[type=checkbox]:checked + label:after {
-  opacity: 1;
+/*.checkbox-inline-default:active:hover,
+.open>.dropdown-toggle.checkbox-inline-default:hover,
+.checkbox-inline-default:active:focus,
+.checkbox-inline-default.active:focus,
+.open>.dropdown-toggle.checkbox-inline-default:focus,
+.checkbox-inline-default:active.focus,
+.checkbox-inline-default.active.focus,
+.open>.dropdown-toggle.checkbox-inline-default.focus {
+  background-color: #ffffff !important;
+  border-color: #DFD7CA !important;
+  border-width: 1px !important;
+  border-style: solid !important;
 }*/
+
+.checkbox-inline+.checkbox-inline {
+  margin-left: 0;
+}
+
+.checkbox-inline .checkbox {
+    margin-right: 3px;
+}
+
+.checkbox-inline {
+  padding-left: 0;
+  width: 114px;
+}
+
+.checkbox:hover{
+  background-color: #98978b;
+} 
+
+.checkbox:disabled:hover{
+  background-color: #dfd7ca;
+}
+
+.row {
+  height: auto;
+}

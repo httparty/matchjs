@@ -8,6 +8,110 @@
 }
 
 .teal-href:hover {
-  color:  #00676C;
+  color:  #00676C; 
 }
+/*BUTTON FIX*/
+.btn-default{
+  color:#ffffff !important;
+  background-color:#009E9A !important;
+  border-color:transparent !important;
+}
+
+.btn-default:hover{
+  color:#ffffff !important;
+  background-color: #00676C !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+.btn-default:focus,.btn-default.focus{
+  color:#ffffff !important;
+  background-color:#009E9A !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+.btn-default:active,.btn-default.active,.open>.dropdown-toggle.btn-default {
+  color:#ffffff !important; 
+  background-color: #009E9A !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+.btn-default:active:hover,.btn-default.active:hover,.open>.dropdown-toggle.btn-default:hover,.btn-default:active:focus,.btn-default.active:focus,.open>.dropdown-toggle.btn-default:focus,.btn-default:active.focus,.btn-default.active.focus,.open>.dropdown-toggle.btn-default.focus {
+  color:#ffffff !important;
+  background-color:#009E9A !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+.btn-default:active,.btn-default.active,.open>.dropdown-toggle.btn-default {
+  background-image:none !important;
+}
+
+.btn-default.disabled:hover,.btn-default[disabled]:hover,fieldset[disabled] .btn-default:hover,.btn-default.disabled:focus,.btn-default[disabled]:focus,fieldset[disabled] .btn-default:focus,.btn-default.disabled.focus,.btn-default[disabled].focus,fieldset[disabled] .btn-default.focus {
+  background-color:#527179 !important;
+  border-color:transparent !important;
+}
+
+.btn-default .badge {
+  color:#527179 !important;
+  background-color:#ffffff  !important;
+}
+/*SELECT BAR FIX*/
+#selectBar-default{
+  background-color:#ffffff !important;
+  border-color:transparent !important;
+}
+
+#selectBar-default:hover{
+  background-color: #ffffff !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+#selectBar-default:focus,.selectBar-default.focus{
+  background-color: #ffffff !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+#selectBar-default:active,
+.selectBar-default.active,
+.open>.dropdown-toggle.selectBar-default {
+  background-color: #ffffff !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+#selectBar-default:active:hover,
+.selectBar-default.active:hover,
+.open>.dropdown-toggle.selectBar-default:hover,
+.selectBar-default:active:focus,
+.selectBar-default.active:focus,
+.open>.dropdown-toggle.selectBar-default:focus,
+.selectBar-default:active.focus,
+.selectBar-default.active.focus,
+.open>.dropdown-toggle.selectBar-default.focus {
+  background-color: #ffffff !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+#selectBar-default:active,
+.selectBar-default.active,
+.open>.dropdown-toggle.selectBar-default {
+  background-image:none !important;
+}
+
+#selectBar-default.disabled:hover,
+.selectBar-default[disabled]:hover,
+fieldset[disabled] .selectBar-default:hover,
+.selectBar-default.disabled:focus,
+.selectBar-default[disabled]:focus,
+fieldset[disabled] .selectBar-default:focus,
+.selectBar-default.disabled.focus,
+.selectBar-default[disabled].focus,
+fieldset[disabled] .selectBar-default.focus {
+  background-color: #ffffff !important;
+  border-color:transparent !important;
+}
+
+#selectBar-default .badge {
+  background-color:#ffffff !important;
+}
+
+
 

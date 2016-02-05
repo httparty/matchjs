@@ -1,5 +1,5 @@
 <!-- <nav-bar></nav-bar> -->
-<div class="container" ng-controller="ProfileController as ctrl">
+<div class="container profileStyle" ng-controller="ProfileController as ctrl">
 <!-- ==================================  -->  
 <!-- PROFILE BASICS SECTION -->
   <div class="row">
@@ -9,8 +9,8 @@
     <!-- ======================================= -->
     <!-- ======================================= -->
     <div ng-show="ctrl.contentLoaded; ctrl.editMode.isSameUser" class="col-sm-6">
-      <div class="ui segment panel panel-default">
-        <div class="panel-body" ng-cloak>           
+      <div class="ui segment panel panel-default mainPanel">
+        <div class="panel-body mainPanel" ng-cloak>           
         <!-- PROFILE PHOTO -->
           <div class="row"> <!-- TEST -->
 
@@ -20,7 +20,7 @@
           <!-- NAME OR USERNAME -->
             <div class="profileBasics col-md-6 pull-right">
               <div>
-                <h4>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h4>
+                <h2>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h2>
               </div>
           <!--PROFILE INFO -->
               <br>
@@ -137,7 +137,7 @@
     <div class="col-sm-6">    
 <!-- ==================================  -->
 <!-- BEGIN INVITATIONS -->
-      <div ng-show="ctrl.contentLoaded; ctrl.editMode.isSameUser" class="ui segment panel panel-default invitations">
+      <div ng-show="ctrl.contentLoaded; ctrl.editMode.isSameUser" class="panel panel-default invitations">
         <div class="panel-heading">
           <h3 class="panel-title">My Invitations</h3>
         </div>
@@ -150,10 +150,10 @@
               <p><b>Mentor:</b> <a ui-sref="profile({username: invite['recipientName']})">{{invite['senderName']}}</a></p>
               <p><b>Mentee:</b> <a ui-sref="profile({username: invite['recipientName']})">{{invite['recipientName']}}</a></p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
-              <div class="editButton" ng-hide="ctrl.invite.readOnly">
-                <button class="btn btn-default btn-sm teal-button" ng-click="ctrl.toggleInviteEditForm(); ctrl.editMode.inviteEditMode = $index">Edit</button>
-                <button class="btn btn-default btn-sm teal-button" ng-show="invite['senderName'] === ctrl.currentUser.username" ng-click="ctrl.deleteInvite(invite)">Delete</button>
-              </div>
+            </div>
+            <div class="editButton" ng-hide="invite['readOnly']">
+              <button class="btn btn-default btn-sm" ng-click="ctrl.toggleInviteEditForm(); ctrl.editMode.inviteEditMode = $index">Edit</button>
+              <button class="btn btn-default btn-sm teal-button" ng-click="ctrl.deleteInvite(invite)">Delete</button>
             </div>
             <form ng-show="ctrl.editMode.inviteEditMode=== $index" ng-init="ctrl.inviteUpdate={}; ctrl.updateSent = false;" ng-submit="ctrl.updateInvite(invite.senderName, invite.recipientName, invite.id, ctrl.inviteUpdate);">
               <b>Location: </b><input class="form-control" type="text" ng-model="ctrl.inviteUpdate.location" placeholder="{{invite['location']}}" ng-disable="!toggle" /><br>
@@ -204,7 +204,7 @@
             <!-- NAME OR USERNAME -->
               <div class="profileBasics col-md-6 pull-right">
                 <div>
-                  <h4>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h4>
+                  <h2>{{ctrl.profileUser.name || ctrl.profileUser.username}}</h2>
                 </div>
             <!--PROFILE INFO, INCL BIO/SUMMARY-->
                 <br>
