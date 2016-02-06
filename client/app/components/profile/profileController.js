@@ -87,20 +87,20 @@
     //---------SHARED BY BASICS & SKILLS---------------
     var updateProfile = function(userObj) {
       for(var learnKey in vm.skills.toLearn) {
-          if(!_.contains(vm.skills.toLearn, learnKey)) {
-            userObj.toLearn.push(learnKey);
-          }
-          if(!vm.skills.toLearn[learnKey]) {
+          if(vm.skills.toLearn[learnKey] === false && _.contains(userObj.toLearn, learnKey)) {
             userObj.toLearn.splice(userObj.toLearn.indexOf(learnKey),1);
+          }
+          if(vm.skills.toLearn[learnKey] === true && !_.contains(userObj.toLearn, learnKey)) {
+            userObj.toLearn.push(learnKey);
           }
       }
       for(var teachKey in vm.skills.toTeach) {
-        if(!_.contains(vm.skills.toTeach, teachKey)) {
+        if(vm.skills.toTeach[teachKey] === false && _.contains(userObj.toTeach, teachKey)) {
+            userObj.toTeach.splice(userObj.toTeach.indexOf(teachKey),1);
+          }
+          if(vm.skills.toTeach[teachKey] === true && !_.contains(userObj.toTeach, teachKey)) {
             userObj.toTeach.push(teachKey);
-        }
-        if(!vm.skills.toTeach[teachKey]) {
-          userObj.toTeach.splice(userObj.toTeach.indexOf(teachKey),1);
-        }
+          }
       }
       Profile.updateProfile(userObj) 
       .then(function(response) {
@@ -124,7 +124,6 @@
       inviteObj.username = username;
       inviteObj.mentee = recipient;
       inviteObj.when = inviteObj.date;
-      console.log("here is the invite obj", inviteObj);
       invitationsModel.updateInvitation(inviteObj)
         .then(function(response) {
           vm.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
@@ -250,13 +249,12 @@
         //---populate the scope with the data returning from getUserProfile query.---
         vm.profileUser.photo = response.data.photo;
         vm.profileUser.location = response.data.location;
-        // vm.profileUser.name = response.data.displayName;
         vm.profileUser.name = (response.data.username === vm.currentUser.username ? vm.currentUser.displayName : response.data.name);
         var nameArr = response.data.name.split(' ');
         vm.profileUser.firstName = nameArr[0];
         vm.profileUser.github = response.data.github;
         vm.profileUser.karmaPoints = response.data.karmaPoints;
-        vm.profileUser.summary =	response.data.summary;
+        vm.profileUser.summary = response.data.summary;
         response.data.toLearn.forEach(function(skill) {
           vm.skills.toLearn[skill] = true;
         });
