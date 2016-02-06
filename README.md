@@ -2,53 +2,58 @@ MatchJS
 ==========
 [![Build Status](https://travis-ci.org/httparty/matchjs.svg?branch=master)](https://travis-ci.org/httparty/matchjs)
 
-Micro Mentoring for JavaScript developers.
+Mentoring for JavaScript developers.
 
-#Overview
+Overview
 ===========
-The world of software engineering is complex and can often be daunting. With frameworks constantly falling in and out of favor it can be difficult to keep pace with the ever-changing landscape. And although Google and Stack Overflow are invaluable tools, they can't replace in-person mentorship.
 
 MatchJS is an app designed to connect current and aspiring software engineers seeking to improve their skills in a certain area with mentors who have real-world experience and are willing to share their knowledge. By allowing users to post their availability and seek out mentors by skill set, MatchJS is aiming to make the way we learn and teach a more open and communal experience.
-
-Documentation
-============
-
-[Check out our wiki](https://github.com/httparty/matchjs/wiki)
-
-Architecture
-========
-
-###### Coming Soon
-
-Tech Stack
-=======
-- Angular/Bootstrap - Front End
-- Node/Express - Back End
-- Postgres/SQL - Database
-- Gulp - Build
-- Heroku/Travis CI - Deployment
-- Mocha/Chai - Testing
 
 Installation
 =============
 
-`npm install`
+```
+$ git clone https://github.com/httparty/matchjs.git
+$ cd matchjs
+$ npm install
+$ npm start
+```
+
+For an in depth guide, please refer to our [Getting Started](https://github.com/httparty/matchjs/wiki) page.
 
 Testing
 ========
 
-`gulp test`
+- Server side unit tests: `gulp test`
+- Client side unit tests: `gulp karma`
+- Client side end to end tests: `gulp e2e`
+
+For an in depth guide, please refer to our [Testing](https://github.com/httparty/matchjs/wiki) page.
+
+Architecture
+========
+
+Coming soon.
+
+Tech Stack
+=======
+
+![](http://i.imgur.com/eIQWMZf.png)
 
 Contributing
 =============
 
-Thanks for your interest! Please read our [CONTRIBUTE.md](https://github.com/httparty/matchjs/blob/master/CONTRIBUTING.md) for instructions on how to contribute.
+Thank you for taking interest in contributing! Please read our [CONTRIBUTING.md](https://github.com/httparty/matchjs/blob/master/CONTRIBUTING.md) and check out our current [issues](https://github.com/httparty/matchjs/issues).
+
+Documentation
+=============
+
+Please see the project [wiki](https://github.com/httparty/matchjs/wiki).
 
 Authors
 =======
 
-- Anthony Bibbs
-- Rachel Jenkins
-- Sergey Piterman
-- Polina Soshnin
-
+- [Anthony Bibbs](https://github.com/abibbs)
+- [Rachel Jenkins](https://github.com/dearamerican)
+- [Polina Soshnin](https://github.com/polinadotio)
+- [Sergey Piterman](https://github.com/spiterman)
