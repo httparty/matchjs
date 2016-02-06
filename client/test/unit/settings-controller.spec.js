@@ -7,6 +7,8 @@ describe('Controller: SettingsController', function() {
   var settingsModel;
   var $rootScope;
   var $state;
+  var SettingsController;
+  var $controller;
 
   beforeEach(module('app'));
   beforeEach(inject(function ($injector) {

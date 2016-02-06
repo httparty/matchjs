@@ -13,6 +13,8 @@ describe('Controller: InboxController', function() {
   var inboxModel;
   var $state;
   var Profile;
+  var $controller;
+  var InboxController;
 
   beforeEach(module('app'));
   beforeEach(module('mock.auth-service')); 
