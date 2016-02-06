@@ -10,7 +10,6 @@ describe('Controller: AuthController', function() {
 
     $rootScope = $injector.get('$rootScope');
     $scope = $rootScope.$new();
-    // $httpBackend = $injector.get('$httpBackend');
     $controller = $injector.get('$controller');
     AuthService = $injector.get('AuthService');
 

@@ -7,7 +7,6 @@
     var vm = this;
 
     vm.users = '';
-    vm.pages = [1, 2, 3, 4, 5];
     var username = angular.fromJson(AuthService.getCurrentUser()).username;
 
     vm.allCities = {};

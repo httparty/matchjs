@@ -12,13 +12,14 @@ describe('Controller: InvitationsController', function() {
   var $currentCookie;
 
   beforeEach(module('app'));
-  beforeEach(inject(function ($injector) {
+  beforeEach(module('mock.auth-service')); 
+  beforeEach(inject(function ($injector, _MockAuthService_) {
 
     // $rootScope = $injector.get('$rootScope');
     // $scope = $rootScope.$new();
     // $httpBackend = $injector.get('$httpBackend');
     $controller = $injector.get('$controller');
-    AuthService = $injector.get('AuthService');
+    AuthService = _MockAuthService_;
     invitationsModel = $injector.get('invitationsModel');
     $state = $injector.get('$state');
     Profile = $injector.get('Profile');
@@ -36,7 +37,6 @@ describe('Controller: InvitationsController', function() {
 
     $currentCookie = $cookies.get('user-profile')
 
-    //need to mock a cookie
     // InvitationsController = $controller('InvitationsController', {
     //   AuthService: AuthService,
     //   invitationsModel: invitationsModel,
