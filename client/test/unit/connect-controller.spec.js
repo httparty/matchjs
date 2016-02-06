@@ -6,36 +6,29 @@ describe('Controller: ConnectController', function() {
   var $rootScope;
   var connectModel;
   var $state;
+  var $cookies;
 
+  beforeEach(module('mock.auth-service')); 
   beforeEach(module('app'));
-  beforeEach(inject(function ($injector) {
+  beforeEach(inject(function ($injector, _MockAuthService_) {
 
     $rootScope = $injector.get('$rootScope');
     $scope = $rootScope.$new();
     $httpBackend = $injector.get('$httpBackend');
     $controller = $injector.get('$controller');
-    AuthService = $injector.get('AuthService');
+    AuthService = _MockAuthService_;
+
     connectModel = $injector.get('connectModel')
     $state = $injector.get('$state');
     
-    //inject a mock cookie somewhere
-
-    //this is currently not working
-    //because it can't get info from a cookie
-
-    // ConnectController = $controller('connectController', {
-    //   $scope: $scope,
-    //   AuthService: AuthService,
-    //   connectModel: connectModel,
-    //   $state: $state
-    // });
+    ConnectController = $controller('connectController', {
+      $scope: $scope,
+      AuthService: AuthService,
+      connectModel: connectModel,
+      $state: $state
+    });
 
   }));
-
-  afterEach(function () {
-    //any after each goes here
-
-  });
 
   describe('vm', function () {
 
