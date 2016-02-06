@@ -86,9 +86,6 @@
 
     //---------SHARED BY BASICS & SKILLS---------------
     var updateProfile = function(userObj) {
-      console.log('HERE IS USEROBJ IN UPDATE PROFILE', userObj);
-      console.log('here is vm.skills.toLearn', vm.skills.toLearn);
-      console.log('here is vm.skills.toTeach', vm.skills.toTeach);
       for(var learnKey in vm.skills.toLearn) {
           if(vm.skills.toLearn[learnKey] === false && _.contains(userObj.toLearn, learnKey)) {
             userObj.toLearn.splice(userObj.toLearn.indexOf(learnKey),1);
@@ -127,7 +124,6 @@
       inviteObj.username = username;
       inviteObj.mentee = recipient;
       inviteObj.when = inviteObj.date;
-      console.log("here is the invite obj", inviteObj);
       invitationsModel.updateInvitation(inviteObj)
         .then(function(response) {
           vm.UImessages.inviteUpdated = 'Your invitation has been updated, and ' + recipient + ' has been notified.';
@@ -253,16 +249,12 @@
         //---populate the scope with the data returning from getUserProfile query.---
         vm.profileUser.photo = response.data.photo;
         vm.profileUser.location = response.data.location;
-        // vm.profileUser.name = response.data.displayName;
         vm.profileUser.name = (response.data.username === vm.currentUser.username ? vm.currentUser.displayName : response.data.name);
         var nameArr = response.data.name.split(' ');
         vm.profileUser.firstName = nameArr[0];
         vm.profileUser.github = response.data.github;
         vm.profileUser.karmaPoints = response.data.karmaPoints;
         vm.profileUser.summary = response.data.summary;
-//========take out below console.log
-        console.log('original response.data from getUserProfile', response.data);
-//========
         response.data.toLearn.forEach(function(skill) {
           vm.skills.toLearn[skill] = true;
         });
