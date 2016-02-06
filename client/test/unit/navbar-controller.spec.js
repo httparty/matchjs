@@ -4,6 +4,7 @@ describe('Controller: NavController', function() {
 
   var AuthService;
   var $state;
+  var $controller;
 
   beforeEach(module('app'));
   beforeEach(inject(function ($injector) {

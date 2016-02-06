@@ -2,13 +2,15 @@
 
 describe('Controller: ConnectController', function() {
 
-  var $httpBackend;
   var $scope;
   var AuthService;
   var $rootScope;
   var connectModel;
   var $state;
   var $cookies;
+  var deferred;
+  var ConnectController;
+  var $controller;
 
   beforeEach(module('app'));
   beforeEach(module('mock.auth-service')); 

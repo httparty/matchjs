@@ -2,10 +2,11 @@
 
 describe('Controller: AuthController', function() {
 
-  var $httpBackend;
   var $scope;
   var AuthService;
   var $rootScope;
+  var $controller;
+  var AuthController;
 
   beforeEach(module('app'));
   beforeEach(inject(function ($injector) {
