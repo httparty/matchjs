@@ -1,3 +1,5 @@
+'use strict';
+
 //Use this config to Run with Sauce Connect locally
 //bin/sc -u YOUR_USERNAME -k YOUR_ACCESS_KEY
 //protractor client/test/e2e/config/sauce.conf.js 
@@ -26,11 +28,7 @@ config.sauceKey = process.env.SAUCE_ACCESS_KEY;
 
 config.multiCapabilities = [
   browsers.chrome,
-  browsers.firefox,
-  // browsers.ie9,
-  // browsers.ie10,
-  // browsers.ie11,
-  // browsers.ios
+  browsers.firefox
 ];
 
 exports.config = config;

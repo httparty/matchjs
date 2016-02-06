@@ -1,50 +1,46 @@
 <div class="ui raised very padded text container segment" ng-controller="SettingsController as ctrl">
+  <h2>Email Preferences</h2>
 
-    <h2>Email Preferences</h2>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <h3>Followers</h3>
+          I would like to receive emails when I receive a new follower.
+        </td>
+        <td>
+          <p>
+          </p>
+          <label class="checkbox-inline"><checkbox type="checkbox" ng-model="ctrl.wantFollowerEmails" ng-disabled="ctrl.blockEditing"/></label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Invitations</h3>
+          I would like to receive emails about new, deleted and updated invitations for mentorship.
+        </td>
+        <td>
+          <label class="checkbox-inline"><checkbox type="checkbox" ng-model="ctrl.wantInvitationEmails" ng-disabled="ctrl.blockEditing"/></label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Messages</h3>
+          I would like to receive emails when I receive new messages in my inbox.
+        </td>
+        <td>
+          <label class="checkbox-inline"><checkbox type="checkbox" ng-model="ctrl.wantChatEmails" ng-disabled="ctrl.blockEditing"/></label>
+        </td>
+      </tr>
+      <tr>
+        <td><h2>Account Preferences</h2></td>
+        <td><a class="btn btn-danger" href="{{'/api/users/settings/deleteAccount/' + ctrl.username}}" ng-disabled="ctrl.blockEditing">Delete account</a></td>
+      </tr>
+    </tbody>
+  </table>
 
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><h3>Followers</h3>
-              I would like to receive emails when I receive a new follower.
-            </td>
-            <td>
-              <p>
-              </p>
-              <label class="checkbox-inline"><checkbox type="checkbox" ng-model="ctrl.wantFollowerEmails" ng-disabled="ctrl.blockEditing"/></label>
-              
-            </td>
-          </tr>
-
-          <tr>
-            <td><h3>Invitations</h3>
-            I would like to receive emails about new, deleted and updated invitations for mentorship.
-          </td>
-
-            <td>
-                <label class="checkbox-inline"><checkbox type="checkbox" ng-model="ctrl.wantInvitationEmails" ng-disabled="ctrl.blockEditing"/></label>
-            </td>
-          </tr>
-
-          <tr>
-            <td><h3>Messages</h3>
-              I would like to receive emails when I receive new messages in my inbox.
-            </td>
-            <td>
-                <label class="checkbox-inline"><checkbox type="checkbox" ng-model="ctrl.wantChatEmails" ng-disabled="ctrl.blockEditing"/></label>
-            </td>
-          </tr>
-
-          <tr>
-            <td><h2>Account Preferences</h2></td>
-            <td><a class="btn btn-danger" href="{{'/api/users/settings/deleteAccount/' + ctrl.username}}" ng-disabled="ctrl.blockEditing">Delete account</a></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <button class="btn btn-default" ng-click="ctrl.editPreferences()" ng-disabled="!ctrl.blockEditing">Edit Preferences</button>
-      <button class="btn btn-default" ng-click="ctrl.savePreferences()" ng-disabled="ctrl.blockEditing">Save Preferences</button>
-
+  <button class="btn btn-default" ng-click="ctrl.editPreferences()" ng-disabled="!ctrl.blockEditing">Edit Preferences</button>
+  <button class="btn btn-default" ng-click="ctrl.savePreferences()" ng-disabled="ctrl.blockEditing">Save Preferences</button>
 
 </div>
 <footer-dir></footer-dir>

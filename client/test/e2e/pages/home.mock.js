@@ -1,6 +1,6 @@
 'use strict';
 
-function IndexPage() {
+function HomePage() {
   this.button = element(by.id('button-login'));
 
   this.get = function() {
@@ -12,4 +12,4 @@ function IndexPage() {
   }
 }
 
-module.exports = IndexPage;
+module.exports = HomePage;

@@ -1,14 +1,16 @@
-var IndexPage = require('./pages/index.page')
+'use strict';
+
+var HomePage = require('./pages/home.mock');
 
 describe("app", function () {
 
-  var page = new IndexPage();
+  var page = new HomePage();
 
   beforeEach(function() {
     page.get();
   });
 
-  describe("index", function () {
+  describe("home page", function () {
 
     it("should display the correct title", function () {
       expect(page.getTitle()).toBe('MatchJS');

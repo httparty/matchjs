@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: AuthController', function() {
 
   var $httpBackend;

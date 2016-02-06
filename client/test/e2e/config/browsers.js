@@ -1,3 +1,5 @@
+'use strict';
+
 exports.chrome = {
   name: 'Chrome',
   browserName: 'chrome'

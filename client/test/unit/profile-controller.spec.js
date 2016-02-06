@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: ProfileController', function() {
 
   var $httpsBackend;

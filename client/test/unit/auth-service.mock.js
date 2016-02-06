@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('mock.auth-service', []).
   factory('MockAuthService', function() {
     var MockAuthService = {};
@@ -13,3 +15,5 @@ angular.module('mock.auth-service', []).
     
     return MockAuthService;
 });
+
+  

@@ -1,3 +1,5 @@
+'use strict';
+
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cors = require('cors');
@@ -30,22 +32,9 @@ module.exports = function(app, express) {
   app.use('/api/invitations', invitationsRouter);
   app.use('/api/calendar', calendarRouter);
 
-  app.get('/failure', function(req, res) {
+  app.get('*', function(req, res){
     res.status('404');
-    res.send('you don\'t have access to that resource. redirecting to sign in.');
-  });
-
-  app.get('/resource', githubSessions.restrict, function(req, res) {
-    res.status('200');
-    res.send('you have access to this resource');
-  });
-
-  app.get('/logout', function(req, res) {
-    req.session.destroy(function() {
-      res.clearCookie('connect.sid', { path: '/' });
-      res.clearCookie('user-profile');
-      res.redirect('/');
-    });
+    res.redirect('/');
   });
 
   require(__dirname + './../auth/authRoutes.js')(authRouter);

@@ -1,3 +1,5 @@
+'use strict';
+
 //Use this config to run locally
 //without Sauce connect
 //webdriver-manager start

@@ -26,13 +26,6 @@
         });
       };
 
-      model.deleteAccount = function(userObj){
-        return $http({
-          method: 'DELETE',    //Change to delete eventually
-          url: '/api/users/settings/deleteAccount/' + userObj.username    //May need to add username property on top
-        });
-      };
-
       return model;
 
   });

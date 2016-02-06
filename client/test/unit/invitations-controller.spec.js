@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: InvitationsController', function() {
 
   var $httpBackend;

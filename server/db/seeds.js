@@ -1,3 +1,5 @@
+'use strict';
+
 var db = require('./config.js');
 var async = require('async');
 var _ = require('underscore');
@@ -51,9 +53,4 @@ var seedUsers = function() {
     }
   });
 };
-
-var seedInvitations = function() {
-
-};
-
 // seedUsers();
