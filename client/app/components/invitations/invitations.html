@@ -67,6 +67,11 @@
       </div>
     </div>
     <br>
+
+
+    <uib-alert ng-repeat="alert in ctrl.alerts" type="{{alert.type}}" close="ctrl.closeAlert()">{{alert.msg}}</uib-alert>
+
+
     <div class="row">
       <div class="col-sm-12">
         <div class="guidelinesFooter">

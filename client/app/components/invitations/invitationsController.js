@@ -25,6 +25,7 @@
 
     Profile.getUserProfile($state.params).then(function(response){
       vm.recipientProfile = response.data;
+      if(vm.recipientProfile === ""){ $state.go('home')}
       vm.recipientName = vm.recipientProfile.name;
       vm.formData.menteeEmail = vm.recipientProfile.email;
     });
@@ -61,7 +62,6 @@
 
 
 
-
 //Helper Functions
 
     //Toggles AM/PM or 24HR
@@ -88,12 +88,23 @@
 
     vm.roundTime(); //Immediately Invoked
 
+    //Alerts
+    vm.alerts = [];
+    vm.addAlert = function() {
+      if(vm.alerts.length === 0){
+        vm.alerts.push({type: 'danger', msg: 'Please fill out all of the form fields'});
+      }
+    };
+    vm.closeAlert = function() {
+      vm.alerts = [];
+    };
+
 //Submission Functions
 
     //No submission if form is incomplete
     vm.attemptSubmit = function() {
       if(!vm.formData.sessionInfo || !vm.formData.sessionInfo.summary || !vm.formData.sessionInfo.where){
-          alert('Please fill out all of the fields!');
+        vm.addAlert();
         return false;
       }
       else{
