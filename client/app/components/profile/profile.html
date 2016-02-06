@@ -151,8 +151,8 @@
               <p><b>Mentee:</b> <a ui-sref="profile({username: invite['recipientName']})">{{invite['recipientName']}}</a></p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
             </div>
-            <div class="editButton" ng-hide="invite['readOnly']">
-              <button class="btn btn-default btn-sm" ng-click="ctrl.toggleInviteEditForm(); ctrl.editMode.inviteEditMode = $index">Edit</button>
+            <div class="editButton" ng-hide="invite['readOnly']; toggle">
+              <button class="btn btn-default btn-sm" ng-click="ctrl.toggleInviteEditForm(); ctrl.editMode.inviteEditMode = $index; toggle = !toggle;">Edit</button>
               <button class="btn btn-default btn-sm teal-button" ng-click="ctrl.deleteInvite(invite)">Delete</button>
             </div>
             <form ng-show="ctrl.editMode.inviteEditMode=== $index" ng-init="ctrl.inviteUpdate={}; ctrl.updateSent = false;" ng-submit="ctrl.updateInvite(invite.senderName, invite.recipientName, invite.id, ctrl.inviteUpdate);">
@@ -164,7 +164,7 @@
                     <uib-timepicker ng-model="ctrl.inviteUpdate.date" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
                 <!-- Date-->
                     <div class="input-group">
-                      <input type="text" class="form-control" uib-datepicker-popup="{{invCtrl.format}}" ng-model="ctrl.inviteUpdate.date" is-open="invCtrl.isCalendarOpen" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="invCtrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
+                      <input type="text" class="form-control" uib-datepicker-popup="{{invCtrl.format}}" ng-model="ctrl.inviteUpdate.date" is-open="invCtrl.isCalendarOpen" min-date="ctrl.minDate" max-date="ctrl.maxDate" datepicker-options="ctrl.dateOptions" ng-required="false" placeholder="{{invite['when']}}" close-text="Close" alt-input-formats="invCtrl.altInputFormats" id="dateSelector" placeholder="Select a date from the calendar"/>
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default teal-button" ng-click="invCtrl.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
@@ -174,9 +174,9 @@
               <p><b>Mentor:</b> {{invite['senderName']}}</p>
               <p><b>Mentee:</b> {{invite['recipientName']}}</p>
               <p><b>Summary:</b> {{invite['summary']}}</p>
-              <button class="btn btn-default btn-sm teal-button submitInvite" type="submit" ng-click="ctrl.updateSent=true; toggle = !toggle;" ng-hide="toggle">Save</button>
-              <p ng-show="toggle"><i>{{ctrl.UImessages.inviteUpdated}}</i></p>
-              <p class="help-block" ng-show="!toggle">Update your mentorship session and notify {{invite['recipientName']}}</p>
+              <button class="btn btn-default btn-sm teal-button submitInvite" type="submit" ng-click="ctrl.updateSent=true;">Save</button>
+              <p ng-show="ctrl.updateSent=true"><i>{{ctrl.UImessages.inviteUpdated}}</i></p>
+              <p class="help-block" ng-show="ctrl.updateSent!=true">Update your mentorship session and notify {{invite['recipientName']}}</p>
             </form>
             <br>
             <hr>
