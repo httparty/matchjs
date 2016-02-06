@@ -30,7 +30,7 @@ var generateToTeachRank = function(currentUser, usersArray) {
 };
 
 /*************************************************************
-Generates a vluae that represents the number of skills
+Generates a value that represents the number of skills
 a user would like to learn that the current user would
 also like to learn
 **************************************************************/
