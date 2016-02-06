@@ -2,6 +2,9 @@ var passport = require('passport');
 var helpers = require('../db/helpers.js');
 var mailer = require('../config/mailer.js');
 
+/*************************************************************
+Set user profile information for login session
+**************************************************************/
 var setCookieProfile = function(userObj) {
   var profile = {
     id: userObj.id,
@@ -15,6 +18,10 @@ var setCookieProfile = function(userObj) {
   return profile;
 };
 
+/*************************************************************
+Email template for sending confirmation email upon initial 
+login
+**************************************************************/
 var setMailOptions = function(userObj) {
   var mailOptions = {
     from: 'MatchJS <matchjsteam@gmail.com>',
@@ -47,18 +54,20 @@ module.exports = {
       } else {
 
         //if user not found and email is available
+        //add user to DB, set cookie profile
+        //send signup email, and redirect to user's
+        //profile
         if (req.user._json.email) {
-          //add user to DB and set cookie profile
+
           helpers.addUser(req.user)
           .then(function(user) {
 
             var cookie = setCookieProfile(req.user);
             res.cookie('user-profile', cookie, { maxAge: 2592000000 });  // Expires in one month
 
-            //send signup email
             var mailOptions = setMailOptions(req.user);
             mailer(mailOptions);
-            //redirect to user's profile
+
             var profileURL = '/#/profile/' + req.user.username;
             res.redirect(profileURL);
           });
@@ -66,6 +75,7 @@ module.exports = {
         } else {
 
           //if user not found and email is not available
+          //redirect to client to prompt for email
           res.redirect('/#/auth');
         }
       }
@@ -86,6 +96,7 @@ module.exports = {
       //send signup email
       var mailOptions = setMailOptions(req.user);
       mailer(mailOptions);
+      
       //redirect to user's profile
       var profileURL = '/#/profile/' + req.user.username;
       res.redirect(profileURL);

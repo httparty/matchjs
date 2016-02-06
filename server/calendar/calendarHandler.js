@@ -5,7 +5,12 @@ var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_CALLBACK);
 
-//Passport Strategy for Google
+/*************************************************************
+Upon requesting to export to Google calendar,
+user is authenticated with Passport Google strategy
+to attain OAuth2 credentials
+**************************************************************/
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -37,7 +42,7 @@ module.exports = {
 
   exportGoogleCalendar: function(req, res) {
 
-    //check to see if authorized with google
+    //check to see if authorized with Google
     //if not authorized, go to authorization route
     //and set event info in session
     if (!req.user || !req.user.accessToken) {
@@ -52,6 +57,7 @@ module.exports = {
       req.session.mentorshipEvent = mentorshipEvent;
       res.redirect('/api/calendar/auth/google');
 
+    //if user is authorized with Google
     } else {
 
       oauth2Client.setCredentials({
@@ -59,6 +65,7 @@ module.exports = {
         refresh_token: req.user.refreshToken
       });
 
+      //Set up Calendar event
       var summary = req.query.summary || req.session.mentorshipEvent.summary;
       var description = req.query.description || req.session.mentorshipEvent.description;
       var start = req.query.start || req.session.mentorshipEvent.start;
@@ -86,6 +93,7 @@ module.exports = {
           console.log('There was an error contacting the Google Calendar service: ' + err);
           return;
         }
+        
         //redirect to newly exported event
         res.redirect(event.htmlLink);
       });
