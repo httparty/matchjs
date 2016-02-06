@@ -79,20 +79,11 @@
       vm.isCalendarOpen = true;
     };
 
-    //Add zero to minutes if under 10
-    vm.displayMinutesCorrectly = function(){
-      var t = vm.date.getMinutes();
-      if(t < 10){
-        return '0' + t;
-      }
-      return t;
-    };
-
 
     //Rounds the time to nearest 15 minutes
     vm.roundTime = function(){
       var currentMinute = vm.date.getMinutes();
-      vm.date.setMinutes(currentMinute + 15 - currentMinute % 15);
+      vm.date.setMinutes(currentMinute + vm.mstep - currentMinute % vm.mstep);
     };
 
     vm.roundTime(); //Immediately Invoked
@@ -103,9 +94,11 @@
     vm.attemptSubmit = function() {
       if(!vm.formData.sessionInfo || !vm.formData.sessionInfo.summary || !vm.formData.sessionInfo.where){
           alert('Please fill out all of the fields!');
+        return false;
       }
       else{
         vm.createInvitation();
+        return true;
       }
     };
 
