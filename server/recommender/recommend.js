@@ -2,19 +2,6 @@ var _ = require('underscore');
 var rank = {};
 
 /*************************************************************
-Generates the total karma points for a user
-**************************************************************/
-
-var generateKarmaRank = function(currentUser, usersArray) {
-
-  _.each(usersArray, function(user){
-    var karmaRank = user.dataValues.karmaPoints;
-    rank[user.dataValues.username] = (rank[user.dataValues.username] || 0)  + karmaRank;
-  });
-  // console.log("RANK", rank);
-};
-
-/*************************************************************
 Generates a value that represents the number of skills
 a user is willing to teach that the current user would like
 to learn
@@ -27,16 +14,6 @@ var generateToTeachRank = function(currentUser, usersArray) {
     rank[user.dataValues.username] = (rank[user.dataValues.username] || 0)  + teachRank;
   });
   // console.log("RANK", rank);
-};
-
-/*************************************************************
-Generates a value that represents the number of skills
-a user would like to learn that the current user would
-also like to learn
-**************************************************************/
-
-var generateToLearnRank = function(currentUser, usersArray) {
-
 };
 
 /*************************************************************
@@ -63,7 +40,6 @@ exports.getRecommendations = function(usersArray, username) {
 
   //populate rank object with appropriate ranks
   generateToTeachRank(currentUser, usersArray);
-  generateKarmaRank(currentUser, usersArray);
 
   //sort usersArray based on rank number in rank object
   usersArray.sort(function(a, b){
