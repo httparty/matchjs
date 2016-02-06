@@ -3,7 +3,7 @@ angular.module('mock.auth-service', []).
     var MockAuthService = {};
 
     MockAuthService.isAuthenticated = function() {
-      return "hello";
+      return true;
     };
     
     MockAuthService.getCurrentUser = function() {
