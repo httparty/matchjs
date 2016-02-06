@@ -15,9 +15,10 @@ module.exports = {
         from: 'MatchJS <matchjsteam@gmail.com>',
         to: req.body.email,
         subject: 'New Message Received on MatchJS!',
-        html: 'Hello '+req.body.name+',<br><br>'
-        +'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
-        +'<br><br>'+'<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to read it!'
+        html: '<h3>Hello '+req.body.name+', </h3><br><br>'
+        + 'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
+        + '<br>' + '<p>' + req.body.message  + '</p>'
+        + '<br>' + '<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to reply!'
       };
 
       if(user.wantChatEmails){
