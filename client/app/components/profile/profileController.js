@@ -86,21 +86,24 @@
 
     //---------SHARED BY BASICS & SKILLS---------------
     var updateProfile = function(userObj) {
+      console.log('HERE IS USEROBJ IN UPDATE PROFILE', userObj);
+      console.log('here is vm.skills.toLearn', vm.skills.toLearn);
+      console.log('here is vm.skills.toTeach', vm.skills.toTeach);
       for(var learnKey in vm.skills.toLearn) {
-          if(!_.contains(vm.skills.toLearn, learnKey)) {
-            userObj.toLearn.push(learnKey);
-          }
-          if(!vm.skills.toLearn[learnKey]) {
+          if(vm.skills.toLearn[learnKey] === false && _.contains(userObj.toLearn, learnKey)) {
             userObj.toLearn.splice(userObj.toLearn.indexOf(learnKey),1);
+          }
+          if(vm.skills.toLearn[learnKey] === true && !_.contains(userObj.toLearn, learnKey)) {
+            userObj.toLearn.push(learnKey);
           }
       }
       for(var teachKey in vm.skills.toTeach) {
-        if(!_.contains(vm.skills.toTeach, teachKey)) {
+        if(vm.skills.toTeach[teachKey] === false && _.contains(userObj.toTeach, teachKey)) {
+            userObj.toTeach.splice(userObj.toTeach.indexOf(teachKey),1);
+          }
+          if(vm.skills.toTeach[teachKey] === true && !_.contains(userObj.toTeach, teachKey)) {
             userObj.toTeach.push(teachKey);
-        }
-        if(!vm.skills.toTeach[teachKey]) {
-          userObj.toTeach.splice(userObj.toTeach.indexOf(teachKey),1);
-        }
+          }
       }
       Profile.updateProfile(userObj) 
       .then(function(response) {
@@ -256,7 +259,10 @@
         vm.profileUser.firstName = nameArr[0];
         vm.profileUser.github = response.data.github;
         vm.profileUser.karmaPoints = response.data.karmaPoints;
-        vm.profileUser.summary =	response.data.summary;
+        vm.profileUser.summary = response.data.summary;
+//========take out below console.log
+        console.log('original response.data from getUserProfile', response.data);
+//========
         response.data.toLearn.forEach(function(skill) {
           vm.skills.toLearn[skill] = true;
         });

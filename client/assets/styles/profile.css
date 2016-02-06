@@ -159,7 +159,11 @@ html, body, .container-table {
 }
 
 /*.checkbox.btn-default:checked <-- doesn't seem to be doing anything*/
-
+.checkbox-inline .btn-default:focus,
+.checkbox-inline .btn-default:active:focus,
+.checkbox-inline .btn-default:active:hover {
+  background-color: #ffffff !important;
+}
 .checkbox.btn-default:hover,
 .checkbox.btn-default:active {
   background-color: #ffffff !important;
@@ -168,32 +172,23 @@ html, body, .container-table {
   border-style: solid !important;
 }
 
-.checkbox-inline-default:active:hover,
-.open>.dropdown-toggle.checkbox-inline-default:hover,
-.checkbox-inline-default:active:focus,
-.checkbox-inline-default.active:focus,
-.open>.dropdown-toggle.checkbox-inline-default:focus,
-.checkbox-inline-default:active.focus,
-.checkbox-inline-default.active.focus,
-.open>.dropdown-toggle.checkbox-inline-default.focus {
-  background-color: #ffffff !important;
+.checkbox-inline .checkbox[disabled],
+.checkbox-inline .checkbox[disabled]:hover,
+.checkbox-inline .checkbox[disabled]:active,
+.checkbox-inline .checkbox[disabled]:focus,
+.checkbox-inline .checkbox[disabled]:active:focus,
+.checkbox-inline .checkbox[disabled]:active:hover {
+  background: #ffffff !important;
   border-color: #DFD7CA !important;
-  border-width: 1px !important;
-  border-style: solid !important;
 }
 
 
-.checkbox-inline-default:focus,
-.checkbox-inline-default.focus{
-  background-color: #ffffff !important;
-  border-color:rgba(0,0,0,0) !important;
-}
+  /*cursor: default;
+  border: #DFD7CA !important;*/
 
-.checkbox-inline-default:active,
-.checkbox-inline-default.active,
 .open>.dropdown-toggle.selectBar-default {
   background-color: #ffffff !important;
-  border-color:rgba(0,0,0,0) !important;
+  border-color: #DFD7CA !important;
 }
 
 .checkbox-inline+.checkbox-inline {
@@ -220,3 +215,19 @@ html, body, .container-table {
 .row {
   height: auto;
 }
+/*
+==========================================
+==========================================
+==========================================*/
+
+
+
+
+/*.form-inline .form-control{display:inline-block;width:auto;vertical-align:middle}.form-inline .form-control-static{display:inline-block}.form-inline .input-group{display:inline-table;vertical-align:middle}
+
+
+  .form-inline .has-feedback .form-control-feedback{top:0}}.form-horizontal .radio,.form-horizontal .checkbox,.form-horizontal .radio-inline,.form-horizontal .checkbox-inline{
+    margin-top:0;
+    margin-bottom:0;
+    padding-top:13px
+  }*/

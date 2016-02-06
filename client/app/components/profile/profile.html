@@ -54,7 +54,7 @@
                   <form>
                     <h4 ng-hide='!ctrl.editMode.isSameUser'>I want to teach:</h4>
                     <h4 ng-hide='ctrl.editMode.isSameUser'>{{ctrl.profileUser.firstName || ctrl.profileUser.username}} wants to teach:</h4>
-                    <div class="toTeach" ng-model="skills.toTeach">
+                    <div>
                       <ng-form>
                         <label class="checkbox-inline" ng-repeat="skill in ctrl.skills.collection">
                           <checkbox class="checkbox" ng-model="ctrl.skills.toTeach[skill]" ng-checked="ctrl.skills.toTeach[skill]" ng-disabled="ctrl.saveEditButton.skills.buttonText ==='Edit'" /> {{skill}}
