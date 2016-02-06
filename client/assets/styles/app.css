@@ -10,6 +10,49 @@
 .teal-href:hover {
   color:  #00676C; 
 }
+
+.badge {
+  background-color: #F10026 !important; 
+  margin-left: 3px !important;
+  bottom: 5px !important;
+  vertical-align: top !important;
+  padding-right: 7px !important; 
+  padding-left: 7px !important;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  display: inline !important;
+}
+
+/*.badge {display:inline-block;min-width:10px;padding:3px 7px;font-size:12px;font-weight:normal;color:#ffffff;line-height:1;vertical-align:middle;white-space:nowrap;text-align:center;background-color:#93c54b;border-radius:10px}
+
+.badge:empty{display:none}
+.btn .badge{position:relative;
+  top:-1px
+}
+.btn-xs .badge,.btn-group-xs>.btn .badge{
+    top:0;padding:1px 5px
+}
+a.badge:hover,a.badge:focus{
+  color:#ffffff;text-decoration:none;cursor:pointer
+  }
+.list-group-item.active>.badge,.nav-pills>.active>a>.badge{
+  color:#ffffff;
+  background-color:#93c54b
+}
+
+.list-group-item>.badge{
+  float:right
+}
+
+.list-group-item>.badge+.badge{
+  margin-right:5px
+}
+.nav-pills>li>a>.badge{
+  margin-left:3px
+}*/
+
+
+
 /*BUTTON FIX*/
 
 .btn-link {
