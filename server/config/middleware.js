@@ -30,24 +30,6 @@ module.exports = function(app, express) {
   app.use('/api/invitations', invitationsRouter);
   app.use('/api/calendar', calendarRouter);
 
-  app.get('/failure', function(req, res) {
-    res.status('404');
-    res.send('you don\'t have access to that resource. redirecting to sign in.');
-  });
-
-  app.get('/resource', githubSessions.restrict, function(req, res) {
-    res.status('200');
-    res.send('you have access to this resource');
-  });
-
-  app.get('/logout', function(req, res) {
-    req.session.destroy(function() {
-      res.clearCookie('connect.sid', { path: '/' });
-      res.clearCookie('user-profile');
-      res.redirect('/');
-    });
-  });
-
   require(__dirname + './../auth/authRoutes.js')(authRouter);
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
   require(__dirname + './../email/emailRoutes.js')(emailRouter);

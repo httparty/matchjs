@@ -90,5 +90,13 @@ module.exports = {
       var profileURL = '/#/profile/' + req.user.username;
       res.redirect(profileURL);
     });
+  },
+
+  logOut: function(req, res) {
+    req.session.destroy(function() {
+      res.clearCookie('connect.sid', { path: '/' });
+      res.clearCookie('user-profile');
+      res.redirect('/');
+    });
   }
 };

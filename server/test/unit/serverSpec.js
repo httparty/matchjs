@@ -15,19 +15,6 @@ middleware(app, express);
 
 describe('Server Spec', function() {
 
-  it('it gets the resource route', function(done) {
-
-    request(app)
-      .get('/resource')
-      .expect(302)
-      .end(function(err, res) {
-        if (err) {
-          throw err;
-        }
-        done();
-      });
-  });
-
   describe('/api/users routes', function() {
 
     it('it gets a user profile', function(done) {

@@ -93,7 +93,7 @@ module.exports = {
   deleteAccount: function(req, res) {
     helpers.deleteUser(req.params)
     .then(function(user){
-      res.redirect('/logout');
+      res.redirect('/auth/logout');
     });
   },
 

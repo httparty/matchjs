@@ -110,9 +110,7 @@ module.exports = {
 
   invitationConfirm: function(inviteObj){
 
-
     var appointment = moment(inviteObj.sessionInfo.when);
-
 
     var mailOptionsMentor = {
       from: "MatchJS <matchjsteam@gmail.com>",
@@ -123,7 +121,7 @@ module.exports = {
       "<h5>Where:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
       "<h5>Who:</h5>" + "<p>" + inviteObj.mentee + "</p>" +
       "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
-      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='http://127.0.0.1:5000/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentee + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
+      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentee + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
       "<h2>Enjoy your meeting!</h2>"
     };
 
@@ -136,7 +134,7 @@ module.exports = {
       "<h5>Location:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
       "<h5>Who:</h5>" + "<p>" + inviteObj.mentor + "</p>" +
       "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
-      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='http://127.0.0.1:5000/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentor + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
+      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentor + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
       "<h2>Enjoy your meeting!</h2>"
     };
 
