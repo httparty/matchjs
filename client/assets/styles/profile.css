@@ -24,7 +24,7 @@
 
 .tabbedPanel {
   overflow-y: scroll !important;
-  max-height: 720px;
+  max-height: 385px !important; 
 }
 
 .followUsername {
@@ -34,6 +34,11 @@
 .invitationsPanelBody {
   overflow-y: scroll !important;
   max-height: 724.5px !important;
+}
+
+.followPanel {
+  overflow-y: scroll !important;
+  max-height: 385px !important; 
 }
 
 .profileBasics {
@@ -132,31 +137,38 @@ html, body, .container-table {
   height: 25px;
 }
 
-/*.btn-success {
+.btn-success {
   background-color: #D58E00 !important; 
 }
 .btn-danger {
   background-color: #F10026 !important; /*Nice red color*/
 }
-/*.btn-primary {
+.btn-primary {
   background-color: #42B1D6 !important;
-}*/
+}
+
+.glyphicon {
+  color: #000000 !important;
+}
 
 .checkbox.btn-default {
-  /*background-color: #ffffff !important;
+  background-color: #ffffff !important;
   border-color: #DFD7CA !important;
   border-width: 1px !important;
   border-style: solid !important;
 }
 
-.checkbox.btn-default:hover {
-  /*background-color: #ffffff !important;*/
+/*.checkbox.btn-default:checked <-- doesn't seem to be doing anything*/
+
+.checkbox.btn-default:hover,
+.checkbox.btn-default:active {
+  background-color: #ffffff !important;
   border-color: #DFD7CA !important;
   border-width: 1px !important;
   border-style: solid !important;
 }
 
-/*.checkbox-inline-default:active:hover,
+.checkbox-inline-default:active:hover,
 .open>.dropdown-toggle.checkbox-inline-default:hover,
 .checkbox-inline-default:active:focus,
 .checkbox-inline-default.active:focus,
@@ -168,7 +180,21 @@ html, body, .container-table {
   border-color: #DFD7CA !important;
   border-width: 1px !important;
   border-style: solid !important;
-}*/
+}
+
+
+.checkbox-inline-default:focus,
+.checkbox-inline-default.focus{
+  background-color: #ffffff !important;
+  border-color:rgba(0,0,0,0) !important;
+}
+
+.checkbox-inline-default:active,
+.checkbox-inline-default.active,
+.open>.dropdown-toggle.selectBar-default {
+  background-color: #ffffff !important;
+  border-color:rgba(0,0,0,0) !important;
+}
 
 .checkbox-inline+.checkbox-inline {
   margin-left: 0;
