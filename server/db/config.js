@@ -1,4 +1,6 @@
-require('dotenv').config(); //use for development
+'use strict';
+
+require('dotenv').config();
 var Sequelize = require('sequelize');
 var User = require('./models/users.js');
 var Message = require('./models/messages.js');
@@ -24,8 +26,12 @@ models.Padawan = new Padawan(sequelize, Sequelize);
 models.User.hasMany(models.Invitation);
 models.User.hasMany(models.Padawan);
 
+/*************************************************************
+Sync with Postgres
+If force is set to true, database tables will be dropped.
+**************************************************************/
+
 models.User.sync({force: false}).then(function(){
-  //Set force: true for development, false for deployment
 	console.log('User table created!');
 });
 
