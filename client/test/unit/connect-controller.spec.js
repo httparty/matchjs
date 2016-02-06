@@ -123,10 +123,56 @@ describe('Controller: ConnectController', function() {
         ConnectController.addName("Vivario");
         expect($rootScope.$broadcast).toHaveBeenCalledWith('query-changed');
     });
-    
   });
 
+  describe('Adding locations to search query', function () {
 
+    it("Adding a new location adds a query param to tags array", function() {
+      expect(ConnectController.tags.length).toBe(0);
+      ConnectController.addLocation("San Francisco");
+      expect(ConnectController.tags.length).toBe(1);
+    });
 
+    it("Selecting the same location twice does not add it more than once to tags array", function() {
+      expect(ConnectController.tags.length).toBe(0);
+      ConnectController.addLocation("San Francisco");
+      expect(ConnectController.tags.length).toBe(1);
+      ConnectController.addLocation("San Francisco");
+      expect(ConnectController.tags.length).toBe(1);
+    });
+  });
 
+  describe('Adding skills to search query', function () {
+
+    it("Adding a new skills adds a query param to tags array", function() {
+      expect(ConnectController.tags.length).toBe(0);
+      ConnectController.addSkill("AngularJS");
+      expect(ConnectController.tags.length).toBe(1);
+    });
+
+    it("Selecting the same skill twice does not add it more than once to tags array", function() {
+      expect(ConnectController.tags.length).toBe(0);
+      ConnectController.addSkill("AngularJS");
+      expect(ConnectController.tags.length).toBe(1);
+      ConnectController.addSkill("AngularJS");
+      expect(ConnectController.tags.length).toBe(1);
+    });
+  });
+
+  describe('Adding names to search query', function () {
+
+    it("Adding a new names adds a query param to tags array", function() {
+      expect(ConnectController.tags.length).toBe(0);
+      ConnectController.addName("Vivario");
+      expect(ConnectController.tags.length).toBe(1);
+    });
+
+    it("Selecting the same name twice does not add it more than once to tags array", function() {
+      expect(ConnectController.tags.length).toBe(0);
+      ConnectController.addName("Vivario");
+      expect(ConnectController.tags.length).toBe(1);
+      ConnectController.addName("Vivario");
+      expect(ConnectController.tags.length).toBe(1);
+    });
+  });
 });
