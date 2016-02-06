@@ -77,6 +77,21 @@ describe('Controller: InvitationsController', function() {
 
   });
 
+  describe('Invitations Model Testing', function(){
+    describe('Basic Tests', function(){
+      it('should be an object', function(){
+        expect(typeof Profile).toBe('object');
+      });
+
+      it('should have a getInvitationsByMentor method', function(){
+        expect(typeof Profile.getInvitationsByMentor).toBe('function');
+      });
+
+    });
+
+
+  });
+
   describe('Basic Functionality', function(){
     it('should have a createInvitation function', function(){
       expect(typeof invitationsModel.createInvitation).toBe('function');
