@@ -10,8 +10,10 @@ describe('Controller: InvitationsController', function() {
   var Profile;
   var $http;
   var $cookies;
-  var invitationsController;
   var $currentCookie;
+  var $scope;
+  var InvitationsController;
+  var $controller;
 
   beforeEach(module('app'));
   beforeEach(module('mock.auth-service'));
