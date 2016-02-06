@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: ConnectController', function() {
 
   var $httpBackend;

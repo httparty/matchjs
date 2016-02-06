@@ -1,3 +1,5 @@
+'use strict';
+
 var helpers = require('../db/helpers.js');
 var emailer = require('../email/emailHandler');
 

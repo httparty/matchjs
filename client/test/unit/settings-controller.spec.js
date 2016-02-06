@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: SettingsController', function() {
 
   var $httpBackend;

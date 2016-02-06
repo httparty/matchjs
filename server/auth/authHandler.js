@@ -1,3 +1,5 @@
+'use strict';
+
 var passport = require('passport');
 var helpers = require('../db/helpers.js');
 var mailer = require('../config/mailer.js');

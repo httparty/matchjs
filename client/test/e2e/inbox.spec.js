@@ -1,3 +1,5 @@
+'use strict';
+
 var InboxPage = require('./pages/inbox.mock');
 
 describe("app", function () {

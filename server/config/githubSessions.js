@@ -1,3 +1,5 @@
+'use strict';
+
 require('dotenv').load();
 var passport = require('passport');
 var cookieParser = require('cookie-parser');

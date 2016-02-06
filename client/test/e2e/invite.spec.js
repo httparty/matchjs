@@ -1,3 +1,5 @@
+'use strict';
+
 var InvitePage = require('./pages/invite.mock');
 
 describe("app", function () {

@@ -1,3 +1,5 @@
+'use strict';
+
 var calendarHandler = require('./calendarHandler.js');
 
 module.exports = function(app) {

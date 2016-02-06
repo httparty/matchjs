@@ -1,10 +1,12 @@
+'use strict';
+
 var mailer = require('../config/mailer.js');
 var moment = require('moment');
 var helpers = require('../db/helpers');
 
 module.exports = {
   sentMessage: function(req, res) {
-    // console.log(req.cookies['user-profile'].username, ':', req.body);
+
     var recipientUsername = req.body.username;
 
     helpers.getUserByUserName({username: req.body.username})
@@ -38,10 +40,6 @@ module.exports = {
     }
     return;
   },
-
-  // newInvitation: function(inviteData) {
-
-  // },
 
   inviteHasBeenUpdated: function(inviteData) {
     var mentorEmail = inviteData.mentorEmail;
@@ -99,15 +97,6 @@ module.exports = {
     return;
   },
 
-  // dayOfMeetingReminder: function(inviteData) {
-
-  // },
-
-  // receivedNewMessage: function(data) {
-
-  // },
-
-
   invitationConfirm: function(inviteObj){
 
     var appointment = moment(inviteObj.sessionInfo.when);
@@ -149,23 +138,3 @@ module.exports = {
     return;
   }
 };
-
-
-// { mentorEmail: 'spiterman@users.noreply.github.com',
-// menteeEmail: 'user2@email.com',
-// sessionInfo:
-// { where: 'asdfasdf',
-// summary: 'asdfasdf',
-// when: '2016-02-01T19:45:00.000Z' },
-// mentorUsername: 'spiterman',
-// menteeUsername: 'user2',
-// mentor: 'Sergey Piterman',
-// mentee: 'user2' }
-
-
-// <a href="http://127.0.0.1:5000/api/calendar/export
-// ?summary=test
-// &description=testing
-// &start=2014-09-08T08:02:17-05:00
-// &end=2014-09-08T08:02:17-05:00">
-// Submit request to export to Google Calendar Event</a>

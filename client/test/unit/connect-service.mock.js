@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('mock.connect-service', []).
   factory('MockConnectService', function() {
     var MockConnectService = {};

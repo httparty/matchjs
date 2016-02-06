@@ -1,3 +1,5 @@
+'use strict';
+
 var authHandler = require('./authHandler.js');
 
 module.exports = function(app) {

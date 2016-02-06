@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: InboxController', function() {
 
   var $httpBackend;

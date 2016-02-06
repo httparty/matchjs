@@ -1,3 +1,5 @@
+'use strict';
+
 var ProfilePage = require('./pages/profile.mock');
 
 describe("app", function () {

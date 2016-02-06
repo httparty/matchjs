@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: NavController', function() {
 
   var AuthService;

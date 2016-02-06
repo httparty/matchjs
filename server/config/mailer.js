@@ -1,3 +1,5 @@
+'use strict';
+
 require('dotenv').load();
 var nodemailer = require('nodemailer');
 

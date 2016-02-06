@@ -1,3 +1,5 @@
+'use strict';
+
 var ConnectPage = require('./pages/connect.mock');
 
 describe("app", function () {

@@ -1,3 +1,5 @@
+'use strict';
+
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cors = require('cors');

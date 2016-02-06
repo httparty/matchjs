@@ -1,3 +1,5 @@
+'use strict';
+
 var HomePage = require('./pages/home.mock');
 
 describe("app", function () {
