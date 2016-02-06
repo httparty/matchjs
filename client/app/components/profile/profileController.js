@@ -7,7 +7,10 @@
 
     var current = new Date();
 
+    var numInvites;
+
     var vm = this;
+
 
     vm.currentUser = angular.fromJson(AuthService.getCurrentUser());
 
@@ -162,7 +165,11 @@
               else {
                 vm.UImessages.noInvites = '';
               }
+                numInvites = invites.length;
                 vm.invitations = invites;
+
+                // $rootScope.$broadcast('InviteCountUpdated', {inviteCount: numInvites});
+
             });
         });
       });
