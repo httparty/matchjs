@@ -23,6 +23,7 @@
       var currentUser = angular.fromJson(AuthService.getCurrentUser());
       vm.username = currentUser.username;
       vm.name = currentUser.displayName;
+      vm.avatar = currentUser.avatar;
 
       /*************************************************************
       Current conversation

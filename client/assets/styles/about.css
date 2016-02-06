@@ -1,0 +1,11 @@
+#matchJSteam {
+  max-width: 150px;
+  max-height: 150px;
+  margin-left: -9%;
+}
+
+#devIcons {
+  color: #272727;
+  text-decoration: inherit;
+  font-size: 1.3em;
+}
