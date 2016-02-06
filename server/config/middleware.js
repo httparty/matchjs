@@ -30,6 +30,11 @@ module.exports = function(app, express) {
   app.use('/api/invitations', invitationsRouter);
   app.use('/api/calendar', calendarRouter);
 
+  app.get('*', function(req, res){
+    res.status('404');
+    res.redirect('/');
+  });
+
   require(__dirname + './../auth/authRoutes.js')(authRouter);
   require(__dirname + './../users/usersRoutes.js')(usersRouter);
   require(__dirname + './../email/emailRoutes.js')(emailRouter);
