@@ -33,8 +33,11 @@ module.exports = {
       from: 'MatchJS <matchjsteam@gmail.com>',
       to: mentorData.email,
       subject: 'You have a new follower on MatchJS!',
-      html: 'Hello '+ mentorData.username +',<br><br>'
-      + mentorData.padawan + ' is now following you on MatchJS! <a href="http://matchjs.herokuapp.com/#/profile/'+ mentorData.padawan +'">View their profile</a> and <a href="http://matchjs.herokuapp.com/#/invitations/'+ mentorData.padawan +'"> set up a mentorship session</a>.<br><br> Have a great Day!<br><br> - The MatchJS Team'
+      html: '<h3>Hello '+ mentorData.username +'!</h3>'
+      + '<p><b>' + mentorData.padawan + '</b>' + ' is now following you on MatchJS!</p>' +
+      '<p><a href="http://matchjs.herokuapp.com/#/profile/'+ mentorData.padawan +'">View their profile</a> and <a href="http://matchjs.herokuapp.com/#/invitations/'+ mentorData.padawan +'"> set up a mentorship session</a>.</p>' +
+      '<p>Have a great Day!</p>' +
+      '<p> - The MatchJS Team</p>'
     };
     if(mentorData.wantFollowerEmails){
       mailer(mailOptions);
@@ -107,8 +110,8 @@ module.exports = {
       to: inviteObj.mentorEmail,
       subject: "Your invitation has been sent!",
       html: "<h3>Your mentorship session with <i>" + inviteObj.mentee + "</i> has been scheduled!</h3>" +
-      "<p>On: " + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
-      "<p>@ " + inviteObj.sessionInfo.where + "</p>" +
+      "<p><b>On:</b> " + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
+      "<p><b>@</b> " + inviteObj.sessionInfo.where + "</p>" +
       "<h5>Here's a summary:</h5>" +
       "<p>" + inviteObj.sessionInfo.summary + "</p>" +
       "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentee + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Add to Google Calendar</a>" + "</p>" +
@@ -117,13 +120,11 @@ module.exports = {
 
     var mailOptionsMentee = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      // to: inviteObj.menteeEmail,
-      to: 'sergeypiterman@yahoo.com',
+      to: inviteObj.menteeEmail,
       subject: 'You have an invitation!',
       html: "<h3>You have an invitation from <i>" + inviteObj.mentor + "</i> to be your mentor!</h3>" +
-      "<p> On " + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
-      "<p>@ " + inviteObj.sessionInfo.where + "</p>" +
-      // "<h5>Who:</h5>" + "<p>" + inviteObj.mentor + "</p>" +
+      "<p><b>On:</b> " + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
+      "<p><b>@</b> " + inviteObj.sessionInfo.where + "</p>" +
       "<h5>Here's a summary of your meeting:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
       "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentor + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Add to Google Calendar</a>" + "</p>" +
       "<h3>Enjoy your meeting!</h3>" + "<p> - The MatchJS Team</p>"
