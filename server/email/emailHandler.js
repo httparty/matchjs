@@ -15,10 +15,10 @@ module.exports = {
         from: 'MatchJS <matchjsteam@gmail.com>',
         to: req.body.email,
         subject: 'New Message Received on MatchJS!',
-        html: '<h3>Hello '+req.body.name+', </h3><br><br>'
-        + 'You\'ve received a new message from '+req.cookies['user-profile'].displayName+'.'
-        + '<br>' + '<p>' + req.body.message  + '</p>'
-        + '<br>' + '<a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to reply!'
+        html: '<h3>Hello '+req.body.name+', </h3>'
+        + '<h5>You\'ve received a new message from '+req.cookies['user-profile'].displayName+'!</h5>'
+        + '<h4><i>"' + req.body.message  + '"</i></h4>'
+        + '<h5><a href="http://matchjs.herokuapp.com/#/connect">Login</a> now to reply!</h5>'
       };
 
       if(user.wantChatEmails){
@@ -106,26 +106,27 @@ module.exports = {
       from: "MatchJS <matchjsteam@gmail.com>",
       to: inviteObj.mentorEmail,
       subject: "Your invitation has been sent!",
-      html: "<h1>Your mentorship session has been scheduled!<h1><h3>Here are the details:</h3>" +
-      "<h5>When:</h5>" + "<p>" + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
-      "<h5>Where:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
-      "<h5>Who:</h5>" + "<p>" + inviteObj.mentee + "</p>" +
-      "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
-      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentee + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
-      "<h2>Enjoy your meeting!</h2>"
+      html: "<h3>Your mentorship session with <i>" + inviteObj.mentee + "</i> has been scheduled!</h3>" +
+      "<p>On: " + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
+      "<p>@ " + inviteObj.sessionInfo.where + "</p>" +
+      "<h5>Here's a summary:</h5>" +
+      "<p>" + inviteObj.sessionInfo.summary + "</p>" +
+      "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentee + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Add to Google Calendar</a>" + "</p>" +
+      "<h3>Enjoy your meeting!</h3>" + "<p> - The MatchJS Team</p>"
     };
 
     var mailOptionsMentee = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      to: inviteObj.menteeEmail,
+      // to: inviteObj.menteeEmail,
+      to: 'sergeypiterman@yahoo.com',
       subject: 'You have an invitation!',
-      html: "<h1>You have an invitation from a mentor!<h1><h3>Here are the details:</h3>" +
-      "<h5>When:</h5>" + "<p>" + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
-      "<h5>Location:</h5>" + "<p>" + inviteObj.sessionInfo.where + "</p>" +
-      "<h5>Who:</h5>" + "<p>" + inviteObj.mentor + "</p>" +
-      "<h5>Summary:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
-      "<h5>Link to Google Cal:</h5>" + "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentor + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Submit request to export to Google Calendar Event</a>" + "</p>" +
-      "<h2>Enjoy your meeting!</h2>"
+      html: "<h3>You have an invitation from <i>" + inviteObj.mentor + "</i> to be your mentor!</h3>" +
+      "<p> On " + appointment.format("dddd MMMM Do, YYYY @ h:mmA") + "</p>"+
+      "<p>@ " + inviteObj.sessionInfo.where + "</p>" +
+      // "<h5>Who:</h5>" + "<p>" + inviteObj.mentor + "</p>" +
+      "<h5>Here's a summary of your meeting:</h5>" + "<p>" + inviteObj.sessionInfo.summary + "</p>" +
+      "<p>" + "<a href='https://matchjs.herokuapp.com/api/calendar/export?summary=Mentorship meeting with " + inviteObj.mentor + "&description=" +  inviteObj.sessionInfo.summary  + "&start=" + appointment.format() + "&end=" + appointment.add(1, 'h').format() + "'>Add to Google Calendar</a>" + "</p>" +
+      "<h3>Enjoy your meeting!</h3>" + "<p> - The MatchJS Team</p>"
     };
 
     if(inviteObj.mentorEmailPreferences){
