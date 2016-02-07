@@ -53,17 +53,29 @@ module.exports = {
 
     var mailOptionsMentor = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      to: mentorEmail,
+      // to: mentorEmail,
+      to: 'sergeypiterman@yahoo.com',
       subject: 'Your upcoming mentorship session has been updated.',
-      html: 'Hello,<br><br>'+
-      'You\'ve recently updated the details of your mentorship session with ' + inviteData.recipientName + '. Your new meeting details are as follows: <br><br>' + 'Time & Date: ' + inviteData.when + '<br> Location: ' + inviteData.location + '<br><br> If you need to send a message directly to your mentee, log in to MatchJS.<br><br>Have a great mentorship session!<br><br> - The MatchJS Team'
+      html: '<h3>Hello,</h3>'+
+      '<p>You\'ve recently updated the details of your mentorship session with<b> ' + inviteData.recipientName + '</b>. Your new meeting details are as follows:</p>' +
+      '<p><b>Time & Date:</b> ' + moment(inviteData.when).format("dddd MMMM Do, YYYY @ h:mmA") + '</p>' +
+      '<p><b>Location:</b> ' + inviteData.location + '</p>' +
+      '<p> If you need to send a message directly to your mentee, log in to MatchJS.</p>'+
+      '<p>Have a great mentorship session!</p>'+
+      '<p> - The MatchJS Team</p>'
     };
     var mailOptionsMentee = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      to: menteeEmail,
+      // to: menteeEmail,
+      to: 'sergeypiterman@yahoo.com',
       subject: 'Please note: Your upcoming mentorship session has been modified.',
-      html: 'Hello,<br><br>'+
-      'Your mentorship session with ' + inviteData.senderName + ' has been updated. Your new meeting details are as follows: <br><br>' + 'Time & Date: ' + inviteData.when + '<br> Location: ' + inviteData.location + '<br><br> If you need to send a message to your mentor directly, log in to MatchJS.<br><br>Have a great mentorship session!<br><br> - The MatchJS Team'
+      html: '<h3>Hello,</h3>'+
+      '<p>Your mentorship session with<b> ' + inviteData.senderName + ' </b>has been updated. Your new meeting details are as follows: </p>' +
+      '<p><b>Time & Date:</b> ' + moment(inviteData.when).format("dddd MMMM Do, YYYY @ h:mmA") + '</p>' +
+      '<p><b>Location:</b> ' + inviteData.location + '</p>' +
+      '<p> If you need to send a message to your mentor directly, log in to MatchJS.</p>' +
+      '<p>Have a great mentorship session!</p>' +
+      '<p> - The MatchJS Team</p>'
     };
     if(mentorInvitationEmailPreferences){
       mailer(mailOptionsMentor);
@@ -80,17 +92,25 @@ module.exports = {
 
     var mailOptionsMentor = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      to: mentorEmail,
+      // to: mentorEmail,
+      to: 'sergeypiterman@yahoo.com',
       subject: 'Your upcoming mentorship session has been cancelled.',
-      html: 'Hello ' + inviteData.mentor.name + ',<br><br>'+
-      'You\'ve recently cancelled your mentorship session with ' + inviteData.mentee.name + ' on ' + inviteData.when + ' at ' + inviteData.location + '.<br><br> To reschedule your mentorship meeting or to send a message directly to your mentee, log in to MatchJS.<br><br>Thanks for being a member of the MatchJS community!<br><br> - The MatchJS Team'
+      html: '<h3>Hello ' + inviteData.mentor.name + ',</h3>'+
+      '<p>You\'ve recently cancelled your mentorship session with<b> ' + inviteData.mentee.name + ' </b>on<b> ' + moment(inviteData.when).format("dddd MMMM Do, YYYY @ h:mmA") + ' </b>at<b> ' + inviteData.location + '</b>.</p>' +
+      '<p> To reschedule your mentorship meeting or to send a message directly to your mentee, log in to MatchJS.</p>' +
+      '<p>Thanks for being a member of the MatchJS community!</p>' +
+      '<p> - The MatchJS Team</p>'
     };
     var mailOptionsMentee = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      to: menteeEmail,
+      // to: menteeEmail,
+      to: 'sergeypiterman@yahoo.com',
       subject: 'Please note: Your upcoming mentorship session has been cancelled.',
-      html: 'Hello ' + inviteData.mentee.name + ',<br><br>'+
-      'Your mentorship session on ' + inviteData.when + ' at ' + inviteData.location + ' with '+ inviteData.mentor.name + ' has been cancelled.<br><br>To send a message to your mentor or find another mentor to pair with, log in to MatchJS.<br><br>Thanks for being a member of the MatchJS community!<br><br> - The MatchJS Team'
+      html: '<h3>Hello ' + inviteData.mentee.name + ',</h3>'+
+      '<p>Your mentorship session on <b>' + moment(inviteData.when).format("dddd MMMM Do, YYYY @ h:mmA") + ' </b>at<b> ' + inviteData.location + ' </b>with <b>'+ inviteData.mentor.name + '</b> has been cancelled.</p>'+
+      '<p>To send a message to your mentor or find another mentor to pair with, log in to MatchJS.</p>'+
+      '<p>Thanks for being a member of the MatchJS community!</p>' +
+      '<p> - The MatchJS Team</p>'
     };
     if(inviteData.mentorInvitationEmailPreferences){
       mailer(mailOptionsMentor);
