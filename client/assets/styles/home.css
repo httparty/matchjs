@@ -45,9 +45,16 @@
       /*margin-right: 2%;*/
     }
 
+    #landing-image {
+      background-image: url('assets/img/bg.jpg') !important;
+      background-size: cover !important;
+    }
     .masthead.segment {
       min-height: 500px;
       padding: 7em 0em;
+      /*background-color: #000000 !important;*/
+      /*background-image: url('assets/img/bg.jpg') !important;
+      background-size: cover !important;*/
     }
     .masthead .logo.item img {
       margin-right: 1em;
