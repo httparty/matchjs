@@ -38,9 +38,6 @@
           <h3 class="ui dividing header">Conversation with <a class="teal-href" href="{{'/#/profile/'+ ctrl.currentRecipient}}">{{ctrl.currentRecipientName}}</a></h3>
           <div class="panel-body"  id="panel-chat" scroll-glue>
             <div class="comment" ng-model="ctrl.currentMessageList" ng-repeat="message in ctrl.currentMessageList track by $index">
-              <a class="ui avatar image">
-                <img ng-src="{{ctrl.avatar || 'http://placehold.it/80x80'}}" style=" width: 40px; height: 40px">
-              </a>
               <div class="content">
                 <a class="author">{{message.from}}</a>
                 <div class="metadata">
