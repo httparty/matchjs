@@ -25,7 +25,7 @@
 
     Profile.getUserProfile($state.params).then(function(response){
       vm.recipientProfile = response.data;
-      if(vm.recipientProfile === ""){ $state.go('home')}
+      if(vm.recipientProfile === ''){ $state.go('home')};
       vm.recipientName = vm.recipientProfile.name;
       vm.formData.menteeEmail = vm.recipientProfile.email;
     });

@@ -53,8 +53,7 @@ module.exports = {
 
     var mailOptionsMentor = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      // to: mentorEmail,
-      to: 'sergeypiterman@yahoo.com',
+      to: mentorEmail,
       subject: 'Your upcoming mentorship session has been updated.',
       html: '<h3>Hello,</h3>'+
       '<p>You\'ve recently updated the details of your mentorship session with<b> ' + inviteData.recipientName + '</b>. Your new meeting details are as follows:</p>' +
@@ -66,8 +65,7 @@ module.exports = {
     };
     var mailOptionsMentee = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      // to: menteeEmail,
-      to: 'sergeypiterman@yahoo.com',
+      to: menteeEmail,
       subject: 'Please note: Your upcoming mentorship session has been modified.',
       html: '<h3>Hello,</h3>'+
       '<p>Your mentorship session with<b> ' + inviteData.senderName + ' </b>has been updated. Your new meeting details are as follows: </p>' +
@@ -92,8 +90,7 @@ module.exports = {
 
     var mailOptionsMentor = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      // to: mentorEmail,
-      to: 'sergeypiterman@yahoo.com',
+      to: mentorEmail,
       subject: 'Your upcoming mentorship session has been cancelled.',
       html: '<h3>Hello ' + inviteData.mentor.name + ',</h3>'+
       '<p>You\'ve recently cancelled your mentorship session with<b> ' + inviteData.mentee.name + ' </b>on<b> ' + moment(inviteData.when).format("dddd MMMM Do, YYYY @ h:mmA") + ' </b>at<b> ' + inviteData.location + '</b>.</p>' +
@@ -103,8 +100,7 @@ module.exports = {
     };
     var mailOptionsMentee = {
       from: 'MatchJS <matchjsteam@gmail.com>',
-      // to: menteeEmail,
-      to: 'sergeypiterman@yahoo.com',
+      to: menteeEmail,
       subject: 'Please note: Your upcoming mentorship session has been cancelled.',
       html: '<h3>Hello ' + inviteData.mentee.name + ',</h3>'+
       '<p>Your mentorship session on <b>' + moment(inviteData.when).format("dddd MMMM Do, YYYY @ h:mmA") + ' </b>at<b> ' + inviteData.location + ' </b>with <b>'+ inviteData.mentor.name + '</b> has been cancelled.</p>'+
