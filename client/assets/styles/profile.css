@@ -95,7 +95,9 @@
 
 .otherUserProfileActionButtons {
   margin-top: 10px;
-  padding-left: 7px;
+  /*margin: 0, auto !important;*/
+/*  position: relative;*/
+  /*width: 100%;*/
 }
 
 .center {
@@ -138,13 +140,15 @@ html, body, .container-table {
 }
 
 .btn-success {
-  background-color: #D58E00 !important; 
+  background-color: #070657 !important;
 }
+
 .btn-danger {
-  background-color: #F10026 !important; /*Nice red color*/
+  background-color: #36624B !important;
 }
+
 .btn-primary {
-  background-color: #42B1D6 !important;
+  background-color: #430647 !important;
 }
 
 .glyphicon {
@@ -182,10 +186,6 @@ html, body, .container-table {
   border-color: #DFD7CA !important;
 }
 
-
-  /*cursor: default;
-  border: #DFD7CA !important;*/
-
 .open>.dropdown-toggle.selectBar-default {
   background-color: #ffffff !important;
   border-color: #DFD7CA !important;
@@ -215,19 +215,3 @@ html, body, .container-table {
 .row {
   height: auto;
 }
-/*
-==========================================
-==========================================
-==========================================*/
-
-
-
-
-/*.form-inline .form-control{display:inline-block;width:auto;vertical-align:middle}.form-inline .form-control-static{display:inline-block}.form-inline .input-group{display:inline-table;vertical-align:middle}
-
-
-  .form-inline .has-feedback .form-control-feedback{top:0}}.form-horizontal .radio,.form-horizontal .checkbox,.form-horizontal .radio-inline,.form-horizontal .checkbox-inline{
-    margin-top:0;
-    margin-bottom:0;
-    padding-top:13px
-  }*/
