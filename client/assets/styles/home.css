@@ -1,3 +1,14 @@
+    .overlay { 
+      color:#fff;
+      position:absolute;
+      z-index:12;
+      top:45%;
+      left:0;
+      width:100%;
+      text-align:center;
+      background: rgba(0, 0, 0, 0.4);
+      height: 40%;
+    }
 
     .pusher {
       margin-top: -10%;
@@ -132,3 +143,10 @@
         font-size: 1.5em;
       }
     }
+
+    #landing-header {
+      color: white;
+      padding-top: 25px;
+    }
+
+    
