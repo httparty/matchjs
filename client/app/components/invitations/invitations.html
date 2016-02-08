@@ -39,7 +39,7 @@
           <input type="text" class="form-control"  placeholder="Enter location" ng-model="ctrl.formData.sessionInfo.where">
         </div>
       </div>
-    </div> 
+    </div>
     <br>
     <div class="row">
       <div class="col-sm-12">
@@ -55,7 +55,7 @@
           <div class="col-md-6">
              <uib-timepicker ng-model="ctrl.date" ng-change="ctrl.changed()" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></uib-timepicker>
           </div>
-        </div> 
+        </div>
     </div>
 
     <div class="row">
@@ -67,6 +67,11 @@
       </div>
     </div>
     <br>
+
+
+    <uib-alert ng-repeat="alert in ctrl.alerts" type="{{alert.type}}" close="ctrl.closeAlert()">{{alert.msg}}</uib-alert>
+
+
     <div class="row">
       <div class="col-sm-12">
         <div class="guidelinesFooter">
@@ -75,7 +80,7 @@
           </button>
         </div>
       </div>
-    </div> 
+    </div>
 </div>
 
   <div class="ui center aligned raised very padded text container segment"  ng-show="ctrl.submitted">
