@@ -1,20 +1,28 @@
 <div ng-controller="FooterController as ctrl">
-  <div class="pusher">
-    <div class="ui vertical masthead center aligned segment" id="landing-image">
 
+  <div class="pusher">
+
+    <div class="ui centered image">
+      <img src="assets/img/bg2.jpg"/>
+
+      <div class="overlay">
       <div class="ui text container">
-        <h1 class="ui header">
+        <h1 class="ui huge header" id="landing-header">
           MatchJS
-        </h1>
-        <h2>Get Matched with a JS Mentor or Mentee today!</h2>
+        </h1> 
+
+        <h2>Get Matched with a JavaScript Mentor or Mentee today!</h2>
         <form method="get" action="/auth/github" class="form-inline">
-        <button class="ui github large button" id="homeButton"><i class="github icon" id="githubIcon"></i>Get Started<i class="right arrow icon"></i></button>
+        <button class="btn btn-default" id="homeButton"><i class="github icon" id="githubIcon"></i>Continue with Github<i class="right arrow icon"></i></button>
         <br>
-        <span id="signupText">(Sign-up or Log-in <i>free</i> via Github!)</span>
+ <!--        <span id="signupText">(Sign-up or Log-in <i>free</i> via Github!)</span> -->
         </form>
+      </div>
       </div>
 
     </div>
+
+<!--     </div> -->
 
     <div class="ui vertical stripe segment inverted" id="drop3">
       <div class="ui text container">
