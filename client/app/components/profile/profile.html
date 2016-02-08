@@ -198,9 +198,18 @@
           <div class="panel-body" ng-cloak>           
           <!-- PROFILE PHOTO -->
             <div class="row">
+              <center>
               <div class="profilePhoto col-md-6">
                 <img class="img-rounded img-responsive otherUserProfilePhoto" ng-src="{{ctrl.profileUser.photo}} || /../../assets/img/default-profile.png"/>
+               <!--FOLLOW, MESSAGE, AND INVITE BUTTONS -->
+                <div class="otherUserProfileActionButtons" ng-show="ctrl.contentLoaded">
+                  <a ui-sref="invitations({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-success btn-sm">Mentor</a>
+                  <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary btn-sm">Message</a>
+                  <button ng-show="!ctrl.editMode.isSameUser && !ctrl.editMode.isPadawan" ng-click="ctrl.becomePadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-warning btn-sm" ng-cloak>Follow</button> 
+                  <button ng-show="!ctrl.editMode.isSameUser && ctrl.editMode.isPadawan" ng-click="ctrl.stopBeingAPadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-danger btn-sm" ng-cloak>Unfollow</button> 
+                </div> <!--end button div --> 
               </div>
+            </center>
             <!-- NAME OR USERNAME -->
               <div class="profileBasics col-md-6 pull-right">
                 <div>
@@ -224,13 +233,6 @@
                 <button class="btn btn-default btn-sm teal-button editButton" ng-hide="!ctrl.editMode.isSameUser" ng-model="ctrl.saveEditButton.basics" ng-click="ctrl.toggleEditShowBasics()"> {{ ctrl.saveEditButton.basics.buttonText }}</button>
             </div>  <!--CLOSE ROW-->
 
-           <!--FOLLOW, MESSAGE, AND INVITE BUTTONS -->
-            <div class="otherUserProfileActionButtons button-inline" ng-show="ctrl.contentLoaded">
-              <a ui-sref="invitations({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-success btn-sm">Mentor</a>
-              <a ui-sref="inbox/conversation({username: ctrl.profileUser.username})" ng-hide="ctrl.editMode.isSameUser" class="btn btn-primary btn-sm">Message</a>
-              <button ng-show="!ctrl.editMode.isSameUser && !ctrl.editMode.isPadawan" ng-click="ctrl.becomePadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-warning btn-sm" ng-cloak>Follow</button> 
-              <button ng-show="!ctrl.editMode.isSameUser && ctrl.editMode.isPadawan" ng-click="ctrl.stopBeingAPadawan(ctrl.profileUser, ctrl.currentUser)" class="btn btn-danger btn-sm" ng-cloak>Unfollow</button> 
-            </div>
             <br>
             <br>
             <!-- ==================================  -->

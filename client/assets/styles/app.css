@@ -10,6 +10,46 @@
 .teal-href:hover {
   color:  #00676C; 
 }
+
+.badge {
+  background-color: #F10026 !important; 
+  margin-left: 3px !important;
+  bottom: 5px !important;
+  vertical-align: top !important;
+  padding-right: 7px !important; 
+  padding-left: 7px !important;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  display: inline !important;
+}
+
+.btn-warning {
+  /*background-color: #36624B !important;*/
+  background-color: #36624B !important;
+}
+
+.btn-success {
+  background-color: #070657 !important;
+}
+
+.btn-danger {
+  background-color: #921700 !important;
+}
+
+.btn-primary {
+  background-color: #430647 !important;
+}
+
+
+.tags .tag-item {
+  background-color: #430647 !important;
+}
+
+tags-input .tags .tag-item .remove-button {
+  color: #ffffff !important;
+}
+
+
 /*BUTTON FIX*/
 
 .btn-link {
