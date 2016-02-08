@@ -20,6 +20,10 @@
   border-color: transparent;
 }
 
+.calendar-picker {
+  padding-top: 7.5%;
+}
+
 /*.btn-success {
   background-color: #009E9A;
 }

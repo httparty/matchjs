@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: InvitationsController', function() {
 
   var $httpBackend;
@@ -8,83 +10,133 @@ describe('Controller: InvitationsController', function() {
   var Profile;
   var $http;
   var $cookies;
-  var invitationsController;
   var $currentCookie;
+  var $scope;
+  var InvitationsController;
+  var $controller;
 
   beforeEach(module('app'));
-  beforeEach(inject(function ($injector) {
+  beforeEach(module('mock.auth-service'));
+  beforeEach(inject(function ($injector, _MockAuthService_) {
 
-    // $rootScope = $injector.get('$rootScope');
-    // $scope = $rootScope.$new();
-    // $httpBackend = $injector.get('$httpBackend');
+    $rootScope = $injector.get('$rootScope');
+    $scope = $rootScope.$new();
+    $httpBackend = $injector.get('$httpBackend');
     $controller = $injector.get('$controller');
-    AuthService = $injector.get('AuthService');
+    AuthService = _MockAuthService_;
     invitationsModel = $injector.get('invitationsModel');
     $state = $injector.get('$state');
     Profile = $injector.get('Profile');
     $http = $injector.get('$http');
     $cookies = $injector.get('$cookies');
-    // invitationsController = $injector.get('InvitationsController');
 
-    $cookies.putObject('user-profile', {id: 1,
-                              username: 'user1',
-                              displayName: 'user 1',
-                              email: 'user1@email.com',
-                              avatar: null,
-                              location: 'San Francisco',
-                              github: 'https://github.com'});
 
-    $currentCookie = $cookies.get('user-profile')
+    InvitationsController = $controller('invitationsController', {
+      AuthService: AuthService,
+      invitationsModel: invitationsModel,
+      $state: $state,
+      Profile: Profile,
+      $scope: $scope
+    });
 
-    //need to mock a cookie
-    // InvitationsController = $controller('InvitationsController', {
-    //   AuthService: AuthService,
-    //   invitationsModel: invitationsModel,
-    //   $state: $state,
-    //   Profile: Profile
-    // });
+    InvitationsController.formData = {};
+    InvitationsController.formData.sessionInfo = {};
 
-// { 'user-profile':
-//   { id: '9453231',
-//     username: 'spiterman',
-//     displayName: 'Sergey Piterman',
-//     email: 'sergeypiterman@gmail.com',
-//     avatar: 'https://avatars.githubusercontent.com/u/9453231?v=3',
-//     location: 'San Francisco Bay Area',
-//     github: 'https://github.com/spiterman' },
-//     'connect.sid': 's:_uUGeH3HSeK9OmiFk7rqeXrZKTvyApnB.51XcO+iNRkCnWjW3LKkgKO/CkdWR2LXzFIxYZGzsn0w' }
+
+//Data that gets passed into the createInvitation function
+    InvitationsController.currentUserProfile = {wantInvitationEmails: true}
+
+        InvitationsController.recipientProfile = {wantInvitationEmails: true}
+
+    InvitationsController.name = 'Jane';
+    InvitationsController.username = 'Jane1';
+    InvitationsController.recipientName = 'Jay';
+    InvitationsController.recipientUsername = 'Jay1';
+    InvitationsController.date = new Date();
+    InvitationsController.submitted = false;
+    InvitationsController.roundTime();
+
   }));
 
   afterEach(function () {
     //any after each goes here
   });
 
-  describe('vm.email', function () {
 
-    it('should expose action route to the view', function() {
-      expect(3).toBe(3);
+  // *** Controller Variables *** //
+
+  describe('Controller Variables', function(){
+
+    it('it should contain a current user and username', function(){
+      expect(InvitationsController.username).toBeDefined();
+      expect(angular.isString(InvitationsController.username)).toBe(true);
+      expect(InvitationsController.name).toBeDefined();
+      expect(angular.isString(InvitationsController.name)).toBe(true);
     });
 
-    it('should equal 4', function() {
-      expect("4").toBe("4");
+    it('it should contain a date variables', function(){
+      expect(InvitationsController.date).toBeDefined();
+      expect(typeof InvitationsController.date).toBe('object');
+      expect(InvitationsController.minDate).toBeDefined();
+      expect(InvitationsController.maxDate).toBeDefined();
+      expect(InvitationsController.ismeridian).toBe(true);
+      expect(angular.isNumber(InvitationsController.hstep)).toBe(true);
+      expect(angular.isNumber(InvitationsController.mstep)).toBe(true);
     });
 
-    it('should equal true', function() {
-      expect(true).toBe(true);
+    it('it should have a form that hasn\'t been submitted', function(){
+      expect(typeof InvitationsController.submitted).toBeDefined();
+      expect(InvitationsController.submitted).toBe(false);
+    });
+
+
+    it('it should contain date options', function(){
+      expect(typeof InvitationsController.dateOptions).toBe('object');
+      expect(InvitationsController.dateOptions.formatYear).toBe('yy');
+      expect(InvitationsController.dateOptions.startingDay).toBe(1);
+    });
+
+    it('it should have date formatting options', function(){
+      expect(angular.isArray(InvitationsController.formats)).toBe(true);
+      expect(InvitationsController.format).toBe('dd-MMMM-yyyy');
     });
 
   });
 
-  describe('Basic Functionality', function(){
-    it('should have a createInvitation function', function(){
-      expect(typeof invitationsModel.createInvitation).toBe('function');
-      console.log($currentCookie, '$cookies')
+
+  describe('Invitations Helper Functions', function(){
+    it('it should have a clear function that resets the date', function(){
+      expect(typeof InvitationsController.clear).toBe('function');
+      var t1 = InvitationsController.date;
+      InvitationsController.clear();
+      var t2 = InvitationsController.date;
+      expect(t1).not.toBe(t2);
     });
-  });
+
+    it('it should have and openCalendar function, and the calendar should start closed', function(){
+      expect(InvitationsController.isCalendarOpen).toBe(false);
+      InvitationsController.openCalendar();
+      expect(InvitationsController.isCalendarOpen).toBe(true);
+    });
+
+    it('it should round the minutes correctly', function(){
+      expect(typeof InvitationsController.roundTime).toBe('function');
+      expect(InvitationsController.date.getMinutes() % 15).toBe(0);
+    });
+
+    it('it should not submit the form if there are empty fields', function(){
+      expect(InvitationsController.attemptSubmit).toBeDefined();
+      expect(typeof InvitationsController.attemptSubmit).toBe('function');
+      expect(InvitationsController.attemptSubmit()).toBe(false);
+      InvitationsController.formData.sessionInfo.summary = "Not much";
+      InvitationsController.formData.sessionInfo.where = "SF";
+      expect(InvitationsController.attemptSubmit()).toBe(true);
+    });
+
+  }); //End helper functions
 
   describe('Create Invitation Functionality', function(){
 
-    // it('')
     var date = new Date();
     var formData = {
       mentee: "user2",
@@ -99,21 +151,32 @@ describe('Controller: InvitationsController', function() {
       when: date,
       where: "asdfasdf"}
     };
+  }); //End Create Invitation Functionality
 
-    it('should return an $http() call', function(){
-      // expect(invitationsModel.createInvitation(formData)).toBe(200);
-      expect(true).toBe(true);
+  describe('Invitations Model Testing', function(){
+    it('should be an object', function(){
+      expect(typeof Profile).toBe('object');
     });
 
+    it('it should have a createInvitation method', function(){
+      expect(typeof invitationsModel.createInvitation).toBe('function');
+    });
 
+    it('it should have a getInvitationsByMentor method', function(){
+      expect(typeof invitationsModel.getInvitationsByMentor).toBe('function');
+    });
 
+    it('it should have a getInvitationsByMentee method', function(){
+      expect(typeof invitationsModel.getInvitationsByMentee).toBe('function');
+    });
+
+    it('it should have a deleteInvitation method', function(){
+      expect(typeof invitationsModel.deleteInvitation).toBe('function');
+    });
+
+    it('it should have an updateInvitation method', function(){
+      expect(typeof invitationsModel.updateInvitation).toBe('function');
+    });
   });
 
-
-
-
-});
-
-
-
-
+}); //End Invitations-Controller Specs

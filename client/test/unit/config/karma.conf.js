@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(config) {
   var configuration = {
 
@@ -24,9 +26,10 @@ module.exports = function(config) {
       '../../../bower_components/angularfire/dist/angularfire.min.js',
       '../../../bower_components/moment/min/moment.min.js',
       '../../../bower_components/angular-scroll-glue/src/scrollglue.js',
-
-      './../*.js', //spec files
-      '../../../../client/app/**/*.js' //client
+      '../../../bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js',
+      '../../../../client/app/**/*.js', //client
+      
+      './../*.js' //spec files
     ],
 
     // test result reporter

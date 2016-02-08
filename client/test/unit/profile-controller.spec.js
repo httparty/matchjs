@@ -1,6 +1,8 @@
+'use strict';
+
 describe('Controller: ProfileController', function() {
 
-  var $httpsBackend;
+  var $httpBackend;
   var AuthService;
   var $rootScope;
   var $window;
@@ -9,6 +11,8 @@ describe('Controller: ProfileController', function() {
   var $sce;
   var invitationsModel;
   var $location;
+  var $controller;
+  var $scope;
 
   beforeEach(module('app'));
   beforeEach(inject(function($injector) {

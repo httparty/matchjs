@@ -1,3 +1,5 @@
+'use strict';
+
 var db = require('./config.js');
 var rec = require('../recommender/recommend');
 var helpers = {};
@@ -98,7 +100,6 @@ helpers.getPadawansByMentor = function(username) {
   return db.Padawan.findAll({
     where: {'mentorUsername': username}
   }).then(function(padawansArr) {
-    // console.log("padawans", padawansArr);
     if (!padawansArr) {
       return null;
     }
@@ -122,7 +123,6 @@ helpers.getMentors = function(padawan) {
     return padawanRelArr;
   });
 };
-
 
 //------------------GET RECOMMENDED USERS-------------------------
 
@@ -157,14 +157,6 @@ helpers.getAllUsers = function() {
 
 //------------------INVITATIONS-------------------------
 
-// var sessionInfo = {
-//   when: new Date(),
-//   where:'San Francisco',
-//   summary: 'AngularJS'
-// };
-
-// helpers.createInvitation('dearamerican','polinadotio',sessionInfo);
-
 helpers.createInvitation = function(username, invitee, sessionInfo){
   return db.User.findOne({
     where: {'username': username}
@@ -177,13 +169,11 @@ helpers.createInvitation = function(username, invitee, sessionInfo){
       location: sessionInfo.where,
       summary: sessionInfo.summary,
     }).then(function(invitation) {
-      // console.log(invitation);
       return invitation;
     });
   });
 };
 
-// helpers.getInvitationsBySender('polinadotio');
 helpers.getInvitationsBySender = function(username) {
   return db.User.findOne({
     where: {'username': username}
@@ -204,12 +194,10 @@ helpers.getInvitationsBySender = function(username) {
   });
 };
 
-// helpers.getInvitationsByRecipient('dearamerican');
 helpers.getInvitationsByRecipient = function(username) {
   return db.Invitation.findAll({
     where: {'recipientName': username}
   }).then(function(invitations) {
-    // console.log("invitations", invitations);
     if (!invitations) {
       return null;
     }
@@ -253,7 +241,5 @@ helpers.deleteInvitation = function(inviteId) {
     return invite.destroy();
   });
 };
-
-
 
 module.exports = helpers;

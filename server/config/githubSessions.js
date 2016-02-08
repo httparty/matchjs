@@ -1,3 +1,5 @@
+'use strict';
+
 require('dotenv').load();
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
@@ -11,7 +13,7 @@ module.exports.restrict = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/failure');
+  res.redirect('/');
 };
 
 module.exports.initialize = function(app) {

@@ -24,7 +24,7 @@
 
 .tabbedPanel {
   overflow-y: scroll !important;
-  max-height: 720px;
+  max-height: 385px !important; 
 }
 
 .followUsername {
@@ -34,6 +34,11 @@
 .invitationsPanelBody {
   overflow-y: scroll !important;
   max-height: 724.5px !important;
+}
+
+.followPanel {
+  overflow-y: scroll !important;
+  max-height: 385px !important; 
 }
 
 .profileBasics {
@@ -63,10 +68,10 @@
   margin-top: 30px;
 }
 
-.editButton {
+/*.editButton {
   margin-top: 0px;
   float: right;
-}
+}*/
 
 .profileBasics .editButton {
   float: right;
@@ -90,7 +95,9 @@
 
 .otherUserProfileActionButtons {
   margin-top: 10px;
-  padding-left: 7px;
+  /*margin: 0, auto !important;*/
+/*  position: relative;*/
+  /*width: 100%;*/
 }
 
 .center {
@@ -131,44 +138,58 @@ html, body, .container-table {
   width: 25px;
   height: 25px;
 }
-/*
+
 .btn-success {
-  background-color: #D58E00 !important; 
+  background-color: #070657 !important;
 }
+
 .btn-danger {
-  background-color: #F10026 !important; /*Nice red color*/
-/*}
+  background-color: #36624B !important;
+}
+
 .btn-primary {
-  background-color: #42B1D6 !important;
-}*/
+  background-color: #430647 !important;
+}
+
+.glyphicon {
+  color: #000000 !important;
+}
 
 .checkbox.btn-default {
-  /*background-color: #ffffff !important;*/
-  border-color: #DFD7CA !important;
-  border-width: 1px !important;
-  border-style: solid !important;
-}
-
-.checkbox.btn-default:hover {
-  /*background-color: #ffffff !important;*/
-  border-color: #DFD7CA !important;
-  border-width: 1px !important;
-  border-style: solid !important;
-}
-
-/*.checkbox-inline-default:active:hover,
-.open>.dropdown-toggle.checkbox-inline-default:hover,
-.checkbox-inline-default:active:focus,
-.checkbox-inline-default.active:focus,
-.open>.dropdown-toggle.checkbox-inline-default:focus,
-.checkbox-inline-default:active.focus,
-.checkbox-inline-default.active.focus,
-.open>.dropdown-toggle.checkbox-inline-default.focus {
   background-color: #ffffff !important;
   border-color: #DFD7CA !important;
   border-width: 1px !important;
   border-style: solid !important;
-}*/
+}
+
+/*.checkbox.btn-default:checked <-- doesn't seem to be doing anything*/
+.checkbox-inline .btn-default:focus,
+.checkbox-inline .btn-default:active:focus,
+.checkbox-inline .btn-default:active:hover {
+  background-color: #ffffff !important;
+}
+.checkbox.btn-default:hover,
+.checkbox.btn-default:active {
+  background-color: #ffffff !important;
+  border-color: #DFD7CA !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+
+.checkbox-inline .checkbox[disabled],
+.checkbox-inline .checkbox[disabled]:hover,
+.checkbox-inline .checkbox[disabled]:active,
+.checkbox-inline .checkbox[disabled]:focus,
+.checkbox-inline .checkbox[disabled]:active:focus,
+.checkbox-inline .checkbox[disabled]:active:hover {
+  background: #ffffff !important;
+  border-color: #DFD7CA !important;
+}
+
+.open>.dropdown-toggle.selectBar-default {
+  background-color: #ffffff !important;
+  border-color: #DFD7CA !important;
+}
 
 .checkbox-inline+.checkbox-inline {
   margin-left: 0;

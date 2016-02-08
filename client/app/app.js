@@ -78,6 +78,10 @@ angular.module('app', [
 
     $rootScope.$on('$stateChangeStart', function(event, toState) {
 
+      (function (event, currentRoute, previousRoute) {
+        window.scrollTo(0, 0);
+      })();
+
       if (toState.name === 'guidelines') {
         return;
       }
@@ -101,13 +105,6 @@ angular.module('app', [
       if (AuthService.isAuthenticated() && toState.name === 'home') {
         event.preventDefault();
         $state.go('connect');
-        return;
-      }
-
-      if (AuthService.isAuthenticated() && toState.name === 'profile') {
-        (function (event, currentRoute, previousRoute) {
-          window.scrollTo(0, 0);
-        })();
         return;
       }
 

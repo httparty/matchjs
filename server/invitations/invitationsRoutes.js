@@ -1,3 +1,5 @@
+'use strict';
+
 var invitationsHandler = require('./invitationsHandler.js');
 
 module.exports = function(app) {

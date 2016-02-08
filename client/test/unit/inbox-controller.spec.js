@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Controller: InboxController', function() {
 
   var $httpBackend;
@@ -11,15 +13,18 @@ describe('Controller: InboxController', function() {
   var inboxModel;
   var $state;
   var Profile;
+  var $controller;
+  var InboxController;
 
   beforeEach(module('app'));
-  beforeEach(inject(function ($injector) {
+  beforeEach(module('mock.auth-service')); 
+  beforeEach(inject(function ($injector, _MockAuthService_) {
 
     $rootScope = $injector.get('$rootScope');
     $scope = $rootScope.$new();
     // $httpBackend = $injector.get('$httpBackend');
     $controller = $injector.get('$controller');
-    AuthService = $injector.get('AuthService');
+    AuthService = _MockAuthService_;
     $firebaseArray = $injector.get('$firebaseArray');
     $firebaseObject = $injector.get('$firebaseObject');
     connectModel = $injector.get('connectModel');
@@ -30,17 +35,17 @@ describe('Controller: InboxController', function() {
 
     //can't read property username of undefined
     
-    // InboxController = $controller('InboxController', {
-    //   $scope: $scope,
-    //   AuthService: AuthService,
-    //   $firebaseArray: $firebaseArray,
-    //   $firebaseObject: $firebaseObject,
-    //   connectModel: connectModel,
-    //   moment: moment,
-    //   inboxModel: inboxModel,
-    //   $state: $state,
-    //   Profile: Profile
-    // });
+    InboxController = $controller('InboxController', {
+      $scope: $scope,
+      AuthService: AuthService,
+      $firebaseArray: $firebaseArray,
+      $firebaseObject: $firebaseObject,
+      connectModel: connectModel,
+      moment: moment,
+      inboxModel: inboxModel,
+      $state: $state,
+      Profile: Profile
+    });
 
   }));
 

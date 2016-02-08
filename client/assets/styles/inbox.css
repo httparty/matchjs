@@ -23,6 +23,11 @@ html, body, .indexView, .inbox, .row, .conversations, .messages{
   box-sizing: border-box;
 }
 
+#inbox {
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+
 .chat
 {
     list-style: none;

@@ -1,28 +1,43 @@
- <div class="ui header">
+<!-- fixes bug of navbar hiding containers below it on window resize -->
+<script>
+var onResize = function() {
+  // apply dynamic padding at the top of the body according to the fixed navbar height
+  $("body").css("padding-top", $(".navbar-fixed-top").height());
+};
+
+// attach the function to the window resize event
+$(window).resize(onResize);
+
+// call it also when the page is ready after load or reload
+$(function() {
+  onResize();
+});
+ </script>
  <div ng-controller="NavController as ctrl">
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+      <div class="container" data-toggle="collapse" data-target=".nav-collapse">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">MatchJS</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse" >
+        <div id="navbar">
 
           <ul class="nav navbar-nav navbar-right" class="navbar-link" ng-show="ctrl.isLoggedIn()">
   
             <li class="navbar-link"><a href="/#/connect">Connect</a></li>
             <li class="navbar-link"><a href="/#/inbox">Inbox</a></li>
             <li class="dropdown navbar-link">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ctrl.user.displayName}}  
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ctrl.user.displayName}}  
 
               <img class="img-circle" ng-src="{{ctrl.user.avatar || 'http://placehold.it/48x48'}}" style=" width: 20px; height: 20px;">
 
-                <span class="caret"></span></a>
+                <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu">
                 <li><a ng-click="ctrl.getThisUserProfile(ctrl.user.username)">Profile</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/#/settings">Settings</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -30,5 +45,4 @@
         </div>
       </div>
     </nav>
- </div>
  </div>

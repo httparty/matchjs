@@ -1,3 +1,5 @@
+'use strict';
+
 var helpers = require('../db/helpers');
 var search = require('../search/search');
 var emailer = require('../email/emailHandler');
@@ -93,7 +95,7 @@ module.exports = {
   deleteAccount: function(req, res) {
     helpers.deleteUser(req.params)
     .then(function(user){
-      res.redirect('/logout');
+      res.redirect('/auth/logout');
     });
   },
 

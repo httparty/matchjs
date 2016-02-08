@@ -1,16 +1,18 @@
+'use strict';
+
 describe('Controller: AuthController', function() {
 
-  var $httpBackend;
   var $scope;
   var AuthService;
   var $rootScope;
+  var $controller;
+  var AuthController;
 
   beforeEach(module('app'));
   beforeEach(inject(function ($injector) {
 
     $rootScope = $injector.get('$rootScope');
     $scope = $rootScope.$new();
-    // $httpBackend = $injector.get('$httpBackend');
     $controller = $injector.get('$controller');
     AuthService = $injector.get('AuthService');
 
