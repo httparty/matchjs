@@ -38,7 +38,7 @@ Coming soon.
 Tech Stack
 =======
 
-![](http://i.imgur.com/eIQWMZf.png)
+![](http://i.imgur.com/cC2gieO.png)
 
 Contributing
 =============
